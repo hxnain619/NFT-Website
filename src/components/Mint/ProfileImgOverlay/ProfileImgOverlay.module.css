@@ -1,0 +1,118 @@
+.modelContainer {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+.modelActive {
+  display: flex;
+}
+.guideContainer {
+  width: 100%;
+  max-width: 48em;
+  border-radius: 1em;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+.imgContainer {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+  height: 432px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.imgContainer > div {
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #c4c4c4;
+  box-shadow: var(--shadow-light);
+  border-radius: 20px;
+  height: 200px;
+  width: 200px;
+  margin-bottom: 1rem;
+  cursor: var(--cursor-pointer);
+}
+.imgContainer > div:hover {
+  background: var(--main-color);
+}
+.imgContainer div img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background: var(--default);
+  border-radius: 20px;
+}
+
+.line {
+  height: 2px;
+  width: 100%;
+  background: var(--outline);
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+.buttonConatiner {
+  display: flex;
+  justify-content: space-evenly;
+}
+.buttonConatiner div,
+.buttonConatiner p {
+  border-radius: 2.375rem;
+  border: 3px solid var(--main-color);
+  font-weight: 500;
+  font-size: 1.25rem;
+  width: 11.8rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: var(--cursor-pointer);
+  transition: 0.3s ease;
+}
+.buttonConatiner p {
+  color: var(--main-color);
+}
+.buttonConatiner div {
+  color: #fff;
+  background: var(--main-color);
+}
+.buttonConatiner div:hover {
+  background: var(--main-hovered);
+}
+.buttonConatiner p:hover {
+  background: var(--main-color);
+  color: #fff;
+}
+div.active {
+  background: var(--main-color);
+}
+.viewALlBtn {
+  width: fit-content;
+  margin: 0.5rem auto auto;
+  color: var(--main-color);
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: var(--cursor-pointer);
+}
+.viewALlBtn:hover {
+  text-decoration-line: underline;
+}
+@media screen and (max-width: 580px) {
+  .buttonConatiner p {
+    margin-right: 0.5em;
+  }
+  .buttonConatiner p,
+  .buttonConatiner div {
+    font-size: 1em;
+  }
+}

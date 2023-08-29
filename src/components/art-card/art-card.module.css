@@ -1,0 +1,145 @@
+.container {
+  width: 14em;
+  cursor: var(--cursor-pointer);
+  position: relative;
+  border-radius: 0.5em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-light);
+  border: 3px solid transparent;
+}
+
+.container.active {
+  border: 3px solid var(--warning-500);
+  box-shadow: var(--shadow-dark-2);
+}
+
+.container.inActive {
+  border-color: transparent;
+}
+
+.container.active .addRuleBtn {
+  color: var(--main-color);
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-trait);
+}
+
+.imageContainer:hover .image {
+  transform: scale(1.01);
+}
+
+.image {
+  object-fit: contain;
+  width: 100%;
+  height: 12em;
+}
+
+.action {
+  width: 100%;
+  background: var(--default);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.5em;
+}
+
+.details {
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: var(--text-heading);
+  background: var(--default);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em;
+}
+
+.editInput,
+.inputText {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+.editInput form {
+  flex: 1;
+}
+
+.editInput input,
+.inputText div {
+  flex: 1;
+  text-align: center;
+}
+
+.editIcon {
+  fill: black;
+}
+
+.container i {
+  cursor: var(--cursor-pointer);
+  font-size: 0.7rem;
+}
+
+.reset {
+  background: var(--main-color);
+}
+
+.reset * {
+  animation: bounce 650ms infinite alternate linear;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(4px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.details input {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  padding: 0.25em;
+  color: var(--text-heading);
+  border: 1px solid var(--outline);
+}
+
+.details input:focus {
+  outline: none;
+}
+
+.promptWrapper {
+  display: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.promptWrapper.show {
+  display: block;
+}
+
+.closeIcon {
+  transition: all 300ms;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  fill: var(--icon-color);
+  width: 1.4em;
+  height: 1.4em;
+  cursor: pointer;
+}
+
+.closeIcon:hover {
+  box-shadow: var(--shadow-dark);
+}

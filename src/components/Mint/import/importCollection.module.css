@@ -1,0 +1,481 @@
+.wrapper {
+  border: 1px solid var(--card-outline);
+  border-radius: 0.5em;
+  padding: 1em;
+}
+.aiPageNav {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  margin: 3em 0 -2em -6em;
+  max-width: 1080px;
+  justify-content: center;
+}
+.aiPageNavMain {
+  display: flex;
+  column-gap: 1em;
+  width: 50%;
+  align-items: center;
+  align-content: center;
+}
+.aiPageNavMain:hover {
+  cursor: pointer;
+}
+.aiPageNavBackArrow {
+  height: 24px;
+  width: 24px;
+}
+.aiPageNavMain > span {
+  white-space: nowrap;
+  flex: 1;
+  font-size: 16px;
+}
+.importMain {
+  display: flex;
+  padding: 1em 2em;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  align-items: center;
+  width: 100vw;
+}
+.importPageHeader {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 4px;
+  padding: 1rem;
+}
+.importPageHeader * {
+  text-align: center;
+  color: var(--fbc-primary-text);
+}
+
+.importPageHeader h2 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+}
+.importPageHeader p {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 160%;
+}
+
+.importMain > * + * {
+  margin-top: 1rem;
+}
+
+.aiLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 68px;
+  width: 50vw;
+  border: transparent;
+  flex: 1;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.importTextInput {
+  outline: none;
+  box-shadow: 8px 8px 18px rgba(93, 134, 194, 0.08);
+  width: 100%;
+  height: 40px;
+  resize: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--fbc-primary-text);
+}
+
+.importTextInput::-webkit-input-placeholder,
+.importTextInput::placeholder,
+.importTextInput::-moz-placeholder {
+  color: var(--text-sub-heading);
+}
+
+.importTextInput:active,
+.importTextInput:hover,
+.importTextInput:focus {
+  border: 1px solid var(--main-color);
+}
+
+.promptForm {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1em;
+  width: 100%;
+}
+
+.promptFormTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.promtFormTitle {
+  color: var(--text-sub-heading);
+  font-weight: 700;
+  font-size: 18px;
+}
+.artStyleList {
+  display: flex;
+  gap: 0.3em;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  overflow-y: scroll;
+  width: 100%;
+  height: 360px;
+  padding: 1rem 1rem 0 0;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.artIndStyle {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  text-align: center;
+  position: relative;
+}
+
+.artStyle {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 14px;
+  border: 4px solid rgba(255, 255, 255, 0);
+  overflow: hidden;
+  box-shadow: 8px 8px 18px rgba(93, 134, 194, 0.08);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: darken;
+}
+.lowBrightness {
+  /* filter: grayscale(100%); */
+  /* -webkit-filter: grayscale(100%); */
+  border: none;
+}
+.artStyleArea {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 14px;
+  /* overflow: hidden; */
+  flex: 1;
+}
+.comingSoonOverlay {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: inherit;
+  height: inherit;
+  cursor: not-allowed;
+  border-radius: 14px;
+}
+.comingSoon {
+  opacity: 0.4;
+}
+
+.comingSoonText {
+  color: var(--text-light);
+
+  cursor: not-allowed;
+  font-weight: 700;
+  background-image: linear-gradient(to bottom right, var(--main-hovered), var(--default));
+
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+}
+.artStyle:hover {
+  border: 4px solid var(--main-color);
+}
+.noArtStyle {
+  background-color: #fff;
+  padding: 46.12px 46.12px;
+  border: 1px solid var(--card-outline);
+  object-fit: contain;
+}
+.noArtStyle:hover {
+  border: 1px solid var(--main-color);
+}
+.aiInspirationSection {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.aiPromptSuggestions {
+  display: flex;
+  padding: 0.5em 0 2em 0;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+  align-content: flex-start;
+  width: 100%;
+}
+.suggestionItem {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e2e4e8;
+  border-radius: 6px;
+  color: var(--text-heading);
+  padding: 0.6em;
+  width: 330px;
+  cursor: pointer;
+  height: 52px;
+  font-size: 14px;
+  gap: 58px;
+  /* margin: 0 auto; */
+  flex-grow: 1;
+}
+
+.suggestionItem svg {
+  width: 24px;
+  height: 24px;
+}
+
+.footerBtn {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createImageBtn {
+  display: flex;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--default);
+  border: transparent;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--main-color);
+  align-self: flex-start;
+  border: 2px solid var(--main-color);
+}
+.createImageBtn_inactive {
+  border: transparent;
+  opacity: 0.5;
+  background-color: #e2e4e8;
+  color: var(--text-placeholder);
+  cursor: not-allowed;
+}
+
+.createImageBtn_active {
+  opacity: 1;
+  outline: none;
+}
+.regenerateBtn {
+  border: 2px solid var(--main-color);
+  background-color: var(--default);
+  color: var(--main-color);
+}
+.regenerateBtn:hover {
+  border: 2px solid var(--main-hovered);
+  color: var(--default);
+}
+
+.createImageBtn_active:hover {
+  background-color: var(--main-hovered);
+  border-color: var(--main-hovered);
+}
+
+.downloadBtn:hover {
+  background-color: var(--main-color);
+  color: var(--default);
+}
+
+.peviewSizeSection {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  height: 100%;
+  align-items: center;
+  align-content: center;
+}
+
+.aiPreviewHeading {
+  color: var(--text-light);
+  font-weight: 500;
+  font-size: 24px;
+  padding-right: 1em;
+}
+
+.artPreview {
+  display: flex;
+  align-items: center;
+  padding: 11px;
+  justify-content: center;
+  border: 4px dashed #e2e4e8;
+  border-radius: 0.5em;
+  height: 507px;
+  width: 507px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #8f94a3;
+}
+
+.loaderWidth {
+  width: 500px;
+}
+
+.downloadBtn {
+  display: flex;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--main-color);
+  border: transparent;
+  padding: 0.5em 1em;
+  transition: 0.3s;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--default);
+  align-self: flex-start;
+  border: 1px solid var(--main-color);
+}
+
+.defaultPreviewContent {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  gap: 1em;
+  flex-flow: column nowrap;
+}
+.imageDownloadBtn {
+  display: flex;
+  align-items: center;
+  margin: 1em 0.5em;
+  border: transparent;
+  align-self: flex-end;
+}
+.imageDownloadBtn path {
+  /* height: 10px;
+  width: 10px; */
+  stroke: var(--default);
+}
+.downloadText {
+  color: var(--default);
+  margin-right: 5px;
+}
+.artStyleSection {
+  display: flex;
+  /* align-items: center; */
+  flex-flow: column nowrap;
+  width: 100%;
+}
+.createBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mintBtns {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  /* gap: 1em; */
+  /* margin: 0 auto; */
+  /* width: 100%; */
+}
+.aiInspirationSection h3 {
+  margin-bottom: 0.5rem;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .importMain {
+    flex-flow: column nowrap;
+    margin: 0 auto;
+    overflow: auto;
+  }
+
+  .loaderWidth {
+    width: 330px;
+  }
+
+  .aiLeft {
+    padding: 1em;
+    width: 90%;
+  }
+
+  .createImageBtn {
+    width: max-content;
+    align-self: center;
+  }
+
+  .peviewSizeSection {
+    order: -1;
+  }
+  .fixedBtns,
+  .topMintBtn {
+    order: -2;
+  }
+  .artIndStyle {
+    margin: 0 auto;
+  }
+  .aiPromptSuggestions {
+    padding: 0px;
+  }
+  .suggestionItem {
+    width: 100%;
+  }
+  .aiInspirationSection h3 {
+    align-self: center;
+    text-align: center;
+  }
+  .artPreview {
+    width: 85vw;
+    height: 85vw;
+  }
+  .artStyleTitle {
+    align-self: center;
+    text-align: center;
+  }
+  .imageDownloadBtn {
+    align-self: flex-end;
+  }
+  .artStyleList {
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+.inputWrapper {
+  width: 100%;
+  margin-bottom: 0.5em;
+  border: 1px solid var(--card-outline);
+  border-radius: 0.5em;
+  padding: 1em;
+  /* box-shadow: var(--shadow-light); */
+}
+
+.inputWrapper textarea,
+.inputWrapper input,
+.inputWrapper select,
+.chinLabel {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  resize: none;
+  border-radius: 0.5em;
+  border: 1px solid var(--outline);
+  color: var(--text-sub-heading);
+  font-size: 1rem;
+}
+
+.required {
+  color: var(--error-500);
+}

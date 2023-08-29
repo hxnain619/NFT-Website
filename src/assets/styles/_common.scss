@@ -1,0 +1,47 @@
+.blured-content {
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.main-content {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 4;
+
+  &__bg {
+    backdrop-filter: var(--bodyBlur);
+    background: var(--bodyBlurredBg);
+  }
+
+  &.dashboard {
+    @media (max-width: 767px) {
+      padding-top: 160px;
+    }
+  }
+
+  .page-content {
+    width: 100%;
+    min-height: 100vh;
+    @media (max-width: 1024px) {
+      min-height: 80vh;
+    }
+  }
+}
+
+.main__range{
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 5;
+}
+
+.main-key-bg {
+  background-image: url("../../assets/images/key_bg.svg");
+  background-attachment: fixed;
+}
+
+.main-cc-bg {
+  background-image: url("../../assets/images/cc_bg.svg");
+  background-attachment: fixed;
+}

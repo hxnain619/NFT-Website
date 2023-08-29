@@ -1,0 +1,23 @@
+.card {
+    background: var(--dashboardBlockBg);
+    border-radius: 16px;
+}
+
+.cardFull {
+    background: var(--dashboardBlockBg);
+    border-radius: 16px;
+    width: 100%;
+    padding: 16px;
+}
+
+.cardHolder {
+    padding: 24px;
+    background: var(--offersTableBg);
+    border: 1px solid var(--nftInfoBorder);
+    border-radius: 16px;
+    margin: 24px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--landingTitle);
+}

@@ -1,0 +1,14 @@
+.chart {
+  height: auto;
+  max-height: 20em;
+  padding: 1em;
+}
+
+.nodata {
+  /* height: 3rem; */
+  text-align: center;
+  color: gray;
+  font-weight: 700;
+  font-size: 1rem;
+  /* padding: 10px; */
+}

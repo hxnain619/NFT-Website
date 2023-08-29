@@ -1,0 +1,180 @@
+.container {
+  width: 100%;
+  margin-bottom: 6em;
+  padding: 0 2em;
+}
+
+.wrapper {
+  width: 100%;
+  margin-bottom: 0.5em;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.heading .accent {
+  color: var(--main-color);
+}
+
+.description {
+  margin-bottom: 2em;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--text-sub-heading);
+}
+
+.display {
+  width: 100%;
+  height: 12em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  position: relative;
+}
+
+.shadow {
+  width: 100%;
+  height: 4em;
+  bottom: 0;
+  position: absolute;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  animation: scroll 15s infinite linear forwards;
+}
+
+.row:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20em);
+  }
+}
+
+.reviewCard {
+  background: #f5f6f8;
+  padding: 1em 0.5em;
+  border-radius: 1em;
+}
+
+.review {
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.thumbnail {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.handle {
+  font-size: 1rem;
+  color: var(--text-sub-heading);
+}
+
+@media screen and (max-width: 1200px) {
+  .heading {
+    font-size: 2.5rem;
+  }
+
+  .row {
+    grid-template-columns: repeat(2, 1fr);
+    animation-duration: 25s;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-28em);
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .heading {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .name,
+  .handle,
+  .review {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    grid-template-columns: auto;
+    animation-duration: 25s;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-48em);
+    }
+  }
+
+  .reviewCard {
+    padding: 1em;
+    border-radius: 0.5em;
+  }
+
+  .name,
+  .handle,
+  .review {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .row {
+    animation-duration: 35s;
+  }
+
+  .container {
+    padding: 0 1em;
+    margin-bottom: 4em;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+}

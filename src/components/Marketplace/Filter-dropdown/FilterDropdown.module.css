@@ -1,0 +1,223 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 10;
+  height: 100%;
+}
+
+.wrapper {
+  width: 15em;
+  position: absolute;
+  /* border-radius: 0.5em; */
+  overflow: hidden;
+  top: 3em;
+  right: 0.2em;
+  padding: 0.5em 1em 1em 1em;
+  /* background: var(--primary-bg-black); */
+  /* border: 1.5px solid var(--outline); */
+  box-shadow: 0px 1.43503px 2.87007px rgba(28, 27, 28, 0.05);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 250ms;
+  transform: translateY(-0.5em);
+  border-radius: 8px;
+  border: 1px solid var(--primary-light-blue, #bbc5ff);
+  background: var(--primary-black-bg, #080f20);
+}
+
+.wrapper.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0em);
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
+  padding: 0.5em 1em;
+  /* border-radius: 0.7em; */
+  cursor: pointer;
+  /* background: var(--default); */
+  /* border: 1px solid var(--card-outline); */
+
+  border-radius: 4px;
+  border: 1px solid rgba(147, 163, 248, 0.24);
+  background: rgba(8, 15, 32, 0.15);
+  backdrop-filter: blur(25px);
+}
+
+.filterBtn:hover {
+  background: var(--primary-blue);
+}
+
+.filterHeading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 0.5em 1em;
+}
+
+.sort,
+.status {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  height: 36px;
+  padding: 4px 16px;
+  gap: 10px;
+  flex: 1 0 0;
+}
+
+.sort.active,
+.status.active {
+  border-radius: 2px;
+  border: 1px solid var(--primary-dark-blue, #262b92);
+  background: var(--transparent-black-black-60, rgba(3, 7, 16, 0.6));
+}
+
+.dropdown {
+  display: flex;
+  padding-bottom: 0.5em;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  align-self: stretch;
+  border-bottom: 1px solid rgba(187, 197, 255, 0.16);
+}
+
+.priceDropdown {
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 0.5em 0.75em; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  /* gap: 8px; */
+  align-self: stretch;
+  margin-top: -1em;
+}
+
+.inputContainer {
+  display: flex;
+  padding: 8px 16px;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+
+  flex: 1 0 0;
+  border-radius: 4px;
+  border: 1px solid rgba(147, 163, 248, 0.24);
+}
+
+.inputContainer input {
+  background: none;
+  color: white;
+  border: none;
+  max-width: 4em;
+}
+
+.inputContainer input:focus {
+  outline: none;
+}
+
+.label {
+  display: flex;
+  height: 20px;
+  padding: 0px 0px 0px 3px;
+  align-items: center;
+
+  position: relative;
+  left: -5em;
+  top: 1em;
+
+  color: var(--transparent-white-white-50, rgba(251, 251, 251, 0.5));
+  /* font-family: Poppins; */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
+
+  background: var(--primary-black-bg, #080f20);
+  backdrop-filter: blur(8.5px);
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 1em 0 0 0;
+}
+
+.btn {
+  /* padding: 0.5em 0;
+  border-radius: 0.7em;
+  flex: 1;
+  text-align: center;
+  font-size: 0.85rem;
+  border: 1px solid transparent;
+  transition: all 300ms;
+  cursor: pointer; */
+  display: flex;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex: 1 0 0;
+  border-radius: 40px;
+}
+
+.btn.apply {
+  background: var(--primary-primary-blue, #3856ff);
+  border: 2px solid var(--primary-primary-blue, #3856ff);
+}
+
+.btn.apply:hover {
+  background: none;
+  border: 2px solid var(--primary-primary-blue, #3856ff);
+}
+
+.btn.cancel {
+  border: 2px solid var(--primary-light-blue, #bbc5ff);
+}
+
+.btn.cancel:hover {
+  background: var(--primary-primary-blue, #3856ff);
+  border: 2px solid var(--primary-primary-blue, #3856ff);
+}
+
+@media screen and (max-width: 540px) {
+  .container {
+    justify-content: flex-end;
+  }
+
+  .filterBtn {
+    gap: 0.5em;
+    padding: 0.5em 0.25em;
+  }
+
+  .filterBtn div {
+    font-size: 0.85rem;
+  }
+
+  .filterIcon {
+    width: 1em;
+    height: 1em;
+  }
+}

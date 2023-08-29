@@ -1,0 +1,51 @@
+.container {
+  width: 100%;
+  padding: 0 1em;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 10em;
+  height: 12em;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  border: 1px solid transparent;
+  position: relative;
+  cursor: var(--cursor-pointer);
+  transition: all 300ms;
+}
+
+.card img {
+  width: 3em;
+}
+
+.card:hover {
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card.inActive:hover .soon {
+  font-size: 1rem;
+  transform: translateY(-3.25em);
+}
+
+.soon {
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: 1em;
+  transition: all 300ms;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0;
+  }
+}

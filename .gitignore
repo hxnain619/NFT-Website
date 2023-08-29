@@ -1,0 +1,46 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+bin/
+forge-cache/
+/lib
+/.pnp
+.pnp.js
+/.openzeppelin
+
+# testing
+/coverage
+
+# production
+/build
+/Pull_Request_Template.md
+
+# misc
+/artifacts
+/cache
+.env
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+out/
+remnant/
+.vscode
+.idea
+
+#backend
+/backend/node_modules
+/backend/yarn.lock
+/backend/.env
+/backend/uploads
+
+yarn.lock
+package-lock.json

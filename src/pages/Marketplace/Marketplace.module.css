@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  padding-bottom: 6em;
+  /* background: var(--default); */
+}
+
+.header {
+  height: 28vw;
+  margin-bottom: 1em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header span {
+  white-space: nowrap;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+  padding: 0 1em;
+}
+
+@media screen and (max-width: 540px) {
+  .header {
+    font-size: 2rem;
+  }
+}

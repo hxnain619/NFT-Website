@@ -1,0 +1,97 @@
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  padding: 0.35em 0.5em;
+  background: var(--card-layer);
+  border-radius: 0.25em;
+  color: var(--default);
+  cursor: grab;
+}
+
+._name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.line {
+  margin-right: 0.5em;
+}
+
+.renameBtn,
+.editBtn,
+.deleteBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms;
+  background: rgb(0, 0, 0, 0.1);
+}
+
+.renameBtn img,
+.deleteBtn img,
+.editBtn img {
+  width: 1em;
+}
+
+.renameBtn:hover,
+.editBtn:hover,
+.deleteBtn:hover {
+  background: rgb(0, 0, 0, 0.3);
+}
+
+.closeIcon,
+.editIcon {
+  fill: white;
+}
+
+.renameWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25em;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  border: none;
+}
+
+.renameWrapper form {
+  flex: 1;
+  height: 100%;
+  display: flex;
+}
+
+.renameWrapper input {
+  background: transparent;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0.25em;
+  border: 1px solid var(--outline-dark);
+  color: var(--default);
+  border-radius: 0.25em;
+  font-size: 1rem;
+}
+
+.nameHeader {
+  width: 100%;
+  max-width: 8em;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 0.25em;
+  color: var(--default);
+}
+
+.trait {
+  color: var(--default);
+}

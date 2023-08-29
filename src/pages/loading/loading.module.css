@@ -1,0 +1,48 @@
+.wrapper {
+  width: 100%;
+  margin-top: 46vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.loader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.dotOne,
+.dotTwo,
+.dotThree {
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+  background: var(--main-hovered);
+  animation: blink 300ms infinite alternate linear;
+}
+
+.dotOne {
+  animation-delay: 0ms;
+}
+
+.dotTwo {
+  animation-delay: 150ms;
+}
+
+.dotThree {
+  animation-delay: 300ms;
+}
+
+@keyframes blink {
+  from {
+    background: var(--default);
+  }
+  to {
+    background: var(--main-color);
+  }
+}

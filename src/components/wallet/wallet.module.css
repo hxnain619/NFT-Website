@@ -1,0 +1,290 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1em;
+}
+
+.popupContainer {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10000;
+}
+
+.popupContainer.active {
+  display: block;
+}
+
+.connect {
+  width: 100%;
+  max-width: 12em;
+  padding: 0.5em 1.5em;
+  border-radius: 40px;
+  cursor: var(--cursor-pointer);
+  color: var(--default);
+  background: var(--primary-blue);
+  text-align: center;
+  border: 1px solid var(--accountBorder);
+  transition: background 300ms;
+}
+
+.connect:hover {
+  background: #2D46D6;
+  /* background: var(--main-hovered); */
+}
+
+.connectedContainer {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 40px;
+  border: 1px solid var(--filtersText);
+}
+
+.balance{
+  color: var(--filtersText);
+  padding: 0.5em 0.25em;
+}
+
+.connected {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  cursor: var(--cursor-pointer);
+  border-radius: 40px;
+  background: var(--primary-blue);
+  transition: all 150ms;
+  padding: 0.25em 0.25em;
+  padding: 0.25em 0.5em;
+}
+
+.connected:hover {
+        background: #2D46D6;
+  color: var(--main-hovered);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: var(--cursor-pointer);
+  font-size: 2rem;
+}
+
+.user img {
+  width: 1em;
+  height: 1em;
+}
+
+.chain {
+  height: 24px;
+  width: 24px;
+  background: var(--default);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.address {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+  padding: 0.25em 0;
+  position: relative;
+}
+
+.address > span {
+  color: var(--default) !important;
+}
+
+.dropdownIconContainer {
+  border-left: 1px solid var(--outline);
+  padding: 0 0.25em;
+}
+
+.dropdownIcon {
+  fill: var(--default);
+}
+
+.networkContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.network {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 0.25em;
+  cursor: pointer;
+}
+
+.activeNetwork {
+  color: var(--filtersText);
+  font-size: 0.8rem;
+}
+
+.chevronIcon {
+  width: 0.75em;
+  height: 0.75em;
+  fill: var(--main-color);
+}
+
+.networkDropdownContainer {
+  width: max-content;
+  position: absolute;
+  top: 0.75em;
+  right: 0;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.networkContainer:hover .networkDropdownContainer {
+  animation: drop 300ms forwards;
+  visibility: visible;
+}
+
+.networkDropdown {
+  border: 1px solid var(--card-outline);
+  overflow: hidden;
+  margin-top: 1.75em;
+  background: var(--default);
+  border-radius: 0.25em;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
+.networkDropdown:hover {
+  background: var(--card-light);
+}
+
+.network:hover .networkDropdown {
+  visibility: visible;
+  transform: translateY(100%);
+}
+
+.network .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f1b56e;
+}
+
+.network .dot.mainnet {
+  background: #6be26b;
+}
+
+.dropdownContainer {
+  width: max-content;
+  top: 2em;
+  position: absolute;
+  visibility: hidden;
+}
+
+.connectedContainer:hover .dropdownContainer,
+.notification.notiActive .pushNotification {
+  animation: drop 300ms forwards;
+  visibility: visible;
+  z-index: 2000;
+}
+
+.pushNotification {
+  position: absolute;
+  width: max-content;
+  top: 2em;
+  right: 0;
+  visibility: hidden;
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-1em);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.dropdown div{
+  color: var(--filtersText);
+}
+.dropdown {
+  background: var(--body-bg);
+  width: 16em;
+  border: 1px solid var(--card-outline);
+  overflow: hidden;
+  margin-top: 1em;
+  border-radius: 0.5em;
+}
+
+.dropdown.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  padding: 1em;
+  cursor: pointer;
+}
+.option:hover div{
+  color: var(--text-heading);
+}
+
+.option:hover {
+  background: var(--card-light);
+  color: var(--text-heading);
+}
+
+.option img {
+  width: 1.2em;
+}
+.notificationContent {
+  position: relative;
+}
+.notification {
+  margin-left: 14px;
+  margin-top: 7px;
+}
+.notification img {
+  width: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .connect {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container {
+    justify-content: space-between;
+  }
+  .popupContainer.active {
+    animation: 300ms forwards;
+  }
+  .pushNotification {
+    right: -1.4em;
+  }
+}
+@media screen and (max-width: 380px) {
+  .pushNotification {
+    right: -1.7em;
+  }
+}

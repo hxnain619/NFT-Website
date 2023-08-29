@@ -1,0 +1,44 @@
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 0.5em;
+  cursor: var(--cursor-pointer);
+  /* border-top: 1px solid var(--outline);
+  border-bottom: 1px solid var(--outline); */
+}
+
+.textWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.textWrapper div {
+  color: var(--transparent-white-white-90, rgba(251, 251, 251, 0.9));
+
+  /* market/body-1-bold */
+  /* font-family: Roboto; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.content {
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--primary-black-bg);
+}
+
+.content.active {
+  max-height: 1000vh;
+}
+
+.dropdownIcon {
+  transform: rotate(0);
+}
+
+.dropdownIcon.active {
+  transform: rotate(180deg);
+}

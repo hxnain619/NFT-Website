@@ -1,0 +1,82 @@
+.button {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--primary-blue);
+    padding: 12px 20px;
+    border-radius: 40px;
+    color: #ECF1F9;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+
+    a {
+        text-decoration: none;
+        color: #ECF1F9;
+    }
+
+    &.light {
+        background: transparent;
+        color: var(--neutral2);
+        border: 2px solid var(--border-color);
+    }
+
+    &.disabled {
+        opacity: 0.5;
+    }
+}
+
+[data-theme="dark"] .light {
+    color: var(--border-color);
+}
+
+.disabledEl {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.faucet {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    color: var(--neutral2);
+    border: 2px solid var(--border-color);
+    padding: 6px;
+    border-radius: 18px;
+    cursor: pointer;
+    z-index: 6;
+    @media (max-width: 450px) {
+        position: absolute;
+        left: 10%;
+        right: auto;
+        bottom: 28%;
+        width: 134px;
+        text-align: center;
+    }
+}
+
+.faucet-list {
+    position: fixed;
+    right: 80px;
+    bottom: 10px;
+    cursor: pointer;
+    z-index: 6;
+
+    button {
+        margin-left: 8px;
+    }
+    @media (max-width: 450px) {
+        position: absolute;
+        left: 10%;
+        right: auto;
+        bottom: 35%;
+        cursor: pointer;
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 134px;
+        button {
+            margin-left: 0px;
+        }
+    }
+}
