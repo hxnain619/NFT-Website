@@ -2,14 +2,15 @@
 /* eslint-disable prefer-destructuring */
 import React, { useEffect, useState } from "react";
 import classes from "./DashboardFilterDropdown.module.css";
-import dropdownIcon from "../../../assets/icon-caret-down.svg";
+import dropdownIcon from "../../../assets/icon-chevron-down.svg";
+import { ReactComponent as DropdownIcon } from "../../../assets/icon-chevron-down.svg";
 
 const DashboardFilterDropdown = ({ onFilter }) => {
   const [state, setState] = useState({
     togglePriceFilter: false,
     activeFilter: {
-      name: "price",
-      label: ["low - high", "high - low"],
+      name: "sort by",
+      label: [],
     },
 
     filterObj: [
@@ -60,7 +61,8 @@ const DashboardFilterDropdown = ({ onFilter }) => {
         <div>{activeFilter.name}</div>
         <div className={classes.filterDetail}>
           <span>{activeFilter.label[0]}</span>
-          <img src={dropdownIcon} alt="" className={`${classes.dropdownIcon} ${togglePriceFilter && classes.active}`} />
+          <DropdownIcon className={`${classes.dropdownIcon} ${togglePriceFilter && classes.active}`} />
+          {/* <img src={dropdownIcon} alt="" className={`${classes.dropdownIcon} ${togglePriceFilter && classes.active}`} /> */}
         </div>
       </div>
       <div className={`${classes.dropdown} ${togglePriceFilter && classes.active}`}>

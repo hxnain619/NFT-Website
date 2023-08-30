@@ -36,11 +36,16 @@ import DashboardFilterDropdown from "../../components/Marketplace/Dashboard-Filt
 import Pagination from "../../components/pagination/Pagination";
 // assets
 import avatar from "../../assets/avatar.png";
-import { ReactComponent as Youtube } from "../../assets/icon-youtube-green.svg";
-import { ReactComponent as Twitter } from "../../assets/icon-twitter-blue.svg";
-import { ReactComponent as Discord } from "../../assets/icon-discord-blue.svg";
-import { ReactComponent as Instagram } from "../../assets/icon-instagram-blue.svg";
-import { ReactComponent as LinkIcon } from "../../assets/icon-link.svg";
+// import { ReactComponent as Youtube } from "../../assets/icon-youtube-green.svg";
+// import { ReactComponent as Twitter } from "../../assets/icon-twitter-blue.svg";
+// import { ReactComponent as Discord } from "../../assets/icon-discord-blue.svg";
+// import { ReactComponent as Instagram } from "../../assets/icon-instagram-blue.svg";
+// import { ReactComponent as LinkIcon } from "../../assets/icon-link.svg";
+import { ReactComponent as Twitter } from "../../assets/icon-twitter-white.svg";
+import { ReactComponent as Website } from "../../assets/icon-website-white.svg";
+import { ReactComponent as Telegram } from "../../assets/icon-telegram-white.svg";
+import { ReactComponent as Instagram } from "../../assets/icon-instagram-white.svg";
+import { ReactComponent as LinkIcon } from "../../assets/icon-link-white-.svg";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -134,7 +139,9 @@ const Dashboard = () => {
     (async function getUsername() {
       const data = await readUserProfile(userId);
 
-      handleSetState({ userDetails: data });
+      handleSetState({
+        userDetails: { twitter: "asdf", website: " ", telegram: "asdf", instagram: "asdf", link: "asdf" },
+      });
     })();
   }, [userId, chainID]);
 
@@ -285,55 +292,64 @@ const Dashboard = () => {
           <div className={classes.profileHeader}>
             <div className={classes.profileDetail}>
               {userDetails?.username ? <div className={classes.username}> {userDetails.username}</div> : ""}
-
-              <div className={classes.social}>
-                {userDetails?.twitter ? (
-                  <a href={`https://twitter.com/${userDetails.twitter}`} target="_blank" rel="noreferrer">
-                    {" "}
-                    <Twitter className={classes.socialIcon} />
-                  </a>
-                ) : (
-                  ""
-                )}
-                {userDetails?.youtube ? (
-                  <a href={`https://youtube.com/${userDetails.youtube}`} target="_blank" rel="noreferrer">
-                    {" "}
-                    <Youtube className={classes.socialIcon} />
-                  </a>
-                ) : (
-                  ""
-                )}
-                {userDetails?.instagram ? (
-                  <a href={`https://www.instagram.com/${userDetails.instagram}`} target="_blank" rel="noreferrer">
-                    {" "}
-                    <Instagram className={classes.socialIcon} />
-                  </a>
-                ) : (
-                  ""
-                )}
-                {userDetails?.discord ? (
-                  <a href={`https://discord.com/users/${userDetails.discord}`} target="_blank" rel="noreferrer">
-                    {" "}
-                    <Discord className={classes.socialIcon} />
-                  </a>
-                ) : (
-                  ""
-                )}
-              </div>
             </div>
 
             <div className={classes.address}>
-              <img src={supportedChains[chainID]?.icon} alt="blockchain" />
+              {/* <img src={supportedChains[chainID]?.icon} alt="blockchain" /> */}
               <div>{userId?.length > 25 ? breakAddress(userId) : userId}</div>
-              <LinkIcon onClick={handleExplorer} />
+              {/* <LinkIcon onClick={handleExplorer} /> */}
             </div>
           </div>
         </div>
-        {userId === account && (
-          <Link to="/profile/settings">
-            <div className={classes.editProfile}>Edit Profile</div>
-          </Link>
-        )}
+        <div className={classes.rightPane}>
+          {userId === account && (
+            <Link to="/profile/settings">
+              <div className={classes.editProfile}>Edit Profile</div>
+            </Link>
+          )}
+          <div className={classes.social}>
+            {userDetails?.twitter ? (
+              <a href={`https://twitter.com/${userDetails.twitter}`} target="_blank" rel="noreferrer">
+                {" "}
+                <Twitter className={classes.socialIcon} />
+              </a>
+            ) : (
+              ""
+            )}
+            {userDetails?.website ? (
+              <a href={`https://${userDetails.website}`} target="_blank" rel="noreferrer">
+                {" "}
+                <Website className={classes.socialIcon} />
+              </a>
+            ) : (
+              ""
+            )}
+            {userDetails?.telegram ? (
+              <a href={`https://t.me/${userDetails.telegram}`} target="_blank" rel="noreferrer">
+                {" "}
+                <Telegram className={classes.socialIcon} />
+              </a>
+            ) : (
+              ""
+            )}
+            {userDetails?.instagram ? (
+              <a href={`https://www.instagram.com/${userDetails.instagram}`} target="_blank" rel="noreferrer">
+                {" "}
+                <Instagram className={classes.socialIcon} />
+              </a>
+            ) : (
+              ""
+            )}
+            {userDetails?.link ? (
+              <a href={`https://${userDetails.link}`} target="_blank" rel="noreferrer">
+                {" "}
+                <LinkIcon className={classes.socialIcon} />
+              </a>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </div>
 
       <div className={classes.wrapper}>
@@ -344,12 +360,12 @@ const Dashboard = () => {
               className={`${classes.detail} ${activeDetail === "created" && classes.active}`}
             >
               <p>Created</p>
-              <span>
+              {/* <span>
                 {" "}
                 {Array.isArray(myCollections) || Array.isArray(createdNfts)
                   ? [...(createdNfts || []), ...(myCollections || [])].length
                   : 0}
-              </span>
+              </span> */}
             </div>
 
             <div
@@ -357,14 +373,23 @@ const Dashboard = () => {
               className={`${classes.detail} ${activeDetail === "collected" && classes.active}`}
             >
               <p>Collected</p>
-              <span>{Array.isArray(collectedNfts) ? collectedNfts.length : 0}</span>
+              {/* <span>{Array.isArray(collectedNfts) ? collectedNfts.length : 0}</span> */}
             </div>
+
+            <div
+              onClick={() => activeSwitch("favourite")}
+              className={`${classes.detail} ${activeDetail === "favourite" && classes.active}`}
+            >
+              <p>Favourite</p>
+              {/* <span>{Array.isArray(collectedNfts) ? collectedNfts.length : 0}</span> */}
+            </div>
+
             <div
               onClick={() => activeSwitch("sale")}
               className={`${classes.detail} ${activeDetail === "sale" && classes.active}`}
             >
               <p>On sale</p>
-              <span>{Array.isArray(onSale) ? onSale.length : 0}</span>
+              {/* <span>{Array.isArray(onSale) ? onSale.length : 0}</span> */}
             </div>
           </div>
         </section>

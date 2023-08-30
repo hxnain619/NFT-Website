@@ -6,8 +6,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: var(--default);
+  background: var(--primary-black-bg);
   z-index: 10;
+}
+
+.filterDropdown * {
+  color: var(--transparent-white-white-70);
 }
 
 .filterDropdown span {
@@ -17,11 +21,11 @@
 .filterHeading {
   width: 100%;
   cursor: var(--cursor-pointer);
-  background: var(--default);
-  border: 1px solid var(--main-color);
+  background: var(--primary-black-bg);
+  border: 1px solid rgba(147, 163, 248, 0.24);
   padding: 0.5em 1em;
   z-index: 99;
-  border-radius: 0.7em;
+  border-radius: 0.25em;
   transition: all 300ms;
   display: flex;
   align-items: center;
@@ -31,11 +35,12 @@
 }
 
 .filterHeading:hover {
-  background: var(--card-light);
+  /* background: var(--card-light); */
+  border: 1px solid var(--primary-blue);
 }
 
 .filterHeading {
-  color: var(--main-color);
+  color: var(--transparent-white-white-70);
 }
 
 .filterDetail {
@@ -50,7 +55,7 @@
   min-width: 100%;
   position: absolute;
   top: 2.5em;
-  background: var(--default);
+  background: var(--primary-black-bg);
   visibility: hidden;
   opacity: 0;
   transition: all 250ms;
@@ -59,7 +64,7 @@
   cursor: var(--cursor-pointer);
   transform: translateY(-0.5em);
   text-transform: capitalize;
-  border-radius: 0.5em;
+  border-radius: 0.25em;
   overflow: hidden;
   box-shadow: -9px 13px 18px rgba(93, 134, 194, 0.1), 26px 18px 18px rgba(93, 134, 194, 0.1);
 }
@@ -80,12 +85,22 @@
   border-bottom: 1px solid var(--outline);
 }
 
+.filter div {
+  color: var(--transparent-white-white-70);
+}
+
 .filter:hover {
   background: var(--card-light);
 }
 
+.filter:hover div {
+  background: var(--card-light);
+  color: black;
+}
+
 .dropdownIcon {
-  transition: all 250ms;
+  transition: all 50ms;
+  fill: #8c93a3;
 }
 
 .dropdownIcon.active {
