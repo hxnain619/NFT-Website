@@ -9,14 +9,15 @@ const Attribute = ({ attribute, removeAttribute, id, changeAttribute, index, isc
       type="text"
       value={attribute.trait_type}
       onChange={(event) => changeAttribute({ event, id })}
-      placeholder="eg. eyes"
+      // placeholder="eg. eyes"
     />
     <input
       name="value"
       type="text"
       value={attribute.value}
+      className={classes.inputPlaceholder}
       onChange={(event) => changeAttribute({ event, id })}
-      placeholder="eg. green"
+      // placeholder="eg. green"
     />
     <button
       className={iscat || index === "0" ? classes._0 : ""}

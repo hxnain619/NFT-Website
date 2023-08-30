@@ -430,7 +430,7 @@ const Minter = () => {
     }
 
     if (mintId === "ai") {
-      console.log("IN CAP", aiData)
+      console.log("IN CAP", aiData);
       dispatch(setLoader("Getting image"));
       // const response = await axios.get(aiData.imageUrl, { responseType: 'blob' });
       const response = await axios.post(
@@ -809,28 +809,22 @@ const Minter = () => {
         />
       ) : (
         <div className={classes.wrapper}>
-          <div className={classes.headerTitle}>Create</div>
-          {file?.length > 1 ? (
-            <div className={classes.headerDescription}>
-              Upload a{" "}
-              <span>
-                collection
-                <BorderIcon />
-              </span>{" "}
-              to create NFTs on any of our <br />
-              supported blockchains super fast!
-            </div>
-          ) : (
-            <div className={classes.headerDescription}>
-              Upload an{" "}
-              <span>
-                {params?.mintId === "1of1" ? "1 of 1" : params?.mintId}
-                <BorderIcon />
-              </span>{" "}
-              to create a proof of sesh NFTs <br />
-              on any of our supported blockchains super fast!
-            </div>
-          )}
+          <div className={classes.header}>
+            <div className={classes.headerTitle}>Create Your NFT</div>
+            {file?.length > 1 ? (
+              <div className={classes.headerDescription}>
+                Upload a{" "}
+                <span>
+                  collection
+                  <BorderIcon />
+                </span>{" "}
+                to create NFTs on any of our <br />
+                supported blockchains super fast!
+              </div>
+            ) : (
+              <div className={classes.headerDescription}>Upload an image to create NFT</div>
+            )}
+          </div>
           <div className={classes.grid}>
             {/* <Category handleSetState={handleSetState} category={category} file={file} params={params} /> */}
             <div className={classes.mintSection}>
@@ -887,7 +881,10 @@ const Minter = () => {
                       </span>
                     </div>
                     <div>
-                      <span>Number of assets:</span> <p>{file?.length ? file.length : 1}</p>
+                      <span>
+                        {"Number of assets: "}
+                        {file?.length ? file.length : 1}
+                      </span>
                     </div>
                     {chainId === 4160 && (
                       <div className={classes.priceTooltip}>
@@ -908,7 +905,7 @@ const Minter = () => {
                     }}
                     type="button"
                   >
-                    Change asset
+                    Change Asset
                   </button>
                 </div>
               </section>
@@ -916,11 +913,11 @@ const Minter = () => {
                 <div className={classes.heading}> {getActivetitle()}</div>
 
                 <section className={classes.details}>
-                  <div className={classes.category}>Asset Details</div>
+                  {/* <div className={classes.category}>Asset Details</div> */}
                   <div className={classes.inputWrapper}>
                     <label>
-                      {" "}
-                      Title <span className={classes.required}>*</span>
+                      {"Add NFT Name "}
+                      <span className={classes.required}>*</span>
                     </label>
                     <input
                       type="text"
@@ -990,11 +987,11 @@ const Minter = () => {
 
                   <div className={classes.inputWrapper}>
                     <label>
-                      Description <span className={classes.required}>*</span>{" "}
-                      <GenadropToolTip
+                      Description <span className={classes.required}>{" *"}</span>{" "}
+                      {/* <GenadropToolTip
                         content="This description will be visible on your collection page"
                         fill="#0d99ff"
-                      />
+                      /> */}
                     </label>
                     <textarea
                       style={metadata?.length === 1 ? { pointerEvents: "none" } : {}}
@@ -1005,8 +1002,10 @@ const Minter = () => {
                   </div>
 
                   {(file?.length === 1 || ipfsLink) && (
-                    <div className={classes.inputWrapper}>
-                      <label>Category</label>
+                    <div className={`${classes.inputWrapper} ${classes.categoryWrapper}`}>
+                      <label>
+                        Category<span className={classes.required}>{" *"}</span>{" "}
+                      </label>
                       <div
                         onClick={() => {
                           if (!metadata?.category) {
@@ -1113,7 +1112,7 @@ const Minter = () => {
                       </>
                     ) : (
                       <div className={classes.metadata}>
-                        <div>Number of assets: {metadata.length}</div>
+                        <div>Number of Assets: {metadata.length}</div>
                         <div className={classes.trait_type}>
                           Trait_types:
                           {metadata[0]?.attributes.map(({ trait_type }, idx) => (
@@ -1266,25 +1265,25 @@ const Minter = () => {
                     <div className={`${classes.toggleTitle}`}>
                       <div className={classes.category}>
                         Mint to {mintToMyAddress && category !== "Sesh" ? "my" : "Another"} Address{" "}
-                        <GenadropToolTip
+                        <div className={classes.toggler}>
+                          <label className={classes.switch}>
+                            <input
+                              type="checkbox"
+                              onClick={() => handleCheck()}
+                              defaultChecked={account !== ""}
+                              disabled={category === "Sesh"}
+                            />
+                            <span className={classes.slider} />
+                          </label>
+                        </div>
+                        {/* <GenadropToolTip
                           content={`${
                             category === "Sesh"
                               ? "Input the Reciever address to mint"
                               : "Click toggle button to mint to another address. This can't be reversed."
                           }`}
                           fill="#0d99ff"
-                        />
-                      </div>
-                      <div className={classes.toggler}>
-                        <label className={classes.switch}>
-                          <input
-                            type="checkbox"
-                            onClick={() => handleCheck()}
-                            defaultChecked={account !== ""}
-                            disabled={category === "Sesh"}
-                          />
-                          <span className={classes.slider} />
-                        </label>
+                        /> */}
                       </div>
                     </div>
                     <div className={classes.otherAddress}>
@@ -1315,7 +1314,7 @@ const Minter = () => {
                         onClick={() => handleSetState({ openQrModal: true })}
                         className={classes.qrScanner}
                       >
-                        <QrCodeIcon />
+                        {/* <QrCodeIcon /> */}
                       </button>
                     </div>
                   </div>
@@ -1328,25 +1327,29 @@ const Minter = () => {
                         <div className={`${classes.toggleTitle}`}>
                           <div className={classes.category}>
                             Soul Bound{" "}
-                            <GenadropToolTip
-                              content="Soulbound token is a publicly verifiable and non-transferable NFT that represents an individual's credentials."
-                              fill="#0d99ff"
-                            />
-                          </div>
-                          <div className={classes.toggler}>
-                            <label className={classes.switch}>
-                              <input
-                                type="checkbox"
-                                // value={isSoulBound}
-                                onClick={() => handleCheckSoulBound()}
-                                defaultChecked={category === "Sesh"}
-                              />
-                              <span className={classes.slider} />
-                            </label>
+                            <div className={classes.toggler}>
+                              <label className={classes.switch}>
+                                <input
+                                  type="checkbox"
+                                  // value={isSoulBound}
+                                  onClick={() => handleCheckSoulBound()}
+                                  defaultChecked={category === "Sesh"}
+                                />
+                                <span className={classes.slider} />
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
                     )}
+
+                  <div className={classes.inputWrapper}>
+                    <div className={classes.confirm}>
+                      <input className={classes.confirmCheckbox} type="checkbox" />
+                      Please confirm you own the rights to use this image commercially.
+                      <span className={classes.required}>*</span>
+                    </div>
+                  </div>
                 </section>
 
                 {/* <section className={classes.mintOptions}>
@@ -1388,16 +1391,15 @@ const Minter = () => {
                     </div>
                   </div>
                 </section> */}
-
-                <section className={classes.mintButtonWrapper}>
-                  <button type="button" onClick={onMint} className={classes.mintBtn}>
-                    Mint
-                  </button>
-                  <button type="button" onClick={handleCancel} className={classes.cancelBtn}>
-                    Cancel
-                  </button>
-                </section>
               </div>
+              <section className={classes.mintButtonWrapper}>
+                <button type="button" onClick={onMint} className={classes.mintBtn}>
+                  Mint
+                </button>
+                <button type="button" onClick={handleCancel} className={classes.cancelBtn}>
+                  Cancel
+                </button>
+              </section>
             </div>
           </div>
           {openQrModal && (
