@@ -1,10 +1,14 @@
 .container {
   width: 100%;
   padding: 1em;
-  background: #ffffff;
-  border: 2px solid #cacdd5;
+  /* background: #ffffff; */
+  /* border: 2px solid #cacdd5; */
   box-shadow: 2px 7px 22px rgba(28, 27, 28, 0.1);
   border-radius: 0.7em;
+}
+
+.container * {
+  color: var(--primary-white, #ecf1f9);
 }
 
 .container > img,
@@ -30,6 +34,15 @@
   padding: 0.5em 0;
   font-weight: 600;
   font-size: 1.5rem;
+}
+
+.heading div {
+  /* Subheading-2-Jost */
+  /* font-family: Jost; */
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 40px; /* 125% */
 }
 
 .shareSection {
@@ -67,13 +80,17 @@
 .title {
   margin-bottom: 0.5em;
   font-size: 0.85rem;
-  color: var(--main-color);
+  /* color: var(--main-color); */
 }
 
 .subSection {
   display: flex;
   align-items: center;
   gap: 1em;
+}
+
+.subSection a {
+  color: var(--primary-blue);
 }
 
 .placeholder {
@@ -94,7 +111,7 @@
 }
 
 .name.active:hover {
-  color: var(--main-color);
+  color: var(--primary-light-blue);
 }
 
 @media screen and (max-width: 1200px) {

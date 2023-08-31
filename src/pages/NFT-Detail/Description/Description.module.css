@@ -1,15 +1,24 @@
 .container {
   width: 100%;
   border-radius: 1em;
-  background: #ffffff;
-  border: 2px solid #eeeff2;
+  /* background: #ffffff; */
+  /* border: 2px solid #eeeff2; */
   box-shadow: 2px 7px 22px rgba(28, 27, 28, 0.1);
 }
 
+.container * {
+  color: var(--primary-white);
+}
+
 .heading {
-  padding: 0.5em;
-  font-weight: 600;
-  font-size: 1.5rem;
+  color: var(--primary-white, #ecf1f9);
+
+  /* subheading-small-jost */
+  /* font-family: Jost; */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
 
 .content {
@@ -18,6 +27,12 @@
 
 .content > div {
   word-wrap: break-word;
+  color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
+  /* font-family: Poppins; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
 }
 
 .showBtn {

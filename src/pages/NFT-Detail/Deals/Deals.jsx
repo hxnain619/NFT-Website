@@ -56,11 +56,11 @@ const Deals = ({ nftDetails }) => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <div className={classes.title}>CURRENT PRICE</div>
+        <div className={classes.title}>Current Price</div>
         <div className={classes.priceSection}>
           <img className={classes.chainIcon} src={supportedChains[chain].icon} alt="" />
-          <div className={classes.price}>{`${price ? Number(price).toFixed(4) : "0.0"}`}</div>
-          <div className={classes.appx}>{`($${price ? usdValue.toFixed(4) : "0"})`}</div>
+          <div className={classes.price}>{`${price ? Number(price).toFixed(2) : "0.0"}`}</div>
+          <div className={classes.appx}>{`~ $${price ? usdValue.toFixed(2) : "0"}`}</div>
         </div>
       </div>
       {isSoulBound ? (

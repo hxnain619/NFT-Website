@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { breakAddress } from "../NFTDetail-script";
 import classes from "./NFT.module.css";
 import { ReactComponent as ShareIcon } from "../../../assets/icon-share.svg";
+import { ReactComponent as RefreshIcon } from "../../../assets/icon-refresh.svg";
 import Share from "./Share";
 import avatar from "../../../assets/avatar.png";
 
@@ -40,6 +41,10 @@ const NFT = ({ nftDetails }) => {
         <div className={classes.nftName}>{truncateText(name, 15)}</div>
         <div className={classes.shareSection}>
           <div className={classes.dropdown} ref={wrapperRef}>
+            <RefreshIcon
+              //  onClick={() => setShare(true)}
+              className={classes.shareIcon}
+            />
             <ShareIcon onClick={() => setShare(true)} className={classes.shareIcon} />
 
             <Share share={share} setShare={setShare} />

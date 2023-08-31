@@ -9,7 +9,10 @@
   border-radius: 1em;
   position: sticky;
   top: 3.5em;
-  background: var(--default);
+  /* background: var(--default); */
+}
+.container * {
+  color: var(--primary-white);
 }
 
 .chainIcon {
@@ -39,19 +42,34 @@
 
 .title {
   margin-bottom: 0.5em;
-  color: var(--text-placeholder);
+  color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
+
+  /* Button 2 */
+  /* font-family: DM Sans; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 114.286% */
+  /* color: var(--text-placeholder); */
 }
 
 .priceSection {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 1em;
+  gap: 0.5em;
 }
 
 .price {
-  font-weight: 600;
-  font-size: 1.2rem;
+  color: var(--primary-white, #ecf1f9);
+
+  /* Headline 4 */
+  /* font-family: DM Sans; */
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px; /* 125% */
+  letter-spacing: -0.32px;
 }
 
 .appx {
@@ -69,11 +87,15 @@
   text-align: center;
   width: 8em;
   font-size: 1.2em;
+  border-radius: 40px;
+  background: var(--primary-primary-blue, #3856ff);
+  border: 1px solid var(--primary-primary-blue, #3856ff);
 }
 
 .btn:hover {
-  background: var(--default);
-  color: var(--main-color);
+  background: none;
+  border: 1px solid var(--primary-light-blue);
+  /* color: var(--main-color); */
 }
 
 .btn.disable {
