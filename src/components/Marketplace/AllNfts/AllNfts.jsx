@@ -2,7 +2,6 @@
 /* eslint-disable no-shadow */
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import CollectionNftCard from "../CollectionNftCard/CollectionNftCard";
 import classes from "./AllNfts.module.css";
 import { GenContext } from "../../../gen-state/gen.context";
@@ -12,6 +11,7 @@ import { getCollectionsByCategory, getCollectionsByChain, sortBy } from "../../.
 import { setActiveCollection } from "../../../gen-state/gen.actions";
 import NotFound from "../../not-found/notFound";
 import { getAllChainCollections, getAllNftsbyChain } from "../../../renderless/fetch-data/fetchUserGraphData";
+import SkeletonCards from "../../skeleton-card";
 
 const AllNfts = () => {
   const history = useHistory();
@@ -193,15 +193,7 @@ const AllNfts = () => {
             )}
           </section>
         ) : (
-          <div className={classes.skeleton}>
-            {[...new Array(4)].map((id, idx) => (
-              <div key={idx}>
-                <Skeleton count={1} height={200} />
-                <Skeleton count={1} height={20} />
-                <Skeleton count={1} height={20} />
-              </div>
-            ))}
-          </div>
+          <SkeletonCards />
         )}
         {/* <div className={classes.btnContainer}>
           {activeType !== "T1" ? (
