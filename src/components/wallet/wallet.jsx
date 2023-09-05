@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { ethers } from "ethers";
 import classes from "./wallet.module.css";
 import { GenContext } from "../../gen-state/gen.context";
 import userIcon from "../../assets/icon-user.svg";
@@ -11,7 +12,6 @@ import disconnectIcon from "../../assets/icon-disconnect.svg";
 import WalletPopup from "../wallet-popup/walletPopup";
 import supportedChains from "../../utils/supportedChains";
 import bellIcon from "../../assets/bell.svg";
-import { ethers } from "ethers";
 import useCommon from "../../hooks/useCommon";
 
 import {
@@ -164,13 +164,10 @@ function ConnectWallet() {
     <div className={classes.connectedContainer}>
       <div className={classes.balance}> {americanFormatNumber(balance, 3)} AVAX </div>
       <div className={classes.connected}>
-        <img className={classes.chain} src={getConnectedChain(chainId)} alt="" />
         <div className={classes.address}>
           <span>{account?.length > 15 ? breakAddress(account) : account}</span>
         </div>
-        <div className={classes.dropdownIconContainer}>
-          <DropdownIcon className={classes.dropdownIcon} />
-        </div>
+        <img className={classes.chain} src={getConnectedChain(chainId)} alt="" />
       </div>
       {dropdown}
     </div>
@@ -178,10 +175,6 @@ function ConnectWallet() {
 
   const changeNetwork = (
     <div className={classes.networkContainer}>
-      <div className={classes.network}>
-        <div className={`${classes.dot} ${network === "mainnet" && classes.mainnet}`} />{" "}
-        <div className={classes.activeNetwork}>{network === "mainnet" ? "Mainnet" : "Testnet"}</div>
-      </div>
       <div className={classes.notificationContent}>
         <div className={`${classes.notification} ${openNotification && classes.notiActive}`}>
           <img
@@ -195,14 +188,20 @@ function ConnectWallet() {
           </div>
         </div>
       </div>
+      <div className={classes.network}>
+        <div className={`${classes.dot} ${network === "mainnet" && classes.mainnet}`} />{" "}
+        <div className={classes.activeNetwork}>{network === "mainnet" ? "Mainnet" : "Testnet"}</div>
+      </div>
     </div>
   );
 
   return (
     <>
-      <div className={`${classes.popupContainer} ${toggleWalletPopup && classes.active}`}>
-        {toggleWalletPopup && <WalletPopup isMetamask={isMetamask} handleSetState={handleSetState} />}
-      </div>
+      {toggleWalletPopup && (
+        <div className={`${classes.popupContainer} ${toggleWalletPopup && classes.active}`}>
+          <WalletPopup isMetamask={isMetamask} handleSetState={handleSetState} />
+        </div>
+      )}
       {account ? (
         <div className={classes.container}>
           {connected}
