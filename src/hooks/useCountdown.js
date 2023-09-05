@@ -34,16 +34,7 @@ const getReturnValues = (countDown) => {
   const minutes = minutesValue < 10 ? `0${minutesValue}` : minutesValue;
   const seconds = secondsValue < 10 ? `0${secondsValue}` : secondsValue;
   const days = daysValue < 10 ? `0${daysValue}` : daysValue;
-  return [
-    hours,
-    minutes,
-    seconds,
-    hoursValue,
-    minutesValue,
-    secondsValue,
-    days,
-    daysValue,
-  ];
+  return [hours, minutes, seconds, hoursValue, minutesValue, secondsValue, days, daysValue];
 };
 
 export { useCountdown };

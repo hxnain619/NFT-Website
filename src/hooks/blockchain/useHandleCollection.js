@@ -20,21 +20,17 @@ export default function useHandleCollection() {
   const checkToken = (contractAddress, tokenID) => {
     console.log(`[useHandleCollection.js::checkToken]`);
 
-    return new CollectionApi()
-      .checkToken(contractAddress, tokenID)
-      .then((res) => {
-        return res?.status ? res?.data?._doc || {} : {};
-      });
+    return new CollectionApi().checkToken(contractAddress, tokenID).then((res) => {
+      return res?.status ? res?.data?._doc || {} : {};
+    });
   };
 
   const getCollectionStatistics = (contractAddress) => {
     console.log(`[useHandleCollection.js::getCollectionStatistics]`);
 
-    return new CollectionApi()
-      .getCollectionStatistics(contractAddress)
-      .then((res) => {
-        return res?.status ? res?.data || {} : {};
-      });
+    return new CollectionApi().getCollectionStatistics(contractAddress).then((res) => {
+      return res?.status ? res?.data || {} : {};
+    });
   };
 
   return {

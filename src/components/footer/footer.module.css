@@ -4,7 +4,7 @@
   background: var(--transparent-black-black-60);
 }
 
-.container  *{
+.container * {
   background: var(--transparent-black-black-60);
 }
 
@@ -36,7 +36,7 @@
   gap: 1em;
 }
 
-.topLeft a img{
+.topLeft a img {
   width: 256px;
 }
 
@@ -206,14 +206,14 @@
   }
 }
 
-.content{
+.content {
   margin-left: 188px;
   margin-right: 188px;
   margin-top: 64px;
   margin-bottom: 32px;
 }
 
-.gridlinks{
+.gridlinks {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px; /* Adjust the gap between items as needed */

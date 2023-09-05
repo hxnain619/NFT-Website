@@ -11,47 +11,24 @@ export default function useHandleAuction() {
   const handleContracts = useHandleContracts();
   const [{ user }] = useContext(Context);
 
-  const transfer = (
-    address,
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const transfer = (address, tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractERC721WithSigner(contractAddress)
       .transferFrom(user?.wallet_id, address, tokenID)
       .then((tx) => tx.wait());
   };
 
-  const approveAuction = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const approveAuction = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractERC721WithSigner(contractAddress)
       .approve(process.env.REACT_APP_MARKETPLACE_AUCTION_ADDRESS, tokenID)
       .then((tx) => tx.wait());
   };
 
-  const createAuction = (
-    nftAddress,
-    tokenID,
-    startPrice,
-    bidStep,
-    blockDeadline,
-    isToken = false,
-    tokenAddress
-  ) => {
+  const createAuction = (nftAddress, tokenID, startPrice, bidStep, blockDeadline, isToken = false, tokenAddress) => {
     return handleContracts
       .contractMarketplaceAuctionWithSigner()
-      .create(
-        nftAddress,
-        tokenID,
-        startPrice,
-        bidStep,
-        blockDeadline,
-        isToken,
-        tokenAddress
-      )
+      .create(nftAddress, tokenID, startPrice, bidStep, blockDeadline, isToken, tokenAddress)
       .then((tx) => tx.wait());
   };
 
@@ -138,27 +115,21 @@ export default function useHandleAuction() {
     for (let j = 0; j < tokens.length; j++) {
       const provider = new ethers.providers.Web3Provider(window?.ethereum);
       const signer = provider.getSigner();
-      const contractNFKey = new ethers.Contract(
-        tokens[j].nftAddress,
-        NFKEY_ABI,
-        provider
-      );
+      const contractNFKey = new ethers.Contract(tokens[j].nftAddress, NFKEY_ABI, provider);
       const contractNFKeyWithSigner = contractNFKey.connect(signer);
 
-      await contractNFKeyWithSigner
-        .tokenURI(tokens[j].tokenId)
-        .then(async (uri) => {
-          const ipfsHash = uri.split("/").pop();
-          const ipfsData = await new AirdropApi().getIpfs(ipfsHash);
-          const tokenData = {
-            owner: tokens[j].owner,
-            contractAddress: tokens[j].nftAddress,
-            tokenId: tokens[j].tokenId,
-            ...ipfsData,
-          };
+      await contractNFKeyWithSigner.tokenURI(tokens[j].tokenId).then(async (uri) => {
+        const ipfsHash = uri.split("/").pop();
+        const ipfsData = await new AirdropApi().getIpfs(ipfsHash);
+        const tokenData = {
+          owner: tokens[j].owner,
+          contractAddress: tokens[j].nftAddress,
+          tokenId: tokens[j].tokenId,
+          ...ipfsData,
+        };
 
-          tokenList.push(tokenData);
-        });
+        tokenList.push(tokenData);
+      });
     }
 
     return tokenList;

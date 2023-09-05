@@ -63,7 +63,7 @@
   background: var(--pirmary-blue);
   border: none;
   background: var(--primary-blue);
-  border: 1px solid var(--primary-blue);  
+  border: 1px solid var(--primary-blue);
 }
 
 .cardGrid {
@@ -163,15 +163,15 @@
   }
 }
 
-.pane{
+.pane {
   width: 80%;
   margin-left: 10%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   grid-gap: 32px; /* Gap between columns */
 }
 
-.leftpane{
+.leftpane {
 }
-.rightpane{
+.rightpane {
 }

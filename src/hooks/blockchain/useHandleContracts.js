@@ -50,39 +50,20 @@ export default function useHandleContracts() {
       return new ethers.providers.Web3Provider(window?.ethereum);
     };
     const contractWhitelist = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_WHITELIST_ADDRESS,
-        WHITELIST_ABI,
-        getProvider()
-      );
-    const contractWhitelistWithSigner = () =>
-      contractWhitelist().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_WHITELIST_ADDRESS, WHITELIST_ABI, getProvider());
+    const contractWhitelistWithSigner = () => contractWhitelist().connect(getSigner());
 
-    const contractNFKey = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_NFKEY_ADDRESS,
-        NFKEY_ABI,
-        getProvider()
-      );
+    const contractNFKey = () => new ethers.Contract(process.env.REACT_APP_NFKEY_ADDRESS, NFKEY_ABI, getProvider());
     const contractNFKeyWithSigner = () => {
       return contractNFKey().connect(getSigner());
     };
 
     const contractSmarterCoin = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_SMARTR_ADDRESS,
-        SMARTR_ABI,
-        getProvider()
-      );
-    const contractSmarterCoinWithSigner = () =>
-      contractSmarterCoin().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_SMARTR_ADDRESS, SMARTR_ABI, getProvider());
+    const contractSmarterCoinWithSigner = () => contractSmarterCoin().connect(getSigner());
 
     const contractNFKeyStaking = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_NFKEY_STAKING_ADDRESS,
-        NFKEY_STAKING_ABI,
-        getProvider()
-      );
+      new ethers.Contract(process.env.REACT_APP_NFKEY_STAKING_ADDRESS, NFKEY_STAKING_ABI, getProvider());
     const contractNFKeyStakingWithSigner = () => {
       // console.log("contractNFKeyStakingWithSigner");
       console.time("contractNFKeyStakingWithSigner");
@@ -91,120 +72,57 @@ export default function useHandleContracts() {
 
       return contract;
     };
-    const contractTresrCoin = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_TRESR_ADDRESS,
-        TRESR_ABI,
-        getProvider()
-      );
-    const contractTresrCoinWithSigner = () =>
-      contractTresrCoin().connect(getSigner());
+    const contractTresrCoin = () => new ethers.Contract(process.env.REACT_APP_TRESR_ADDRESS, TRESR_ABI, getProvider());
+    const contractTresrCoinWithSigner = () => contractTresrCoin().connect(getSigner());
 
     const contractDailyBonusRewards = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_REWARD_ADDRESS,
-        REWARD_ABI,
-        getProvider()
-      );
-    const contractDailyBonusRewardsWithSigner = () =>
-      contractDailyBonusRewards().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_REWARD_ADDRESS, REWARD_ABI, getProvider());
+    const contractDailyBonusRewardsWithSigner = () => contractDailyBonusRewards().connect(getSigner());
 
     const contractTresrStakingCoin = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_TRESR_STAKING_ADDRESS,
-        TRESR_STAKING_ABI,
-        getProvider()
-      );
-    const contractTresrStakingCoinWithSigner = () =>
-      contractTresrStakingCoin().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_TRESR_STAKING_ADDRESS, TRESR_STAKING_ABI, getProvider());
+    const contractTresrStakingCoinWithSigner = () => contractTresrStakingCoin().connect(getSigner());
 
     const contractLpStakingTRESRAVAX = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_LP_TRESRAVAX_STAKING_ADDRESS,
-        LP_TRESRAVAX_STAKING_ABI,
-        getProvider()
-      );
-    const contractLpStakingTRESRAVAXWithSigner = () =>
-      contractLpStakingTRESRAVAX().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_LP_TRESRAVAX_STAKING_ADDRESS, LP_TRESRAVAX_STAKING_ABI, getProvider());
+    const contractLpStakingTRESRAVAXWithSigner = () => contractLpStakingTRESRAVAX().connect(getSigner());
 
     const contractLpStakingSMRTRAVAX = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_LP_SMRTRAVAX_STAKING_ADDRESS,
-        LP_SMRTRAVAX_STAKING_ABI,
-        getProvider()
-      );
-    const contractLpStakingSMRTRAVAXWithSigner = () =>
-      contractLpStakingSMRTRAVAX().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_LP_SMRTRAVAX_STAKING_ADDRESS, LP_SMRTRAVAX_STAKING_ABI, getProvider());
+    const contractLpStakingSMRTRAVAXWithSigner = () => contractLpStakingSMRTRAVAX().connect(getSigner());
 
     const contractLpCoinTRESRAVAX = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_LP_TRESRAVAX_TOKEN_ADDRESS,
-        LP_TRESRAVAX_TOKEN_ABI,
-        getProvider()
-      );
-    const contractLpCoinTRESRAVAXWithSigner = () =>
-      contractLpCoinTRESRAVAX().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_LP_TRESRAVAX_TOKEN_ADDRESS, LP_TRESRAVAX_TOKEN_ABI, getProvider());
+    const contractLpCoinTRESRAVAXWithSigner = () => contractLpCoinTRESRAVAX().connect(getSigner());
 
     const contractLpCoinSMRTRRAVAX = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_LP_SMRTRAVAX_TOKEN_ADDRESS,
-        LP_SMRTRAVAX_TOKEN_ABI,
-        getProvider()
-      );
-    const contractLpCoinSMRTRAVAXWithSigner = () =>
-      contractLpCoinSMRTRRAVAX().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_LP_SMRTRAVAX_TOKEN_ADDRESS, LP_SMRTRAVAX_TOKEN_ABI, getProvider());
+    const contractLpCoinSMRTRAVAXWithSigner = () => contractLpCoinSMRTRRAVAX().connect(getSigner());
 
     const contractMarketplaceListing = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_MARKETPLACE_LISTING_ADDRESS,
-        MARKETPLACE_LISTING_ABI,
-        getProvider()
-      );
-    const contractMarketplaceListingWithSigner = () =>
-      contractMarketplaceListing().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_MARKETPLACE_LISTING_ADDRESS, MARKETPLACE_LISTING_ABI, getProvider());
+    const contractMarketplaceListingWithSigner = () => contractMarketplaceListing().connect(getSigner());
 
     const contractMarketplaceAuction = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_MARKETPLACE_AUCTION_ADDRESS,
-        MARKETPLACE_AUCTION_ABI,
-        getProvider()
-      );
-    const contractMarketplaceAuctionWithSigner = () =>
-      contractMarketplaceAuction().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_MARKETPLACE_AUCTION_ADDRESS, MARKETPLACE_AUCTION_ABI, getProvider());
+    const contractMarketplaceAuctionWithSigner = () => contractMarketplaceAuction().connect(getSigner());
 
     const contractMarketplaceCommunityCollection = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_COMMUNITY_COLLECTION_ADDRESS,
-        COMMUNITY_COLLECTION,
-        getProvider()
-      );
+      new ethers.Contract(process.env.REACT_APP_COMMUNITY_COLLECTION_ADDRESS, COMMUNITY_COLLECTION, getProvider());
     const contractMarketplaceCommunityCollectionWithSigner = () =>
       contractMarketplaceCommunityCollection().connect(getSigner());
 
     const contractMasterChef = () =>
-      new ethers.Contract(
-        process.env.REACT_APP_MASTER_CHEF_ADDRESS,
-        MASTER_CHEF_ABI,
-        getProvider()
-      );
-    const contractMasterChefWithSigner = () =>
-      contractMasterChef().connect(getSigner());
+      new ethers.Contract(process.env.REACT_APP_MASTER_CHEF_ADDRESS, MASTER_CHEF_ABI, getProvider());
+    const contractMasterChefWithSigner = () => contractMasterChef().connect(getSigner());
 
     const contractERC20WithSigner = (contractAddress) => {
-      const contract = new ethers.Contract(
-        contractAddress,
-        ERC20_ABI,
-        getProvider()
-      );
+      const contract = new ethers.Contract(contractAddress, ERC20_ABI, getProvider());
       return contract.connect(getSigner());
     };
 
     const contractERC721WithSigner = (contractAddress) => {
-      const contract = new ethers.Contract(
-        contractAddress,
-        ERC721_ABI,
-        getProvider()
-      );
+      const contract = new ethers.Contract(contractAddress, ERC721_ABI, getProvider());
       return contract.connect(getSigner());
     };
 

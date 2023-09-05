@@ -13,11 +13,11 @@
   /* cursor: pointer; */
   /* background: #ffffff; */
   /* border: 1.41429px solid #a9a9a9; */
-  /* box-shadow: 5.65714px 5.65714px 11.3143px rgba(28, 27, 28, 0.04); */  
+  /* box-shadow: 5.65714px 5.65714px 11.3143px rgba(28, 27, 28, 0.04); */
   padding: 4px;
 }
 
-.container *{
+.container * {
   color: var(--transparent-white-white-90);
 }
 
@@ -51,7 +51,7 @@
   transition: transform 300ms;
   position: absolute;
   background-color: black;
-  border: 0.3px solid var(--primary-blue)
+  border: 0.3px solid var(--primary-blue);
 }
 
 .details {

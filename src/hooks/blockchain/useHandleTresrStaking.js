@@ -7,12 +7,7 @@ import { hexToNumber } from "../../utils/blockchain";
 import useHandleContracts from "./useHandleContracts";
 import { nowUnix, sleep } from "../../utils";
 import useHandleNFT from "./useHandleNFT";
-import {
-  ALERT_STATUS_FAILURE,
-  ALERT_STATUS_SUCCESS,
-  STAKE_TRESR,
-  UNSTAKE_TRESR,
-} from "../../constant/alert";
+import { ALERT_STATUS_FAILURE, ALERT_STATUS_SUCCESS, STAKE_TRESR, UNSTAKE_TRESR } from "../../constant/alert";
 import useHandleRewards from "./useHandleRewards";
 
 export default function useHandleTresrStaking() {
@@ -24,8 +19,7 @@ export default function useHandleTresrStaking() {
   const handleRewards = useHandleRewards();
 
   const approveTRESR = async (value) => {
-    if (value > balance?.balanceTresr)
-      return handleToastAlert.error("Empty balance");
+    if (value > balance?.balanceTresr) return handleToastAlert.error("Empty balance");
 
     const balanceWei = ethers.utils.parseUnits(value.toString(), "ether");
     if (!+balanceWei) return handleToastAlert.error("Empty balance");
@@ -78,9 +72,7 @@ export default function useHandleTresrStaking() {
       .contractTresrStakingCoinWithSigner()
       .getRewardPerSecond(user?.wallet_id)
       .then((tx) =>
-        ACTION.SET_BALANCE_TRESR_REWARDS_PER_SEC(
-          ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-        )
+        ACTION.SET_BALANCE_TRESR_REWARDS_PER_SEC(ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
       )
       .catch(() => null);
   };
@@ -111,17 +103,12 @@ export default function useHandleTresrStaking() {
     return await handleContracts
       .contractTresrStakingCoinWithSigner()
       .getReward(nowUnix())
-      .then((tx) =>
-        ACTION.SET_BALANCE_TOTAL_EARNED(
-          +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-        )
-      )
+      .then((tx) => ACTION.SET_BALANCE_TOTAL_EARNED(+ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())))
       .catch(() => null);
   };
 
   const stakeTresr = async (value) => {
-    if (value > balance?.balanceTresr)
-      return handleToastAlert.error("Empty balance");
+    if (value > balance?.balanceTresr) return handleToastAlert.error("Empty balance");
 
     const balanceWei = ethers.utils.parseUnits(value.toString(), "ether");
     if (!+balanceWei) return handleToastAlert.error("Empty balance");
@@ -171,8 +158,7 @@ export default function useHandleTresrStaking() {
   };
 
   const unstakeTresr = async (value) => {
-    if (value > balance?.balanceTresrStaked)
-      return handleToastAlert.error("Empty staking balance");
+    if (value > balance?.balanceTresrStaked) return handleToastAlert.error("Empty staking balance");
 
     const amountWei = ethers.utils.parseUnits(value.toString(), "ether");
     if (!+amountWei) return handleToastAlert.error("Empty staking balance");
@@ -202,11 +188,7 @@ export default function useHandleTresrStaking() {
 
         handleToastAlert.success("$TRESR unstaked");
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          UNSTAKE_TRESR(true, value)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, UNSTAKE_TRESR(true, value));
       })
       .catch((err) => {
         new AirdropApi().logger({
@@ -216,11 +198,7 @@ export default function useHandleTresrStaking() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          UNSTAKE_TRESR(false, value)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, UNSTAKE_TRESR(false, value));
 
         return null;
       });

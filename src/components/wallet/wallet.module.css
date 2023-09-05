@@ -35,7 +35,7 @@
 }
 
 .connect:hover {
-  background: #2D46D6;
+  background: #2d46d6;
   /* background: var(--main-hovered); */
 }
 
@@ -48,7 +48,7 @@
   border: 1px solid var(--filtersText);
 }
 
-.balance{
+.balance {
   color: var(--filtersText);
   padding: 0.5em 0.25em;
 }
@@ -68,7 +68,7 @@
 }
 
 .connected:hover {
-        background: #2D46D6;
+  background: #2d46d6;
   color: var(--main-hovered);
 }
 
@@ -218,7 +218,7 @@
   }
 }
 
-.dropdown div{
+.dropdown div {
   color: var(--filtersText);
 }
 .dropdown {
@@ -244,7 +244,7 @@
   padding: 1em;
   cursor: pointer;
 }
-.option:hover div{
+.option:hover div {
   color: var(--text-heading);
 }
 

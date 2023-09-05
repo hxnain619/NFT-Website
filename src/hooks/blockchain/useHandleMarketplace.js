@@ -12,26 +12,17 @@ export default function useHandleMarketplace() {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .commissionPer()
-      .then((tx) =>
-        ACTION.SET_MARKETPLACE_LISTING_COMMISSION(hexToNumber(tx?._hex))
-      );
+      .then((tx) => ACTION.SET_MARKETPLACE_LISTING_COMMISSION(hexToNumber(tx?._hex)));
   };
 
-  const transfer = (
-    address,
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const transfer = (address, tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractERC721WithSigner(contractAddress)
       .transferFrom(user?.wallet_id, address, tokenID)
       .then((tx) => tx.wait());
   };
 
-  const approveListing = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const approveListing = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractERC721WithSigner(contractAddress)
       .approve(process.env.REACT_APP_MARKETPLACE_LISTING_ADDRESS, tokenID)
@@ -49,23 +40,11 @@ export default function useHandleMarketplace() {
   ) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
-      .addListing(
-        price,
-        tokenID,
-        contractAddress,
-        startDate,
-        endDate,
-        isToken,
-        tokenAddress
-      )
+      .addListing(price, tokenID, contractAddress, startDate, endDate, isToken, tokenAddress)
       .then((tx) => tx.wait());
   };
 
-  const purchaseListing = (
-    tokenID,
-    price,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const purchaseListing = (tokenID, price, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .purchase(contractAddress, tokenID, {
@@ -74,30 +53,21 @@ export default function useHandleMarketplace() {
       .then((tx) => tx.wait());
   };
 
-  const purchaseListingToken = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const purchaseListingToken = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .purchaseToken(contractAddress, tokenID)
       .then((tx) => tx.wait());
   };
 
-  const cancelListing = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const cancelListing = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .cancelListing(tokenID, contractAddress)
       .then((tx) => tx.wait());
   };
 
-  const checkListing = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const checkListing = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .listings(contractAddress, tokenID)
@@ -113,11 +83,7 @@ export default function useHandleMarketplace() {
       });
   };
 
-  const changePrice = (
-    price,
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const changePrice = (price, tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .changeListingPrice(price, tokenID, contractAddress)
@@ -152,54 +118,31 @@ export default function useHandleMarketplace() {
   ) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
-      .makeOfferToken(
-        price,
-        owner,
-        contractAddress,
-        tokenID,
-        startDate,
-        endDate,
-        isToken,
-        tokenAddress
-      )
+      .makeOfferToken(price, owner, contractAddress, tokenID, startDate, endDate, isToken, tokenAddress)
       .then((tx) => tx.wait());
   };
 
-  const onCancelOffer = (
-    tokenID,
-    offerID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const onCancelOffer = (tokenID, offerID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .cancelOffer(tokenID, contractAddress, offerID)
       .then((tx) => tx.wait());
   };
 
-  const onAcceptOffer = (
-    tokenID,
-    offerID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const onAcceptOffer = (tokenID, offerID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .acceptOffer(contractAddress, tokenID, offerID)
       .then((tx) => tx.wait());
   };
 
-  const checkOffer = (
-    tokenID,
-    offerID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const checkOffer = (tokenID, offerID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .offers(contractAddress, tokenID, offerID)
       .then((tx) => {
         return {
-          price: +ethers.utils.formatEther(
-            hexToNumber(tx?.price?._hex)?.toString()
-          ),
+          price: +ethers.utils.formatEther(hexToNumber(tx?.price?._hex)?.toString()),
           owner: tx?.owner,
           from: tx?.buyer,
           id: hexToNumber(tx?.id?._hex),
@@ -212,10 +155,7 @@ export default function useHandleMarketplace() {
       .catch((err) => null);
   };
 
-  const getOffersLength = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const getOffersLength = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractMarketplaceListingWithSigner()
       .offersCount(tokenID, contractAddress)
@@ -224,10 +164,7 @@ export default function useHandleMarketplace() {
       });
   };
 
-  const approveOffer = (
-    tokenID,
-    contractAddress = process.env.REACT_APP_NFKEY_ADDRESS
-  ) => {
+  const approveOffer = (tokenID, contractAddress = process.env.REACT_APP_NFKEY_ADDRESS) => {
     return handleContracts
       .contractERC721WithSigner(contractAddress)
       .approve(process.env.REACT_APP_MARKETPLACE_LISTING_ADDRESS, tokenID)

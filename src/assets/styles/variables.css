@@ -162,195 +162,231 @@
     --noteArrow: url("../../assets/images/arrow4.svg");
 } */
 
-[data-theme="dark"], :root {
-    --bg-color: #081326;
-    --primary-white: #ECF1F9;
-    --transparent-white-white-90: rgba(251, 251, 251, 0.90);
-    --transparent-white-white-70: rgba(251, 251, 251, 0.70);
-    --transparent-white-white-40: rgba(251, 251, 251, 0.40);
-    --transparent-black-black-60: #030710;
-    --transparnet-black-balck-40: rgba(3, 7, 16, 0.40);
-    --primary-blue: #3856FF;
-    --primary-dark-blue: #262B92;
-    --primary-light-blue: #93A3F8;
-    --primary-blue-hover: #2D46D6;
-    --primary-black-bg: #080F20;
-    --secondary-yellow: #FEC90C;
-    --body-bg: #081326;
-    --bodyBlur: blur(900px);
-    --bodyBlurredBg: rgba(8, 15, 32, 1);
-    --neutral: #C7C7C7;
-    --link-notAvtive: #ECF1F9;
-    --link-active: #FFCA0E;
-    --title-color: #ECF1F9;
-    --maxWidth: 1300px;
-    --headerHeight: 82px;
-    --neutral2: #FBFBFB;
-    --lightBtnText: #313131;
-    --neutral3: #909090;
-    --neutral4: #777E90;
-    --border-color: #ECF1F9;
-    --border-neutral: #313131;
-    --timer-count: #FBFBFB;
-    --neutral5: #313131;
-    --tile-bg: #030710;
-    --button-bg: #081326;
-    --badge-blue: rgba(86, 111, 254, 0.3);
-    --badge-green: rgba(44, 155, 142, 0.3);
-    --badge-red: rgba(255, 104, 113, 0.3);
-    --badge-gray: rgba(145, 145, 145, 0.3);
-    --progress-bg: #313131;
-    --progress-line-bg: #FBFBFB;
-    --subtitle-color: #C7C7C7;
-    --tokenBalanceColor: rgba(255, 255, 255, 0.7);
-    --treasureTitle: rgba(255, 255, 255, 0.85);
-    --treasureProgressBg: transparent;
-    --treasureBorderColor: rgba(254, 201, 12, 0.5);
-    --treasureLineColor: #FEC90C;
-    --treasureTextColor: #FEC90C;
-    --cardBg: #030710;
-    --spanColor: #919191;
-    --subtitleColor: rgba(255, 255, 255, 0.85);
-    --tabMenuBgActive: rgba(255, 255, 255, 0.8);
-    --tabMenuColorActive: rgba(3, 7, 16, 0.6);
-    --progressLineBg: rgba(38, 43, 146, 0.3);
-    --progressLineBg2: #030710;
-    --marketplaceMenuItem: rgba(86, 111, 254, 0.6);
-    --marketplaceTitle: rgba(255, 255, 255, 0.85);
-    --marketplacePercentage: #07CD9D;
-    --marketPlaceCollection: rgba(255, 255, 255, 0.8);
-    --marketplaceBg: linear-gradient(180deg, #061033 0%, #0A1D60 16.2%, #07174F 40.23%, #081443 68.13%, #040B26 100%);
-    --marketplaceFilters: rgba(7, 18, 61, 0.5);
-    --marketplaceFiltersMobile: rgba(8, 15, 32, 0.15);
-    --marketplaceFiltersBorder: rgba(255, 255, 255, 0.5);
-    --marketplaceFiltersTitle: rgba(255, 255, 255, 0.85);
-    --marketplaceButton: #C2CBFF;
-    --accountBg: rgba(8, 15, 32, 0.4);
-    --accountBlur: blur(20px);
-    --accountName: #ECF1F9;
-    --accountAddress: rgba(255, 255, 255, 0.9);
-    --tabsText: #ECF1F9;
-    --nftItemBorder: rgba(3, 7, 16, 0.4);
-    --mintedBg: rgba(255, 255, 255, 0.4);
-    --nftItemBg: rgba(251, 251, 251, 0.1);
-    --activityTableBg: rgba(147, 163, 248, 0.05);
-    --activityTableBorder: rgba(73, 100, 254, 0.5);
-    --nftItemPercentage: rgba(255, 255, 255, 0.7);
-    --searchInput: rgba(255, 255, 255, 0.7);
-    --keyId: rgba(255, 255, 255, 0.9);
-    --nftInfoBg: rgba(3, 7, 16, 0.4);
-    --selectorBg: rgba(3, 7, 16, 0.3);
-    --selectorBgItem: rgb(7, 15, 23);
-    --selectorBorder: 1px solid rgba(86, 111, 254, 0.15);
-    --singleNFTTableBorder: rgba(38, 43, 146, 0.7);
-    --metadataBg: linear-gradient(112.75deg, rgba(17, 58, 129, 0.3) 0%, rgba(8, 19, 38, 0) 100%);
-    --metadataBorder: rgba(38, 43, 146, 0.3);
-    --metadataPercentage: rgba(255, 255, 255, 0.5);
-    --footerBg: linear-gradient(0deg, rgba(3, 7, 16, 0.6), rgba(3, 7, 16, 0.6));
-    --foterInputBg: rgba(8, 15, 32, 0.15);
-    --dashboardFiltersBg: rgba(3, 7, 16, 0.5);
-    --dashboardDropdownBorder: #BBC5FF;
-    --dashboardDropdownBg: rgba(8, 15, 32, 0.15);
-    --dashboardScrollBg: rgba(251, 251, 251, 0.3);
-    --dashboardBlockBg: rgba(3, 7, 16, 0.3);
-    --subHeaderBg: rgba(8, 15, 32, 1);
-    --subHeaderCCBg: rgba(8, 15, 32, 0.3);
-    --dashboardTabsMobile: rgba(3, 7, 16, 0.3);
-    --calendarBg: rgba(8, 15, 32, 0.5);
-    --durationListBg: #181540;
-    --modalBg: linear-gradient(180deg, rgba(6, 16, 51, 0.5) 0%, rgba(10, 29, 96, 0.5) 16.2%, rgba(7, 23, 79, 0.5) 40.23%, rgba(8, 20, 67, 0.5) 68.13%, rgba(4, 11, 38, 0.5) 100%);
-    --modalBlur: blur(30px);
-    --modalBorder: rgba(153, 0, 255, 0.2);
-    --accountBorder: #ECF1F9;
-    --accountButtonBorder: rgba(3, 7, 16, 0.6);
-    --emptyTabText: #A0ADF6;
-    --accountPopupBg: linear-gradient(180deg, rgba(6, 16, 51, 0.3) 0%, rgba(10, 29, 96, 0.3) 16.2%, rgba(7, 23, 79, 0.3) 40.23%, rgba(8, 20, 67, 0.3) 68.13%, rgba(4, 11, 38, 0.3) 100%);
-    --accountWalletBg: rgba(187, 197, 255, 0.2);
-    --landingTitle: #ECF1F9;
-    --topCollectionBg: rgba(236, 241, 249, 0.1);
-    --topCollectionText: rgba(255, 255, 255, 0.8);
-    --sliderBg: rgba(3, 7, 16, 0.1);
-    --sliderBlur: blur(20px);
-    --sliderBlurredBlock: rgba(3, 7, 16, 0.3);
-    --createSellBg: rgba(3, 7, 16, 0.4);
-    --createSellInputText: rgba(255, 255, 255, 0.5);
-    --createSellInputBorder: #BBC5FF;
-    --goBackText: #BBC5FF;
-    --filtersText: rgba(255, 255, 255, 0.7);
-    --filterOptionBg: rgba(73, 100, 254, 0.1);
-    --filterOptionBorder: #4964FE;
-    --filterSelected: #2D46D6;
-    --filterClearAll: #2D46D6;
-    --filterDropdownBg: #090f23;
-    --dropdownActiveItem: rgba(38, 43, 146, 0.5);
-    --tooltipBg: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), rgba(38, 43, 146, 0.8);
-    --tooltipArrow: url("../images/tooltipArrowDark.svg");
-    --currencyInputLabel: #BBC5FF;
-    --currencyPopupBg: #181540;
-    --createPageName: rgba(255, 255, 255, 0.85);
-    --createPageSelectBg: rgba(73, 100, 254, 0.2);
-    --addMetadataBg: linear-gradient(180deg, rgba(6, 16, 51, 0.1) 0%, rgba(10, 29, 96, 0.1) 16.2%, rgba(7, 23, 79, 0.1) 40.23%, rgba(8, 20, 67, 0.1) 68.13%, rgba(4, 11, 38, 0.1) 100%);
-    --addMetadataBorder: rgba(38, 43, 146, 0.3);
-    --copyImage: url("../../assets/images/icon-copy-white.svg");
-    --connectButtonBg: rgba(187, 197, 255, 0.1);
-    --collectionPlaceholderBg: linear-gradient(90deg, #030710 0%, rgba(8, 15, 32, 0.3) 100%);
-    --collectionPlaceholderBg2: #080F20;
-    --collectionPlaceholderBg3: rgba(8, 15, 32, 0.5);
-    --collectionPlaceholderBg4: rgba(8, 15, 32, 0.1);
-    --nftPlaceholder: linear-gradient(90deg, rgba(8, 15, 32, 0.7) 0%, #030710 50.52%, rgba(8, 15, 32, 0.7) 100%);
-    --nftInfoBorder: rgba(3, 7, 16, 0.1);
-    --collectionName: #93A3F8;
-    --nftTabsBorder: #262B92;
-    --socialsBoxShadow: 0px -1px 4px rgba(255, 255, 255, 0.5), 0px 1px 4px rgba(255, 255, 255, 0.5);
-    --socialsBg: rgba(3, 7, 16, 0.6);
-    --offersTableBg: rgba(3, 7, 16, 0.3);
-    --offersTableTitleBg: rgba(3, 7, 16, 0.1);
-    --titleShadow: rgba(73, 100, 254, 0.6) 1px 0 20px;
-    --buttonShadow: 0px 0px 20px rgba(73, 100, 254, 0.6);
-    --mintInputBg: rgba(3, 7, 16, 0.3);
-    --getItemBg: linear-gradient(269.48deg, #09153D 0.16%, #081443 53.52%, #040B26 95.91%);
-    --printItemBg: rgba(251, 251, 251, 0.05);
-    --phoneCard: url("../../assets/images/phoneCard.svg");
-    --phoneCardHover: url("../../assets/images/phoneCardHover.svg");
-    --faqItemBg: rgba(3, 7, 16, 0.3);
-    --faqItemText: rgba(255, 255, 255, 0.9);
-    --arrowDown: url("../../assets/images/arrowWhite.svg");
-    --inputRangeBg: rgba(3, 7, 16, 0.6);
-    --inputRangeLine: #BBC5FF linear-gradient(#93A3F8, #93A3F8) no-repeat;
-    --mintPageBg1: linear-gradient(180deg, rgba(1, 5, 18, 0.5) 0%, rgba(5, 17, 61, 0.5) 16.2%, rgba(7, 21, 72, 0.5) 40.23%, rgba(8, 20, 67, 0.5) 68.13%, rgba(1, 4, 16, 0.5) 100%);
-    --mintPageBg2: linear-gradient(180deg, rgba(6, 16, 51, 0.5) 0%, rgba(10, 29, 96, 0.5) 16.2%, rgba(7, 23, 79, 0.5) 40.23%, rgba(8, 20, 67, 0.5) 68.13%, rgba(4, 11, 38, 0.5) 100%);
-    --viewMoreImg: url("../../assets/images/viewMore.svg");
-    --gameKeyTitle: rgba(251, 251, 251, 0.8);
-    --keyItemBg: rgba(251, 251, 251, 0.1);
-    --dashboardPopap: #181540;
-    --modalTitle:#ECF1F9;
-    --modalHeart: url("../../assets/images/heart_transparent.svg");
-    --modalHeartColored: url("../../assets/images/heart_colored.svg");
-    --modalInputBg: transparent;
-    --modalInputBorder: #BBC5FF;
-    --sellModalTabs: rgba(187, 197, 255, 0.15);
-    --calendarTitle: #FCFCF9;
-    --calendarArrow: rgba(255, 255, 255, 0.3);
-    --modalImgBg: rgba(251, 251, 251, 0.1);
-    --modalImgShadow: 0px 4px 12px rgba(86, 86, 86, 0.16);
-    --noteShadow: 0px 0px 20px rgba(73, 100, 254, 0.6);
-    --noteArrow: url("../../assets/images/arrow4_light.svg");
+[data-theme="dark"],
+:root {
+  --bg-color: #081326;
+  --primary-white: #ecf1f9;
+  --transparent-white-white-90: rgba(251, 251, 251, 0.9);
+  --transparent-white-white-70: rgba(251, 251, 251, 0.7);
+  --transparent-white-white-40: rgba(251, 251, 251, 0.4);
+  --transparent-black-black-60: #030710;
+  --transparnet-black-balck-40: rgba(3, 7, 16, 0.4);
+  --primary-blue: #3856ff;
+  --primary-dark-blue: #262b92;
+  --primary-light-blue: #93a3f8;
+  --primary-blue-hover: #2d46d6;
+  --primary-black-bg: #080f20;
+  --secondary-yellow: #fec90c;
+  --body-bg: #081326;
+  --bodyBlur: blur(900px);
+  --bodyBlurredBg: rgba(8, 15, 32, 1);
+  --neutral: #c7c7c7;
+  --link-notAvtive: #ecf1f9;
+  --link-active: #ffca0e;
+  --title-color: #ecf1f9;
+  --maxWidth: 1300px;
+  --headerHeight: 82px;
+  --neutral2: #fbfbfb;
+  --lightBtnText: #313131;
+  --neutral3: #909090;
+  --neutral4: #777e90;
+  --border-color: #ecf1f9;
+  --border-neutral: #313131;
+  --timer-count: #fbfbfb;
+  --neutral5: #313131;
+  --tile-bg: #030710;
+  --button-bg: #081326;
+  --badge-blue: rgba(86, 111, 254, 0.3);
+  --badge-green: rgba(44, 155, 142, 0.3);
+  --badge-red: rgba(255, 104, 113, 0.3);
+  --badge-gray: rgba(145, 145, 145, 0.3);
+  --progress-bg: #313131;
+  --progress-line-bg: #fbfbfb;
+  --subtitle-color: #c7c7c7;
+  --tokenBalanceColor: rgba(255, 255, 255, 0.7);
+  --treasureTitle: rgba(255, 255, 255, 0.85);
+  --treasureProgressBg: transparent;
+  --treasureBorderColor: rgba(254, 201, 12, 0.5);
+  --treasureLineColor: #fec90c;
+  --treasureTextColor: #fec90c;
+  --cardBg: #030710;
+  --spanColor: #919191;
+  --subtitleColor: rgba(255, 255, 255, 0.85);
+  --tabMenuBgActive: rgba(255, 255, 255, 0.8);
+  --tabMenuColorActive: rgba(3, 7, 16, 0.6);
+  --progressLineBg: rgba(38, 43, 146, 0.3);
+  --progressLineBg2: #030710;
+  --marketplaceMenuItem: rgba(86, 111, 254, 0.6);
+  --marketplaceTitle: rgba(255, 255, 255, 0.85);
+  --marketplacePercentage: #07cd9d;
+  --marketPlaceCollection: rgba(255, 255, 255, 0.8);
+  --marketplaceBg: linear-gradient(180deg, #061033 0%, #0a1d60 16.2%, #07174f 40.23%, #081443 68.13%, #040b26 100%);
+  --marketplaceFilters: rgba(7, 18, 61, 0.5);
+  --marketplaceFiltersMobile: rgba(8, 15, 32, 0.15);
+  --marketplaceFiltersBorder: rgba(255, 255, 255, 0.5);
+  --marketplaceFiltersTitle: rgba(255, 255, 255, 0.85);
+  --marketplaceButton: #c2cbff;
+  --accountBg: rgba(8, 15, 32, 0.4);
+  --accountBlur: blur(20px);
+  --accountName: #ecf1f9;
+  --accountAddress: rgba(255, 255, 255, 0.9);
+  --tabsText: #ecf1f9;
+  --nftItemBorder: rgba(3, 7, 16, 0.4);
+  --mintedBg: rgba(255, 255, 255, 0.4);
+  --nftItemBg: rgba(251, 251, 251, 0.1);
+  --activityTableBg: rgba(147, 163, 248, 0.05);
+  --activityTableBorder: rgba(73, 100, 254, 0.5);
+  --nftItemPercentage: rgba(255, 255, 255, 0.7);
+  --searchInput: rgba(255, 255, 255, 0.7);
+  --keyId: rgba(255, 255, 255, 0.9);
+  --nftInfoBg: rgba(3, 7, 16, 0.4);
+  --selectorBg: rgba(3, 7, 16, 0.3);
+  --selectorBgItem: rgb(7, 15, 23);
+  --selectorBorder: 1px solid rgba(86, 111, 254, 0.15);
+  --singleNFTTableBorder: rgba(38, 43, 146, 0.7);
+  --metadataBg: linear-gradient(112.75deg, rgba(17, 58, 129, 0.3) 0%, rgba(8, 19, 38, 0) 100%);
+  --metadataBorder: rgba(38, 43, 146, 0.3);
+  --metadataPercentage: rgba(255, 255, 255, 0.5);
+  --footerBg: linear-gradient(0deg, rgba(3, 7, 16, 0.6), rgba(3, 7, 16, 0.6));
+  --foterInputBg: rgba(8, 15, 32, 0.15);
+  --dashboardFiltersBg: rgba(3, 7, 16, 0.5);
+  --dashboardDropdownBorder: #bbc5ff;
+  --dashboardDropdownBg: rgba(8, 15, 32, 0.15);
+  --dashboardScrollBg: rgba(251, 251, 251, 0.3);
+  --dashboardBlockBg: rgba(3, 7, 16, 0.3);
+  --subHeaderBg: rgba(8, 15, 32, 1);
+  --subHeaderCCBg: rgba(8, 15, 32, 0.3);
+  --dashboardTabsMobile: rgba(3, 7, 16, 0.3);
+  --calendarBg: rgba(8, 15, 32, 0.5);
+  --durationListBg: #181540;
+  --modalBg: linear-gradient(
+    180deg,
+    rgba(6, 16, 51, 0.5) 0%,
+    rgba(10, 29, 96, 0.5) 16.2%,
+    rgba(7, 23, 79, 0.5) 40.23%,
+    rgba(8, 20, 67, 0.5) 68.13%,
+    rgba(4, 11, 38, 0.5) 100%
+  );
+  --modalBlur: blur(30px);
+  --modalBorder: rgba(153, 0, 255, 0.2);
+  --accountBorder: #ecf1f9;
+  --accountButtonBorder: rgba(3, 7, 16, 0.6);
+  --emptyTabText: #a0adf6;
+  --accountPopupBg: linear-gradient(
+    180deg,
+    rgba(6, 16, 51, 0.3) 0%,
+    rgba(10, 29, 96, 0.3) 16.2%,
+    rgba(7, 23, 79, 0.3) 40.23%,
+    rgba(8, 20, 67, 0.3) 68.13%,
+    rgba(4, 11, 38, 0.3) 100%
+  );
+  --accountWalletBg: rgba(187, 197, 255, 0.2);
+  --landingTitle: #ecf1f9;
+  --topCollectionBg: rgba(236, 241, 249, 0.1);
+  --topCollectionText: rgba(255, 255, 255, 0.8);
+  --sliderBg: rgba(3, 7, 16, 0.1);
+  --sliderBlur: blur(20px);
+  --sliderBlurredBlock: rgba(3, 7, 16, 0.3);
+  --createSellBg: rgba(3, 7, 16, 0.4);
+  --createSellInputText: rgba(255, 255, 255, 0.5);
+  --createSellInputBorder: #bbc5ff;
+  --goBackText: #bbc5ff;
+  --filtersText: rgba(255, 255, 255, 0.7);
+  --filterOptionBg: rgba(73, 100, 254, 0.1);
+  --filterOptionBorder: #4964fe;
+  --filterSelected: #2d46d6;
+  --filterClearAll: #2d46d6;
+  --filterDropdownBg: #090f23;
+  --dropdownActiveItem: rgba(38, 43, 146, 0.5);
+  --tooltipBg: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), rgba(38, 43, 146, 0.8);
+  --tooltipArrow: url("../images/tooltipArrowDark.svg");
+  --currencyInputLabel: #bbc5ff;
+  --currencyPopupBg: #181540;
+  --createPageName: rgba(255, 255, 255, 0.85);
+  --createPageSelectBg: rgba(73, 100, 254, 0.2);
+  --addMetadataBg: linear-gradient(
+    180deg,
+    rgba(6, 16, 51, 0.1) 0%,
+    rgba(10, 29, 96, 0.1) 16.2%,
+    rgba(7, 23, 79, 0.1) 40.23%,
+    rgba(8, 20, 67, 0.1) 68.13%,
+    rgba(4, 11, 38, 0.1) 100%
+  );
+  --addMetadataBorder: rgba(38, 43, 146, 0.3);
+  --copyImage: url("../../assets/images/icon-copy-white.svg");
+  --connectButtonBg: rgba(187, 197, 255, 0.1);
+  --collectionPlaceholderBg: linear-gradient(90deg, #030710 0%, rgba(8, 15, 32, 0.3) 100%);
+  --collectionPlaceholderBg2: #080f20;
+  --collectionPlaceholderBg3: rgba(8, 15, 32, 0.5);
+  --collectionPlaceholderBg4: rgba(8, 15, 32, 0.1);
+  --nftPlaceholder: linear-gradient(90deg, rgba(8, 15, 32, 0.7) 0%, #030710 50.52%, rgba(8, 15, 32, 0.7) 100%);
+  --nftInfoBorder: rgba(3, 7, 16, 0.1);
+  --collectionName: #93a3f8;
+  --nftTabsBorder: #262b92;
+  --socialsBoxShadow: 0px -1px 4px rgba(255, 255, 255, 0.5), 0px 1px 4px rgba(255, 255, 255, 0.5);
+  --socialsBg: rgba(3, 7, 16, 0.6);
+  --offersTableBg: rgba(3, 7, 16, 0.3);
+  --offersTableTitleBg: rgba(3, 7, 16, 0.1);
+  --titleShadow: rgba(73, 100, 254, 0.6) 1px 0 20px;
+  --buttonShadow: 0px 0px 20px rgba(73, 100, 254, 0.6);
+  --mintInputBg: rgba(3, 7, 16, 0.3);
+  --getItemBg: linear-gradient(269.48deg, #09153d 0.16%, #081443 53.52%, #040b26 95.91%);
+  --printItemBg: rgba(251, 251, 251, 0.05);
+  --phoneCard: url("../../assets/images/phoneCard.svg");
+  --phoneCardHover: url("../../assets/images/phoneCardHover.svg");
+  --faqItemBg: rgba(3, 7, 16, 0.3);
+  --faqItemText: rgba(255, 255, 255, 0.9);
+  --arrowDown: url("../../assets/images/arrowWhite.svg");
+  --inputRangeBg: rgba(3, 7, 16, 0.6);
+  --inputRangeLine: #bbc5ff linear-gradient(#93a3f8, #93a3f8) no-repeat;
+  --mintPageBg1: linear-gradient(
+    180deg,
+    rgba(1, 5, 18, 0.5) 0%,
+    rgba(5, 17, 61, 0.5) 16.2%,
+    rgba(7, 21, 72, 0.5) 40.23%,
+    rgba(8, 20, 67, 0.5) 68.13%,
+    rgba(1, 4, 16, 0.5) 100%
+  );
+  --mintPageBg2: linear-gradient(
+    180deg,
+    rgba(6, 16, 51, 0.5) 0%,
+    rgba(10, 29, 96, 0.5) 16.2%,
+    rgba(7, 23, 79, 0.5) 40.23%,
+    rgba(8, 20, 67, 0.5) 68.13%,
+    rgba(4, 11, 38, 0.5) 100%
+  );
+  --viewMoreImg: url("../../assets/images/viewMore.svg");
+  --gameKeyTitle: rgba(251, 251, 251, 0.8);
+  --keyItemBg: rgba(251, 251, 251, 0.1);
+  --dashboardPopap: #181540;
+  --modalTitle: #ecf1f9;
+  --modalHeart: url("../../assets/images/heart_transparent.svg");
+  --modalHeartColored: url("../../assets/images/heart_colored.svg");
+  --modalInputBg: transparent;
+  --modalInputBorder: #bbc5ff;
+  --sellModalTabs: rgba(187, 197, 255, 0.15);
+  --calendarTitle: #fcfcf9;
+  --calendarArrow: rgba(255, 255, 255, 0.3);
+  --modalImgBg: rgba(251, 251, 251, 0.1);
+  --modalImgShadow: 0px 4px 12px rgba(86, 86, 86, 0.16);
+  --noteShadow: 0px 0px 20px rgba(73, 100, 254, 0.6);
+  --noteArrow: url("../../assets/images/arrow4_light.svg");
 }
 
 [data-theme="dark"] .ReactModal__Content {
-    background: #030710;
+  background: #030710;
 }
 
 [data-theme="dark"] .ReactModal__Overlay {
-    background-color: rgba(0, 0, 0, 0.75) !important;
+  background-color: rgba(0, 0, 0, 0.75) !important;
 }
 
 [data-theme="dark"] .homePage__info-button-icon {
-    background-image: url("./../../assets/images/arrowRL.svg");
+  background-image: url("./../../assets/images/arrowRL.svg");
 }
 
 .ReactModal__Overlay {
-    z-index: 10;
+  z-index: 10;
 }
 
 input::-webkit-outer-spin-button,
@@ -359,6 +395,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }

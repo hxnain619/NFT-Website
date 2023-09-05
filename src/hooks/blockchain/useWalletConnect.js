@@ -31,8 +31,7 @@ export default function useWalletConnect() {
       if (window?.ethereum) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const { chainId } = await provider.getNetwork();
-        if (!isAvalancheChain(chainId.toString(16)))
-          await switchToAvalancheChain();
+        if (!isAvalancheChain(chainId.toString(16))) await switchToAvalancheChain();
         await provider.send("eth_requestAccounts", []);
 
         window.ethereum.on("accountsChanged", callback);
@@ -46,8 +45,7 @@ export default function useWalletConnect() {
     const network = await provider.getNetwork().catch(() => null);
     if (!network) return;
 
-    if (!isAvalancheChain(network?.chainId?.toString(16)))
-      await switchToAvalancheChain();
+    if (!isAvalancheChain(network?.chainId?.toString(16))) await switchToAvalancheChain();
 
     await findWallet(address);
   };

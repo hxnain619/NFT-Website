@@ -1,12 +1,14 @@
-import {useState} from "react";
+import { useState } from "react";
 
 export default function useHandleModal() {
-    const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
-    const open = () => setIsActive(true);
-    const close = () => setIsActive(false);
+  const open = () => setIsActive(true);
+  const close = () => setIsActive(false);
 
-    return {
-        isActive, open, close,
-    }
+  return {
+    isActive,
+    open,
+    close,
+  };
 }

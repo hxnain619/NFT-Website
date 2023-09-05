@@ -18,11 +18,7 @@ function useFetchCollectionData(page) {
       await setLoading(true);
       await setError(false);
       handleCollection
-        .getTokenList(
-          process.env.REACT_APP_COMMUNITY_COLLECTION_ADDRESS,
-          amountOnPage,
-          page
-        )
+        .getTokenList(process.env.REACT_APP_COMMUNITY_COLLECTION_ADDRESS, amountOnPage, page)
         .then((res) => {
           if (res?.data) {
             setListNFT((prev) => [

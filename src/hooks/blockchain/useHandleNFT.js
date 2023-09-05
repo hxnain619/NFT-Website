@@ -87,19 +87,13 @@ export default function useHandleNFT() {
       handleContracts.contractTresrCoinWithSigner().balanceOf(address),
       provider.getBalance(address),
       handleContracts.contractLpCoinTRESRAVAXWithSigner().balanceOf(address),
-      handleContracts
-        .contractLpStakingTRESRAVAXWithSigner()
-        .stakedBalanceOf(address),
+      handleContracts.contractLpStakingTRESRAVAXWithSigner().stakedBalanceOf(address),
     ]).then((res) => {
       ACTION.SET_BALANCE_SMRTR(hexToNumber(res[0]._hex) / Math.pow(10, 18));
       ACTION.SET_BALANCE_TRESR(hexToNumber(res[1]._hex) / Math.pow(10, 18));
       ACTION.SET_BALANCE_AVAX(+ethers.utils.formatEther(res[2]));
-      ACTION.SET_BALANCE_LP_TRESRAVAX(
-        hexToNumber(res[3]._hex) / Math.pow(10, 18)
-      );
-      ACTION.SET_BALANCE_LP_STAKED_TRESRAVAX(
-        hexToNumber(res[4]._hex) / Math.pow(10, 18)
-      );
+      ACTION.SET_BALANCE_LP_TRESRAVAX(hexToNumber(res[3]._hex) / Math.pow(10, 18));
+      ACTION.SET_BALANCE_LP_STAKED_TRESRAVAX(hexToNumber(res[4]._hex) / Math.pow(10, 18));
     });
   };
 
@@ -109,9 +103,7 @@ export default function useHandleNFT() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     return provider
       .getBalance(address)
-      .then((balance) =>
-        ACTION.SET_BALANCE_AVAX(+ethers.utils.formatEther(balance))
-      )
+      .then((balance) => ACTION.SET_BALANCE_AVAX(+ethers.utils.formatEther(balance)))
       .catch(() => (count ? getAVAXBalance(address, count - 1) : null));
   };
 
@@ -133,9 +125,7 @@ export default function useHandleNFT() {
 
     return handleContracts.contractTresrCoinWithSigner
       .bonusPoolAllocation()
-      .then((tx) =>
-        ACTION.SET_BONUS_POOL_ALLOCATION(hexToNumber(tx?._hex) / 10 ** 18)
-      )
+      .then((tx) => ACTION.SET_BONUS_POOL_ALLOCATION(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -143,15 +133,11 @@ export default function useHandleNFT() {
     return;
 
     console.log(`[useHandleNFT::getPoolAllocation]`);
-    handleContracts.contractTresrCoinWithSigner
-      .poolAllocation()
-      .then((tx) => console.log("poolAllocation", tx));
+    handleContracts.contractTresrCoinWithSigner.poolAllocation().then((tx) => console.log("poolAllocation", tx));
 
     return handleContracts.contractTresrCoinWithSigner
       .poolAllocation()
-      .then((tx) =>
-        ACTION.SET_POOL_ALLOCATION(hexToNumber(tx?._hex) / 10 ** 18)
-      )
+      .then((tx) => ACTION.SET_POOL_ALLOCATION(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -191,9 +177,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractSmarterCoinWithSigner()
       .balanceOf(address)
-      .then((tx) =>
-        ACTION.SET_BALANCE_SMRTR(hexToNumber(tx._hex) / Math.pow(10, 18))
-      )
+      .then((tx) => ACTION.SET_BALANCE_SMRTR(hexToNumber(tx._hex) / Math.pow(10, 18)))
       .catch(() => (count ? balanceOfSMRTR(address, count - 1) : null));
   };
 
@@ -204,9 +188,7 @@ export default function useHandleNFT() {
       .contractERC20WithSigner(contractAddress)
       .balanceOf(walletAddress)
       .then((tx) => String(hexToNumber(tx._hex) / Math.pow(10, 18)))
-      .catch(() =>
-        count ? balanceOfERC20(walletAddress, contractAddress, count - 1) : null
-      );
+      .catch(() => (count ? balanceOfERC20(walletAddress, contractAddress, count - 1) : null));
   };
 
   const balanceOfTRESR = async (address, count = 3) => {
@@ -215,9 +197,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractTresrCoinWithSigner()
       .balanceOf(address)
-      .then((tx) =>
-        ACTION.SET_BALANCE_TRESR(hexToNumber(tx._hex) / Math.pow(10, 18))
-      )
+      .then((tx) => ACTION.SET_BALANCE_TRESR(hexToNumber(tx._hex) / Math.pow(10, 18)))
       .catch(() => (count ? balanceOfTRESR(address, count - 1) : null));
   };
 
@@ -258,9 +238,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractNFKeyStakingWithSigner()
       .getBonusReward(tokenList)
-      .then(
-        (tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-      )
+      .then((tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
       .catch(() => (count ? getBonusReward(tokenList, count - 1) : null));
   };
 
@@ -271,9 +249,7 @@ export default function useHandleNFT() {
       .contractNFKeyStakingWithSigner()
       .pendingAllBaseReward(tokenList)
       .then((tx) => {
-        ACTION.SET_BALANCE_CALIMED_BONUS_TOTAL(
-          +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-        );
+        ACTION.SET_BALANCE_CALIMED_BONUS_TOTAL(+ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()));
       })
       .catch(() => {});
   };
@@ -284,12 +260,8 @@ export default function useHandleNFT() {
     return handleContracts
       .contractNFKeyStakingWithSigner()
       .getBonusRewardPerSecond(tokenList)
-      .then(
-        (tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-      )
-      .catch(() =>
-        count ? getBonusRewardPerSecond(tokenList, count - 1) : null
-      );
+      .then((tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
+      .catch(() => (count ? getBonusRewardPerSecond(tokenList, count - 1) : null));
   };
 
   const getTresrRewardsBalance = async (tokenId, count = 3) => {
@@ -301,9 +273,7 @@ export default function useHandleNFT() {
       .calcRewards(tokenId)
       .then((tx) => {
         // FIXME: this is for dev
-        ACTION.SET_BALANCE_TRESR_REWARDS(
-          +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-        );
+        ACTION.SET_BALANCE_TRESR_REWARDS(+ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()));
       })
       .catch(() => (count ? getTresrRewardsBalance(tokenId, count - 1) : null));
   };
@@ -314,9 +284,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractNFKeyStakingWithSigner()
       .calcRewards(tokenId)
-      .then(
-        (tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-      )
+      .then((tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
       .catch(() => (count ? getTresrRewardsBalance(tokenId, count - 1) : null));
   };
 
@@ -324,13 +292,8 @@ export default function useHandleNFT() {
     console.log(`[useHandleNFT::calcRewardByTokens]`);
     if (tokenList?.length == 0) return [];
     console.log(`[useHandleNFT::calcRewardByTokens] tokenList: `, tokenList);
-    const rewardList = await handleContracts
-      .contractNFKeyStakingWithSigner()
-      .pendingBaseRewardByTokens(tokenList);
-    return rewardList.map(
-      (reward) =>
-        +ethers.utils.formatEther(hexToNumber(reward?._hex)?.toString())
-    );
+    const rewardList = await handleContracts.contractNFKeyStakingWithSigner().pendingBaseRewardByTokens(tokenList);
+    return rewardList.map((reward) => +ethers.utils.formatEther(hexToNumber(reward?._hex)?.toString()));
   };
 
   const calcRewardsList = async (tokenList) => {
@@ -338,14 +301,9 @@ export default function useHandleNFT() {
     if (tokenList?.length == 0) return 0;
     console.log(`[useHandleNFT::calcRewardsList] tokenList: `, tokenList);
 
-    const rewardList = await handleContracts
-      .contractNFKeyStakingWithSigner()
-      .pendingBaseRewardByTokens(tokenList);
+    const rewardList = await handleContracts.contractNFKeyStakingWithSigner().pendingBaseRewardByTokens(tokenList);
     return rewardList
-      .map(
-        (reward) =>
-          +ethers.utils.formatEther(hexToNumber(reward?._hex)?.toString())
-      )
+      .map((reward) => +ethers.utils.formatEther(hexToNumber(reward?._hex)?.toString()))
       .reduce((acc, val) => acc + val, 0);
   };
 
@@ -368,9 +326,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractNFKeyStakingWithSigner()
       .calcRewardsPerSecond(tokenID)
-      .then(
-        (tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-      )
+      .then((tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
       .catch(() => (count ? calcRewardsPerSecond(count - 1) : null));
   };
 
@@ -383,10 +339,7 @@ export default function useHandleNFT() {
           handleContracts
             .contractNFKeyStakingWithSigner()
             .calcRewardsPerSecond(item)
-            .then(
-              (tx) =>
-                +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-            )
+            .then((tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
             .catch(() => 0)
         )
       )
@@ -410,9 +363,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractNFKeyStakingWithSigner()
       .calcUnlockCost(tokenID)
-      .then(
-        (tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString())
-      )
+      .then((tx) => +ethers.utils.formatEther(hexToNumber(tx?._hex)?.toString()))
       .catch(() => (count ? getUnlockCost(tokenID, count - 1) : 0));
   };
 
@@ -422,9 +373,7 @@ export default function useHandleNFT() {
     return handleContracts
       .contractWhitelistWithSigner()
       .getWhitelistZone(address, zone, wl, proof)
-      .catch(() =>
-        count ? getAccountZone(address, zone, count - 1, wl, proof) : null
-      );
+      .catch(() => (count ? getAccountZone(address, zone, count - 1, wl, proof) : null));
   };
 
   const getZoneCommission = async (address, zone, count = 3) => {
@@ -434,9 +383,7 @@ export default function useHandleNFT() {
       .contractNFKeyWithSigner()
       .getZoneCommission(address, zone)
       .then((res) => hexToNumber(res?._hex))
-      .catch(() =>
-        count ? getZoneCommission(address, zone, count - 1) : null
-      );
+      .catch(() => (count ? getZoneCommission(address, zone, count - 1) : null));
   };
 
   const timeToTreasureAvailable = async (tokenId, count = 3) => {
@@ -451,9 +398,7 @@ export default function useHandleNFT() {
         ACTION.SET_BALANCE_TRESR_TIME_UNLOCK(hexToNumber(tx?._hex) * 1000);
         return hexToNumber(tx?._hex);
       })
-      .catch(() =>
-        count ? timeToTreasureAvailable(tokenId, count - 1) : null
-      );
+      .catch(() => (count ? timeToTreasureAvailable(tokenId, count - 1) : null));
   };
 
   const getProbToOpen = async (tokenId, count = 3) => {
@@ -665,11 +610,7 @@ export default function useHandleNFT() {
         updateProfileBalance();
         ACTION.SET_TRANSANCTION_HASH(tx?.hash);
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          UPGRADE_KEY_ALERT(token?.selected?.tokenId, true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, UPGRADE_KEY_ALERT(token?.selected?.tokenId, true));
 
         return true;
       })
@@ -681,11 +622,7 @@ export default function useHandleNFT() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          UPGRADE_KEY_ALERT(token?.selected?.tokenId, false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, UPGRADE_KEY_ALERT(token?.selected?.tokenId, false));
 
         return null;
       });
@@ -723,11 +660,7 @@ export default function useHandleNFT() {
         await loadNFTBalance(user?.wallet_id);
 
         for (const tokenItem of tokenList) {
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_SUCCESS,
-            UPGRADE_KEY_ALERT(tokenItem, true)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, UPGRADE_KEY_ALERT(tokenItem, true));
         }
         // balanceOfSMRTR(user?.wallet_id);
         // getAVAXBalance(user?.wallet_id);
@@ -742,11 +675,7 @@ export default function useHandleNFT() {
           action: "upgradeKey",
           error: JSON.stringify(err),
         });
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          UPGRADE_KEY_ALERT(token?.selected?.tokenId, false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, UPGRADE_KEY_ALERT(token?.selected?.tokenId, false));
         return null;
       });
   };
@@ -754,8 +683,7 @@ export default function useHandleNFT() {
   const batchMint = async (zones, amounts) => {
     let commission = 0;
     for (let i = 0; i < zones.length; i++) {
-      commission +=
-        (await getZoneCommission(user?.wallet_id, zones[i])) * amounts[i];
+      commission += (await getZoneCommission(user?.wallet_id, zones[i])) * amounts[i];
     }
     const merkle_data = await handleCustomer.getMerkleTree(user?.wallet_id);
     const merkle_proof = merkle_data[0].proof;
@@ -800,9 +728,7 @@ export default function useHandleNFT() {
 
         ACTION.SET_TRANSANCTION_HASH(tx?.hash);
         // await sleep(15);
-        const transactionLogList = answer?.logs?.filter(
-          (log) => log?.address === process.env.REACT_APP_NFKEY_ADDRESS
-        );
+        const transactionLogList = answer?.logs?.filter((log) => log?.address === process.env.REACT_APP_NFKEY_ADDRESS);
 
         await loadNFTBalance(user?.wallet_id);
 
@@ -874,18 +800,13 @@ export default function useHandleNFT() {
         await handleToken.getcheckTxEvent(tx?.hash, "BatchMinted");
         ACTION.SET_TRANSANCTION_HASH(tx?.hash);
         // await sleep(15);
-        const transactionLogList = answer?.logs?.filter(
-          (log) => log?.address === process.env.REACT_APP_NFKEY_ADDRESS
-        );
+        const transactionLogList = answer?.logs?.filter((log) => log?.address === process.env.REACT_APP_NFKEY_ADDRESS);
 
         for (const transactionLog of transactionLogList) {
           const tokenID = parseInt(transactionLog?.topics[3], 16);
           // FIXME: should remove this
           if (+tokenID > 0 && +tokenID < 10000)
-            await reloadNFTItemBalance(
-              process.env.REACT_APP_NFKEY_ADDRESS,
-              tokenID
-            );
+            await reloadNFTItemBalance(process.env.REACT_APP_NFKEY_ADDRESS, tokenID);
         }
 
         return transactionLogList;
@@ -931,11 +852,7 @@ export default function useHandleNFT() {
         // }
         await loadNFTBalance(user?.wallet_id);
         for (const tokenItem of tokenList) {
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_SUCCESS,
-            ACTIVATE_KEY_ALERT(tokenItem, true)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, ACTIVATE_KEY_ALERT(tokenItem, true));
         }
         // await getAVAXBalance(user?.wallet_id);
         updateProfileBalance();
@@ -949,11 +866,7 @@ export default function useHandleNFT() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          ACTIVATE_KEY_ALERT(token?.selected?.tokenId, false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, ACTIVATE_KEY_ALERT(token?.selected?.tokenId, false));
 
         return null;
       });
@@ -987,11 +900,7 @@ export default function useHandleNFT() {
 
         ACTION.SET_TRANSANCTION_HASH(tx?.hash);
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          ACTIVATE_KEY_ALERT(token?.selected?.tokenId, true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, ACTIVATE_KEY_ALERT(token?.selected?.tokenId, true));
         // getAVAXBalance(user?.wallet_id);
         // getkeyLevelP();
         updateProfileBalance();
@@ -1005,11 +914,7 @@ export default function useHandleNFT() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          ACTIVATE_KEY_ALERT(token?.selected?.tokenId, false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, ACTIVATE_KEY_ALERT(token?.selected?.tokenId, false));
 
         return null;
       });
@@ -1045,11 +950,7 @@ export default function useHandleNFT() {
 
         // getAVAXBalance(user?.wallet_id);
         // getkeyLevelP();
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          DEACTIVATE_KEY_ALERT(token?.selected?.tokenId, true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, DEACTIVATE_KEY_ALERT(token?.selected?.tokenId, true));
         updateProfileBalance();
       })
       .catch((err) => {
@@ -1061,11 +962,7 @@ export default function useHandleNFT() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          DEACTIVATE_KEY_ALERT(token?.selected?.tokenId, false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, DEACTIVATE_KEY_ALERT(token?.selected?.tokenId, false));
 
         return null;
       });
@@ -1096,9 +993,7 @@ export default function useHandleNFT() {
 
         ACTION.SET_TRANSANCTION_HASH(tx?.hash);
 
-        const event = transaction?.events?.find(
-          (item) => item?.event === "Opened"
-        );
+        const event = transaction?.events?.find((item) => item?.event === "Opened");
         const statusChest = event?.args[2];
 
         // await reloadNFTItemBalance(
@@ -1150,9 +1045,7 @@ export default function useHandleNFT() {
     console.log(`[useHandleNFT::reloadNFTItemBalance]`);
 
     if (!user?.wallet_id) return;
-    const isKeyContract =
-      contractAddress?.toLowerCase() ===
-      process.env.REACT_APP_NFKEY_ADDRESS?.toLowerCase();
+    const isKeyContract = contractAddress?.toLowerCase() === process.env.REACT_APP_NFKEY_ADDRESS?.toLowerCase();
 
     const token = await handleToken.checkToken(tokenID);
     console.log("[useHandleNFT::reloadNFTItemBalance]", token);
