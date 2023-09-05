@@ -45,12 +45,14 @@
   align-items: flex-start;
   justify-content: center;
   border-radius: 40px;
+  padding:2px;
   border: 1px solid var(--filtersText);
 }
 
 .balance{
   color: var(--filtersText);
-  padding: 0.5em 0.25em;
+  font-size: 14px;
+  padding: 0.5em;
 }
 
 .connected {
@@ -58,17 +60,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5em;
+  gap: 1em;
   cursor: var(--cursor-pointer);
   border-radius: 40px;
-  background: var(--primary-blue);
+  background: var(--primary-light);
+  padding: 0.25em 1em;
   transition: all 150ms;
-  padding: 0.25em 0.25em;
-  padding: 0.25em 0.5em;
 }
 
 .connected:hover {
-        background: #2D46D6;
+  background: #2D46D6;
   color: var(--main-hovered);
 }
 
@@ -104,7 +105,8 @@
 }
 
 .address > span {
-  color: var(--default) !important;
+  color: var(--text-dark-900default) !important;
+  font-size: 14px;
 }
 
 .dropdownIconContainer {
@@ -134,7 +136,8 @@
 
 .activeNetwork {
   color: var(--filtersText);
-  font-size: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .chevronIcon {
@@ -179,6 +182,7 @@
 .network .dot {
   width: 8px;
   height: 8px;
+  margin-right: 4px;
   border-radius: 50%;
   background: #f1b56e;
 }
@@ -260,11 +264,11 @@
   position: relative;
 }
 .notification {
-  margin-left: 14px;
+  margin: 0 18px;
   margin-top: 7px;
 }
 .notification img {
-  width: 20px;
+  width: 24px;
 }
 
 @media screen and (max-width: 1000px) {
