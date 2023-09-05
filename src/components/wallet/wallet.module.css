@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1em;
+  gap: 32px;
 }
 
 .popupContainer {
@@ -30,8 +30,11 @@
   color: var(--default);
   background: var(--primary-blue);
   text-align: center;
-  border: 1px solid var(--accountBorder);
-  transition: background 300ms;
+  transition: 300px;
+  -webkit-transition: 300px;
+  -moz-transition: 300px;
+  -ms-transition: 300px;
+  -o-transition: 300px;
 }
 
 .connect:hover {
@@ -42,29 +45,41 @@
 .connectedContainer {
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   border-radius: 40px;
-  border: 1px solid var(--filtersText);
+  border: 1px solid var(--primary-white);
+  padding: 2px 2px;
 }
 
 .balance {
-  color: var(--filtersText);
-  padding: 0.5em 0.25em;
+  color: var(--primary-white);
+  padding: 5px 8px 5px 10px;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .connected {
-  width: max-content;
   display: flex;
-  align-items: center;
+  height: 32px;
+  padding: 12px 4px 12px 16px;
   justify-content: center;
-  gap: 0.5em;
-  cursor: var(--cursor-pointer);
+  align-items: center;
+  gap: 12px;
   border-radius: 40px;
-  background: var(--primary-blue);
-  transition: all 150ms;
-  padding: 0.25em 0.25em;
-  padding: 0.25em 0.5em;
+  border: 1px solid var(--primary-white);
+  background: var(--primary-light-blue, #bbc5ff);
+  backdrop-filter: blur(2px);
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
 }
 
 .connected:hover {
@@ -101,10 +116,23 @@
   gap: 0.25em;
   padding: 0.25em 0;
   position: relative;
+
+  text-align: center;
 }
 
 .address > span {
-  color: var(--default) !important;
+  color: var(--primary-black-bg, #080f20) !important;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.userAvatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 26px;
 }
 
 .dropdownIconContainer {
@@ -121,6 +149,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  gap: 40px;
 }
 
 .network {
@@ -155,6 +184,7 @@
 .networkContainer:hover .networkDropdownContainer {
   animation: drop 300ms forwards;
   visibility: visible;
+  -webkit-animation: drop 300ms forwards;
 }
 
 .networkDropdown {
@@ -258,6 +288,7 @@
 }
 .notificationContent {
   position: relative;
+  gap: 2em;
 }
 .notification {
   margin-left: 14px;
@@ -271,6 +302,26 @@
   .connect {
     max-width: 100%;
   }
+  .container {
+    gap: 24px;
+  }
+
+  .networkContainer {
+    gap: 24px;
+  }
+
+  .balance {
+    display: none;
+  }
+
+  .address {
+    padding: 0.25em 8px;
+  }
+
+  .connect {
+    padding: 10px 20px;
+    margin-bottom: 32px;
+  }
 }
 @media screen and (max-width: 480px) {
   .container {
@@ -282,9 +333,32 @@
   .pushNotification {
     right: -1.4em;
   }
+  .container {
+    gap: 24px;
+  }
+
+  .networkContainer {
+    gap: 24px;
+  }
+
+  .balance {
+    display: none;
+  }
 }
 @media screen and (max-width: 380px) {
   .pushNotification {
     right: -1.7em;
+  }
+
+  .container {
+    gap: 24px;
+  }
+
+  .networkContainer {
+    gap: 24px;
+  }
+
+  .balance {
+    display: none;
   }
 }

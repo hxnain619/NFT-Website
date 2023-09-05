@@ -45,6 +45,8 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .socialIcons img {
@@ -219,5 +221,29 @@
   gap: 16px; /* Adjust the gap between items as needed */
 }
 
-.griditem {
+@media (max-width: 1024px) {
+  .content {
+    margin: 56px 16px;
+  }
+
+  .top {
+    padding: 0;
+  }
+
+  .topLeft {
+    height: 120px;
+  }
+
+  .topRight {
+    margin-top: 32px;
+    margin-bottom: 56px;
+  }
+
+  .links {
+    flex: 1;
+  }
+
+  .bottom {
+    display: none;
+  }
 }

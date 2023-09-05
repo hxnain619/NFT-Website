@@ -2,18 +2,18 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import classes from "./Header.module.css";
 import bannerImg from "../../../assets/explore-banner2.svg";
+import discordIcon from "../../../assets/icon-discord-blue.svg";
 import listIcon from "../../../assets/icon-list.svg";
 import stackIcon from "../../../assets/icon-stack.svg";
 import tradeIcon from "../../../assets/icon-trade.svg";
-import supportedChains from "../../../utils/supportedChains";
-import { getFormatedPrice } from "../../../utils";
-import { readUserProfile } from "../../../utils/firebase";
+import twitterIcon from "../../../assets/icon-twitter-blue.svg";
 import Copy from "../../../components/copy/copy";
 import { breakAddress } from "../../../components/wallet/wallet-script";
-import discordIcon from "../../../assets/icon-discord-blue.svg";
-import twitterIcon from "../../../assets/icon-twitter-blue.svg";
+import { getFormatedPrice } from "../../../utils";
+import { readUserProfile } from "../../../utils/firebase";
+import supportedChains from "../../../utils/supportedChains";
+import classes from "./Header.module.css";
 
 const linkIcons = {
   discord: discordIcon,
