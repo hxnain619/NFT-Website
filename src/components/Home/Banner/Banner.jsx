@@ -19,7 +19,7 @@ const Banner = () => {
 
   return (
     <div className={classes.container}>
-      {/* <div className={classes.heading}>
+      <div className={classes.heading}>
         <div className={classes.features}>
           EXPLORE. COLLECT.
           <br />
@@ -37,7 +37,7 @@ const Banner = () => {
             <div className={classes.btn_2}>Explore</div>
           </Link>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

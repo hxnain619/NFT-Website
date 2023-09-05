@@ -10,10 +10,10 @@ import HomeNfts from "../../components/Marketplace/HomeNfts/HomeNfts";
 const Home = () => (
   <div className={classes.container}>
     <Banner />
-    {/* <CreatePane />
+    <CreatePane />
     <ExplorePane />
-    <HomeNfts />
-    <FAQ /> */}
+    {/* <HomeNfts /> */}
+    {/* <FAQ /> */}
   </div>
 );
 
