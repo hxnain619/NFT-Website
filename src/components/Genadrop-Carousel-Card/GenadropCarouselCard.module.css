@@ -70,7 +70,7 @@
 @media screen and (max-width: 1150px) {
   .wrapper {
     overflow-x: auto;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .cardContainer {

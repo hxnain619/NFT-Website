@@ -13,7 +13,7 @@ const Home = () => (
     <CreatePane />
     <ExplorePane />
     <HomeNfts />
-    {/* <FAQ /> */}
+    <FAQ />
   </div>
 );
 

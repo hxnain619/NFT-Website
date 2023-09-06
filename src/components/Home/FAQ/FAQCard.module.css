@@ -21,9 +21,12 @@
 }
 
 .question {
-  padding: 12px 0;
-  font-weight: 600;
+  color: var(--transparent-white-white-90, rgba(251, 251, 251, 0.9));
+  font-family: Poppins;
   font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
 }
 .question span {
   display: flex;
@@ -62,25 +65,7 @@
   flex: 1;
 }
 
-@media screen and (max-width: 1200px) {
-  .answer,
-  .question {
-    font-size: 1.2rem;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .answer,
-  .question {
-    gap: 1em;
-    font-size: 1rem;
-  }
-}
-
 @media screen and (max-width: 540px) {
-  .container {
-    padding: 0 1em;
-  }
 }
 
 .rightIcon {

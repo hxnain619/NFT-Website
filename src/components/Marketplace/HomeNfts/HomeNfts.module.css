@@ -1,13 +1,6 @@
 .container {
   width: 100%;
-  /* max-width: 24em; */
   padding: 0 2em;
-  margin-bottom: 4em;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
-  /* background: linear-gradient(180deg, #e4f1fb 0%, rgba(217, 217, 217, 0) 100%); */
   padding-top: 64px;
 }
 
@@ -114,5 +107,9 @@
   .content {
     width: 100%;
     margin-left: 0;
+  }
+
+  .headingContainer {
+    text-align: center;
   }
 }
