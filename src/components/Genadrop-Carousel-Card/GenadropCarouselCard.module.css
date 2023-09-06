@@ -73,13 +73,13 @@
     justify-content: flex-start;
   }
 
-  .cardContainer {
+  /* .cardContainer {
     padding: 1em;
-  }
+  } */
 }
 
 @media screen and (max-width: 480px) {
-  .cardContainer {
+  /* .cardContainer {
     padding: 1em;
-  }
+  } */
 }

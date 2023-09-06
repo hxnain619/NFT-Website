@@ -167,7 +167,11 @@ const AllNfts = () => {
                 filteredCollection
                   .slice(0, 16)
                   .map((el, idx) =>
-                    !el?.nfts ? <SingleNftCard key={idx} nft={el} /> : <CollectionNftCard key={idx} collection={el} />
+                    !el?.nfts ? (
+                      <SingleNftCard use_width="100%" key={idx} nft={el} />
+                    ) : (
+                      <CollectionNftCard key={idx} collection={el} />
+                    )
                   )
               ) : (
                 <div className={classes.notFound}>
@@ -176,7 +180,9 @@ const AllNfts = () => {
               )
             ) : activeType === "T2" ? (
               filteredCollection.length > 0 ? (
-                filteredCollection.slice(0, 16).map((nft, idx) => <SingleNftCard key={idx} nft={nft} />)
+                filteredCollection
+                  .slice(0, 16)
+                  .map((nft, idx) => <SingleNftCard use_width="100%" key={idx} nft={nft} />)
               ) : (
                 <div className={classes.notFound}>
                   <NotFound />

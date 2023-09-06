@@ -140,9 +140,8 @@
   height: 48px;
 }
 
-
 .card:hover .icon svg path {
-  fill: var(--primary-light-blue)
+  fill: var(--primary-light-blue);
 }
 
 .card._1of1 {
