@@ -4,11 +4,6 @@
   background: var(--primary-black-bg);
   margin-top: 2em;
 }
-
-.container * {
-  color: var(--transparent-white-white-90);
-}
-
 .notFound {
   grid-column: 1 / span 4;
 }
@@ -60,6 +55,10 @@
   /* overflow: hidden; */
 }
 
+.filter * {
+  color: var(--transparent-white-white-90);
+}
+
 .categories {
   display: flex;
   align-items: center;
@@ -68,6 +67,7 @@
   gap: 1em;
   overflow: auto;
   max-width: 900px;
+  color: var(--transparent-white-white-90);
 }
 
 .category {

@@ -323,7 +323,8 @@
     animation: 300ms forwards;
   }
   .pushNotification {
-    right: -1.4em;
+    right: -6.5em;
+    top: 3em;
   }
   .container {
     gap: 24px;

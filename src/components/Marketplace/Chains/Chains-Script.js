@@ -7,9 +7,9 @@ const chains = [
   {
     name: "All Chains",
     icon: allChains,
-    color: "#009987",
-    border: "#009987",
-    bg: "#FFFFFF",
+    color: "#ECF1F9",
+    border: "#2F88FF",
+    bg: "#93A3F814",
     isComingSoon: false,
     isChain: false,
   },

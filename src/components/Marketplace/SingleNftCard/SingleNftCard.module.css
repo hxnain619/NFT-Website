@@ -11,8 +11,8 @@
   background: rgba(187, 197, 255, 0.04);
   padding: 3px;
   min-width: 286px;
-  width: 286px !important;
-  height: 432px !important;
+  width: 286px;
+  height: 432px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;

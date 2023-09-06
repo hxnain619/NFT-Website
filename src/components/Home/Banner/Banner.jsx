@@ -1,22 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Banner.module.css";
+import GlowCircle from "../../glow-circle/GlowCircle";
 
 const Banner = () => {
-  // const videoRef = useRef(null);
-  // const [showOverlayer, setShowOverlay] = useState(true);
-
-  // const handlePlay = () => {
-  //   videoRef.current.play();
-  //   setShowOverlay(false);
-  // };
-
-  // useEffect(() => {
-  //   videoRef.current.addEventListener("ended", () => {
-  //     setShowOverlay(true);
-  //   });
-  // }, []);
-
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
@@ -38,6 +25,7 @@ const Banner = () => {
           </Link>
         </div>
       </div>
+      <GlowCircle />
     </div>
   );
 };
