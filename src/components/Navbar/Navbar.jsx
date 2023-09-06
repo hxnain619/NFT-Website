@@ -37,7 +37,7 @@ const Navbar = () => {
             {NAVIGATION_LIST?.map((link) => {
               return (
                 <NavLink
-                  className={`${classes.navItem} ${pathname == link.path ? classes.active : ""}`}
+                  className={`${classes.navItem} ${pathname === link.path ? classes.active : ""}`}
                   to={link.path}
                   key={link.label}
                 >
@@ -56,8 +56,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          {NAVIGATION_LIST?.map((link) => (
-            <a href={link.path}>{link.label}</a>
+          {NAVIGATION_LIST?.map((link, id) => (
+            <a key={new Date().getTime() + id} href={link.path}>
+              {link.label}
+            </a>
           ))}
         </div>
 
