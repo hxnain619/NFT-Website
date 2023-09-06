@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./pushNotification.module.css";
-import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
+import { ReactComponent as CloseIcon } from "../../assets/icon-close-solid.svg";
 
 const PushNotification = ({ toggleNotification }) => {
   const handleClose = () => toggleNotification({ openNotification: false });
