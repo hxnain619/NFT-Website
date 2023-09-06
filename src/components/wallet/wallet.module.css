@@ -48,38 +48,27 @@
   align-items: center;
   justify-content: center;
   border-radius: 40px;
-  border: 1px solid var(--primary-white);
-  padding: 2px 2px;
+  padding: 2px;
+  border: 1px solid var(--filtersText);
 }
 
 .balance {
-  color: var(--primary-white);
-  padding: 5px 8px 5px 10px;
-  color: var(--primary-white, #ecf1f9);
-  text-align: center;
-  font-family: Poppins;
+  color: var(--filtersText);
   font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
+  padding: 0.5em;
 }
 
 .connected {
   display: flex;
-  height: 32px;
+  height: 35px;
   padding: 12px 4px 12px 16px;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
+  gap: 1em;
+  cursor: var(--cursor-pointer);
   border-radius: 40px;
-  border: 1px solid var(--primary-white);
-  background: var(--primary-light-blue, #bbc5ff);
-  backdrop-filter: blur(2px);
-  transition: 300ms;
-  -webkit-transition: 300ms;
-  -moz-transition: 300ms;
-  -ms-transition: 300ms;
-  -o-transition: 300ms;
+  background: var(--primary-light);
+  padding: 0.25em 1em;
+  transition: all 150ms;
 }
 
 .connected:hover {
@@ -163,7 +152,8 @@
 
 .activeNetwork {
   color: var(--filtersText);
-  font-size: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .chevronIcon {
@@ -209,6 +199,7 @@
 .network .dot {
   width: 8px;
   height: 8px;
+  margin-right: 4px;
   border-radius: 50%;
   background: #f1b56e;
 }
@@ -291,11 +282,11 @@
   gap: 2em;
 }
 .notification {
-  margin-left: 14px;
+  margin: 0 18px;
   margin-top: 7px;
 }
 .notification img {
-  width: 20px;
+  width: 24px;
 }
 
 @media screen and (max-width: 1000px) {

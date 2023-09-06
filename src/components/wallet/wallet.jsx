@@ -168,10 +168,7 @@ function ConnectWallet() {
         <div className={classes.address}>
           <span>{account?.length > 15 ? breakAddress(account) : account}</span>
         </div>
-
-        <div className={classes.userAvatar}>
-          <img className={classes.avatarImg} src={userAvatar} alt="" />
-        </div>
+        <img className={classes.chain} src={getConnectedChain(chainId)} alt="" />
       </div>
       {dropdown}
     </div>
@@ -201,9 +198,11 @@ function ConnectWallet() {
 
   return (
     <>
-      <div className={`${classes.popupContainer} ${toggleWalletPopup && classes.active}`}>
-        {toggleWalletPopup && <WalletPopup isMetamask={isMetamask} handleSetState={handleSetState} />}
-      </div>
+      {toggleWalletPopup && (
+        <div className={`${classes.popupContainer} ${toggleWalletPopup && classes.active}`}>
+          <WalletPopup isMetamask={isMetamask} handleSetState={handleSetState} />
+        </div>
+      )}
       {account ? (
         <div className={classes.container}>
           {connected}

@@ -1,7 +1,16 @@
 {
-  "name": "genadrop",
-  "version": "0.1.0",
-  "private": true,
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@celo-tools/celo-ethers-wrapper": "^0.3.0",
@@ -105,37 +114,6 @@
     "web3modal": "^1.9.5",
     "workerize-loader": "^1.3.0"
   },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "eject": "react-scripts eject",
-    "prod": "yarn run build && serve build",
-    "lint": "eslint \"./**/*.{js,jsx}\"",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "prepare": "husky install",
-    "doc": "jsdoc -c jsdoc.json"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-etherscan": "^3.1.7",
@@ -159,5 +137,27 @@
     "husky": "^7.0.0",
     "prettier": "2.6.2",
     "react-app-rewire-babel-loader": "^0.1.1"
-  }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "name": "genadrop",
+  "private": true,
+  "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "build": "react-app-rewired --openssl-legacy-provider build",
+    "doc": "jsdoc -c jsdoc.json",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "lint": "eslint \"./**/*.{js,jsx}\"",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install",
+    "prod": "yarn run build && serve build",
+    "start": "react-app-rewired --openssl-legacy-provider start",
+    "test": "react-app-rewired test"
+  },
+  "version": "0.1.0"
 }
