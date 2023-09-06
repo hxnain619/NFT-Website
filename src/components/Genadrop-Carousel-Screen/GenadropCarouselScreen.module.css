@@ -28,29 +28,40 @@
 .ctrlBtn_left,
 .ctrlBtn_right {
   position: absolute;
-  padding: 0.5em;
+  padding: 8px;
   z-index: 1;
-  background: rgb(255, 255, 255, 0.75);
+  background: var(--primary-black-bg);
   cursor: var(--cursor-pointer);
-  width: 3em;
-  height: 3em;
   border-radius: 50%;
   display: none;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-light);
   transition: all 300ms;
+
+  border: 2px solid var(--primary-white);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .ctrlBtn_left:hover,
 .ctrlBtn_right:hover {
-  background: rgb(255, 255, 255, 1);
+  background: var(--primary-black-bg);
   box-shadow: var(--shadow-dark);
 }
 
 .ctrlBtn_left {
   left: 1em;
   display: none;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
 }
 
 .ctrlBtn_left.active {
@@ -63,4 +74,15 @@
 
 .ctrlBtn_right.active {
   display: flex;
+}
+
+@media screen and (max-width: 540px) {
+  .ctrlBtn_left,
+  .ctrlBtn_right {
+    display: none !important;
+  }
+
+  .cardContainer {
+    overflow-x: scroll;
+  }
 }

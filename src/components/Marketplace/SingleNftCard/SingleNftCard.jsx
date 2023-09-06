@@ -121,7 +121,7 @@ const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionN
           <div className={classes.name}>{name}</div>
           <img className={classes.chain} src={supportedChains[chain]?.icon} alt="" />
         </div>
-        {/* <div className={classes.owner}>{breakAddress(owner)}</div> */}
+        <div className={classes.owner}>{breakAddress(owner)}</div>
       </div>
       {!fromDashboard ? (
         <MarketplaceView footerPrpops={footerPrpops} />

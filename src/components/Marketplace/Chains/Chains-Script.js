@@ -11,6 +11,7 @@ const chains = [
     border: "#009987",
     bg: "#FFFFFF",
     isComingSoon: false,
+    isChain: false,
   },
   {
     name: "Polygon",
@@ -20,6 +21,7 @@ const chains = [
     border: "transparent",
     bg: "#DFC6FF",
     isComingSoon: false,
+    isChain: true,
   },
   {
     name: "Avalanche",
@@ -29,6 +31,7 @@ const chains = [
     border: "transparent",
     bg: "#E84141CC",
     isComingSoon: false,
+    isChain: true,
   },
   {
     name: "Ethereum",
@@ -38,6 +41,7 @@ const chains = [
     border: "transparent",
     bg: "#BBC5FF",
     isComingSoon: false,
+    isChain: true,
   },
 ];
 export default chains;

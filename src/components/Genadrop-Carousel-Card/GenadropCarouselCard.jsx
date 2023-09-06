@@ -116,24 +116,6 @@ const GenadropCarouselCard = ({ children, cardWidth, gap = 16 }) => {
         <div style={{ gap }} ref={cardContainerRef} className={classes.cardContainer}>
           {children}
         </div>
-        {slideNumberOfCounts ? (
-          <>
-            <button
-              type="button"
-              onClick={handleSlideLeft}
-              className={`${classes.ctrlBtn_left} ${slideActiveCount && classes.active}`}
-            >
-              <img src={iconLeft} alt="" />
-            </button>
-            <button
-              type="button"
-              onClick={handleSlideRight}
-              className={`${classes.ctrlBtn_right} ${slideActiveCount < slideNumberOfCounts && classes.active}`}
-            >
-              <img src={iconRight} alt="" />
-            </button>
-          </>
-        ) : null}
       </div>
     </div>
   );

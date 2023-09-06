@@ -335,6 +335,12 @@
   .balance {
     display: none;
   }
+
+  .connected,
+  .networkContainer,
+  .container {
+    gap: 0;
+  }
 }
 @media screen and (max-width: 380px) {
   .pushNotification {
