@@ -3,8 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 2em;
   background-color: var(--primary-black-bg);
+  padding: 12px;
 }
 
 .wrapper {
@@ -54,6 +54,10 @@
   }
 
   .heading {
-    font-size: 1.5rem;
+    font-size: 40px;
+  }
+
+  .wrapper {
+    width: 100%;
   }
 }

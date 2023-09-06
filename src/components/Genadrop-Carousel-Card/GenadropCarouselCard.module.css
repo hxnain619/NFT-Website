@@ -13,7 +13,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   /* user-select: none; */
   /* pointer-events: none; */
 }
@@ -65,6 +65,17 @@
 
 .ctrlBtn_right.active {
   display: flex;
+}
+
+@media screen and (max-width: 1150px) {
+  .wrapper {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .cardContainer {
+    padding: 1em;
+  }
 }
 
 @media screen and (max-width: 480px) {

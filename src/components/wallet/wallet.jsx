@@ -13,6 +13,7 @@ import WalletPopup from "../wallet-popup/walletPopup";
 import supportedChains from "../../utils/supportedChains";
 import bellIcon from "../../assets/bell.svg";
 import useCommon from "../../hooks/useCommon";
+import userAvatar from "./avatar.png";
 
 import {
   setNetworkType,

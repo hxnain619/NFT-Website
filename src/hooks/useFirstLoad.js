@@ -31,19 +31,14 @@ export default function useEffectFirstLoad() {
     handleTheme.setDefaultTheme();
 
     if (!user?._id) {
-      handleLoader
-        .loaderWrapper(handleAdmin.fetchInfo, 2)
-        .then((res) => !res && handleAuth.logout());
+      handleLoader.loaderWrapper(handleAdmin.fetchInfo, 2).then((res) => !res && handleAuth.logout());
       //handleAdmin.fetchInfo().then(res => !res && handleAuth.logout());
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (user?._id) {
-      handleLoader.loaderWrapper(
-        () => walletConnect.connectWallet(user?.wallet_id),
-        2
-      );
+      handleLoader.loaderWrapper(() => walletConnect.connectWallet(user?.wallet_id), 2);
       console.log(`useFirstLoad.js::useEffect_user`);
       console.log(user);
       walletConnect.connectWallet(user?.wallet_id);

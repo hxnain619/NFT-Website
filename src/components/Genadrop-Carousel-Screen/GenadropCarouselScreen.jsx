@@ -3,8 +3,8 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./GenadropCarouselScreen.module.css";
-import iconRight from "../../assets/icon-angle-right.svg";
-import iconLeft from "../../assets/icon-angle-left.svg";
+
+import iconArrow from "../../assets/icon-full-arrow.svg";
 
 const GenadropCarouselScreen = ({ children, cardWidth, gap = 16, init = true }) => {
   const cardContainerRef = useRef(null);
@@ -80,7 +80,7 @@ const GenadropCarouselScreen = ({ children, cardWidth, gap = 16, init = true }) 
     const width = wrapperRef.current && wrapperRef.current.getBoundingClientRect().width;
     const cardTotalLength = children.length;
     const cardsInView = Math.floor(width / (cardWidth + gap / 2));
-    const slideCount = getCount(cardTotalLength, cardsInView);
+    const slideCount = cardTotalLength - cardsInView;
     handleSetState({ slideCount });
     if (!slideCount) {
       setSlideActiveCount(0);
@@ -96,30 +96,28 @@ const GenadropCarouselScreen = ({ children, cardWidth, gap = 16, init = true }) 
 
   useEffect(() => {
     // touch event for mobile
-    wrapperRef.current.addEventListener("touchstart", (e) => {
-      let event = e.changedTouches ? e.changedTouches[0] : e;
-      let x = event.clientX;
-      handleSetState({ start: x });
-    });
-
-    wrapperRef.current.addEventListener("touchmove", () => {
-      handleSetState({ move: true, end: false });
-    });
-
-    wrapperRef.current.addEventListener("touchend", () => {
-      handleSetState({ end: true });
-    });
+    // wrapperRef.current.addEventListener("touchstart", (e) => {
+    //   let event = e.changedTouches ? e.changedTouches[0] : e;
+    //   let x = event.clientX;
+    //   handleSetState({ start: x });
+    // });
+    // wrapperRef.current.addEventListener("touchmove", () => {
+    //   handleSetState({ move: true, end: false });
+    // });
+    // wrapperRef.current.addEventListener("touchend", () => {
+    //   handleSetState({ end: true });
+    // });
   }, []);
 
   useEffect(() => {
-    if (move && start) {
-      if (wrapperWidth / 2 > start) {
-        handleSetState({ dir: "left" });
-      } else {
-        handleSetState({ dir: "right" });
-      }
-      handleSetState({ start: 0, move: false, end: false });
-    }
+    // if (move && start) {
+    //   if (wrapperWidth / 2 > start) {
+    //     handleSetState({ dir: "left" });
+    //   } else {
+    //     handleSetState({ dir: "right" });
+    //   }
+    //   handleSetState({ start: 0, move: false, end: false });
+    // }
   }, [end]);
 
   useEffect(() => {
@@ -145,14 +143,14 @@ const GenadropCarouselScreen = ({ children, cardWidth, gap = 16, init = true }) 
               onClick={handleSlideLeft}
               className={`${classes.ctrlBtn_left} ${slideActiveCount && classes.active}`}
             >
-              <img src={iconLeft} alt="" />
+              <img className={classes.rotate180} src={iconArrow} alt="" />
             </button>
             <button
               type="button"
               onClick={handleSlideRight}
               className={`${classes.ctrlBtn_right} ${slideActiveCount < slideCount && classes.active}`}
             >
-              <img src={iconRight} alt="" />
+              <img src={iconArrow} alt="" />
             </button>
           </>
         ) : null}

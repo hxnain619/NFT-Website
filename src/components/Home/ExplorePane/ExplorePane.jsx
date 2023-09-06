@@ -59,7 +59,7 @@ const ExplorePane = () => {
           <GenadropCarouselCard cardWidth={cardWidth} gap={20}>
             {chains.map((chain, idx) => {
               return (
-                idx && (
+                chain.isChain && (
                   <div
                     onClick={() => handleClick(chain.name, chain.isComingSoon)}
                     style={{ background: chain.bg, borderColor: chain.border }}

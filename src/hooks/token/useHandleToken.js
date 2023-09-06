@@ -60,18 +60,14 @@ export default function useHandleToken() {
   };
 
   const checkToken = (tokenID) => {
-    return new TokenApi()
-      .checkToken({ tokenID })
-      .then((res) => (res?.status ? getTierUpdatedToken(res?.data) : null));
+    return new TokenApi().checkToken({ tokenID }).then((res) => (res?.status ? getTierUpdatedToken(res?.data) : null));
   };
 
   const updateUserTokenList = (contractAddress, count = 3) => {
     return new TokenApi()
       .updateUserTokenList({ contractAddress })
       .then((res) => (res?.status ? res?.data : null))
-      .catch(() =>
-        count ? updateUserTokenList(contractAddress, count - 1) : null
-      );
+      .catch(() => (count ? updateUserTokenList(contractAddress, count - 1) : null));
   };
 
   const checkTxEventSingle = async (txHash, eventName) => {
@@ -96,9 +92,7 @@ export default function useHandleToken() {
   }
 
   const getTokenHistory = (contractAddress, tokenID) => {
-    return new EventApi()
-      .getTokenHistory(contractAddress, tokenID)
-      .then((res) => (res?.status ? res?.data : null));
+    return new EventApi().getTokenHistory(contractAddress, tokenID).then((res) => (res?.status ? res?.data : null));
   };
 
   return {

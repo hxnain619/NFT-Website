@@ -2,7 +2,7 @@
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  padding: 4em 2em;
+  padding: 4em 6em;
   background-color: var(--primary-black-bg);
 }
 
@@ -22,7 +22,7 @@
 }
 .heading {
   width: 100%;
-  margin-top: 1.5em;
+  margin-top: 32px;
   margin-bottom: 0.5em;
   font-size: 32px;
   font-style: normal;
@@ -52,18 +52,18 @@
   padding: 0.75em 3em;
   border-radius: 40px;
   background: var(--primary-black-bg);
-  color: var(--primary-white);
-  border: 1px solid var(--primary-white);
+  color: var(--primary-light-blue, #bbc5ff);
+  border: 2px solid var(--primary-light-blue);
   transition: all 300ms;
   cursor: pointer;
   margin-bottom: 2em;
 }
 
 .btn:hover {
-  background: var(--pirmary-blue);
   border: none;
+  color: white;
   background: var(--primary-blue);
-  border: 1px solid var(--primary-blue);  
+  border: 2px solid var(--primary-blue);
 }
 
 .cardGrid {
@@ -150,14 +150,47 @@
   }
 }
 
-.pane{
+.pane {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   grid-gap: 32px; /* Gap between columns */
 }
 
-.left{
+.left {
 }
-.right{
+.right {
   width: 80%;
+}
+
+@media screen and (max-width: 1150px) {
+  .pane {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    grid-gap: 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .left img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .right a {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
 }

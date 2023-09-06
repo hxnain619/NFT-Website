@@ -21,43 +21,23 @@ export default function useHandleRewards() {
   const handleContracts = useHandleContracts();
   const handleNFT = useHandleNFT();
 
-  const [jlpSmrtBonusRewardPerSecond, setJlpSmrtBonusRewardPerSecond] =
-    useState(0);
-  const [jlpTresrBonusRewardPerSecond, setJlpTresrBonusRewardPerSecond] =
-    useState(0);
-  const [veTresrBonusRewardPerSecond, setVeTresrBonusRewardPerSecond] =
-    useState(0);
-  const [keyLevelBonusRewardPerSecond, setKeyLevelBonusRewardPerSecond] =
-    useState(0);
+  const [jlpSmrtBonusRewardPerSecond, setJlpSmrtBonusRewardPerSecond] = useState(0);
+  const [jlpTresrBonusRewardPerSecond, setJlpTresrBonusRewardPerSecond] = useState(0);
+  const [veTresrBonusRewardPerSecond, setVeTresrBonusRewardPerSecond] = useState(0);
+  const [keyLevelBonusRewardPerSecond, setKeyLevelBonusRewardPerSecond] = useState(0);
 
   const updateClaimableBonusRewardBalance = async () => {
     // return;
     Promise.all([
-      handleContracts
-        .contractDailyBonusRewardsWithSigner()
-        .getVeTresrBonusReward(user?.wallet_id),
-      handleContracts
-        .contractDailyBonusRewardsWithSigner()
-        .getJlpSmrtBonusReward(user?.wallet_id),
-      handleContracts
-        .contractDailyBonusRewardsWithSigner()
-        .getJlpTresrBonusReward(user?.wallet_id),
-      handleContracts
-        .contractDailyBonusRewardsWithSigner()
-        .getKeyLevelBonusReward(user?.wallet_id),
+      handleContracts.contractDailyBonusRewardsWithSigner().getVeTresrBonusReward(user?.wallet_id),
+      handleContracts.contractDailyBonusRewardsWithSigner().getJlpSmrtBonusReward(user?.wallet_id),
+      handleContracts.contractDailyBonusRewardsWithSigner().getJlpTresrBonusReward(user?.wallet_id),
+      handleContracts.contractDailyBonusRewardsWithSigner().getKeyLevelBonusReward(user?.wallet_id),
     ]).then((res) => {
-      ACTION.SET_BALANCE_BONUS_VETRESR_REWARDS(
-        hexToNumber(res[0]?._hex) / 10 ** 18
-      );
-      ACTION.SET_BALANCE_BONUS_JLPSMARTR_REWARDS(
-        hexToNumber(res[1]?._hex) / 10 ** 18
-      );
-      ACTION.SET_BALANCE_BONUS_JLPTRESR_REWARDS(
-        hexToNumber(res[2]?._hex) / 10 ** 18
-      );
-      ACTION.SET_BALANCE_BONUS_KEY_LEVEL_REWARDS(
-        hexToNumber(res[3]?._hex) / 10 ** 18
-      );
+      ACTION.SET_BALANCE_BONUS_VETRESR_REWARDS(hexToNumber(res[0]?._hex) / 10 ** 18);
+      ACTION.SET_BALANCE_BONUS_JLPSMARTR_REWARDS(hexToNumber(res[1]?._hex) / 10 ** 18);
+      ACTION.SET_BALANCE_BONUS_JLPTRESR_REWARDS(hexToNumber(res[2]?._hex) / 10 ** 18);
+      ACTION.SET_BALANCE_BONUS_KEY_LEVEL_REWARDS(hexToNumber(res[3]?._hex) / 10 ** 18);
     });
   };
 
@@ -67,9 +47,7 @@ export default function useHandleRewards() {
         .contractTresrStakingCoinWithSigner()
         .getRewardPerSecond(address)
         .then((tx) => hexToNumber(tx?._hex) / 10 ** 18),
-      handleContracts
-        .contractTresrStakingCoinWithSigner()
-        .pendingVeTresr(address),
+      handleContracts.contractTresrStakingCoinWithSigner().pendingVeTresr(address),
       handleContracts
         .contractTresrStakingCoinWithSigner()
         .getStaked(address)
@@ -95,12 +73,8 @@ export default function useHandleRewards() {
 
   const getEstDailyBonusReward = async (count = 3) => {
     return Promise.all([
-      handleContracts
-        .contractDailyBonusRewards()
-        .getEstDailyBonusReward(user?.wallet_id),
-      handleContracts
-        .contractDailyBonusRewards()
-        .getEstMonthlyBonusReward(user?.wallet_id),
+      handleContracts.contractDailyBonusRewards().getEstDailyBonusReward(user?.wallet_id),
+      handleContracts.contractDailyBonusRewards().getEstMonthlyBonusReward(user?.wallet_id),
     ]).then((res) => {
       console.log("[useHandleReward::getEstDailyBonusReward]", res);
 
@@ -116,11 +90,7 @@ export default function useHandleRewards() {
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .getVeTresrBonusReward(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_BONUS_VETRESR_REWARDS(
-          hexToNumber(tx?._hex) / 10 ** 18
-        )
-      )
+      .then((tx) => ACTION.SET_BALANCE_BONUS_VETRESR_REWARDS(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -133,9 +103,7 @@ export default function useHandleRewards() {
       .contractDailyBonusRewardsWithSigner()
       .getJlpTresrBonusReward(user?.wallet_id)
       .then((tx) => {
-        ACTION.SET_BALANCE_BONUS_JLPTRESR_REWARDS(
-          hexToNumber(tx?._hex) / 10 ** 18
-        );
+        ACTION.SET_BALANCE_BONUS_JLPTRESR_REWARDS(hexToNumber(tx?._hex) / 10 ** 18);
       })
       .catch(() => null);
   };
@@ -148,11 +116,7 @@ export default function useHandleRewards() {
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .getJlpSmrtBonusReward(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_BONUS_JLPSMARTR_REWARDS(
-          hexToNumber(tx?._hex) / 10 ** 18
-        )
-      )
+      .then((tx) => ACTION.SET_BALANCE_BONUS_JLPSMARTR_REWARDS(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -164,9 +128,7 @@ export default function useHandleRewards() {
       .contractDailyBonusRewardsWithSigner()
       .getKeyLevelBonusReward(user?.wallet_id)
       .then((tx) => {
-        ACTION.SET_BALANCE_BONUS_KEY_LEVEL_REWARDS(
-          hexToNumber(tx?._hex) / 10 ** 18
-        );
+        ACTION.SET_BALANCE_BONUS_KEY_LEVEL_REWARDS(hexToNumber(tx?._hex) / 10 ** 18);
       })
       .catch(() => null);
   };
@@ -178,9 +140,7 @@ export default function useHandleRewards() {
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .getJlpTresrBonusRewardPerSecond()
-      .then((tx) =>
-        setJlpTresrBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18)
-      )
+      .then((tx) => setJlpTresrBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -305,9 +265,7 @@ export default function useHandleRewards() {
     if (!user?.wallet_id) return;
     console.log(`[useHandleReward::getPendingTotalRewards]`);
     if (token?.list?.length == 0) return 0;
-    const ownTokenList = token?.list
-      ?.filter((item) => item?.owner === user?.wallet_id)
-      ?.map((item) => +item?.tokenId);
+    const ownTokenList = token?.list?.filter((item) => item?.owner === user?.wallet_id)?.map((item) => +item?.tokenId);
     console.log("pendingTotalReward::ownTokenList", token?.list);
     console.log("pendingTotalReward::walletid", user?.wallet_id);
     return handleContracts
@@ -326,9 +284,7 @@ export default function useHandleRewards() {
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .getJlpSmrtBonusRewardPerSecond()
-      .then((tx) =>
-        setJlpSmrtBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18)
-      )
+      .then((tx) => setJlpSmrtBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -339,9 +295,7 @@ export default function useHandleRewards() {
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .getVeTresrBonusRewardPerSecond()
-      .then((tx) =>
-        setVeTresrBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18)
-      )
+      .then((tx) => setVeTresrBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -352,9 +306,7 @@ export default function useHandleRewards() {
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .getKeyLevelBonusRewardPerSecond()
-      .then((tx) =>
-        setKeyLevelBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18)
-      )
+      .then((tx) => setKeyLevelBonusRewardPerSecond(hexToNumber(tx?._hex) / 10 ** 18))
       .catch(() => null);
   };
 
@@ -447,11 +399,7 @@ export default function useHandleRewards() {
         // getVeTresrBonusReward();
         updateClaimableBonusRewardBalance();
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          CLAIM_BONUS_REWARDS_ALERT(true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, CLAIM_BONUS_REWARDS_ALERT(true));
       })
       .catch((err) => {
         new AirdropApi().logger({
@@ -462,11 +410,7 @@ export default function useHandleRewards() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          CLAIM_BONUS_REWARDS_ALERT(false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, CLAIM_BONUS_REWARDS_ALERT(false));
 
         return null;
       });
@@ -497,11 +441,7 @@ export default function useHandleRewards() {
         handleNFT.getPoolAllocation();
         handleNFT.updateProfileBalance();
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          CLAIM_FOUNDERS_REWARDS_ALERT(true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, CLAIM_FOUNDERS_REWARDS_ALERT(true));
       })
       .catch((err) => {
         new AirdropApi().logger({
@@ -512,11 +452,7 @@ export default function useHandleRewards() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          CLAIM_FOUNDERS_REWARDS_ALERT(false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, CLAIM_FOUNDERS_REWARDS_ALERT(false));
 
         return null;
       });
@@ -526,9 +462,7 @@ export default function useHandleRewards() {
     if (!user?.wallet_id) return;
     if (!token?.selected?.tokenId) return;
 
-    const tokenIdList = token?.list
-      ?.filter((item) => item?.staked == true)
-      ?.map((item) => item.tokenId);
+    const tokenIdList = token?.list?.filter((item) => item?.staked == true)?.map((item) => item.tokenId);
     return handleContracts
       .contractDailyBonusRewardsWithSigner()
       .claimAllBaseReward(tokenIdList)
@@ -544,18 +478,10 @@ export default function useHandleRewards() {
         handleNFT.updateProfileBalance();
         handleNFT.getPendingAllBaseReward(tokenIdList);
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          CLAIM_FOUNDERS_REWARDS_ALERT(true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, CLAIM_FOUNDERS_REWARDS_ALERT(true));
       })
       .catch((err) => {
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          CLAIM_FOUNDERS_REWARDS_ALERT(false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, CLAIM_FOUNDERS_REWARDS_ALERT(false));
 
         return null;
       });
@@ -598,11 +524,7 @@ export default function useHandleRewards() {
         // getJlpTresrBonusReward();
         // getVeTresrBonusReward();
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_SUCCESS,
-          CLAIM_ALL_REWARDS_ALERT(true)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, CLAIM_ALL_REWARDS_ALERT(true));
       })
       .catch((err) => {
         new AirdropApi().logger({
@@ -613,11 +535,7 @@ export default function useHandleRewards() {
           error: JSON.stringify(err),
         });
 
-        ACTION.SET_ALERT(
-          true,
-          ALERT_STATUS_FAILURE,
-          CLAIM_ALL_REWARDS_ALERT(false)
-        );
+        ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, CLAIM_ALL_REWARDS_ALERT(false));
 
         return null;
       });

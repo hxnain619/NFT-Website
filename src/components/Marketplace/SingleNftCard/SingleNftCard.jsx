@@ -29,7 +29,10 @@ const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionN
     let value = usdPrice;
     const chainName = supportedChains[chain].coinGeckoLabel || supportedChains[chain].id;
     if (!value) {
-      value = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${chainName}&vs_currencies=usd`);
+      value =
+        process.env.NODE_ENV === "production"
+          ? await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${chainName}&vs_currencies=usd`)
+          : await axios.get(`http://localhost:4000/coingecko/simple/price?ids=${chainName}&vs_currencies=usd`);
     }
     setUsdValue(Number(Object.values(value.data)[0].usd) * Number(price));
   }, []);
@@ -107,7 +110,7 @@ const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionN
               className={classes.image}
               src={image_url}
               alt=""
-              onload={() => handleImageLoad()}
+              onLoad={() => handleImageLoad()}
               onError={handleImageError}
             />
           )}
@@ -118,7 +121,7 @@ const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionN
           <div className={classes.name}>{name}</div>
           <img className={classes.chain} src={supportedChains[chain]?.icon} alt="" />
         </div>
-        {/* <div className={classes.owner}>{breakAddress(owner)}</div> */}
+        <div className={classes.owner}>{breakAddress(owner)}</div>
       </div>
       {!fromDashboard ? (
         <MarketplaceView footerPrpops={footerPrpops} />

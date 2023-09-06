@@ -44,7 +44,7 @@
   border: 1px solid rgba(147, 163, 248, 0.24);
 }
 
-.filterBtn div{
+.filterBtn div {
   color: var(--transparent-white-white-70);
 }
 .filterBtn:hover {

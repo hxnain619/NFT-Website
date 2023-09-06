@@ -25,10 +25,7 @@ export default function useHandleLpStaking() {
         handleContracts
           .contractLpCoinTRESRAVAXWithSigner()
           // .approve(process.env.REACT_APP_LP_TRESRAVAX_STAKING_ADDRESS, parseEther(balance?.toString()).toString())
-          .approve(
-            process.env.REACT_APP_LP_TRESRAVAX_STAKING_ADDRESS,
-            parseEther(balance?.toString()).toString()
-          )
+          .approve(process.env.REACT_APP_LP_TRESRAVAX_STAKING_ADDRESS, parseEther(balance?.toString()).toString())
           .then(async (tx) => {
             await tx.wait();
             ACTION.SET_TRANSANCTION_HASH(tx?.hash);
@@ -43,10 +40,7 @@ export default function useHandleLpStaking() {
         handleContracts
           .contractLpCoinSMRTRAVAXWithSigner()
           // .approve(process.env.REACT_APP_LP_SMRTRAVAX_STAKING_ADDRESS, parseEther(balance?.toString()).toString())
-          .approve(
-            process.env.REACT_APP_LP_SMRTRAVAX_STAKING_ADDRESS,
-            parseEther(balance?.toString()).toString()
-          )
+          .approve(process.env.REACT_APP_LP_SMRTRAVAX_STAKING_ADDRESS, parseEther(balance?.toString()).toString())
           .then(async (tx) => {
             await tx.wait();
             ACTION.SET_TRANSANCTION_HASH(tx?.hash);
@@ -65,17 +59,13 @@ export default function useHandleLpStaking() {
     await handleContracts
       .contractLpCoinTRESRAVAXWithSigner()
       .balanceOf(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_LP_TRESRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18))
-      )
+      .then((tx) => ACTION.SET_BALANCE_LP_TRESRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18)))
       .catch(() => null);
 
     await handleContracts
       .contractLpCoinSMRTRAVAXWithSigner()
       .balanceOf(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_LP_SMRTRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18))
-      )
+      .then((tx) => ACTION.SET_BALANCE_LP_SMRTRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18)))
       .catch(() => null);
   };
 
@@ -86,20 +76,14 @@ export default function useHandleLpStaking() {
     await handleContracts
       .contractLpStakingTRESRAVAXWithSigner()
       .stakedBalanceOf(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_LP_STAKED_TRESRAVAX(
-          hexToNumber(tx._hex) / Math.pow(10, 18)
-        )
-      )
+      .then((tx) => ACTION.SET_BALANCE_LP_STAKED_TRESRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18)))
       .catch(() => null);
 
     await handleContracts
       .contractLpStakingTRESRAVAXWithSigner()
       .portion(user?.wallet_id)
       .then((tx) => {
-        ACTION.SET_BALANCE_LP_TOTAL_STAKED_TRESRAVAX(
-          hexToNumber(tx._hex) / 1e34
-        );
+        ACTION.SET_BALANCE_LP_TOTAL_STAKED_TRESRAVAX(hexToNumber(tx._hex) / 1e34);
       })
       .catch(() => null);
 
@@ -107,39 +91,27 @@ export default function useHandleLpStaking() {
       .contractLpStakingTRESRAVAXWithSigner()
       .totalStaked()
       .then((tx) => {
-        ACTION.SET_BALANCE_LP_COMMUNITY_STAKED_TRESRAVAX(
-          hexToNumber(tx._hex) / Math.pow(10, 18)
-        );
+        ACTION.SET_BALANCE_LP_COMMUNITY_STAKED_TRESRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18));
       })
       .catch(() => null);
 
     await handleContracts
       .contractLpStakingSMRTRAVAXWithSigner()
       .stakedBalanceOf(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_LP_STAKED_SMRTRAVAX(
-          hexToNumber(tx._hex) / Math.pow(10, 18)
-        )
-      )
+      .then((tx) => ACTION.SET_BALANCE_LP_STAKED_SMRTRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18)))
       .catch(() => null);
 
     await handleContracts
       .contractLpStakingSMRTRAVAXWithSigner()
       .portion(user?.wallet_id)
-      .then((tx) =>
-        ACTION.SET_BALANCE_LP_TOTAL_STAKED_SMRTRAVAX(
-          hexToNumber(tx._hex) / 1e34
-        )
-      )
+      .then((tx) => ACTION.SET_BALANCE_LP_TOTAL_STAKED_SMRTRAVAX(hexToNumber(tx._hex) / 1e34))
       .catch(() => null);
 
     await handleContracts
       .contractLpStakingSMRTRAVAXWithSigner()
       .totalStaked()
       .then((tx) => {
-        ACTION.SET_BALANCE_LP_COMMUNITY_STAKED_SMRTRAVAX(
-          hexToNumber(tx._hex) / Math.pow(10, 18)
-        );
+        ACTION.SET_BALANCE_LP_COMMUNITY_STAKED_SMRTRAVAX(hexToNumber(tx._hex) / Math.pow(10, 18));
       })
       .catch(() => null);
   };
@@ -169,20 +141,12 @@ export default function useHandleLpStaking() {
           await balanceOfLp();
           await handleRewards.getJlpTresrBonusReward();
 
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_SUCCESS,
-            STAKE_TRESR_LP_ALERT(true, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, STAKE_TRESR_LP_ALERT(true, amount));
 
           return true;
         })
         .catch(() => {
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_FAILURE,
-            STAKE_TRESR_LP_ALERT(false, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, STAKE_TRESR_LP_ALERT(false, amount));
           return null;
         });
     } else {
@@ -204,20 +168,12 @@ export default function useHandleLpStaking() {
           await balanceOfLp();
           await handleRewards.getJlpSmrtBonusReward();
 
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_SUCCESS,
-            STAKE_SMRTR_LP_ALERT(true, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, STAKE_SMRTR_LP_ALERT(true, amount));
 
           return true;
         })
         .catch(() => {
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_FAILURE,
-            STAKE_SMRTR_LP_ALERT(false, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, STAKE_SMRTR_LP_ALERT(false, amount));
           return null;
         });
     }
@@ -247,18 +203,10 @@ export default function useHandleLpStaking() {
           await balanceOfLp();
           await handleRewards.getJlpTresrBonusReward();
 
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_SUCCESS,
-            UNSTAKE_TRESR_LP_ALERT(true, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, UNSTAKE_TRESR_LP_ALERT(true, amount));
         })
         .catch(() => {
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_FAILURE,
-            UNSTAKE_TRESR_LP_ALERT(false, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, UNSTAKE_TRESR_LP_ALERT(false, amount));
           return null;
         });
     } else {
@@ -280,18 +228,10 @@ export default function useHandleLpStaking() {
           await balanceOfLp();
           await handleRewards.getJlpSmrtBonusReward();
 
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_SUCCESS,
-            UNSTAKE_SMRTR_LP_ALERT(true, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_SUCCESS, UNSTAKE_SMRTR_LP_ALERT(true, amount));
         })
         .catch(() => {
-          ACTION.SET_ALERT(
-            true,
-            ALERT_STATUS_FAILURE,
-            UNSTAKE_SMRTR_LP_ALERT(false, amount)
-          );
+          ACTION.SET_ALERT(true, ALERT_STATUS_FAILURE, UNSTAKE_SMRTR_LP_ALERT(false, amount));
           return null;
         });
     }

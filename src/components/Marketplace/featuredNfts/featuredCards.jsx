@@ -57,7 +57,7 @@ const FeaturedNFTCards = () => {
   return (
     <div className={`${classes.wrapper}`}>
       {ready ? (
-        <GenadropCarouselScreen cardWidth={16 * 20} gap={32} init={init}>
+        <GenadropCarouselScreen cardWidth={286} gap={32} init={init}>
           {NFTs.length > 0 ? (
             NFTs.map((collection) => <SingleNftCard use_width="20em" key={collection.Id} nft={collection} />)
           ) : !NFTs ? (
