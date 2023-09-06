@@ -1,9 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
 import classes from "./footer.module.css";
-import logo from "../../assets/genadrop-logo-light.svg";
 import logoDarkIcon from "../../assets/images/logo-dark.svg";
-import { footerLinks, orgs, socialLinks } from "./footer-script";
+import { footerLinks, socialLinks } from "./footer-script";
 
 const Footer = () => (
   <div id="hide-footer">

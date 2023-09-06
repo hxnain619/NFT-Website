@@ -80,16 +80,20 @@ export const footerLinks = [
         link: "https://twitter.com/genadrop",
         id: "1",
       },
-      { name: "Create Product", link: "https://t.me/+4BDhz2QLaa05NzEx", id: "2" },
+      {
+        name: "Create Product",
+        link: "https://t.me/+4BDhz2QLaa05NzEx",
+        id: "2",
+      },
       {
         name: "Shop",
         link: "https://www.genadrop.com/docs",
-        id: "1",
+        id: "3",
       },
       {
         name: "View Profile",
         link: "https://linktr.ee/MinorityProgrammers",
-        id: "2",
+        id: "4",
       },
     ],
   },
