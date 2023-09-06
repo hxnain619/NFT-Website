@@ -2,15 +2,10 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { useParams, useHistory, useRouteMatch, useLocation, Link } from "react-router-dom";
 import classes from "./collection-single.module.css";
-// import { ReactComponent as CameraIcon } from "../../../assets/icon-camera.svg";
 import collectionIcon from "../../../assets/icon-collection-light.svg";
-import _1of1Icon from "../../../assets/icon-1of1-light.svg";
-import artIcon from "../../../assets/create/art-browse-icon.svg";
+import { ReactComponent as Art } from "../../../assets/create/art-icon.svg";
 import { ReactComponent as BackIcon } from "../../../assets/icon-arrow-left.svg";
-// import UploadOverlay from "../upload-overlay/upload-overlay";
 import { handleZipFile } from "./collection-single-script";
-// import Minter from "../minter/minter";
-import line from "../../../assets/icon-line.svg";
 import { GenContext } from "../../../gen-state/gen.context";
 import { setMinter, setZip } from "../../../gen-state/gen.actions";
 import { NearErrorPop, NearSuccessPopup } from "../popup/nearMintPopup";
@@ -275,9 +270,8 @@ const CollectionToSingleMinter = () => {
               </div>
             ) : (
               <div className={`${classes.card} ${classes[`_${params.mintId}`]} drop-area`}>
-                {!loading2 ? <div className={classes.imagePlaceholder} /> : null}
                 <div className={classes.icon}>
-                  <img style={!loading2 ? { display: "none" } : {}} src={artIcon} alt="" onLoad={handleImageLoading2} />
+                  <Art />
                 </div>
                 <h3 className={classes.title}> Digital Art</h3>
                 {/* <Link className={classes.takePic} to="/mint/camera">

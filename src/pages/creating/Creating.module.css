@@ -19,7 +19,7 @@
   text-align: center;
 
   /* Subheading-1-Jost */
-  /* font-family: Jost; */
+  font-family: 'Jost';
   font-size: 40px;
   font-style: normal;
   font-weight: 900;
@@ -28,9 +28,7 @@
 .description {
   color: var(--primary-white, #ecf1f9);
   text-align: center;
-
-  /* subheading-small-jost */
-  font-family: Jost;
+  font-family: 'Jost';
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -51,9 +49,9 @@
   align-items: center;
   gap: 16px;
   align-self: stretch;
-
   border-radius: 4px;
-  border: 1px dashed var(--primary-light-blue, #bbc5ff);
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  transition: background-image 10ms ease-in-out;
   /* max-width: 20em; */
   /* background: var(--default);
   border: 1px solid #e5e8eb;
@@ -100,14 +98,9 @@
   padding-bottom: 1rem;
 }
 
-.extra .card:hover .icon svg path {
-  /* fill: var(--main-color); */
-}
-
 .card:hover {
-  border: 1px solid var(--primary-blue);
-  /* border-color: var(--main-color); */
-  box-shadow: 26px 18px 18px rgb(93 134 194 / 16%);
+  background: var(--marketplaceBg);
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2393A3F8FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 .icon {
@@ -127,21 +120,8 @@
   padding-top: 20px;
 }
 
-.card:hover .icon {
-  background: var(--primary-blue);
-}
 .card:hover .icon svg path {
-  stroke: var(--default);
-}
-.card:nth-child(3):hover .icon svg path {
-  fill: var(--default);
-}
-
-.noDrop:nth-child(3):hover .icon svg path {
-  fill: var(--main-color);
-}
-.card:nth-child(2):hover .icon svg path:last-child {
-  fill: var(--default);
+  fill: var(--primary-light-blue)
 }
 
 .icon svg {
