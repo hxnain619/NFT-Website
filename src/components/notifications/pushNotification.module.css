@@ -23,8 +23,8 @@
   cursor: var(--cursor-pointer);
   fill: var(--icon-color);
   margin-right: 0.4em;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1em;
+  height: 1em;
 }
 .content {
   display: flex;

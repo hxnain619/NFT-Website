@@ -136,6 +136,24 @@ function ConnectWallet() {
     if (account && account.length > 15) getAccountBalance();
   }, [account]);
 
+  const notificationRef = useRef(null);
+
+  const handleNotificationMenu = (isOpen) => {
+    handleSetState({ openNotification: isOpen });
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        handleNotificationMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [notificationRef, handleNotificationMenu]);
+
   const dropdown = (
     <div className={classes.dropdownContainer}>
       <div className={classes.dropdown}>
@@ -174,15 +192,10 @@ function ConnectWallet() {
   );
 
   const changeNetwork = (
-    <div className={classes.networkContainer}>
+    <div className={classes.networkContainer} ref={notificationRef}>
       <div className={classes.notificationContent}>
         <div className={`${classes.notification} ${openNotification && classes.notiActive}`}>
-          <img
-            className={classes.nIcon}
-            src={bellIcon}
-            alt=""
-            onClick={() => handleSetState({ openNotification: true })}
-          />
+          <img className={classes.nIcon} src={bellIcon} alt="" onClick={() => handleNotificationMenu(true)} />
           <div id="push-notification" className={classes.pushNotification}>
             <PushNotification toggleNotification={handleSetState} />
           </div>
