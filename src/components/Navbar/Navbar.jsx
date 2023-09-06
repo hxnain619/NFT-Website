@@ -5,6 +5,7 @@ import classes from "./Navbar.module.css";
 import logoDarkIcon from "../../assets/images/logo-dark.svg";
 import { NAVIGATION_LIST } from "../../constant/navigation";
 import menuIcon from "../../assets/icon-burger.svg";
+import MenuButton from "./MenuButton";
 
 // import "./style.scss";
 
@@ -67,7 +68,7 @@ const Navbar = () => {
         </div>
 
         <div className={classes.openNavbar} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          <img src={menuIcon} alt="" />
+          <MenuButton />
         </div>
       </div>
     </header>
