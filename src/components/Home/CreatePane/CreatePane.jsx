@@ -44,10 +44,6 @@ const CreatePane = () => {
       ]).then((data) => {
         handleSetState({ singles: [...data.flat()] });
       });
-    } else {
-      // Promise.all([nearFeaturedNfts("genadrop-test.mpadev.testnet1663492551707")]).then((data) => {
-      //   handleSetState({ singles: [...data.flat()] });
-      // });
     }
   }, []);
 

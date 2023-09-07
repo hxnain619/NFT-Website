@@ -7,9 +7,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable consistent-return */
 /* eslint-disable no-unsafe-optional-chaining */
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 import moment from "moment";
 
@@ -17,40 +17,31 @@ import * as htmlToImage from "html-to-image";
 
 import classes from "./minter.module.css";
 // utils
-import { handleMint, handleSingleMint, getBase64, getFileFromBase64 } from "./minter-script";
-import { initConnectWallet } from "../../wallet/wallet-script";
 import supportedChains from "../../../utils/supportedChains";
+import { initConnectWallet } from "../../wallet/wallet-script";
 import cards from "../Category/Category-script";
+import { getBase64, getFileFromBase64, handleMint, handleSingleMint } from "./minter-script";
 // assets
+import { ReactComponent as BorderIcon } from "../../../assets/create/border-icon.svg";
 import rightArrow from "../../../assets/icon-arrow-right.svg";
-import { ReactComponent as PlusIcon } from "../../../assets/icon-plus.svg";
 import { ReactComponent as DropdownIcon } from "../../../assets/icon-dropdown2.svg";
 import { ReactComponent as GreenTickIcon } from "../../../assets/icon-green-tick.svg";
-import { ReactComponent as BorderIcon } from "../../../assets/create/border-icon.svg";
+import { ReactComponent as PlusIcon } from "../../../assets/icon-plus.svg";
 import { ReactComponent as VibesLogo } from "../../../assets/proof-of-vibes.svg";
-import { ReactComponent as QrCodeIcon } from "../../../assets/Scan.svg";
 
 // components
-import CollectionPreview from "../collection-preview/collectionPreview";
-import ProfileImgOverlay from "../ProfileImgOverlay/ProfileImgOverlay";
-import Popup from "../popup/popup.component";
 import GenadropToolTip from "../../Genadrop-Tooltip/GenadropTooltip";
-import SliderInput from "./SliderInput";
 import Attribute from "../Attribute/Attribute";
+import CollectionPreview from "../collection-preview/collectionPreview";
+import Popup from "../popup/popup.component";
+import ProfileImgOverlay from "../ProfileImgOverlay/ProfileImgOverlay";
+import SliderInput from "./SliderInput";
 
-import {
-  setClipboard,
-  setConnectFromMint,
-  setLoader,
-  setOverlay,
-  setNotification,
-  setMinter,
-  setToggleWalletPopup,
-} from "../../../gen-state/gen.actions";
+import { setClipboard, setLoader, setMinter, setNotification, setOverlay } from "../../../gen-state/gen.actions";
 import { GenContext } from "../../../gen-state/gen.context";
-import Tweeter from "../Tweeter/tweeter";
-import IpfsImage from "../IpfsImage/IpfsImage";
 import QrReaderContainer from "../../../pages/NFT-Detail/ImageModal/ImageModal";
+import IpfsImage from "../IpfsImage/IpfsImage";
+import Tweeter from "../Tweeter/tweeter";
 
 const Minter = () => {
   const params = useParams();

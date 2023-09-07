@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
+import React from "react";
 import "./Slider.css";
 function Slider({ from, to, rangeChanged }) {
   // const [minValue, set_minValue] = useState(25);

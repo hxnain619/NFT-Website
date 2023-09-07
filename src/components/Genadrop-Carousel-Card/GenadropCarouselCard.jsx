@@ -3,8 +3,6 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./GenadropCarouselCard.module.css";
-import iconRight from "../../assets/icon-angle-right.svg";
-import iconLeft from "../../assets/icon-angle-left.svg";
 
 const GenadropCarouselCard = ({ children, cardWidth, gap = 16 }) => {
   const cardContainerRef = useRef(null);
