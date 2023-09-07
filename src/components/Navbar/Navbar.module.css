@@ -121,10 +121,30 @@
   font-style: normal;
   font-weight: 800;
   line-height: 64px;
+  position: relative;
+}
+
+.mobileMenu a.active {
+  color: var(--secondary-yellow, #fec90c);
+}
+
+.mobileMenu a .decorator {
+  position: absolute;
+  width: 3px;
+  left: -32px;
+  top: 0;
+  height: 60px;
+  background: var(--secondary-yellow);
+  display: none;
+}
+
+.decorator.active {
+  display: block !important;
 }
 
 .mobileWalletAuthContainer {
   width: 100%;
+  margin-bottom: 16px;
 }
 
 @media (max-width: 1024px) {

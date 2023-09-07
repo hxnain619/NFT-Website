@@ -1,16 +1,7 @@
-import mintImage from "../../../assets/app-mint.svg";
 import exploreImage from "../../../assets/app-explore.svg";
+import mintImage from "../../../assets/app-mint.svg";
 
 const features = [
-  // {
-  //   heading: "CREATE",
-  //   link: "Try Genadrop Create for FREE",
-  //   url: "/create",
-  //   image: createImage,
-  //   title: "No More need for copy & Paste or Uploading your NFTs all over again.",
-  //   description:
-  //     "Automatically Bring your NFTs to life via a simple interface, upload each assets and have genaDrop create your generative collection effortlessly.",
-  // },
   {
     heading: "CREATE",
     link: "Go to Mint",

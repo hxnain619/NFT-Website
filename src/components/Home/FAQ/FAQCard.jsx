@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 import React from "react";
-import classes from "./FAQCard.module.css";
 import downIcon from "../../../assets/down-icon.svg";
 import rightIcon from "../../../assets/right-icon.svg";
+import classes from "./FAQCard.module.css";
 
 const FQACard = ({ dropdown, id, handleSetState, FAQ: { question, answer } }) => {
   const handleDropdown = () => {
