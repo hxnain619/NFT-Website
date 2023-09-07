@@ -1,14 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-shadow */
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import classes from "./ExplorePane.module.css";
-import { GenContext } from "../../../gen-state/gen.context";
-import { getFeaturedChainNft } from "../../../renderless/fetch-data/fetchUserGraphData";
-import chains from "../../../components/Marketplace/Chains/Chains-Script";
 import GenadropCarouselCard from "../../../components/Genadrop-Carousel-Card/GenadropCarouselCard";
+import chains from "../../../components/Marketplace/Chains/Chains-Script";
+import classes from "./ExplorePane.module.css";
 
 const ExplorePane = () => {
   const cardRef = useRef(null);
@@ -34,13 +31,6 @@ const ExplorePane = () => {
     handleSetState({ cardWidth });
   }, []);
 
-  const handlePreview = (chain, Id) => {
-    if (chain) {
-      history.push(`/marketplace/1of1/${chain}/${Id}`);
-    } else {
-      history.push(`/marketplace/1of1/${Id}`);
-    }
-  };
   return (
     <div className={classes.container}>
       <div className={classes.pane}>

@@ -2,9 +2,9 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import classes from "./Features.module.css";
-import features from "./Feature-Script";
 import { ReactComponent as LinkIcon } from "../../../assets/icon-arr-right-long.svg";
+import features from "./Feature-Script";
+import classes from "./Features.module.css";
 
 const Features = () => {
   useEffect(() => {

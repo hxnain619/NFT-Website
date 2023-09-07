@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState, useEffect, useContext, useCallback } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
 import axios from "axios";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 // import { getFormatedPrice } from "../../../utils";
-import supportedChains from "../../../utils/supportedChains";
-import classes from "./SingleNftCard.module.css";
+import imgHolder from "../../../assets/imgHolder.jpeg";
+import thumbnail from "../../../assets/music-thumbnail.svg";
 import { GenContext } from "../../../gen-state/gen.context";
+import supportedChains from "../../../utils/supportedChains";
 import {
+  CollectedView,
   // marketplace differnt card footer
   MarketplaceView,
   // dashboard differnt card footer
   OnSalveView,
-  CollectedView,
 } from "./CardFooter";
-import thumbnail from "../../../assets/music-thumbnail.svg";
-import imgHolder from "../../../assets/imgHolder.jpeg";
+import classes from "./SingleNftCard.module.css";
 
 const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionNft, userId, usdPrice }) => {
   const { Id, image_url, name, owner, collection_name, price, chain, sold, isListed, isSoulBound } = nft;

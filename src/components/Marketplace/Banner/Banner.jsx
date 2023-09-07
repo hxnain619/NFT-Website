@@ -1,14 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import classes from "./Banner.module.css";
+import GlowCircle from "../../glow-circle/GlowCircle";
 import Search from "../../Search/Search";
 import Chains from "../Chains/Chains";
-import image_url from "../../../assets/banner-marketplace.svg";
-import GlowCircle from "../../glow-circle/GlowCircle";
+import classes from "./Banner.module.css";
 
 const Banner = () => {
-  const history = useHistory();
-
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -19,12 +16,6 @@ const Banner = () => {
           <div className={classes.searchContainer}>
             <Search searchPlaceholder="Search collections, and 1 of 1s" type="" />
           </div>
-          {/* <div className={classes.category}>
-            <span onClick={() => history.push("/marketplace/1of1")}>1 of 1s</span>
-            <span onClick={() => history.push("/marketplace/collections")}>Collections</span>
-            <span onClick={() => {}}>Photographs</span>
-            <span onClick={() => {}}>Creators</span>
-          </div> */}
         </div>
         <Chains />
       </div>

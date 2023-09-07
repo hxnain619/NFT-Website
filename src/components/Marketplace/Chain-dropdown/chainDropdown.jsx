@@ -1,15 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable consistent-return */
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import classes from "./chainDropdown.module.css";
-import polygonIcon from "../../../assets/icon-polygon.svg";
+import allChainsIcon from "../../../assets/all-chains.svg";
 import avalancheIcon from "../../../assets/icon-avalanche.svg";
 import { ReactComponent as DropdownIcon } from "../../../assets/icon-chevron-down.svg";
-import allChainsIcon from "../../../assets/all-chains.svg";
-import { orderedChainsList } from "../../../utils/supportedChains";
+import polygonIcon from "../../../assets/icon-polygon.svg";
 import { GenContext } from "../../../gen-state/gen.context";
+import { orderedChainsList } from "../../../utils/supportedChains";
+import classes from "./chainDropdown.module.css";
 
 const chainIcon = {
   polygon: polygonIcon,
