@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./CardFooter.module.css";
-import supportedChains from "../../../utils/supportedChains";
 import lockIcon from "../../../assets/lock-icon.svg";
+import supportedChains from "../../../utils/supportedChains";
+import classes from "./CardFooter.module.css";
 
 const formattedNumber = (number, decimals = 2) => {
   const input = number?.toFixed(decimals);
