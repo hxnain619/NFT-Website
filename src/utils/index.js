@@ -1115,3 +1115,18 @@ export const handleResetCreate = ({ dispatch }) => {
 export const setActiveNavLink = ({ isActive }) => (isActive ? "active" : "");
 
 export const isActiveNavLink = ({ isActive }) => (isActive ? true : false);
+
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return Math.abs(hash);
+}
+
+export const getRandomFromMetadata = (metadata, max) => {
+  const hashValue = simpleHash(metadata);
+  return hashValue % max;
+};

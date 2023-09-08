@@ -49,12 +49,11 @@ export const OnSalveView = ({ footerPrpops }) => {
   return (
     <div className={classes.onSale}>
       <div className={classes.floorPrice}>
-        <div className={classes.priceLabel}>LIST PRICE</div>
+        <div className={classes.priceLabel}>Price</div>
         <div className={classes.amount}>
           <p className={classes.accent}>
-            {formattedNumber(Number(price))} <span>{supportedChains[chain].symbol}</span>
+            {formattedNumber(Number(price))} {supportedChains[chain].symbol}
           </p>
-          <div>{`($${formattedNumber(usdValue)})`}</div>
         </div>
       </div>
       {isSoulBound && (

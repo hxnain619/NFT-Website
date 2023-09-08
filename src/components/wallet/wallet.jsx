@@ -181,7 +181,10 @@ function ConnectWallet() {
 
   const connected = (
     <div className={classes.connectedContainer}>
-      <div className={classes.balance}> {americanFormatNumber(balance, 3)} AVAX </div>
+      <div className={classes.balance}>
+        {" "}
+        {`${americanFormatNumber(balance, 3)} ${supportedChains[chainId]?.symbol}`}{" "}
+      </div>
       <div className={classes.connected}>
         <div className={classes.address}>
           <span>{account?.length > 15 ? breakAddress(account) : account}</span>

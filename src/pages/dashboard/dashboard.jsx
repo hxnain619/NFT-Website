@@ -1,38 +1,27 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { ethers } from "ethers";
+import React, { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import classes from "./dashboard.module.css";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { GenContext } from "../../gen-state/gen.context";
-import { fetchUserBoughtNfts, fetchUserCollections, fetchUserCreatedNfts, readUserProfile } from "../../utils/firebase";
 import {
-  getArbitrumCollectedNFTs,
-  getArbitrumMintedNfts,
-  getAuroraCollectedNFTs,
-  getAuroraMintedNfts,
-  getAuroraUserCollections,
-  getAvaxCollectedNFTs,
-  getAvaxUserCollections,
-  getCeloCollectedNFTs,
-  getCeloMintedNFTs,
-  getCeloUserCollections,
-  getNearMintedNfts,
   getChainCollectedNFTs,
   getChainMintedNFTs,
   getChainUserCollections,
 } from "../../renderless/fetch-data/fetchUserGraphData";
+
+import { fetchUserBoughtNfts, fetchUserCollections, readUserProfile } from "../../utils/firebase";
+import classes from "./dashboard.module.css";
 // utils
-import { getUserNftCollections, getUserSingleNfts } from "../../utils";
-import supportedChains from "../../utils/supportedChains";
 import { chainIdToParams } from "../../utils/chainConnect";
+import supportedChains from "../../utils/supportedChains";
 // components
-import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
 import CollectionNftCard from "../../components/Marketplace/CollectionNftCard/CollectionNftCard";
-import SearchBar from "../../components/Marketplace/Search-bar/searchBar.component";
-import NotFound from "../../components/not-found/notFound";
 import DashboardFilterDropdown from "../../components/Marketplace/Dashboard-Filter-Dropdown/DashboardFilterDropdown";
+import SearchBar from "../../components/Marketplace/Search-bar/searchBar.component";
+import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
+import NotFound from "../../components/not-found/notFound";
 import Pagination from "../../components/pagination/Pagination";
 // assets
 import avatar from "../../assets/avatar.png";
@@ -41,11 +30,11 @@ import avatar from "../../assets/avatar.png";
 // import { ReactComponent as Discord } from "../../assets/icon-discord-blue.svg";
 // import { ReactComponent as Instagram } from "../../assets/icon-instagram-blue.svg";
 // import { ReactComponent as LinkIcon } from "../../assets/icon-link.svg";
-import { ReactComponent as Twitter } from "../../assets/icon-twitter-white.svg";
-import { ReactComponent as Website } from "../../assets/icon-website-white.svg";
-import { ReactComponent as Telegram } from "../../assets/icon-telegram-white.svg";
 import { ReactComponent as Instagram } from "../../assets/icon-instagram-white.svg";
 import { ReactComponent as LinkIcon } from "../../assets/icon-link-white-.svg";
+import { ReactComponent as Telegram } from "../../assets/icon-telegram-white.svg";
+import { ReactComponent as Twitter } from "../../assets/icon-twitter-white.svg";
+import { ReactComponent as Website } from "../../assets/icon-website-white.svg";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -404,22 +393,31 @@ const Dashboard = () => {
             activeDetail === "sale" ? (
               <div className={classes.overview}>
                 {filteredCollection.slice(pageVisited, pageVisited + perPage).map((nft) => (
-                  <SingleNftCard key={nft.Id} nft={nft} fromDashboard="onSale" userId={userId} />
+                  <SingleNftCard use_width="100%" key={nft.Id} nft={nft} fromDashboard="onSale" userId={userId} />
                 ))}
               </div>
             ) : activeDetail === "created" ? (
               <div className={classes.overview}>
                 {filteredCollection.slice(pageVisited, pageVisited + perPage).map((nft) => {
                   if (nft.nfts) {
-                    return <CollectionNftCard key={nft.Id} collection={nft} fromDashboard />;
+                    return <CollectionNftCard use_width="100%" key={nft.Id} collection={nft} fromDashboard />;
                   }
-                  return <SingleNftCard key={nft.Id} nft={nft} listed={false} fromDashboard="onSale" userId={userId} />;
+                  return (
+                    <SingleNftCard
+                      use_width="100%"
+                      key={nft.Id}
+                      nft={nft}
+                      listed={false}
+                      fromDashboard="onSale"
+                      userId={userId}
+                    />
+                  );
                 })}
               </div>
             ) : activeDetail === "collected" ? (
               <div className={classes.overview}>
                 {filteredCollection.slice(pageVisited, pageVisited + perPage).map((nft) => (
-                  <SingleNftCard key={nft.Id} nft={nft} fromDashboard="collected" userId={userId} />
+                  <SingleNftCard use_width="100%" key={nft.Id} nft={nft} fromDashboard="collected" userId={userId} />
                 ))}
               </div>
             ) : (
