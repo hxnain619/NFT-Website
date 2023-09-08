@@ -79,6 +79,7 @@ const Minter = () => {
     previewSelectMode: false,
     profileSelected: false,
     popupProps: {
+      imageSrc: null,
       url: null,
       isError: null,
       popup: false,
@@ -529,6 +530,7 @@ const Minter = () => {
         if (typeof url === "object") {
           handleSetState({
             popupProps: {
+              imageSrc: null,
               url: url.message,
               isError: true,
               popup: true,
@@ -538,6 +540,7 @@ const Minter = () => {
           sessionStorage.removeItem("minter");
           handleSetState({
             popupProps: {
+              imageSrc: file[0],
               url,
               isError: false,
               popup: true,
@@ -609,6 +612,7 @@ const Minter = () => {
           if (url.message) {
             return handleSetState({
               popupProps: {
+                imageSrc: file[0],
                 url: url.message,
                 isError: true,
                 popup: true,
@@ -618,6 +622,7 @@ const Minter = () => {
           if (url.transaction.hash) {
             return handleSetState({
               popupProps: {
+                imageSrc: file[0],
                 url: `https://explorer.near.org/?query=${url.transaction.hash}`,
                 isError: false,
                 popup: true,
@@ -637,6 +642,7 @@ const Minter = () => {
         if (typeof url === "object" && singleMintProps.chain.toLowerCase() !== "near") {
           handleSetState({
             popupProps: {
+              imageSrc: null,
               url: url.message,
               isError: true,
               popup: true,
@@ -646,6 +652,7 @@ const Minter = () => {
           sessionStorage.removeItem("minter");
           handleSetState({
             popupProps: {
+              imageSrc: file[0],
               url,
               isError: false,
               popup: true,

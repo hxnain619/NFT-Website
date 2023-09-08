@@ -15,7 +15,7 @@ const SuccessPopup = (props) => {
 
   const {
     handleSetState,
-    popupProps: { url },
+    popupProps: { url, imageSrc },
   } = props;
 
   const handleCopy = (clipProps) => {
@@ -43,9 +43,10 @@ const SuccessPopup = (props) => {
     <div className={classes.popupContainer}>
       <CloseIcon onClick={handleResetPopup} className={classes.closeIcon} />
       <div className={classes.imgContainer}>
-        <img src={successIcon} alt="" />
+        <img src={imageSrc ? URL.createObjectURL(imageSrc) : ""} alt="" />
       </div>
       <h3 className={`${classes.heading} ${classes.success}`}>Mint Successful</h3>
+
       <div className={classes.actionBtnContainer}>
         <button
           onClick={() => history.push(`/profile/${chainId}/${account}?tab=created`)}
@@ -63,18 +64,6 @@ const SuccessPopup = (props) => {
             <img src={linkIconWhite} alt="" />
           </div>
         </button>
-      </div>
-      <div className={classes.detailsContainer}>
-        <div className={classes.tag}>Share</div>
-        <div className={classes.url}>{url}</div>
-        <button
-          onClick={() => handleCopy({ navigator, clipboard: clipboardRef.current })}
-          className={classes.copyBtn}
-          type="button"
-        >
-          {clipboardState}
-        </button>
-        <input style={{ display: "none" }} ref={clipboardRef} type="text" defaultValue={url} />
       </div>
     </div>
   );

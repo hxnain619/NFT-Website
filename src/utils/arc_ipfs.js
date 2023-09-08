@@ -7,12 +7,12 @@
 /* eslint-disable no-await-in-loop */
 // import { CeloProvider, CeloWallet } from "@celo-tools/celo-ethers-wrapper";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { ethers } from "ethers";
 import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
-import { utils } from "near-api-js";
+import { ethers } from "ethers";
 import JSZip from "jszip";
-import { setLoader, setNotification } from "../gen-state/gen.actions";
 import { getRandomFromMetadata } from ".";
+import { setLoader, setNotification } from "../gen-state/gen.actions";
+import { chainNameToParams } from "./chainConnect";
 // import axios from "axios";
 
 const BN = require("bn.js");
@@ -295,7 +295,7 @@ async function signTx(connector, txns, dispatch) {
   return { assetID: assetIds, txId: TxIds };
 }
 
-export async function mintSoulBound(mintprops) {
+export async function mintSoulBound(mintprops, chain) {
   const {
     file,
     metadata,
@@ -351,7 +351,11 @@ export async function mintSoulBound(mintprops) {
       const result = await signer.sendTransaction(tx);
       await result.wait();
       dispatch(setLoader(""));
-      return mainnet ? `https://snowtrace.io/tx/${result.hash}` : `https://testnet.snowtrace.io/tx/${result.hash}`;
+
+      const txUrl = `${
+        chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
+      }tx/${result.hash}`;
+      return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
       return {
@@ -389,7 +393,10 @@ export async function mintSoulBound(mintprops) {
     await txn.wait();
     // await marketContract.createMarketplaceItem(contract.address, id, String(price * 10 ** 18), "General", account);
     dispatch(setLoader(""));
-    return mainnet ? `https://snowtrace.io/tx/${txn.hash}` : `https://testnet.snowtrace.io/tx/${txn.hash}`;
+    const txUrl = `${
+      chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
+    }tx/${txn.hash}`;
+    return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
     return {
@@ -459,9 +466,11 @@ export async function mintSingleToChain(singleMintProps, chain) {
       const result = await signer.sendTransaction(tx);
       await result.wait();
       dispatch(setLoader(""));
-      return mainnet
-        ? `https://explorer.celo.org/mainnet/tx/${result.hash}`
-        : `https://explorer.celo.org/alfajores/tx/${result.hash}`;
+
+      const txUrl = `${
+        chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
+      }tx/${result.hash}`;
+      return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
       return {
@@ -499,7 +508,11 @@ export async function mintSingleToChain(singleMintProps, chain) {
     console.log(txn.hash);
     // await marketContract.createMarketplaceItem(contract.address, id, String(price * 10 ** 18), "General", account);
     dispatch(setLoader(""));
-    return mainnet ? `https://snowtrace.io/tx/${txn.hash}` : `https://testnet.snowtrace.io/tx/${txn.hash}`;
+
+    const txUrl = `${
+      chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
+    }tx/${txn.hash}`;
+    return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
     console.log(error);
@@ -634,7 +647,11 @@ export async function listNetworkNft(nftProps, chainName) {
       const result = await signer.sendTransaction(listingTx);
       await result.wait();
       dispatch(setLoader(""));
-      return mainnet ? `https://polygonscan.com/tx/${result.hash}` : `https://mumbai.polygonscan.com/tx/${result.hash}`;
+
+      const txUrl = `${
+        chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
+      }tx/${result.hash}`;
+      return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
       return {
@@ -663,7 +680,10 @@ export async function listNetworkNft(nftProps, chainName) {
     );
     await txn.wait();
     dispatch(setLoader(""));
-    return mainnet ? `https://polygonscan.com/tx/${txn.hash}` : `https://mumbai.polygonscan.com/tx/${txn.hash}`;
+    const txUrl = `${
+      chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
+    }tx/${txn.hash}`;
+    return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
     console.log(error);
@@ -802,7 +822,11 @@ export async function mintToChain(chainProps, chainName) {
           type: "success",
         })
       );
-      return mainnet ? `https://snowtrace.io/tx/${result.hash}` : `https://testnet.snowtrace.io/tx/${result.hash}`;
+
+      const txUrl = `${
+        chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
+      }tx/${result.hash}`;
+      return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
       return {
@@ -837,7 +861,10 @@ export async function mintToChain(chainProps, chainName) {
       type: "success",
     })
   );
-  return mainnet ? `https://snowtrace.io/tx/${tx.hash}` : `https://testnet.snowtrace.io/tx/${tx.hash}`;
+  const txUrl = `${
+    chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
+  }tx/${tx.hash}`;
+  return txUrl;
 }
 
 export async function getAlgoData(mainnet, id) {
@@ -855,8 +882,8 @@ export async function PurchaseNft(buyProps) {
   const enc = new TextEncoder();
   const note = enc.encode("Nft Purchase");
   const note2 = enc.encode("Platform fee");
-  const txns = [];
   const userBalance = await algodClient.accountInformation(account).do();
+  const txns = [];
   if (algosdk.microalgosToAlgos(userBalance.amount) <= nftDetails.price) {
     dispatch(
       setNotification({
