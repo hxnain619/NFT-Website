@@ -35,6 +35,42 @@ export const chainIdToParams = {
   },
 };
 
+export const chainNameToParams = {
+  polygon: {
+    chainId: "0x89",
+    chainName: "Polygon Matic",
+    nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
+    rpcUrls: ["https://polygon-rpc.com/"],
+    blockExplorerUrls: ["https://www.polygonscan.com/"],
+    iconUrls: [""],
+  },
+
+  "polygon-testnet": {
+    chainId: "0x13881",
+    chainName: "Polygon Testnet",
+    nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
+    rpcUrls: ["https://polygon-mumbai.g.alchemy.com/v2/sjbvWTjbyKXxvfJ1HkHIdEDHc2u8wNym"],
+    blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+    iconUrls: [""],
+  },
+  avalanche: {
+    chainId: "0Xa869",
+    chainName: "Avalanche",
+    nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
+    rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+    blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+    iconUrls: [""],
+  },
+  "avalanche-testnet": {
+    chainId: "0xa86a",
+    chainName: "Avalanche",
+    nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
+    rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+    blockExplorerUrls: ["https://snowtrace.io/"],
+    iconUrls: [""],
+  },
+};
+
 const chainDecimalsToHex = {
   137: "0x89",
   80001: "0x13881",

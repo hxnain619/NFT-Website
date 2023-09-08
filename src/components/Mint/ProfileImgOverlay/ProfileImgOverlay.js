@@ -17,7 +17,7 @@ const ProfileImgOverlay = ({ toggleGuide, file, handleSetState, collectionProfil
           {file?.slice(0, 6).map((f) => (
             <div
               key={f.name}
-              className={collectionProfile.name === f.name && classes.active}
+              className={collectionProfile.name === f.name ? classes.active : ""}
               onClick={() => selectHandler(f)}
             >
               <img src={URL.createObjectURL(f)} alt="" />

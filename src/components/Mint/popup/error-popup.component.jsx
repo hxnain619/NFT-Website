@@ -19,9 +19,6 @@ const ErrorPopup = (props) => {
   return (
     <div className={classes.popupContainer}>
       <CloseIcon onClick={handleResetPopup} className={classes.closeIcon} />
-      <div className={classes.imgContainer}>
-        <img src={errorIcon} alt="" />
-      </div>
       <h3 className={`${classes.heading} ${classes.error}`}>Mint Failed</h3>
       <p className={classes.errorMsg}>{popupProps.url}</p>
       <div className={classes.actionBtnContainer}>
