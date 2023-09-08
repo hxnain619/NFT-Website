@@ -19,7 +19,6 @@
   flex-direction: column;
   gap: 1em;
   padding: 1em;
-  padding-top: 2em;
   /* background: var(--default); */
   box-shadow: var(--shadow-light-5);
   overflow: hidden;
@@ -121,9 +120,9 @@
   max-width: 1440px;
   margin: 0 auto;
   display: flex;
-  padding: 0 2rem;
-  margin-top: -4rem;
-  margin-bottom: 4rem;
+  padding: 0 1rem;
+  margin-top: -6rem;
+  margin-bottom: 1rem;
   position: relative;
   justify-content: space-between;
 }
@@ -158,8 +157,16 @@
 }
 .profileDetail {
   display: flex;
-  gap: 1rem;
   margin-top: auto;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  /* Subheading-2-Jost */
+  font-family: Jost;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 40px; /* 125% */
 }
 .social {
   display: flex;
@@ -177,6 +184,7 @@
   border-radius: 24px;
   border: 1px solid var(--transparent-white-white-50, rgba(251, 251, 251, 0.5));
   background: var(--transparent-black-black-60, rgba(3, 7, 16, 0.6));
+  padding: 6px;
 }
 .socialIcon {
   width: 100%;
@@ -226,8 +234,8 @@
 .rightPane {
   display: flex;
   flex-direction: column;
-  justify-content: space-between !important;
-  padding: 1em 0 6em 0;
+  gap: 32px;
+  margin-top: -16px;
 }
 .editProfile {
   display: flex;
@@ -378,9 +386,38 @@
   .bannerWrapper {
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .bannerWrapper > div {
+    flex-direction: column;
+    align-items: center;
   }
   .bannerWrapper > a {
     margin: unset;
+  }
+
+  .profileHeader {
+    padding: 1rem;
+    gap: 8px;
+  }
+
+  .address {
+    justify-content: center;
+  }
+
+  .social {
+    display: none;
+  }
+
+  .imageContainer {
+    margin-bottom: 0;
+  }
+
+  .header {
+    margin-bottom: 16px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -421,12 +458,5 @@
   }
   .main {
     padding: 1rem;
-  }
-}
-@media screen and (max-width: 400px) {
-  .imageContainer {
-    max-width: 10rem;
-    max-height: 10rem;
-    margin-bottom: 1rem;
   }
 }

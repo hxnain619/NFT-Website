@@ -130,19 +130,23 @@
 
 .onSale .priceLabel {
   color: var(--transparent-white-white-85, rgba(251, 251, 251, 0.85));
+
+  /* Caption 2 */
+  font-family: Poppins;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 20px; /* 166.667% */
 }
 
 .onSale .amount {
   color: var(--primary-white, #ecf1f9);
 
+  /* Body 2 (Bold) */
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 24px; /* 150% */
 }
 
 .onSale .amount .accent {

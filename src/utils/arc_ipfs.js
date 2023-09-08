@@ -12,6 +12,7 @@ import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
 import { utils } from "near-api-js";
 import JSZip from "jszip";
 import { setLoader, setNotification } from "../gen-state/gen.actions";
+import { getRandomFromMetadata } from ".";
 // import axios from "axios";
 
 const BN = require("bn.js");
@@ -484,9 +485,9 @@ export async function mintSingleToChain(singleMintProps, chain) {
   console.log("rd", rd);
   const asset = rd.data.content.upload;
   console.log("url", asset.url, receiverAddress);
-  const id = 0;
-  // const uintArray = asset.metadata.toLocaleString();
-  // const id = parseInt(uintArray.slice(0, 7).replace(/,/g, ""));
+  const id = getRandomFromMetadata(asset.metadata, 100000);
+
+  console.log(id);
   console.log("contract address", process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS);
   dispatch(setLoader("minting 1 of 1"));
   const contract = new ethers.Contract(singleMinterAddress, mintSingle, signer);

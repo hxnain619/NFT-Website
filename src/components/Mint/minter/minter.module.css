@@ -540,7 +540,6 @@ div.showPreview > span {
 
 .mintBtn {
   border-radius: 40px;
-  height: 40px;
   background: var(--primary-primary-blue, #3856ff);
   border: 1px solid var(--primary-primary-blue, #3856ff);
   color: var(--default);

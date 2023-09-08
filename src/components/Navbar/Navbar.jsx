@@ -57,10 +57,10 @@ const Navbar = () => {
           </div>
 
           {NAVIGATION_LIST?.map((link, id) => (
-            <a
+            <NavLink
               className={`${pathname === link.path || pathname.includes(link.pathOption) ? classes.active : ""}`}
               key={new Date().getTime() + id}
-              href={link.path}
+              to={link.path}
             >
               {link.label}
               <div
@@ -68,7 +68,7 @@ const Navbar = () => {
                   pathname === link.path || pathname.includes(link.pathOption) ? classes.active : ""
                 }`}
               />
-            </a>
+            </NavLink>
           ))}
         </div>
 
