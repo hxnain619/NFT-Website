@@ -1,3 +1,80 @@
+.chainsListContainer {
+  padding: 10px;
+  background-color: #bbc5ff1a;
+  color: var(--primary-white);
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+}
+.chainList {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chainList img {
+  margin-right: 6px;
+  border-radius: 50px;
+  background-color: var(--primary-light-blue);
+}
+.chainList span {
+  color: var(--primary-white);
+}
+.chainList a {
+  color: var(--primary-blue);
+}
+.avatar {
+  position: relative;
+  display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+  background-color: var(--primary-light-blue);
+}
+.avatar img {
+  height: auto;
+  width: 100%;
+  display: inline-block;
+  user-select: none;
+}
+.listView {
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  padding: 8px 16px;
+}
+.listView span {
+  min-width: 56px;
+  flex-shrink: 0;
+  letter-spacing: 0.00938em;
+  display: block;
+  color: var(--transparent-white-white-70);
+}
+.listView div {
+  display: flex;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  color: var(--primary-white) !important;
+  display: block;
+}
+
 .container {
   width: 100%;
   display: flex;
@@ -92,7 +169,7 @@
 .chain {
   height: 24px;
   width: 24px;
-  background: var(--default);
+  background: var(--primary-blue);
   border-radius: 50%;
   display: inline-block;
 }
@@ -244,7 +321,7 @@
 }
 .dropdown {
   background: var(--body-bg);
-  width: 16em;
+  width: 19em;
   border: 1px solid var(--card-outline);
   overflow: hidden;
   margin-top: 1em;
