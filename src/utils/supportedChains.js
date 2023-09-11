@@ -1,6 +1,6 @@
-import polygonIcon from "../assets/icon-polygon.svg";
 import avalancheIcon from "../assets/icon-avalanche.svg";
-import { addChain, switchChain } from "./chainConnect";
+import polygonIcon from "../assets/icon-polygon.svg";
+import { addChain, switchChain } from "./chain";
 
 // Chain Icons
 import avaxChainIcon from "../assets/chainIcons/avalanche.svg";

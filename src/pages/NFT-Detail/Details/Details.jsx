@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
+import { ReactComponent as LinkIcon } from "../../../assets/icon-link.svg";
 import { GenContext } from "../../../gen-state/gen.context";
-import { chainIdToParams } from "../../../utils/chainConnect";
+import { chainIdToParams } from "../../../utils/chain";
 import supportedChains from "../../../utils/supportedChains";
 import { breakAddress } from "../NFTDetail-script";
-import { ReactComponent as LinkIcon } from "../../../assets/icon-link.svg";
 import classes from "./Details.module.css";
 
 const Details = ({ nftDetails }) => {

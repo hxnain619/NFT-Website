@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import classes from "./exploreTransactionHistory.module.css";
-import timerIcon from "../../../assets/icon-timer.svg";
-import transferIcon from "../../../assets/icon-transfer.svg";
-import searchIcon from "../../../assets/icon-search.svg";
-import mintIcon from "../../../assets/icon-mint.svg";
 import cartIcon from "../../../assets/icon-cart-no-bg.svg";
 import exportIcon from "../../../assets/icon-export.svg";
-import { chainIdToParams } from "../../../utils/chainConnect";
+import mintIcon from "../../../assets/icon-mint.svg";
+import searchIcon from "../../../assets/icon-search.svg";
+import timerIcon from "../../../assets/icon-timer.svg";
+import transferIcon from "../../../assets/icon-transfer.svg";
+import { chainIdToParams } from "../../../utils/chain";
+import classes from "./exploreTransactionHistory.module.css";
 
 import { breakAddress, getDate } from "../../../components/wallet/wallet-script";
-import supportedChains from "../../../utils/supportedChains";
 import { chainCollectionTransactions } from "../../../renderless/fetch-data/fetchUserGraphData";
+import supportedChains from "../../../utils/supportedChains";
 
 const ExploreTransactionHistory = ({ collectionId, data, chain, fromCollection }) => {
   const [state, setState] = useState({

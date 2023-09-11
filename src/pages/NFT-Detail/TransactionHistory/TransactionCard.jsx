@@ -1,7 +1,7 @@
 /* eslint-disable no-lonely-if */
 import React, { useContext, useState } from "react";
 import { GenContext } from "../../../gen-state/gen.context";
-import { chainIdToParams } from "../../../utils/chainConnect";
+import { chainIdToParams } from "../../../utils/chain";
 import supportedChains from "../../../utils/supportedChains";
 import { breakAddress, getFormatedTxDate } from "../NFTDetail-script";
 import classes from "./TransactionCard.module.css";

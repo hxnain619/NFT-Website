@@ -13,9 +13,11 @@ import {
 
 import { fetchUserBoughtNfts, fetchUserCollections, readUserProfile } from "../../utils/firebase";
 import classes from "./dashboard.module.css";
+
 // utils
-import { chainIdToParams } from "../../utils/chainConnect";
+import { chainIdToParams } from "../../utils/chain";
 import supportedChains from "../../utils/supportedChains";
+
 // components
 import CollectionNftCard from "../../components/Marketplace/CollectionNftCard/CollectionNftCard";
 import DashboardFilterDropdown from "../../components/Marketplace/Dashboard-Filter-Dropdown/DashboardFilterDropdown";
@@ -23,13 +25,9 @@ import SearchBar from "../../components/Marketplace/Search-bar/searchBar.compone
 import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
 import NotFound from "../../components/not-found/notFound";
 import Pagination from "../../components/pagination/Pagination";
+
 // assets
 import avatar from "../../assets/avatar.png";
-// import { ReactComponent as Youtube } from "../../assets/icon-youtube-green.svg";
-// import { ReactComponent as Twitter } from "../../assets/icon-twitter-blue.svg";
-// import { ReactComponent as Discord } from "../../assets/icon-discord-blue.svg";
-// import { ReactComponent as Instagram } from "../../assets/icon-instagram-blue.svg";
-// import { ReactComponent as LinkIcon } from "../../assets/icon-link.svg";
 import { ReactComponent as Instagram } from "../../assets/icon-instagram-white.svg";
 import { ReactComponent as LinkIcon } from "../../assets/icon-link-white-.svg";
 import { ReactComponent as Telegram } from "../../assets/icon-telegram-white.svg";

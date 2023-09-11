@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import classes from "./transaction.module.css";
+import React, { useEffect, useRef, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import algoIcon from "../../assets/icon-algo.svg";
+import { chainIdToParams } from "../../utils/chain";
 import supportedChains from "../../utils/supportedChains";
-import { chainIdToParams } from "../../utils/chainConnect";
+import classes from "./transaction.module.css";
+
 const Transaction = (data) => {
   function breakAddress(address = "", width = 6) {
     if (!address) return "--";

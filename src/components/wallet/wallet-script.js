@@ -5,44 +5,44 @@
 /* eslint-disable no-async-promise-executor */
 /* eslint-disable import/no-self-import */
 // packages
-import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { ethers } from "ethers";
 
 // near wallets
-import { setupSender } from "@near-wallet-selector/sender";
-import { setupNearWallet } from "@near-wallet-selector/near-wallet";
-import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupWalletSelector } from "@near-wallet-selector/core";
-import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
+import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
+import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
+import { setupNearWallet } from "@near-wallet-selector/near-wallet";
 import { setupNightly } from "@near-wallet-selector/nightly";
+import { setupSender } from "@near-wallet-selector/sender";
 
 // near styles & icons
-import MyNearIconUrl from "@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png";
-import SenderIconUrl from "@near-wallet-selector/sender/assets/sender-icon.png";
-import NearIconUrl from "@near-wallet-selector/near-wallet/assets/near-wallet-icon.png";
-import MeteorIconUrl from "@near-wallet-selector/meteor-wallet/assets/meteor-icon.png";
 import HereWalletIconUrl from "@near-wallet-selector/here-wallet/assets/here-wallet-icon.png";
-import NightlyIcon from "@near-wallet-selector/nightly/assets/nightly.png";
+import MeteorIconUrl from "@near-wallet-selector/meteor-wallet/assets/meteor-icon.png";
 import "@near-wallet-selector/modal-ui/styles.css";
+import MyNearIconUrl from "@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png";
+import NearIconUrl from "@near-wallet-selector/near-wallet/assets/near-wallet-icon.png";
+import NightlyIcon from "@near-wallet-selector/nightly/assets/nightly.png";
+import SenderIconUrl from "@near-wallet-selector/sender/assets/sender-icon.png";
 
 // components
-import * as WS from "./wallet-script";
+import blankImage from "../../assets/blank.png";
 import {
+  setAccount,
+  setChainId,
+  setClipboard,
+  setConnector,
+  setMainnet,
   setNotification,
   setProposedChain,
-  setConnector,
-  setChainId,
-  setAccount,
-  setMainnet,
-  setClipboard,
-  setToggleWalletPopup,
   setSwitchWalletNotification,
+  setToggleWalletPopup,
 } from "../../gen-state/gen.actions";
-import { chainIdToParams } from "../../utils/chainConnect";
-import blankImage from "../../assets/blank.png";
+import { chainIdToParams } from "../../utils/chain";
 import supportedChains from "../../utils/supportedChains";
 import getConfig from "../wallet-popup/nearConfig";
+import * as WS from "./wallet-script";
 
 export const breakAddress = (address = "", width = 6) => {
   if (address) return `${address.slice(0, width)}...${address.slice(-width)}`;
