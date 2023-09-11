@@ -263,7 +263,7 @@ const AI = () => {
       </header>
       <main className={classes.aiMain}>
         <section className={classes.peviewSizeSection}>
-          {!load ? (
+          {load ? (
             <div style={{ width: "98%" }} className={classes.loader}>
               <SkeletonCards cardsLength={1} className={[classes.loaderWidth]} customSize={[10, 405, 10]} />
             </div>

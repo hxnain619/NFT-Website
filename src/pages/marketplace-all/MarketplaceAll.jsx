@@ -204,7 +204,7 @@ const MarketplaceAll = () => {
               );
             })}
           </div>
-        ) : !notFound || isLoading ? (
+        ) : !notFound && isLoading ? (
           <div className={classes.nfts}>
             <SkeletonCards cardsLength={8} customSize={[200, 40]} />
           </div>
