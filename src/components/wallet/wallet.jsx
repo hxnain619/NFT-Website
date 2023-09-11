@@ -25,9 +25,9 @@ import {
   initConnectWallet,
 } from "./wallet-script";
 
-// import { setSwitchWalletNotification } from "../../gen-state/gen.actions";
 import PushNotification from "../notifications/PushNotification";
 import { readUserProfile } from "../../utils/firebase";
+import { setNotification } from "../../gen-state/gen.actions";
 
 function ConnectWallet() {
   const history = useHistory();
@@ -85,10 +85,14 @@ function ConnectWallet() {
     clipboard.select();
     clipboard.setSelectionRange(0, 99999); /* For mobile devices */
     navigator.clipboard.writeText(clipboard.value);
+
     handleSetState({ clipboardState: "Copied" });
-    setTimeout(() => {
-      handleSetState({ clipboardState: "Copy Address" });
-    }, 850);
+    dispatch(
+      setNotification({
+        message: `Copied to clipboard.`,
+        type: "success",
+      })
+    );
   };
 
   const handleDisconnet = async () => {

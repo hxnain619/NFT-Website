@@ -3,17 +3,19 @@
   background-color: #bbc5ff1a;
   color: var(--primary-white);
   border-radius: 10px;
-  width: 80%;
-  margin: 0 auto;
+  margin: 0 1em;
+}
+.chainList:last-child {
+  margin-bottom: 0 !important;
 }
 .chainList {
-  margin-top: 8px;
+  margin-bottom: 0.8em;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .chainList img {
-  margin-right: 6px;
+  margin-right: 8px;
   border-radius: 50px;
   background-color: var(--primary-light-blue);
 }
@@ -21,7 +23,7 @@
   color: var(--primary-white);
 }
 .chainList a {
-  color: var(--primary-blue);
+  color: var(--primary-light-blue);
 }
 .avatar {
   position: relative;
@@ -326,6 +328,7 @@
   overflow: hidden;
   margin-top: 1em;
   border-radius: 0.5em;
+  padding: 10px;
 }
 
 .dropdown.active {
@@ -341,14 +344,15 @@
   gap: 1em;
   padding: 1em;
   cursor: pointer;
+  margin: 5px 0;
 }
 .option:hover div {
-  color: var(--text-heading);
+  color: var(--primary-white);
 }
 
 .option:hover {
-  background: var(--card-light);
-  color: var(--text-heading);
+  background: #bbc5ff1a;
+  color: var(--primary-white);
 }
 
 .option img {
