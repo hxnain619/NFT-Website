@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-dynamic-require */
 /* eslint-disable no-shadow */
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
@@ -5,15 +7,12 @@ import { ethers } from "ethers";
 import classes from "./wallet.module.css";
 import { GenContext } from "../../gen-state/gen.context";
 import userIcon from "../../assets/icon-user.svg";
-import switchIcon from "../../assets/icon-switch.svg";
 import copyIcon from "../../assets/icon-copy.svg";
-import { ReactComponent as DropdownIcon } from "../../assets/icon-chevron-down.svg";
 import disconnectIcon from "../../assets/icon-disconnect.svg";
 import WalletPopup from "../wallet-popup/walletPopup";
 import supportedChains from "../../utils/supportedChains";
 import bellIcon from "../../assets/bell.svg";
 import useCommon from "../../hooks/useCommon";
-import userAvatar from "./avatar.png";
 
 import {
   setNetworkType,
@@ -26,8 +25,9 @@ import {
   initConnectWallet,
 } from "./wallet-script";
 
-// import { setSwitchWalletNotification } from "../../gen-state/gen.actions";
 import PushNotification from "../notifications/PushNotification";
+import { readUserProfile } from "../../utils/firebase";
+import { setNotification } from "../../gen-state/gen.actions";
 
 function ConnectWallet() {
   const history = useHistory();
@@ -47,10 +47,10 @@ function ConnectWallet() {
     openNotification: false,
     overrideWalletConnect: false,
     rpc: null,
+    userDetails: null,
   });
 
   const {
-    clipboardState,
     openNotification,
     network,
     walletConnectProvider,
@@ -58,6 +58,7 @@ function ConnectWallet() {
     connectionMethod,
     rpc,
     isMetamask,
+    userDetails,
   } = state;
 
   const handleSetState = (payload) => {
@@ -84,10 +85,14 @@ function ConnectWallet() {
     clipboard.select();
     clipboard.setSelectionRange(0, 99999); /* For mobile devices */
     navigator.clipboard.writeText(clipboard.value);
+
     handleSetState({ clipboardState: "Copied" });
-    setTimeout(() => {
-      handleSetState({ clipboardState: "Copy Address" });
-    }, 850);
+    dispatch(
+      setNotification({
+        message: `Copied to clipboard.`,
+        type: "success",
+      })
+    );
   };
 
   const handleDisconnet = async () => {
@@ -133,6 +138,11 @@ function ConnectWallet() {
       const balanceEther = ethers.utils.formatEther(balanceWei);
       // console.log(`Account Balance: ${balanceEther} ETH`);
       setBalance(balanceEther);
+      if (account) {
+        await readUserProfile(account).then((res) => {
+          handleSetState({ userDetails: res });
+        });
+      }
     };
     if (account && account.length > 15) getAccountBalance();
   }, [account]);
@@ -158,19 +168,50 @@ function ConnectWallet() {
   const dropdown = (
     <div className={classes.dropdownContainer}>
       <div className={classes.dropdown}>
+        <div className={classes.listView}>
+          <span>
+            <div className={classes.avatar}>
+              <img src={getConnectedChain(chainId)} alt="user img" />
+            </div>
+          </span>
+          <div>
+            <span>{userDetails?.username ?? "User 123"}</span>
+            <div
+              style={{ display: "flex", margin: 0, cursor: "pointer" }}
+              onClick={() => handleCopy({ navigator, clipboard: clipboardRef.current })}
+            >
+              <div>{account?.length > 15 ? breakAddress(account, 8) : account}</div>
+              &nbsp;&nbsp;
+              <img src={copyIcon} width="20px" alt="" />
+            </div>
+            <input style={{ display: "none" }} ref={clipboardRef} type="text" defaultValue={account} />
+          </div>
+        </div>
         <div onClick={handleDashboard} className={classes.option}>
           <img src={userIcon} alt="" />
-          <div>View Profile</div>
+          <div>My Profile</div>
         </div>
-        <div onClick={() => initConnectWallet(walletProps)} className={classes.option}>
-          <img src={switchIcon} alt="" />
-          <div>Switch network</div>
-        </div>
-        <div onClick={() => handleCopy({ navigator, clipboard: clipboardRef.current })} className={classes.option}>
-          <img src={copyIcon} alt="" />
-          <div>{clipboardState}</div>
-          <input style={{ display: "none" }} ref={clipboardRef} type="text" defaultValue={account} />
-        </div>
+        {Object.entries(supportedChains || {}).length && (
+          <div className={classes.chainsListContainer}>
+            {Object.entries(supportedChains)
+              .filter((val) => val[1].id !== "invalid")
+              .map((val) => {
+                return (
+                  <div className={classes.chainList}>
+                    <div style={{ display: "flex" }}>
+                      <img width={24} src={getConnectedChain(val[1].id)} alt="" />
+                      <span>
+                        {(Math.random() * 123).toFixed(3)} {val[1].symbol}
+                      </span>
+                    </div>
+                    <a href={val[1].explorer} target="_blank" rel="noreferrer">
+                      Buy
+                    </a>
+                  </div>
+                );
+              })}
+          </div>
+        )}
         <div onClick={handleDisconnet} className={classes.option}>
           <img src={disconnectIcon} alt="" />
           <div>Disconnect</div>
