@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { useHistory, useRouteMatch, Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import { CopyBlock, dracula } from "react-code-blocks";
-import axios from "axios";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { GenContext } from "../../../gen-state/gen.context";
@@ -19,18 +17,12 @@ import detailsIcon from "../../../assets/details.png";
 import Search from "../../../components/Nft-details/history/search";
 import { readNftTransaction } from "../../../utils/firebase";
 import algoLogo from "../../../assets/icon-algo.svg";
-import { setNotification } from "../../../gen-state/gen.actions";
 import supportedChains from "../../../utils/supportedChains";
-import {
-  auroraUserData,
-  celoUserData,
-  getNftById,
-  nearUserData,
-} from "../../../renderless/fetch-data/fetchUserGraphData";
+import { getNftById } from "../../../renderless/fetch-data/fetchUserGraphData";
+import LoadingScreen from "../../NFT-Detail/Loading-Screen/LoadingScreen";
 
 const ListSingleNFT = (nft) => {
   const { account, connector, mainnet, dispatch, singleAlgoNfts, chainId } = useContext(GenContext);
-  const { Id, collection_name, name, price, image_url, chain } = nft;
 
   const history = useHistory();
   const {
@@ -166,31 +158,7 @@ const ListSingleNFT = (nft) => {
   };
 
   if (isLoading) {
-    return (
-      <div className={classes.menu}>
-        <div className={classes.left}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.right}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.fullLegnth}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={200} />
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   const description = {
@@ -288,7 +256,7 @@ const ListSingleNFT = (nft) => {
                   </Link>
                 ) : (
                   <div className={classes.alignIcon}>
-                    <button className={classes.sold} disabled={true}>
+                    <button className={classes.sold} disabled>
                       Not Listed
                     </button>
                   </div>

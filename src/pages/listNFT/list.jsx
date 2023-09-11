@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 
 // Components
 import supportedChains from "../../utils/supportedChains";
 import { GenContext } from "../../gen-state/gen.context";
 import { setNotification } from "../../gen-state/gen.actions";
 import { getFormatedPrice } from "../../utils";
-import { listNetworkNft, listAvaxNft, listPolygonNft } from "../../utils/arc_ipfs";
+import { listNetworkNft } from "../../utils/arc_ipfs";
 import { readUserProfile } from "../../utils/firebase";
 import { getNftById } from "../../renderless/fetch-data/fetchUserGraphData";
 import { ReactComponent as DropdownIcon } from "../../assets/icon-chevron-down.svg";
@@ -19,16 +18,15 @@ import avatar from "../../assets/avatar.png";
 
 // Styles
 import classes from "./list.module.css";
+import LoadingScreen from "../NFT-Detail/Loading-Screen/LoadingScreen";
 
 const List = () => {
-  const { account, chainId, connector, dispatch, singleAlgoNfts, algoCollections, activeCollection, mainnet } =
-    useContext(GenContext);
+  const { account, chainId, connector, dispatch, mainnet } = useContext(GenContext);
 
   const {
     params: { nftId },
   } = useRouteMatch();
   const match = useRouteMatch();
-  const { params } = useRouteMatch();
   const history = useHistory();
 
   const [state, setState] = useState({
@@ -162,31 +160,7 @@ const List = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className={classes.menu}>
-        <div className={classes.left}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.right}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.fullLegnth}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={200} />
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
   const dropHandler = (event) => {
     if (activeTab === event) {

@@ -3,7 +3,6 @@
 /* eslint-disable react/no-array-index-key */
 
 import React, { useContext, useEffect, useState, useRef } from "react";
-import Skeleton from "react-loading-skeleton";
 import classes from "./collections.module.css";
 import CollectionNftCard from "../../components/Marketplace/CollectionNftCard/CollectionNftCard";
 import { GenContext } from "../../gen-state/gen.context";
@@ -14,9 +13,10 @@ import NotFound from "../../components/not-found/notFound";
 import FilterDropdown from "../../components/Marketplace/Filter-dropdown/FilterDropdown";
 import Search from "../../components/Search/Search";
 import { getAllPolygonCollections } from "../../renderless/fetch-data/fetchUserGraphData";
+import SkeletonCards from "../../components/skeleton-card";
 
 const Collections = () => {
-  const { dispatch, mainnet } = useContext(GenContext);
+  const { mainnet } = useContext(GenContext);
 
   const mountRef = useRef(0);
   const [state, setState] = useState({
@@ -181,17 +181,7 @@ const Collections = () => {
             ))}
           </div>
         ) : !notFound || load ? (
-          <div className={classes.nfts}>
-            {[...new Array(8)]
-              .map((_, idx) => idx)
-              .map((id) => (
-                <div className={classes.loader} key={id}>
-                  <Skeleton count={1} height={200} />
-                  <br />
-                  <Skeleton count={1} height={40} />
-                </div>
-              ))}
-          </div>
+          <SkeletonCards cardsLength={8} customSize={[200, 40]} />
         ) : (
           <NotFound />
         )}

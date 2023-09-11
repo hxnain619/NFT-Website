@@ -20,10 +20,11 @@
   background-color: var(--primary-light-blue);
 }
 .chainList span {
-  color: var(--primary-white);
+  color: var(--primary-white) !important;
 }
 .chainList a {
-  color: var(--primary-light-blue);
+  font-size: 14px !important;
+  color: var(--primary-light-blue) !important;
 }
 .avatar {
   position: relative;
@@ -426,11 +427,15 @@
   }
 }
 @media screen and (max-width: 380px) {
+  .dropdownContainer {
+    left: 0;
+  }
   .pushNotification {
     right: -1.7em;
   }
 
   .container {
+    flex-direction: column;
     gap: 24px;
   }
 

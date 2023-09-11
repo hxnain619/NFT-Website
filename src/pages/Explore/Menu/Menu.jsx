@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import SingleNftCard from "../../../components/Marketplace/SingleNftCard/SingleNftCard";
 import classes from "./Menu.module.css";
+import SkeletonCards from "../../../components/skeleton-card";
 
 const Menu = ({ NFTCollection, toggleFilter, headerHeight }) => {
   const [state, setState] = useState({
@@ -47,19 +47,13 @@ const Menu = ({ NFTCollection, toggleFilter, headerHeight }) => {
   return (
     <div className={classes.container}>
       <div className={`${classes.menu} ${toggleFilter && classes.resize}`}>
-        {Object.keys(paginate).length
-          ? paginate[currentPage].map((nft, idx) => (
-              <SingleNftCard collectionNft={{ name: NFTCollection[0]?.collection_name }} key={idx} nft={nft} />
-            ))
-          : [...new Array(8)]
-              .map((_, idx) => idx)
-              .map((id) => (
-                <div className={classes.loader} key={id}>
-                  <Skeleton count={1} height={200} />
-                  <br />
-                  <Skeleton count={1} height={40} />
-                </div>
-              ))}
+        {Object.keys(paginate).length ? (
+          paginate[currentPage].map((nft, idx) => (
+            <SingleNftCard collectionNft={{ name: NFTCollection[0]?.collection_name }} key={idx} nft={nft} />
+          ))
+        ) : (
+          <SkeletonCards className={classes.loader} cardsLength={8} customSize={[200, 40]} />
+        )}
       </div>
       <div className={classes.control}>
         <div onClick={handlePrev} className={classes.pageControl}>

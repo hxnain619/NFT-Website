@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import classes from "./searchResult.module.css";
 import { GenContext } from "../../gen-state/gen.context";
 import handleSuggestions from "../../components/Search/Search-script";
@@ -13,6 +12,7 @@ import CollectionsCard from "../../components/Marketplace/collectionsCard/collec
 import NftCard from "../../components/Marketplace/NftCard/NftCard";
 import NotFound from "../../components/not-found/notFound";
 import supportedChains from "../../utils/supportedChains";
+import SkeletonCards from "../../components/skeleton-card";
 
 const SearchResult = () => {
   const [state, setState] = useState({
@@ -125,17 +125,7 @@ const SearchResult = () => {
           })}
         </div>
       ) : !filteredCollection ? (
-        <div className={classes.skeleton}>
-          {[...new Array(5)].map((id) => (
-            <div key={id}>
-              <Skeleton count={1} height={200} />
-              <br />
-              <Skeleton count={1} height={30} />
-              <br />
-              <Skeleton count={1} height={30} />
-            </div>
-          ))}
-        </div>
+        <SkeletonCards cardsLength={5} customSize={[200, 30, 30]} />
       ) : (
         <NotFound />
       )}

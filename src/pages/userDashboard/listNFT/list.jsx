@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import axios from "axios";
 import { GenContext } from "../../../gen-state/gen.context";
 import { buyNft, getSingleNftDetails } from "../../../utils";
 import classes from "./list.module.css";
+import LoadingScreen from "../../NFT-Detail/Loading-Screen/LoadingScreen";
 
 const List = () => {
   const { dispatch, account, connector, mainnet, chainId } = useContext(GenContext);
@@ -58,31 +57,7 @@ const List = () => {
   }, [nftDetails]);
 
   if (isLoading) {
-    return (
-      <div className={classes.menu}>
-        <div className={classes.left}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.right}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.fullLegnth}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={200} />
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

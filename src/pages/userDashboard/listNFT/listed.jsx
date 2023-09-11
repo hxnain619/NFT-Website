@@ -1,18 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouteMatch, Link, useHistory } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import { FacebookShareButton, TwitterShareButton, TelegramShareButton } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
 import classes from "./listed.module.css";
 import { GenContext } from "../../../gen-state/gen.context";
 import supportedChains from "../../../utils/supportedChains";
-// import { getUserBoughtNftCollection } from "../../../utils";
 import { getNftById } from "../../../renderless/fetch-data/fetchUserGraphData";
-// import { fetchUserBoughtNfts } from "../../../utils/firebase";
 import telegram from "../../../assets/blue-telegram.svg";
 import twitterIcon from "../../../assets/blue-twitter.svg";
 import facebookIcon from "../../../assets/blue-facebook.svg";
 import linktree from "../../../assets/linked-tree.svg";
+import LoadingScreen from "../../NFT-Detail/Loading-Screen/LoadingScreen";
 
 const Listed = () => {
   const { mainnet, activeCollection } = useContext(GenContext);
@@ -47,31 +45,7 @@ const Listed = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className={classes.menu}>
-        <div className={classes.left}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.right}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.fullLegnth}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={200} />
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
   const baseURL = `${window.location.protocol}//${window.location.host}`;
   const shareURL =
