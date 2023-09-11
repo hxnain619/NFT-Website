@@ -1,3 +1,5 @@
+import { CHAIN_DECIMAL_TO_HEX } from "../constant/chain";
+
 /* eslint-disable no-console */
 export const chainIdToParams = {
   137: {
@@ -71,20 +73,13 @@ export const chainNameToParams = {
   },
 };
 
-const chainDecimalsToHex = {
-  137: "0x89",
-  80001: "0x13881",
-  43113: "0Xa869",
-  43114: "0xa86a",
-};
-
 export async function switchChain(chainId) {
   try {
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
       params: [
         {
-          chainId: chainDecimalsToHex[chainId],
+          chainId: CHAIN_DECIMAL_TO_HEX[chainId],
         },
       ],
     });

@@ -11,57 +11,26 @@ import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
 import { ethers } from "ethers";
 import JSZip from "jszip";
 import { getRandomFromMetadata } from ".";
+import { mintAbi, mintCollectionAbi, mintSingleAbi, mintSoulAbi } from "../constant/abi";
 import { setLoader, setNotification } from "../gen-state/gen.actions";
+import { getMarketAddress, getMinterAddress, getSingleMinterAddress, getSoulBoundAddress } from "./address";
+import { getChainExplorerLink, getChainFromName } from "./chain";
 import { chainNameToParams } from "./chainConnect";
-// import axios from "axios";
-
-const BN = require("bn.js");
+import { convertIpfsCidV0ToByte32 } from "./string";
 
 const algosdk = require("algosdk");
-const bs58 = require("bs58");
 
 const pinataApiKey = process.env.REACT_APP_PINATA_API_KEY;
 const pinataApiSecret = process.env.REACT_APP_PINATA_SECRET_KEY;
 const pinataSDK = require("@pinata/sdk");
-
 const pinata = pinataSDK(pinataApiKey, pinataApiSecret);
+
 const axios = require("axios");
 const FormData = require("form-data");
 const config = require("./arc_config");
 
 const write = require("./firebase");
 const marketAbi = require("./marketAbi.json");
-/*
-TODO: change conditional addresses once mainnet address is ready!
-*/
-
-const mintCollectionAbi = [
-  "function createCollection(string memory _name, string memory _symbol, string memory _description) public {}",
-  "function importCollection(string memory _name, string memory _symbol, address collectionAddress) public {}",
-  "function collectionsOf(address user) public view returns (address[] memory)",
-];
-
-const mintSingle = [
-  "function mint(address to, uint256 id, uint256 amount, string memory uri, bytes memory data) public {}",
-  "function setApprovalForAll(address operator, bool approved) public virtual override {}",
-  "function isApprovedForAll(address account, address operator) public view returns (bool)",
-];
-
-const mintSoul = [
-  "function safeMint(address to, string memory uri) public {}",
-  "function setApprovalForAll(address operator, bool approved) public virtual override {}",
-  "function isApprovedForAll(address account, address operator) public view returns (bool)",
-];
-
-// const marketAi = ['function getMarketItems() public view {}'];
-
-const mintAbi = ["function mintBatch( address to, uint256[] memory ids, string[] memory uris) public {}"];
-
-// const fromHexString = (hexString) =>
-// new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
-
-// const toHexString = (bytes) => bytes.reduce((str, byte)
-//  => str + byte.toString(16).padStart(2, '0'), '');
 
 const pinFileToIPFS = async (pinataApiIFPSKey, pinataSecretApiKey, file, metadata, option) => {
   const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
@@ -82,29 +51,6 @@ const pinFileToIPFS = async (pinataApiIFPSKey, pinataSecretApiKey, file, metadat
     .catch(() => {
       // handle error here
     });
-};
-
-const waitForConfirmation = async (txId) => {
-  const response = await algodTxnClient.status().do();
-  let lastround = response["last-round"];
-  const pageConid = true;
-  while (pageConid) {
-    const pendingInfo = await algodTxnClient.pendingTransactionInformation(txId).do();
-    if (pendingInfo["confirmed-round"] !== null && pendingInfo["confirmed-round"] > 0) {
-      break;
-    }
-    lastround += 1;
-    await algodTxnClient.statusAfterBlock(lastround).do();
-  }
-};
-
-const convertIpfsCidV0ToByte32 = (cid) => {
-  const hex = `${bs58.decode(cid).slice(2).toString("hex")}`;
-  const base64 = `${bs58.decode(cid).slice(2).toString("base64")}`;
-
-  const buffer = Buffer.from(bs58.decode(cid).slice(2).toString("base64"), "base64");
-
-  return { base64, hex, buffer };
 };
 
 const uploadToIpfs = async (nftFile, nftFileName, asset, isIpfsLink, isAi) => {
@@ -171,130 +117,6 @@ export const connectAndMint = async (file, metadata, imgName, retryTimes, isIpfs
   }
 };
 
-async function createAsset(asset, account) {
-  const params = await algodTxnClient.getTransactionParams().do();
-
-  const defaultFrozen = false;
-  const unitName = "nft";
-  const assetName = `${asset.name}@arc3`;
-  const { url } = asset;
-
-  const managerAddr = undefined;
-  const reserveAddr = undefined;
-  const freezeAddr = undefined;
-  const clawbackAddr = undefined;
-  const decimals = 0;
-  const total = 1;
-  const { metadata } = asset;
-  const metadataUint8Array = new Uint8Array(metadata);
-
-  const txn = algosdk.makeAssetCreateTxnWithSuggestedParamsFromObject({
-    from: account,
-    total,
-    decimals,
-    assetName,
-    unitName,
-    assetURL: url,
-    assetMetadataHash: metadataUint8Array,
-    defaultFrozen,
-    freeze: freezeAddr,
-    manager: managerAddr,
-    clawback: clawbackAddr,
-    reserve: reserveAddr,
-    suggestedParams: params,
-  });
-  return txn;
-}
-
-async function signTx(connector, txns, dispatch) {
-  alert("Note: Before closing this modal, ensure that your wallet is open so as to confirm transaction");
-  const TxIds = [];
-  const assetIds = [];
-  // const txnsToSign = [txnsToSign];
-  const requestChunkSize = 64;
-  for (let index = 0; index < txns.length; index += requestChunkSize) {
-    const requestChunk = txns.slice(index, index + requestChunkSize);
-    const groupChunkSize = 16;
-    // let txgroup;
-    if (txns.length > 1) {
-      for (let i = 0; i < requestChunk.length; i += groupChunkSize) {
-        const chunk = requestChunk.slice(i, i + groupChunkSize);
-        algosdk.assignGroupID(chunk);
-      }
-    }
-    const txnsToSign = requestChunk.map((txn) => {
-      const encodedTxn = Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString("base64");
-      return {
-        txn: encodedTxn,
-        message: "Nft Minting",
-        // Note: if the transaction does not need to be signed (because it's part of an atomic group
-        // that will be signed by another party), specify an empty singers array like so:
-        // signers: [],
-      };
-    });
-    dispatch(
-      setLoader(
-        txns.length > 64
-          ? `Minting batch ${index + 1} - ${index + requestChunk.length} of ${txns.length}`
-          : `Minting asset`
-      )
-    );
-    // const chunk = decodedResult.slice(i, i + chunkSize);
-    let result;
-    try {
-      const request = formatJsonRpcRequest("algo_signTxn", [txnsToSign]);
-      dispatch(
-        setNotification({
-          message: "please check your wallet to confirm transaction",
-          type: "warning",
-        })
-      );
-      result = await connector.send(request);
-    } catch (error) {
-      dispatch(
-        setNotification({
-          message: error.message,
-          type: "error",
-        })
-      );
-      throw error;
-    }
-    const decodedResult = result.map((element) => (element ? new Uint8Array(Buffer.from(element, "base64")) : null));
-    const chunkSize = 16;
-    dispatch(
-      setLoader(
-        txns.length > 64
-          ? `Broadcasting transaction for batch ${index + 1} - ${index + requestChunk.length} of ${txns.length}`
-          : `Broadcasting transaction`
-      )
-    );
-    for (let id = 0; id < decodedResult.length; id += chunkSize) {
-      const chunk = decodedResult.slice(id, id + chunkSize);
-      // should watch for failed transaction sendings on rare occassions and log the signed tx to send later on.
-      await algodTxnClient.sendRawTransaction(chunk).do();
-    }
-    dispatch(
-      setLoader(
-        txns.length > 64
-          ? `Confirming transaction for batch ${index + 1} - ${index + requestChunk.length} of ${txns.length}`
-          : `confirming transaction`
-      )
-    );
-    for (let tIndex = 0; tIndex < requestChunk.length; ++tIndex) {
-      const trxId = requestChunk[tIndex].txID();
-      TxIds.push(trxId);
-      await waitForConfirmation(trxId);
-      const ptx = await algodTxnClient.pendingTransactionInformation(trxId).do();
-      const assetID = ptx["asset-index"];
-      assetIds.push(assetID);
-    }
-  }
-  // const tx = await algodTxnClient.sendRawTransaction(decodedResult).do();
-  // await waitForConfirmation(tx.txId);
-
-  return { assetID: assetIds, txId: TxIds };
-}
-
 export async function mintSoulBound(mintprops, chain) {
   const {
     file,
@@ -309,16 +131,8 @@ export async function mintSoulBound(mintprops, chain) {
     isAi,
     fileName,
   } = mintprops;
-  const soulBoundAddress =
-    chain.toLowerCase() === "polygon"
-      ? mainnet
-        ? process.env.REACT_APP_POLY_MAINNET_SOULBOUND_ADDRESS
-        : process.env.REACT_APP_POLY_TESTNET_SOULBOUND_ADDRESS
-      : chain.toLowerCase() === "avalanche"
-      ? mainnet
-        ? process.env.REACT_APP_AVAX_MAINNET_SOULBOUND_ADDRESS
-        : process.env.REACT_APP_AVAX_TESTNET_SOULBOUND_ADDRESS
-      : process.env.REACT_APP_AVAX_TESTNET_SOULBOUND_ADDRESS;
+
+  const soulBoundAddress = getSoulBoundAddress(chain, mainnet);
 
   if (connector.isWalletConnect) {
     const provider = new ethers.providers.Web3Provider(connector);
@@ -337,7 +151,7 @@ export async function mintSoulBound(mintprops, chain) {
     const asset = rd.data.content.upload;
     // const uintArray = asset.metadata.toLocaleString();
     dispatch(setLoader("minting 1 of 1"));
-    const contract = new ethers.Contract(soulBoundAddress, mintSoul, signer);
+    const contract = new ethers.Contract(soulBoundAddress, mintSoulAbi, signer);
     const ethNonce = await signer.getTransactionCount();
     const tx = {
       from: account,
@@ -352,9 +166,7 @@ export async function mintSoulBound(mintprops, chain) {
       await result.wait();
       dispatch(setLoader(""));
 
-      const txUrl = `${
-        chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
-      }tx/${result.hash}`;
+      const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${result.hash}`;
       return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
@@ -378,7 +190,7 @@ export async function mintSoulBound(mintprops, chain) {
   });
   const asset = rd.data.content.upload;
   dispatch(setLoader("minting 1 of 1"));
-  const contract = new ethers.Contract(soulBoundAddress, mintSoul, signer);
+  const contract = new ethers.Contract(soulBoundAddress, mintSoulAbi, signer);
   // const wallet = new ethers.Wallet(process.env.REACT_APP_GENADROP_SERVER_KEY, connector);
   // const marketContract = new ethers.Contract(
   //   mainnet
@@ -424,16 +236,9 @@ export async function mintSingleToChain(singleMintProps, chain) {
   if (isSoulBound) {
     return mintSoulBound(singleMintProps, chain);
   }
-  const singleMinterAddress =
-    chain.toLowerCase() === "polygon"
-      ? mainnet
-        ? process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS
-        : process.env.REACT_APP_POLY_TESTNET_SINGLE_ADDRESS
-      : chain.toLowerCase() === "avalanche"
-      ? mainnet
-        ? process.env.REACT_APP_AVAX_MAINNET_SINGLE_ADDRESS
-        : process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS
-      : process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS;
+
+  const singleMinterAddress = getSingleMinterAddress(chain, mainnet);
+
   if (connector.isWalletConnect) {
     const provider = new ethers.providers.Web3Provider(connector);
     const signer = provider.getSigner();
@@ -452,7 +257,7 @@ export async function mintSingleToChain(singleMintProps, chain) {
     const uintArray = asset.metadata.toLocaleString();
     const id = parseInt(uintArray.slice(0, 7).replace(/,/g, ""));
     dispatch(setLoader("minting 1 of 1"));
-    const contract = new ethers.Contract(singleMinterAddress, mintSingle, signer);
+    const contract = new ethers.Contract(singleMinterAddress, mintSingleAbi, signer);
     const ethNonce = await signer.getTransactionCount();
     const tx = {
       from: account,
@@ -467,9 +272,7 @@ export async function mintSingleToChain(singleMintProps, chain) {
       await result.wait();
       dispatch(setLoader(""));
 
-      const txUrl = `${
-        chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
-      }tx/${result.hash}`;
+      const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${result.hash}`;
       return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
@@ -499,7 +302,7 @@ export async function mintSingleToChain(singleMintProps, chain) {
   console.log(id);
   console.log("contract address", process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS);
   dispatch(setLoader("minting 1 of 1"));
-  const contract = new ethers.Contract(singleMinterAddress, mintSingle, signer);
+  const contract = new ethers.Contract(singleMinterAddress, mintSingleAbi, signer);
   console.log("contract", process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS, contract);
   let txn;
   try {
@@ -591,24 +394,17 @@ export async function createNFT(createProps, doAccountCheck) {
 
 export async function listNetworkNft(nftProps, chainName) {
   const { account, connector, id, nftContract, dispatch, price, mainnet } = nftProps;
-  const marketAddress =
-    chainName === "Polygon"
-      ? mainnet
-        ? process.env.REACT_APP_GENADROP_POLY_MAINNET_MARKET_ADDRESS
-        : process.env.REACT_APP_GENADROP_POLY_TESTNET_MARKET_ADDRESS
-      : chainName === "Avalanche"
-      ? mainnet
-        ? process.env.REACT_APP_GENADROP_AVAX_MAINNET_MARKET_ADDRESS
-        : process.env.REACT_APP_GENADROP_AVAX_TESTNET_MARKET_ADDRESS
-      : process.env.REACT_APP_GENADROP_AVAX_TESTNET_MARKET_ADDRESS;
+
+  const marketAddress = getMarketAddress(chainName, mainnet);
+
   if (connector.isWalletConnect) {
     const provider = new ethers.providers.Web3Provider(connector);
     const signer = provider.getSigner();
     const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
-    const contract = new ethers.Contract(nftContract, mintSingle, signer);
+    const contract = new ethers.Contract(nftContract, mintSingleAbi, signer);
     // const contract = new ethers.Contract(
     //   mainnet ? process.env.REACT_APP_CELO_MAINNET_SINGLE_ADDRESS : process.env.REACT_APP_CELO_TESTNET_SINGLE_ADDRESS,
-    //   mintSingle,
+    //   mintSingleAbi,
     //   signer
     // );
     const approvalCheck = await contract.isApprovedForAll(account, marketContract.address);
@@ -648,9 +444,7 @@ export async function listNetworkNft(nftProps, chainName) {
       await result.wait();
       dispatch(setLoader(""));
 
-      const txUrl = `${
-        chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
-      }tx/${result.hash}`;
+      const txUrl = `${getChainExplorerLink(chainName, mainnet)}tx/${result.hash}`;
       return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
@@ -663,7 +457,7 @@ export async function listNetworkNft(nftProps, chainName) {
   const signer = await connector.getSigner();
   const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
   try {
-    const contract = new ethers.Contract(nftContract, mintSingle, signer);
+    const contract = new ethers.Contract(nftContract, mintSingleAbi, signer);
     const approvalCheck = await contract.isApprovedForAll(account, marketContract.address);
     if (!approvalCheck) {
       dispatch(setLoader("Approve marketplace to list nft"));
@@ -680,9 +474,7 @@ export async function listNetworkNft(nftProps, chainName) {
     );
     await txn.wait();
     dispatch(setLoader(""));
-    const txUrl = `${
-      chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
-    }tx/${txn.hash}`;
+    const txUrl = `${getChainExplorerLink(chainName, mainnet)}tx/${txn.hash}`;
     return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
@@ -742,16 +534,7 @@ export async function importToChain(chainProps, chainName) {
   const { collectionAddress, connector, account, mainnet, dispatch, setLoader } = chainProps;
   const name = "test_collection_name";
   const description = "test_collection_desc";
-  const minterAddress =
-    chainName.toLowerCase() === "polygon"
-      ? mainnet
-        ? process.env.REACT_APP_POLY_MAINNET_MINTER_ADDRESS
-        : process.env.REACT_APP_POLY_TESTNET_MINTER_ADDRESS
-      : chainName.toLowerCase() === "avalanche"
-      ? mainnet
-        ? process.env.REACT_APP_AVAX_MAINNET_MINTER_ADDRESS
-        : process.env.REACT_APP_AVAX_TESTNET_MINTER_ADDRESS
-      : process.env.REACT_APP_AVAX_TESTNET_MINTER_ADDRESS;
+  const minterAddress = getSingleMinterAddress(chainName, mainnet);
 
   const signer = await connector.getSigner();
   const collectionContract = new ethers.Contract(minterAddress, mintCollectionAbi, signer);
@@ -772,17 +555,10 @@ export async function mintToChain(chainProps, chainName) {
     chainProps;
   const ipfsJsonData = await createNFT({ ...chainProps });
   dispatch(setLoader("preparing assets for minting"));
+
+  const minterAddress = getMinterAddress(chainName, mainnet);
   const contract = await initializeContract({
-    minterAddress:
-      chainName.toLowerCase() === "polygon"
-        ? mainnet
-          ? process.env.REACT_APP_POLY_MAINNET_MINTER_ADDRESS
-          : process.env.REACT_APP_POLY_TESTNET_MINTER_ADDRESS
-        : chainName.toLowerCase() === "avalanche"
-        ? mainnet
-          ? process.env.REACT_APP_AVAX_MAINNET_MINTER_ADDRESS
-          : process.env.REACT_APP_AVAX_TESTNET_MINTER_ADDRESS
-        : process.env.REACT_APP_AVAX_TESTNET_MINTER_ADDRESS,
+    minterAddress,
     fileName,
     connector,
     account,
@@ -822,10 +598,7 @@ export async function mintToChain(chainProps, chainName) {
           type: "success",
         })
       );
-
-      const txUrl = `${
-        chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
-      }tx/${result.hash}`;
+      const txUrl = `${getChainExplorerLink(chainName, mainnet)}tx/${result.hash}`;
       return txUrl;
     } catch (error) {
       dispatch(setLoader(""));
@@ -861,9 +634,7 @@ export async function mintToChain(chainProps, chainName) {
       type: "success",
     })
   );
-  const txUrl = `${
-    chainNameToParams[mainnet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`].blockExplorerUrls
-  }tx/${tx.hash}`;
+  const txUrl = `${getChainExplorerLink(chainName, mainnet)}tx/${tx.hash}`;
   return txUrl;
 }
 
