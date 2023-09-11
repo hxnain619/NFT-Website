@@ -7,19 +7,18 @@ import classes from "./exploreTransactionHistory.module.css";
 import exportIcon from "../../../assets/icon-export.svg";
 import searchIcon from "../../../assets/icon-search.svg";
 
-import { chainIdToParams } from "../../../utils/chainConnect";
+import { chainIdToParams } from "../../../utils/chain";
 
 import { breakAddress } from "../../../components/wallet/wallet-script";
 import supportedChains from "../../../utils/supportedChains";
 
 import { ReactComponent as MintIcon } from "../../../assets/icon-mint.svg";
 import { ReactComponent as SalesIcon } from "../../../assets/icon-sales.svg";
-import { ReactComponent as TransferIcon, ReactComponent as ListIcon } from "../../../assets/icon-transfer.svg";
 import { ReactComponent as TransactionIcon } from "../../../assets/icon-transaction.svg";
+import { ReactComponent as ListIcon, ReactComponent as TransferIcon } from "../../../assets/icon-transfer.svg";
 
-import { chainCollectionTransactions } from "../../../renderless/fetch-data/fetchUserGraphData";
 import NotFound from "../../../components/not-found/notFound";
-import { getCollectionTransactions } from "../../../renderless/fetch-data/fetchNearCollectionData";
+import { chainCollectionTransactions } from "../../../renderless/fetch-data/fetchUserGraphData";
 
 const ExploreTransactionHistory = ({ collectionId, chain }) => {
   const [state, setState] = useState({

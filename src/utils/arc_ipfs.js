@@ -14,21 +14,19 @@ import { getRandomFromMetadata } from ".";
 import { mintAbi, mintCollectionAbi, mintSingleAbi, mintSoulAbi } from "../constant/abi";
 import { setLoader, setNotification } from "../gen-state/gen.actions";
 import { getMarketAddress, getMinterAddress, getSingleMinterAddress, getSoulBoundAddress } from "./address";
-import { getChainExplorerLink, getChainFromName } from "./chain";
-import { chainNameToParams } from "./chainConnect";
+import { chainNameToParams, getChainExplorerLink } from "./chain";
 import { convertIpfsCidV0ToByte32 } from "./string";
-
-const algosdk = require("algosdk");
-
-const pinataApiKey = process.env.REACT_APP_PINATA_API_KEY;
-const pinataApiSecret = process.env.REACT_APP_PINATA_SECRET_KEY;
-const pinataSDK = require("@pinata/sdk");
-const pinata = pinataSDK(pinataApiKey, pinataApiSecret);
 
 const axios = require("axios");
 const FormData = require("form-data");
-const config = require("./arc_config");
+const algosdk = require("algosdk");
+const pinataSDK = require("@pinata/sdk");
 
+const pinataApiKey = process.env.REACT_APP_PINATA_API_KEY;
+const pinataApiSecret = process.env.REACT_APP_PINATA_SECRET_KEY;
+const pinata = pinataSDK(pinataApiKey, pinataApiSecret);
+
+const config = require("./arc_config");
 const write = require("./firebase");
 const marketAbi = require("./marketAbi.json");
 
