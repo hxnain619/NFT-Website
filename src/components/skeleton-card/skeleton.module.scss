@@ -1,11 +1,10 @@
-
 .skeletonWrapper {
-    display: flex;
-    gap: 1em;
-    overflow-x: hidden;
-    flex-flow: row nowrap;
+  display: flex;
+  gap: 1em;
+  overflow-x: hidden;
+  flex-flow: row nowrap;
 }
-  
+
 .skeleton {
- width: 20em;
+  width: 20em;
 }

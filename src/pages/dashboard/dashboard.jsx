@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { ethers } from "ethers";
 import React, { useContext, useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { GenContext } from "../../gen-state/gen.context";
@@ -33,6 +32,7 @@ import { ReactComponent as LinkIcon } from "../../assets/icon-link-white-.svg";
 import { ReactComponent as Telegram } from "../../assets/icon-telegram-white.svg";
 import { ReactComponent as Twitter } from "../../assets/icon-twitter-white.svg";
 import { ReactComponent as Website } from "../../assets/icon-website-white.svg";
+import SkeletonCards from "../../components/skeleton-card";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -422,17 +422,7 @@ const Dashboard = () => {
               ""
             )
           ) : loading ? (
-            <div className={classes.skeleton}>
-              {[...new Array(5)].map((id, idx) => (
-                <div key={idx}>
-                  <Skeleton count={1} height={200} />
-                  <br />
-                  <Skeleton count={1} height={30} />
-                  <br />
-                  <Skeleton count={1} height={30} />
-                </div>
-              ))}
-            </div>
+            <SkeletonCards cardsLength={5} customSize={[200, 30, 30]}/>
           ) : filter.searchValue ? (
             <NotFound />
           ) : (

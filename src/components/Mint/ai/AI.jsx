@@ -3,7 +3,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import classes from "./ai.module.css";
 import { ReactComponent as RefreshIcon } from "../../../assets/mint-ai-page/refresh_icon.svg";
 
@@ -18,6 +17,7 @@ import NotIcon from "../../../assets/ai-art-style/not-icon.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/ai-mint-plus.svg";
 import { ReactComponent as PreviewImageIcon } from "../../../assets/ai-preview.svg";
 import axios from "axios";
+import SkeletonCards from "../../skeleton-card";
 
 const AI = () => {
   const [wordCount, setWordCount] = useState(0);
@@ -265,9 +265,7 @@ const AI = () => {
         <section className={classes.peviewSizeSection}>
           {load ? (
             <div style={{ width: "98%" }} className={classes.loader}>
-              <Skeleton count={1} height={10} className={classes.loaderWidth} />
-              <Skeleton count={1} height={405} className={classes.loaderWidth} />
-              <Skeleton count={1} height={10} className={classes.loaderWidth} />
+              <SkeletonCards cardsLength={1} className={[classes.loaderWidth]} customSize={[10, 405, 10]} />
             </div>
           ) : (
             <div className={classes.artPreview} style={{ backgroundImage: `url(${imageUrl})` }}>

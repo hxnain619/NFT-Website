@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import { GenContext } from "../../gen-state/gen.context";
 import { getSingleNftDetails } from "../../utils";
 import classes from "./listed.module.css";
@@ -8,6 +7,7 @@ import telegram from "../../assets/blue-telegram.svg";
 import twitterIcon from "../../assets/blue-twitter.svg";
 import facebookIcon from "../../assets/blue-facebook.svg";
 import linktree from "../../assets/linked-tree.svg";
+import LoadingScreen from "../NFT-Detail/Loading-Screen/LoadingScreen";
 
 const Listed = () => {
   const {
@@ -36,31 +36,7 @@ const Listed = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className={classes.menu}>
-        <div className={classes.left}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.right}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={40} />
-          <br />
-          <Skeleton count={1} height={40} />
-        </div>
-
-        <div className={classes.fullLegnth}>
-          <Skeleton count={1} height={200} />
-          <br />
-          <Skeleton count={1} height={200} />
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

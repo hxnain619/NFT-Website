@@ -1,9 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 import React, { useContext, useEffect, useState, useRef } from "react";
-import Skeleton from "react-loading-skeleton";
 import classes from "./singleNftCollection.module.css";
-// import { ReactComponent as SearchIcon } from "../../assets/icon-search.svg";
 import NotFound from "../../components/not-found/notFound";
 import { GenContext } from "../../gen-state/gen.context";
 import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
@@ -14,6 +12,7 @@ import { filterBy, getCollectionsByChain, rangeBy, sortBy } from "../Marketplace
 import FilterDropdown from "../../components/Marketplace/Filter-dropdown/FilterDropdown";
 import Search from "../../components/Search/Search";
 import { getAllNftsbyChain } from "../../renderless/fetch-data/fetchUserGraphData";
+import SkeletonCards from "../../components/skeleton-card";
 
 const SingleNftCollection = () => {
   const { mainnet, account, dispatch } = useContext(GenContext);
@@ -139,15 +138,7 @@ const SingleNftCollection = () => {
           </div>
         ) : !notFound || load ? (
           <div className={classes.nfts}>
-            {[...new Array(8)]
-              .map((_, idx) => idx)
-              .map((id) => (
-                <div className={classes.loader} key={id}>
-                  <Skeleton count={1} height={200} />
-                  <br />
-                  <Skeleton count={1} height={40} />
-                </div>
-              ))}
+            <SkeletonCards cardsLength={8} customSize={(200, 40)} />
           </div>
         ) : (
           <NotFound />

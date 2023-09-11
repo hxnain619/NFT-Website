@@ -3,7 +3,6 @@
 /* eslint-disable consistent-return */
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 import classes from "./Session.module.css";
 import { ReactComponent as ChevronIcon } from "../../assets/icon-chevron-down.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
@@ -27,6 +26,7 @@ import { plans } from "../Pricing/Pricing.script";
 import { getCurrentUser } from "../../components/google-auth/googleAuth.script";
 import NotResult from "./No-Result/NoResult";
 import { handleResetCreate } from "../../utils";
+import SkeletonCards from "../../components/skeleton-card";
 
 const Session = () => {
   const history = useHistory();
@@ -180,13 +180,7 @@ const Session = () => {
                   ))}
               </div>
             ) : (
-              <div className={classes.skeleton}>
-                <Skeleton count={1} height={120} />
-                <br />
-                <Skeleton count={1} height={120} />
-                <br />
-                <Skeleton count={1} height={120} />
-              </div>
+              <SkeletonCards customSize={[120, 120, 120]} />
             )}
           </div>
         </div>

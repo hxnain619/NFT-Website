@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 import React, { useContext, useEffect, useState, useRef } from "react";
-import Skeleton from "react-loading-skeleton";
 import classes from "./MarketplaceAll.module.css";
 import CollectionNftCard from "../../components/Marketplace/CollectionNftCard/CollectionNftCard";
 import { GenContext } from "../../gen-state/gen.context";
@@ -19,10 +18,12 @@ import FilterDropdown from "../../components/Marketplace/Filter-dropdown/FilterD
 import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
 import Search from "../../components/Search/Search";
 import { getAllChainCollections, getAllNftsbyChain } from "../../renderless/fetch-data/fetchUserGraphData";
+import SkeletonCards from "../../components/skeleton-card";
 
 const MarketplaceAll = () => {
   const { mainnet, dispatch } = useContext(GenContext);
   const mountRef = useRef(0);
+  const [isLoading, setLoading] = useState(false);
   const [state, setState] = useState({
     collections: [],
     filteredCollection: [],
@@ -53,6 +54,7 @@ const MarketplaceAll = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     Promise.all([
       getAllNftsbyChain(0, "Avalanche"),
       getAllNftsbyChain(0, "Polygon"),
@@ -61,6 +63,7 @@ const MarketplaceAll = () => {
     ]).then((data) => {
       const filteredData = sortBy({ collections: data.flat(), value: "Newest" });
       handleSetState({ collections: filteredData, filteredCollection: filteredData });
+      setLoading(false);
     });
   }, []);
 
@@ -201,17 +204,9 @@ const MarketplaceAll = () => {
               );
             })}
           </div>
-        ) : !notFound ? (
+        ) : !notFound && isLoading ? (
           <div className={classes.nfts}>
-            {[...new Array(8)]
-              .map((_, idx) => idx)
-              .map((id) => (
-                <div className={classes.loader} key={id}>
-                  <Skeleton count={1} height={200} />
-                  <br />
-                  <Skeleton count={1} height={40} />
-                </div>
-              ))}
+            <SkeletonCards cardsLength={8} customSize={[200, 40]} />
           </div>
         ) : (
           <NotFound />
