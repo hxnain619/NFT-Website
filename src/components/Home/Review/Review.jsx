@@ -7,6 +7,7 @@ import twitterIcon from "../../../assets/twitter/icon-twitter2.svg";
 
 import { twitterAPIURL } from "./Reviews-Script";
 import displayShadow from "../../../assets/home-display-shadow.png";
+import { isMainNet } from "../../../utils/chain";
 
 const reviews = [
   "1614492280743948289",
@@ -37,7 +38,7 @@ const Review = () => {
   };
 
   useEffect(() => {
-    if (process.env.REACT_APP_ENV_STAGING) return;
+    if (isMainNet) return;
     axios
       .get(`https://cors-anywhere-wjlt.onrender.com/${twitterAPIURL(reviews)}`, {
         headers: {

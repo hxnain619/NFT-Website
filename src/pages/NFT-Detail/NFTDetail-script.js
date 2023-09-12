@@ -1,11 +1,10 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
-import { readNftTransaction, readUserProfile } from "../../utils/firebase";
-import { getCeloGraphNft, getGraphCollection, getNearNftDetailTransaction, getTransactions } from "../../utils";
-import { getNftById, getAllNftsbyChain, getSingleCollection } from "../../renderless/fetch-data/fetchUserGraphData";
+import { getAllNftsbyChain, getNftById, getSingleCollection } from "../../renderless/fetch-data/fetchUserGraphData";
+import { getCeloGraphNft, getGraphCollection, getTransactions } from "../../utils";
+import { readUserProfile } from "../../utils/firebase";
 import supportedChains from "../../utils/supportedChains";
-import { getCollectionNft } from "../../renderless/fetch-data/fetchNearCollectionData";
 
 export const getGraphData = async ({ graphProps }) => {
   const {
@@ -14,19 +13,6 @@ export const getGraphData = async ({ graphProps }) => {
 
   if (collectionName) {
     const graphCollections = [];
-    if (nftId.includes("genadorp.testnet")) {
-      const nearGraphNft = await getCollectionNft(nftId);
-      if (nearGraphNft.length) {
-        const nearCollectionNft = await getNearCollection(collectionName);
-        const nearTransactionHistory = await getNearNftDetailTransaction(nearCollectionNft[0]?.transactions);
-        return {
-          nftDetails: nearGraphNft[0],
-          collection: nearCollectionNft,
-          _1of1: [],
-          transactionHistory: nearTransactionHistory,
-        };
-      }
-    }
 
     if (collectionName.split("~")[1]) {
       const collectionChain = collectionName.split("~")[0];
@@ -74,7 +60,7 @@ export const getGraphData = async ({ graphProps }) => {
     try {
       // Fetching for nft by Id comparing it to the chain it belongs to before displaying the Id
       const [nftData, trHistory] = await getNftById(nftId, supportedChains[Number(chainId)]?.chain);
-      const nfts = await getAllNftsbyChain(10, supportedChains[Number(chainId)]?.chain);
+      const nfts = await getAllNftsbyChain(supportedChains[Number(chainId)]?.chain, 10);
       return {
         nftDetails: nftData,
         collection: [],

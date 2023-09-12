@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import supportedChains from "../../../utils/supportedChains";
 import classes from "./CollectionNftCard.module.css";
@@ -36,7 +36,7 @@ const CollectionNftCard = ({ use_width, collection }) => {
       <div className={classes.imageContainer}>
         <div className={classes.imageWrapper}>
           {image_urls ? (
-            image_urls[0] && image_urls[0].slice(-3) == "mp4" ? (
+            image_urls[0] && image_urls[0].slice(-3) === "mp4" ? (
               <video className={classes.image} controls src={image_urls[0]} alt="" />
             ) : (
               image_urls.map((image_url, id) => (

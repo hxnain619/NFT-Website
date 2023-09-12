@@ -4,7 +4,7 @@ import { getChainFromName } from "./chain";
 require("dotenv").config();
 
 const getSoulBoundAddress = (chainName, isMainNet) => {
-  let chain;
+  let chain = 0;
   if (typeof chainName === "string") chain = getChainFromName(chainName);
   else if (typeof chainName === "number") chain = chainName;
 
@@ -27,11 +27,9 @@ const getSoulBoundAddress = (chainName, isMainNet) => {
 };
 
 const getSingleMinterAddress = (chainName, isMainNet) => {
-  let chain;
+  let chain = 0;
   if (typeof chainName === "string") chain = getChainFromName(chainName);
   else if (typeof chainName === "number") chain = chainName;
-  console.log(process.env.REACT_APP_AVAX_MAINNET_SOULDBOUND_ADDRESS);
-  console.log(process.env.REACT_APP_AVAX_TESTNET_SOULDBOUND_ADDRESS);
 
   switch (chain) {
     case EVM_CHAINS.Polygon:
@@ -52,7 +50,7 @@ const getSingleMinterAddress = (chainName, isMainNet) => {
 };
 
 const getMinterAddress = (chainName, isMainNet) => {
-  let chain;
+  let chain = 0;
   if (typeof chainName === "string") chain = getChainFromName(chainName);
   else if (typeof chainName === "number") chain = chainName;
 
@@ -75,7 +73,7 @@ const getMinterAddress = (chainName, isMainNet) => {
 };
 
 const getMarketAddress = (chainName, isMainNet) => {
-  let chain;
+  let chain = 0;
   if (typeof chainName === "string") chain = getChainFromName(chainName);
   else if (typeof chainName === "number") chain = chainName;
 

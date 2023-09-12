@@ -17,7 +17,6 @@
 .chainList img {
   margin-right: 8px;
   border-radius: 50px;
-  background-color: var(--primary-light-blue);
 }
 .chainList span {
   color: var(--primary-white) !important;

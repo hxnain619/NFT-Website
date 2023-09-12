@@ -1,33 +1,35 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable no-shadow */
+import { ethers } from "ethers";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { ethers } from "ethers";
-import classes from "./wallet.module.css";
-import { GenContext } from "../../gen-state/gen.context";
-import userIcon from "../../assets/icon-user.svg";
+import bellIcon from "../../assets/bell.svg";
 import copyIcon from "../../assets/icon-copy.svg";
 import disconnectIcon from "../../assets/icon-disconnect.svg";
-import WalletPopup from "../wallet-popup/walletPopup";
-import supportedChains from "../../utils/supportedChains";
-import bellIcon from "../../assets/bell.svg";
+import userIcon from "../../assets/icon-user.svg";
+import { GenContext } from "../../gen-state/gen.context";
 import useCommon from "../../hooks/useCommon";
+import supportedChains from "../../utils/supportedChains";
+import WalletPopup from "../wallet-popup/walletPopup";
+import classes from "./wallet.module.css";
 
 import {
-  setNetworkType,
-  connectWallet,
-  getConnectedChain,
   breakAddress,
-  disconnectWallet,
+  connectWallet,
   connectWithQRCode,
-  initializeConnection,
+  disconnectWallet,
+  getConnectedChain,
   initConnectWallet,
+  initializeConnection,
+  setNetworkType,
 } from "./wallet-script";
 
-import PushNotification from "../notifications/PushNotification";
-import { readUserProfile } from "../../utils/firebase";
 import { setNotification } from "../../gen-state/gen.actions";
+import { readUserProfile } from "../../utils/firebase";
+import PushNotification from "../notifications/PushNotification";
+import Web3 from "web3";
+import { chainIdToParams, chainNameToParams } from "../../utils/chain";
 
 function ConnectWallet() {
   const history = useHistory();
@@ -36,6 +38,12 @@ function ConnectWallet() {
   const walletProviderRef = useRef(0);
   const { dispatch, account, chainId, proposedChain, mainnet, toggleWalletPopup } = useContext(GenContext);
   const [balance, setBalance] = useState(0);
+  const [balances, setBalances] = useState({
+    ETH: "0",
+    MATIC: "0",
+    AVAX: "0",
+  });
+
   const { americanFormatNumber } = useCommon();
 
   const [state, setState] = useState({
@@ -132,12 +140,38 @@ function ConnectWallet() {
 
   useEffect(() => {
     const getAccountBalance = async () => {
+      const fetchBalance = async (providerUrl, account) => {
+        const web3 = new Web3(new Web3.providers.HttpProvider(providerUrl));
+        return await web3.eth.getBalance(account);
+      };
+
+      const formatBalance = (balance) => {
+        console.log(Web3.utils.fromWei(balance, "ether"));
+        return parseFloat(Web3.utils.fromWei(balance, "ether")).toFixed(3);
+      };
+      const ethBalance = formatBalance(
+        await fetchBalance(mainnet ? chainIdToParams[1].rpcUrls[0] : chainIdToParams[5].rpcUrls[0], account)
+      );
+      const maticBalance = formatBalance(
+        await fetchBalance(mainnet ? chainIdToParams[137].rpcUrls[0] : chainIdToParams[80001].rpcUrls[0], account)
+      );
+      const avaxBalance = formatBalance(
+        await fetchBalance(mainnet ? chainIdToParams[43114].rpcUrls[0] : chainIdToParams[43113].rpcUrls[0], account)
+      );
+
+      setBalances({
+        ETH: ethBalance,
+        MATIC: maticBalance,
+        AVAX: avaxBalance,
+      });
+
       // Fetch account balance using Ether.js
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const balanceWei = await provider.getBalance(account); // accounts is an array, so we use [0] to access the first account
       const balanceEther = ethers.utils.formatEther(balanceWei);
-      // console.log(`Account Balance: ${balanceEther} ETH`);
+
       setBalance(balanceEther);
+
       if (account) {
         await readUserProfile(account).then((res) => {
           handleSetState({ userDetails: res });
@@ -194,14 +228,14 @@ function ConnectWallet() {
         {Object.entries(supportedChains || {}).length && (
           <div className={classes.chainsListContainer}>
             {Object.entries(supportedChains)
-              .filter((val) => val[1].id !== "invalid")
+              .filter((val) => val[1].id !== "invalid" && val[1].isMainnet === mainnet)
               .map((val) => {
                 return (
-                  <div className={classes.chainList}>
+                  <div className={classes.chainList} key={val[1].networkId.toString()}>
                     <div style={{ display: "flex" }}>
-                      <img width={24} src={getConnectedChain(val[1].id)} alt="" />
+                      <img width={24} src={val[1].icon} alt="" />
                       <span>
-                        {(Math.random() * 123).toFixed(3)} {val[1].symbol}
+                        {balances[val[1].symbol]} {val[1].symbol}
                       </span>
                     </div>
                     <a href={val[1].explorer} target="_blank" rel="noreferrer">

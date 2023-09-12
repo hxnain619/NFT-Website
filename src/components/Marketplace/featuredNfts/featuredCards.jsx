@@ -22,29 +22,15 @@ const FeaturedNFTCards = () => {
     setState((states) => ({ ...states, ...payload }));
   };
 
-  const featuredNFTs = [
-    "genadrop-contract.nftgen.near1664562603103",
-    "0x5ce2deee9b495b5db2996c81c16005559393efb810815",
-    "0x436aeceaeec57b38a17ebe71154832fb0faff87823108",
-    "0x5ce2deee9b495b5db2996c81c16005559393efb8238140",
-    "0x5ce2deee9b495b5db2996c81c16005559393efb845339",
-    "0x5ce2deee9b495b5db2996c81c16005559393efb812068",
-    "0x436aeceaeec57b38a17ebe71154832fb0faff878160136",
-  ];
+  const featuredNFTs = ["0x0949183501aA67a77fb009b46e8D7F07a3520352"];
 
   useEffect(() => {
     if (mainnet) {
-      Promise.all([
-        getFeaturedChainNft(featuredNFTs[1], "Avalanche"),
-        getFeaturedChainNft(featuredNFTs[3], "Avalanche"),
-        getFeaturedChainNft(featuredNFTs[4], "Avalanche"),
-        getFeaturedChainNft(featuredNFTs[5], "Avalanche"),
-        // getFeaturedPolygonNfts(featuredNFTs[6], "Avalanche"),
-      ]).then((data) => {
+      Promise.all([getFeaturedChainNft(featuredNFTs[1], "Avalanche")]).then((data) => {
         handleSetState({ NFTs: [...data.flat()] });
       });
     } else {
-      Promise.all([getAllNftsbyChain(10, "Avalanche")]).then((data) => {
+      Promise.all([getAllNftsbyChain("Avalanche", 10)]).then((data) => {
         handleSetState({ NFTs: [...data.flat()] });
       });
     }

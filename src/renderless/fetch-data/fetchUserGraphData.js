@@ -23,13 +23,13 @@ import {
 } from "../../utils";
 import { getSingleMinterAddress, getSoulBoundAddress } from "../../utils/address";
 import { isMainNet } from "../../utils/chain";
-import { clientByChainName } from "../../utils/graph";
+import { getClientByChainName } from "../../utils/graph";
 import { avalancheClient, polygonClient } from "../../utils/graphqlClient";
 
 const soulboundSingleFilterAddress = getSoulBoundAddress(EVM_CHAINS.Polygon);
 
 export const getNftById = async (id, chainName) => {
-  const client = clientByChainName(chainName);
+  const client = getClientByChainName(chainName);
   const { data: nftData, error: nftError } = await client.query(GET_GRAPH_NFT, { id }).toPromise();
   if (nftError) return;
   let trHistory;
@@ -45,14 +45,14 @@ export const getNftById = async (id, chainName) => {
 };
 
 export const getFeaturedChainNft = async (address, chainName) => {
-  const { data, error } = await clientByChainName(chainName).query(GET_GRAPH_NFT, { id: address }).toPromise();
+  const { data, error } = await getClientByChainName(chainName).query(GET_GRAPH_NFT, { id: address }).toPromise();
   if (error) return [];
   const result = await getFeaturedGraphNft(data?.nft);
   return result;
 };
 
 export const getChainCollectedNFTs = async (address, chainName) => {
-  const { data, error: polygonError } = await clientByChainName(chainName)
+  const { data, error: polygonError } = await getClientByChainName(chainName)
     .query(GET_USER_NFT, { id: address })
     .toPromise();
   if (polygonError) return;
@@ -64,7 +64,7 @@ export const getChainCollectedNFTs = async (address, chainName) => {
 export const getChainMintedNFTs = async (address, chainName) => {
   const singleMinterAddress = getSingleMinterAddress(chainName, isMainNet);
 
-  const { data, error: dataError } = await clientByChainName(chainName)
+  const { data, error: dataError } = await getClientByChainName(chainName)
     .query(GET_USER_NFT, { id: address })
     .toPromise();
   if (dataError) return;
@@ -87,7 +87,7 @@ export const getSingleCollection = async (address, chainName) => {
 };
 
 export const getChainUserCollections = async (account, chainName) => {
-  const { data, error: avaxError } = await clientByChainName(chainName)
+  const { data, error: avaxError } = await getClientByChainName(chainName)
     .query(GET_USER_COLLECTIONS, { id: account })
     .toPromise();
   if (avaxError) return;
@@ -95,9 +95,8 @@ export const getChainUserCollections = async (account, chainName) => {
   return result;
 };
 
-export const getAllNftsbyChain = async (limit = 0, chainName) => {
-  const client =
-    chainName === "Polygon" ? polygonClient : chainName === "Avalanche" ? avalancheClient : avalancheClient;
+export const getAllNftsbyChain = async (chainName, limit = 0) => {
+  const client = getClientByChainName(chainName);
   const { data: graphData, error } = await client.query(GET_SIGNLE_NFTS(chainName, limit, false)).toPromise();
   const { data: sbData, error: sbError } = await client.query(GET_SIGNLE_NFTS(chainName, limit, true)).toPromise();
 
@@ -109,7 +108,7 @@ export const getAllNftsbyChain = async (limit = 0, chainName) => {
 export const getAllChainCollections = async (chainName) => {
   const singleMinterAddress = getSingleMinterAddress(chainName, isMainNet);
 
-  const { data, error } = await clientByChainName(chainName).query(GET_GRAPH_COLLECTIONS).toPromise();
+  const { data, error } = await getClientByChainName(chainName).query(GET_GRAPH_COLLECTIONS).toPromise();
   if (error) return [];
   const result = await getGraphCollections(data?.collections);
   const res = result?.filter(
@@ -130,7 +129,7 @@ export const getAllPolygonCollections = async () => {
 };
 
 export const chainCollectionTransactions = async (id, chainName) => {
-  const { data: chainData, error: chainError } = await clientByChainName(chainName)
+  const { data: chainData, error: chainError } = await getClientByChainName(chainName)
     .query(
       gql`query MyQuery {
       transactions(

@@ -68,15 +68,10 @@ export const initializeConnection = async (walletProps) => {
   if (window.localStorage.walletconnect) {
     let newRpc = null;
     const storedProvider = JSON.parse(window.localStorage.walletconnect);
-    if (storedProvider.chainId === 4160) {
-      newRpc = {
-        4160: mainnet ? "https://node.algoexplorerapi.io" : "https://node.testnet.algoexplorerapi.io",
-      };
-    } else {
-      newRpc = {
-        [storedProvider.chainId]: chainIdToParams[storedProvider.chainId].rpcUrls[0],
-      };
-    }
+
+    newRpc = {
+      [storedProvider.chainId]: chainIdToParams[storedProvider.chainId].rpcUrls[0],
+    };
     walletConnectProvider = new WalletConnectProvider({
       rpc: newRpc,
     });
@@ -191,8 +186,8 @@ export const initializeConnection = async (walletProps) => {
 };
 
 export const setNetworkType = ({ dispatch, handleSetState }) => {
-  dispatch(setMainnet(isMainNet === "false"));
-  handleSetState({ network: isMainNet === "false" ? "mainnet" : "testnet" });
+  dispatch(setMainnet(isMainNet));
+  handleSetState({ network: isMainNet ? "mainnet" : "testnet" });
 };
 
 export const connectWithQRCode = async ({ walletConnectProvider, dispatch, supportedChains }) => {
