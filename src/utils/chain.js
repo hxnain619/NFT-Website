@@ -1,6 +1,8 @@
 import { CHAIN_DECIMAL_TO_HEX, EVM_CHAINS } from "../constant/chain";
 
-const isMainNet = process.env.REACT_APP_ENV_STAGING === "true";
+const isMainNet = process.env.REACT_APP_IS_MAIN_NET === "true";
+
+console.log(process.env.REACT_APP_IS_MAIN_NET === "true");
 
 const chainIdToParams = {
   137: {
@@ -36,6 +38,23 @@ const chainIdToParams = {
     blockExplorerUrls: ["https://snowtrace.io/"],
     iconUrls: [""],
   },
+  1: {
+    chainId: "0x1",
+    chainName: "Ethereum Mainnet",
+    nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
+    rpcUrls: ["https://rpc.builder0x69.io	"],
+    blockExplorerUrls: ["https://etherscan.io/"],
+    iconUrls: [""],
+  },
+
+  5: {
+    chainId: "0x5",
+    chainName: "Goerli Testnet",
+    nativeCurrency: { name: "Goerli ETH", symbol: "gETH", decimals: 18 },
+    rpcUrls: ["https://ethereum-goerli.publicnode.com"],
+    blockExplorerUrls: ["https://goerli.etherscan.io/"],
+    iconUrls: [""],
+  },
 };
 
 const chainNameToParams = {
@@ -47,7 +66,6 @@ const chainNameToParams = {
     blockExplorerUrls: ["https://www.polygonscan.com/"],
     iconUrls: [""],
   },
-
   "polygon-testnet": {
     chainId: "0x13881",
     chainName: "Polygon Testnet",
@@ -57,6 +75,14 @@ const chainNameToParams = {
     iconUrls: [""],
   },
   avalanche: {
+    chainId: "0xa86a",
+    chainName: "Avalanche",
+    nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
+    rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+    blockExplorerUrls: ["https://snowtrace.io/"],
+    iconUrls: [""],
+  },
+  "avalanche-testnet": {
     chainId: "0Xa869",
     chainName: "Avalanche",
     nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
@@ -64,12 +90,22 @@ const chainNameToParams = {
     blockExplorerUrls: ["https://testnet.snowtrace.io/"],
     iconUrls: [""],
   },
-  "avalanche-testnet": {
-    chainId: "0xa86a",
-    chainName: "Avalanche",
-    nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
-    rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-    blockExplorerUrls: ["https://snowtrace.io/"],
+
+  ethereum: {
+    chainId: "0x1",
+    chainName: "Ethereum Mainnet",
+    nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
+    rpcUrls: ["https://rpc.builder0x69.io	"],
+    blockExplorerUrls: ["https://etherscan.io/"],
+    iconUrls: [""],
+  },
+
+  "ethereum-testnet": {
+    chainId: "0x5",
+    chainName: "Goerli Testnet",
+    nativeCurrency: { name: "Goerli ETH", symbol: "gETH", decimals: 18 },
+    rpcUrls: ["https://ethereum-goerli.publicnode.com"],
+    blockExplorerUrls: ["https://goerli.etherscan.io/"],
     iconUrls: [""],
   },
 };

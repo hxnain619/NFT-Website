@@ -1,17 +1,16 @@
-import avalancheIcon from "../assets/icon-avalanche.svg";
-import polygonIcon from "../assets/icon-polygon.svg";
 import { addChain, switchChain } from "./chain";
 
 // Chain Icons
-import avaxChainIcon from "../assets/chainIcons/avalanche.svg";
-import polygonChainIcon from "../assets/chainIcons/polygon.svg";
+import avaxChainIcon from "../assets/chainIcons/AVAX.svg";
+import polygonChainIcon from "../assets/chainIcons/MATIC.svg";
+import etherChainIcon from "../assets/chainIcons/ETH.svg";
 
 const supportedChains = {
   80001: {
     id: "matic-network",
     label: "Polygon Testnet",
     chain: "Polygon",
-    icon: polygonIcon,
+    icon: polygonChainIcon,
     symbol: "MATIC",
     explorer: "https://mumbai.polygonscan.com/",
     networkId: 80001,
@@ -26,7 +25,7 @@ const supportedChains = {
     label: "Polygon",
     chain: "Polygon",
     explorer: "https://polygonscan.com/",
-    icon: polygonIcon,
+    icon: polygonChainIcon,
     symbol: "MATIC",
     networkId: 137,
     livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=matic-network&vs_currencies=usd",
@@ -39,7 +38,7 @@ const supportedChains = {
     id: "avalanche",
     label: "Avalanche",
     chain: "Avalanche",
-    icon: avalancheIcon,
+    icon: avaxChainIcon,
     livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=avalanche-2&vs_currencies=usd",
     symbol: "AVAX",
     networkId: 43114,
@@ -48,12 +47,14 @@ const supportedChains = {
     isMainnet: true,
     switch: switchChain,
     coinGeckoLabel: "avalanche-2",
+    bgColor: "#E13F40",
+    color: "#FFFFFF",
   },
   43113: {
     id: "avalanche",
     label: "Avalanche Testnet",
     chain: "Avalanche",
-    icon: avalancheIcon,
+    icon: avaxChainIcon,
     livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=avalanche-2&vs_currencies=usd",
     symbol: "AVAX",
     networkId: 43113,
@@ -63,11 +64,40 @@ const supportedChains = {
     switch: switchChain,
     coinGeckoLabel: "avalanche-2",
   },
+  1: {
+    id: "ethereum",
+    label: "Ethereum",
+    chain: "Ethereum",
+    icon: etherChainIcon,
+    symbol: "ETH",
+    networkId: 1,
+    explorer: "https://etherscan.io/",
+    livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
+    add: addChain,
+    isMainnet: true,
+    switch: switchChain,
+    coinGeckoLabel: "ethereum",
+  },
+
+  5: {
+    id: "ethereum-testnet",
+    label: "Goerli",
+    chain: "Ethereum",
+    icon: etherChainIcon,
+    symbol: "ETH",
+    networkId: 5,
+    explorer: "https://goerli.etherscan.io/",
+    livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
+    add: addChain,
+    isMainnet: false,
+    switch: switchChain,
+    coinGeckoLabel: "ethereum",
+  },
   0: {
     id: "invalid",
     label: "invalid",
     chain: "invalid",
-    icon: avalancheIcon,
+    icon: avaxChainIcon,
     livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=avalanche-2&vs_currencies=usd",
     symbol: "invalid",
     networkId: 0,

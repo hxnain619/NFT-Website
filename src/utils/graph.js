@@ -2,7 +2,7 @@ import { EVM_CHAINS } from "../constant/chain";
 import { getChainFromName } from "./chain";
 import { avalancheClient, ethClient, polygonClient } from "./graphqlClient";
 
-const clientByChain = (chain) => {
+const getClientByChain = (chain) => {
   switch (chain) {
     case EVM_CHAINS.Polygon:
       return polygonClient;
@@ -15,9 +15,9 @@ const clientByChain = (chain) => {
   }
 };
 
-const clientByChainName = (chainName) => {
+const getClientByChainName = (chainName) => {
   const chain = getChainFromName(chainName);
-  return clientByChain(chain);
+  return getClientByChain(chain);
 };
 
-export { clientByChainName, clientByChain };
+export { getClientByChainName, getClientByChain };

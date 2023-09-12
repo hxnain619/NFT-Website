@@ -29,7 +29,7 @@ module.exports = {
       accounts: [process.env.OWNER_PRIVATE_KEY],
     },
     "eth-mainnet": {
-      url: "wss://mainnet.gateway.tenderly.co	",
+      url: "https://rpc.builder0x69.io",
       accounts: [process.env.OWNER_PRIVATE_KEY],
     },
   },

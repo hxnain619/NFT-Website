@@ -1,17 +1,17 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import CollectionNftCard from "../CollectionNftCard/CollectionNftCard";
-import classes from "./AllNfts.module.css";
-import { GenContext } from "../../../gen-state/gen.context";
-import SingleNftCard from "../SingleNftCard/SingleNftCard";
-import ChainDropdown from "../Chain-dropdown/chainDropdown";
-import { getCollectionsByCategory, getCollectionsByChain, sortBy } from "../../../pages/Marketplace/Marketplace-script";
 import { setActiveCollection } from "../../../gen-state/gen.actions";
-import NotFound from "../../not-found/notFound";
+import { GenContext } from "../../../gen-state/gen.context";
+import { getCollectionsByCategory, getCollectionsByChain, sortBy } from "../../../pages/Marketplace/Marketplace-script";
 import { getAllChainCollections, getAllNftsbyChain } from "../../../renderless/fetch-data/fetchUserGraphData";
+import NotFound from "../../not-found/notFound";
 import SkeletonCards from "../../skeleton-card";
+import ChainDropdown from "../Chain-dropdown/chainDropdown";
+import CollectionNftCard from "../CollectionNftCard/CollectionNftCard";
+import SingleNftCard from "../SingleNftCard/SingleNftCard";
+import classes from "./AllNfts.module.css";
 
 const AllNfts = () => {
   const history = useHistory();
@@ -74,7 +74,7 @@ const AllNfts = () => {
     }
   };
 
-  const haandleTabActive = (active) => {
+  const handleTabActive = (active) => {
     handleSetState({
       activeType: active,
       load: true,
@@ -95,7 +95,7 @@ const AllNfts = () => {
   }, []);
 
   useEffect(() => {
-    Promise.all([getAllNftsbyChain(10, "Avalanche"), getAllNftsbyChain(10, "Polygon")]).then((data) => {
+    Promise.all([getAllNftsbyChain("Avalanche", 10), getAllNftsbyChain("Polygon", 10)]).then((data) => {
       handleSetState({ singles: sortBy({ collections: data.flat(), value: "Newest" }) });
     });
   }, []);
@@ -128,19 +128,19 @@ const AllNfts = () => {
       <div className={classes.wrapper}>
         <div className={classes.types}>
           <div
-            onClick={() => haandleTabActive("T1")}
+            onClick={() => handleTabActive("T1")}
             className={`${classes.type}  ${activeType === "T1" && classes.active}`}
           >
             New
           </div>
           <div
-            onClick={() => haandleTabActive("T2")}
+            onClick={() => handleTabActive("T2")}
             className={`${classes.type}  ${activeType === "T2" && classes.active}`}
           >
             1 of 1s
           </div>
           <div
-            onClick={() => haandleTabActive("T3")}
+            onClick={() => handleTabActive("T3")}
             className={`${classes.type}  ${activeType === "T3" && classes.active}`}
           >
             Collections

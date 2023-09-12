@@ -56,8 +56,8 @@ const MarketplaceAll = () => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      getAllNftsbyChain(0, "Avalanche"),
-      getAllNftsbyChain(0, "Polygon"),
+      getAllNftsbyChain("Avalanche"),
+      getAllNftsbyChain("Polygon"),
       getAllChainCollections("Avalanche"),
       getAllChainCollections("Polygon"),
     ]).then((data) => {
