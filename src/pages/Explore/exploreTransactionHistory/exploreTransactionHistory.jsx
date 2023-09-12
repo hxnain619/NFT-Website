@@ -7,7 +7,7 @@ import classes from "./exploreTransactionHistory.module.css";
 import exportIcon from "../../../assets/icon-export.svg";
 import searchIcon from "../../../assets/icon-search.svg";
 
-import { chainIdToParams } from "../../../utils/chain";
+import { chainIdToParams, isMainNet } from "../../../utils/chain";
 
 import { breakAddress } from "../../../components/wallet/wallet-script";
 import supportedChains from "../../../utils/supportedChains";
@@ -27,8 +27,7 @@ const ExploreTransactionHistory = ({ collectionId, chain }) => {
     isAlgoChain: false,
     searchValue: "",
     filterdHistory: [],
-    explorer:
-      process.env.REACT_APP_ENV_STAGING === "false" ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/",
+    explorer: isMainNet ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/",
   });
   const txIcons = {
     Minting: <MintIcon />,

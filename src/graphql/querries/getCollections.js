@@ -1,5 +1,8 @@
 import { gql } from "@apollo/client";
 import { ethers } from "ethers";
+import { EVM_CHAINS } from "../../constant/chain";
+import { getSingleMinterAddress, getSoulBoundAddress } from "../../utils/address";
+import { isMainNet } from "../../utils/chain";
 
 export const GET_GRAPH_COLLECTIONS = gql`
   query MyQuery {
@@ -241,25 +244,11 @@ export const GET_FEATURED_SINGLE_NFT = gql`
   }
 `;
 
-const polygonAddress =
-  process.env.REACT_APP_ENV_STAGING === "true"
-    ? ethers.utils.hexlify(process.env.REACT_APP_POLY_TESTNET_SINGLE_ADDRESS)
-    : ethers.utils.hexlify(process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS);
+const polygonAddress = getSingleMinterAddress(EVM_CHAINS.Polygon, isMainNet);
+const polygonSoulBoundAddress = getSoulBoundAddress(EVM_CHAINS.Polygon, isMainNet);
 
-const polygonSoulBoundAddress =
-  process.env.REACT_APP_ENV_STAGING === "true"
-    ? ethers.utils.hexlify(process.env?.REACT_APP_POLY_MAINNET_SOULBOUND_ADDRESS)
-    : ethers.utils.hexlify(process.env?.REACT_APP_POLY_MAINNET_SOULBOUND_ADDRESS);
-
-const avalancheAddress =
-  process.env.REACT_APP_ENV_STAGING === "true"
-    ? ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS)
-    : ethers.utils.hexlify(process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS);
-
-const avalancheSoulBoundAddress =
-  process.env.REACT_APP_ENV_STAGING === "true"
-    ? ethers.utils.hexlify(process.env?.REACT_APP_AVAX_TESTNET_SOULBOUND_ADDRESS)
-    : ethers.utils.hexlify(process.env?.REACT_APP_AVAX_MAINNET_SOULBOUND_ADDRESS);
+const avalancheAddress = getSingleMinterAddress(EVM_CHAINS.Avalanche, isMainNet);
+const avalancheSoulBoundAddress = getSoulBoundAddress(EVM_CHAINS.Avalanche, isMainNet);
 
 const addressByNetworkandSoulBound = (chainName, isSoulBound) => {
   return isSoulBound

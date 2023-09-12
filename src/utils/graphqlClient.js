@@ -1,24 +1,25 @@
 import { createClient } from "urql";
+import { isMainNet } from "./chain";
 
-export const polygonClient = createClient({
-  url:
-    process.env.REACT_APP_ENV_STAGING === "true"
-      ? "https://api.thegraph.com/subgraphs/name/prometheo/playdrop"
-      : "https://api.thegraph.com/subgraphs/name/prometheo/polygon-mainnet",
-  requestPolicy: "cache-first",
-});
-export const avalancheClient = createClient({
-  url:
-    process.env.REACT_APP_ENV_STAGING === "true"
-      ? "https://api.thegraph.com/subgraphs/name/doochain/subgraph-genadrop"
-      : "https://api.thegraph.com/subgraphs/name/prometheo/genadrop-avax",
+const polygonClient = createClient({
+  url: isMainNet
+    ? "https://api.studio.thegraph.com/query/52649/nftreasure-mumbai/version/latest"
+    : "https://api.studio.thegraph.com/query/52649/nftreasure-mumbai/version/latest",
   requestPolicy: "cache-first",
 });
 
-// export const avalancheClient = createClient({
-//   url:
-//     process.env.REACT_APP_ENV_STAGING === "true"
-//       ? "https://api.thegraph.com/subgraphs/name/prometheo/genadrop-avatestnet"
-//       : "https://api.thegraph.com/subgraphs/name/prometheo/genadrop-avax",
-//   requestPolicy: "cache-first",
-// });
+const avalancheClient = createClient({
+  url: isMainNet
+    ? "https://api.studio.thegraph.com/query/52649/nftreasure/version/latest"
+    : "https://api.studio.thegraph.com/query/52649/nftreasure/version/latest",
+  requestPolicy: "cache-first",
+});
+
+const ethClient = createClient({
+  url: isMainNet
+    ? "https://api.studio.thegraph.com/query/52649/nftreasure-goerli/version/latest"
+    : "https://api.studio.thegraph.com/query/52649/nftreasure-goerli/version/latest",
+  requestPolicy: "cache-first",
+});
+
+export { polygonClient, avalancheClient, ethClient };

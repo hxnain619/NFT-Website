@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import algoIcon from "../../assets/icon-algo.svg";
-import { chainIdToParams } from "../../utils/chain";
+import { chainIdToParams, isMainNet } from "../../utils/chain";
 import supportedChains from "../../utils/supportedChains";
 import classes from "./transaction.module.css";
 
@@ -12,8 +12,7 @@ const Transaction = (data) => {
   }
 
   const [state, setState] = useState({
-    explorer:
-      process.env.REACT_APP_ENV_STAGING === "false" ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/",
+    explorer: isMainNet ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/",
     isCopied: false,
     showDrop: false,
     clicked: "",

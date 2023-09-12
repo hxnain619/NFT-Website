@@ -88,7 +88,7 @@ const Dashboard = () => {
     // Get User Created NFTs
     handleSetState({ loading: true });
     let address = "";
-    if (supportedChains[chainID]?.chain !== "Algorand" && supportedChains[chainID]?.chain !== "Near" && userId) {
+    if (userId) {
       address = ethers?.utils?.hexlify(userId);
     }
     (async function getUserNFTs() {
@@ -422,7 +422,7 @@ const Dashboard = () => {
               ""
             )
           ) : loading ? (
-            <SkeletonCards cardsLength={5} customSize={[200, 30, 30]}/>
+            <SkeletonCards cardsLength={5} customSize={[200, 30, 30]} />
           ) : filter.searchValue ? (
             <NotFound />
           ) : (

@@ -2,40 +2,35 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
 import { gql } from "@apollo/client";
-import { ethers } from "ethers";
+import { EVM_CHAINS } from "../../constant/chain";
 import {
   GET_GRAPH_COLLECTIONS,
-  GET_FEATURED_SINGLE_NFT,
   GET_GRAPH_NFT,
+  GET_SIGNLE_NFTS,
   GET_SINGLE_GRAPH_COLLECTION,
   GET_USER_COLLECTIONS,
   GET_USER_NFT,
-  GET_SIGNLE_NFTS,
 } from "../../graphql/querries/getCollections";
 import {
+  getFeaturedGraphNft,
   getGraphCollection,
+  getGraphCollectionData,
   getGraphCollections,
   getGraphNft,
   getGraphTransactionHistory,
   getSingleGraphNfts,
   getTransactions,
-  getUserGraphNft,
-  getNftCollections,
-  getSingleNfts,
-  getGraphCollectionData,
-  getFeaturedGraphNft,
 } from "../../utils";
-import { avalancheClient, polygonClient, nearClient } from "../../utils/graphqlClient";
+import { getSingleMinterAddress, getSoulBoundAddress } from "../../utils/address";
+import { isMainNet } from "../../utils/chain";
+import { clientByChainName } from "../../utils/graph";
+import { avalancheClient, polygonClient } from "../../utils/graphqlClient";
 
-const soulboundSingleFilterAddress = ethers.utils.hexlify(process.env.REACT_APP_POLY_MAINNET_SOULBOUND_ADDRESS);
-
-const clientByChain = (chainName) => {
-  return chainName === "Polygon" ? polygonClient : chainName === "Avalanche" ? avalancheClient : avalancheClient;
-};
+const soulboundSingleFilterAddress = getSoulBoundAddress(EVM_CHAINS.Polygon);
 
 export const getNftById = async (id, chainName) => {
-  const client = clientByChain(chainName);
-  const { data: nftData, error: nftError } = await client.query(GET_GRAPH_NFT, { id: id }).toPromise();
+  const client = clientByChainName(chainName);
+  const { data: nftData, error: nftError } = await client.query(GET_GRAPH_NFT, { id }).toPromise();
   if (nftError) return;
   let trHistory;
   let nftResult = [];
@@ -50,14 +45,16 @@ export const getNftById = async (id, chainName) => {
 };
 
 export const getFeaturedChainNft = async (address, chainName) => {
-  const { data, error } = await clientByChain(chainName).query(GET_GRAPH_NFT, { id: address }).toPromise();
+  const { data, error } = await clientByChainName(chainName).query(GET_GRAPH_NFT, { id: address }).toPromise();
   if (error) return [];
   const result = await getFeaturedGraphNft(data?.nft);
   return result;
 };
 
 export const getChainCollectedNFTs = async (address, chainName) => {
-  const { data, error: polygonError } = await clientByChain(chainName).query(GET_USER_NFT, { id: address }).toPromise();
+  const { data, error: polygonError } = await clientByChainName(chainName)
+    .query(GET_USER_NFT, { id: address })
+    .toPromise();
   if (polygonError) return;
   const response = await getSingleGraphNfts(data?.user?.nfts, address);
   const polygonBoughtNft = response?.filter((NFTS) => NFTS.sold === true);
@@ -65,23 +62,16 @@ export const getChainCollectedNFTs = async (address, chainName) => {
 };
 
 export const getChainMintedNFTs = async (address, chainName) => {
-  const singleMinterAddress =
-    chainName.toLowerCase() === "polygon"
-      ? process.env.REACT_APP_ENV_STAGING === "false"
-        ? ethers.utils.hexlify(process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS)
-        : ethers.utils.hexlify(process.env.REACT_APP_POLY_TESTNET_SINGLE_ADDRESS)
-      : chainName.toLowerCase() === "avalanche"
-      ? process.env.REACT_APP_ENV_STAGING === "false"
-        ? ethers.utils.hexlify(process.env.REACT_APP_AVAX_MAINNET_SINGLE_ADDRESS)
-        : ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS)
-      : ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS);
+  const singleMinterAddress = getSingleMinterAddress(chainName, isMainNet);
 
-  const { data, error: dataError } = await clientByChain(chainName).query(GET_USER_NFT, { id: address }).toPromise();
+  const { data, error: dataError } = await clientByChainName(chainName)
+    .query(GET_USER_NFT, { id: address })
+    .toPromise();
   if (dataError) return;
 
   const response = await getSingleGraphNfts(data?.user?.nfts, data?.user?.id);
   const mintedNfts = response?.filter(
-    (NFTS) => !NFTS?.sold && NFTS?.collectionId === singleMinterAddress // soulbound address ignored
+    (NFTS) => !NFTS?.sold && NFTS?.collectionId === singleMinterAddress.toLowerCase() // soulbound address ignored
   );
   return mintedNfts;
 };
@@ -97,7 +87,7 @@ export const getSingleCollection = async (address, chainName) => {
 };
 
 export const getChainUserCollections = async (account, chainName) => {
-  const { data, error: avaxError } = await clientByChain(chainName)
+  const { data, error: avaxError } = await clientByChainName(chainName)
     .query(GET_USER_COLLECTIONS, { id: account })
     .toPromise();
   if (avaxError) return;
@@ -117,23 +107,11 @@ export const getAllNftsbyChain = async (limit = 0, chainName) => {
 };
 
 export const getAllChainCollections = async (chainName) => {
-  const singleMinterAddress =
-    chainName.toLowerCase() === "polygon"
-      ? process.env.REACT_APP_ENV_STAGING === "false"
-        ? ethers.utils.hexlify(process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS)
-        : ethers.utils.hexlify(process.env.REACT_APP_POLY_TESTNET_SINGLE_ADDRESS)
-      : chainName.toLowerCase() === "avalanche"
-      ? process.env.REACT_APP_ENV_STAGING === "false"
-        ? ethers.utils.hexlify(process.env.REACT_APP_AVAX_MAINNET_SINGLE_ADDRESS)
-        : ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS)
-      : ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS);
-  const { data, error } = await clientByChain(chainName).query(GET_GRAPH_COLLECTIONS).toPromise();
+  const singleMinterAddress = getSingleMinterAddress(chainName, isMainNet);
+
+  const { data, error } = await clientByChainName(chainName).query(GET_GRAPH_COLLECTIONS).toPromise();
   if (error) return [];
   const result = await getGraphCollections(data?.collections);
-  // const filterAddress =
-  //   process.env.REACT_APP_ENV_STAGING === "true"
-  //     ? ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS)
-  //     : ethers.utils.hexlify(process.env.REACT_APP_AVAX_MAINNET_SINGLE_ADDRESS);
   const res = result?.filter(
     (aurora) => aurora?.Id !== singleMinterAddress && aurora?.Id !== soulboundSingleFilterAddress
   );
@@ -144,16 +122,15 @@ export const getAllPolygonCollections = async () => {
   const { data, error } = await polygonClient.query(GET_GRAPH_COLLECTIONS).toPromise();
   if (error) return [];
   const result = await getGraphCollections(data?.collections);
-  const filterAddress =
-    process.env.REACT_APP_ENV_STAGING === "true"
-      ? ethers.utils.hexlify(process.env.REACT_APP_POLY_TESTNET_SINGLE_ADDRESS)
-      : ethers.utils.hexlify(process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS);
+
+  const filterAddress = getSingleMinterAddress(EVM_CHAINS.Polygon, isMainNet);
+
   const res = result?.filter((aurora) => aurora?.Id !== filterAddress && aurora?.Id !== soulboundSingleFilterAddress);
   return res;
 };
 
 export const chainCollectionTransactions = async (id, chainName) => {
-  const { data: chainData, error: chainError } = await clientByChain(chainName)
+  const { data: chainData, error: chainError } = await clientByChainName(chainName)
     .query(
       gql`query MyQuery {
       transactions(

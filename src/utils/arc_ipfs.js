@@ -12,6 +12,7 @@ import { ethers } from "ethers";
 import JSZip from "jszip";
 import { getRandomFromMetadata } from ".";
 import { mintAbi, mintCollectionAbi, mintSingleAbi, mintSoulAbi } from "../constant/abi";
+import { EVM_CHAINS } from "../constant/chain";
 import { setLoader, setNotification } from "../gen-state/gen.actions";
 import { getMarketAddress, getMinterAddress, getSingleMinterAddress, getSoulBoundAddress } from "./address";
 import { chainNameToParams, getChainExplorerLink } from "./chain";
@@ -203,9 +204,8 @@ export async function mintSoulBound(mintprops, chain) {
     await txn.wait();
     // await marketContract.createMarketplaceItem(contract.address, id, String(price * 10 ** 18), "General", account);
     dispatch(setLoader(""));
-    const txUrl = `${
-      chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
-    }tx/${txn.hash}`;
+
+    const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${txn.hash}`;
     return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
@@ -298,10 +298,10 @@ export async function mintSingleToChain(singleMintProps, chain) {
   const id = getRandomFromMetadata(asset.metadata, 100000);
 
   console.log(id);
-  console.log("contract address", process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS);
+  console.log("contract address", singleMinterAddress);
   dispatch(setLoader("minting 1 of 1"));
   const contract = new ethers.Contract(singleMinterAddress, mintSingleAbi, signer);
-  console.log("contract", process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS, contract);
+  console.log("contract", singleMinterAddress, contract);
   let txn;
   try {
     txn = await contract.mint(receiverAddress, id, 1, asset.url, "0x");
@@ -310,9 +310,7 @@ export async function mintSingleToChain(singleMintProps, chain) {
     // await marketContract.createMarketplaceItem(contract.address, id, String(price * 10 ** 18), "General", account);
     dispatch(setLoader(""));
 
-    const txUrl = `${
-      chainNameToParams[mainnet ? chain.toLowerCase() : `${chain.toLowerCase()}-testnet`].blockExplorerUrls
-    }tx/${txn.hash}`;
+    const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${txn.hash}`;
     return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
@@ -829,13 +827,8 @@ export async function purchasePolygonNfts(buyProps) {
   if (connector.isWalletConnect) {
     const provider = new ethers.providers.Web3Provider(connector);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      mainnet
-        ? process.env.REACT_APP_GENADROP_POLY_MAINNET_MARKET_ADDRESS
-        : process.env.REACT_APP_GENADROP_POLY_TESTNET_MARKET_ADDRESS,
-      marketAbi,
-      signer
-    );
+
+    const contract = new ethers.Contract(getMarketAddress(EVM_CHAINS.Polygon, mainnet), marketAbi, signer);
     const ethNonce = await signer.getTransactionCount();
     const saleTx = {
       from: account,
@@ -860,13 +853,8 @@ export async function purchasePolygonNfts(buyProps) {
       );
     }
   }
-  const contract = new ethers.Contract(
-    mainnet
-      ? process.env.REACT_APP_GENADROP_POLY_MAINNET_MARKET_ADDRESS
-      : process.env.REACT_APP_GENADROP_POLY_TESTNET_MARKET_ADDRESS,
-    marketAbi,
-    connector.getSigner()
-  );
+
+  const contract = new ethers.Contract(getMarketAddress(EVM_CHAINS.Polygon, mainnet), marketAbi, connector.getSigner());
   try {
     const tx = await contract.nftSale(price, tokenId, seller, nftContract, { value: price });
     await tx.wait();
@@ -895,9 +883,7 @@ export async function purchaseAvaxNfts(buyProps) {
   }
   price = ethers.utils.parseEther(price.toString()).toString();
   const contract = new ethers.Contract(
-    mainnet
-      ? process.env.REACT_APP_GENADROP_AVAX_MAINNET_MARKET_ADDRESS
-      : process.env.REACT_APP_GENADROP_AVAX_TESTNET_MARKET_ADDRESS,
+    getMarketAddress(EVM_CHAINS.Avalanche, mainnet),
     marketAbi,
     connector.getSigner()
   );

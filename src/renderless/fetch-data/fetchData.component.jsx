@@ -17,6 +17,9 @@ import { GET_GRAPH_COLLECTIONS, GET_SIGNLE_NFTS } from "../../graphql/querries/g
 import { avalancheClient, polygonClient } from "../../utils/graphqlClient";
 import { GenContext } from "../../gen-state/gen.context";
 import { parseAvaxSingle, parsePolygonCollection, parsePolygonSingle } from "./fetchData-script";
+import { getSingleMinterAddress } from "../../utils/address";
+import { EVM_CHAINS } from "../../constant/chain";
+import { isMainNet } from "../../utils/chain";
 
 const FetchData = () => {
   const { dispatch, mainnet } = useContext(GenContext);
@@ -35,10 +38,9 @@ const FetchData = () => {
         );
       }
       const result = await getGraphCollections(data?.collections);
-      const filterAddress =
-        process.env.REACT_APP_ENV_STAGING === "true"
-          ? ethers.utils.hexlify(process.env.REACT_APP_POLY_TESTNET_SINGLE_ADDRESS)
-          : ethers.utils.hexlify(process.env.REACT_APP_GENA_MAINNET_SINGLE_ADDRESS);
+
+      const filterAddress = getSingleMinterAddress(EVM_CHAINS.Polygon, isMainNet);
+
       const res = result?.filter((data) => data?.Id !== filterAddress);
       if (res?.length) {
         // dispatch(setPolygonCollections(res));
@@ -97,10 +99,8 @@ const FetchData = () => {
         );
       }
       const result = await getGraphCollections(data?.collections);
-      const filterAddress =
-        process.env.REACT_APP_ENV_STAGING === "true"
-          ? ethers.utils.hexlify(process.env.REACT_APP_AVAX_TESTNET_SINGLE_ADDRESS)
-          : ethers.utils.hexlify(process.env.REACT_APP_AVAX_MAINNET_SINGLE_ADDRESS);
+      const filterAddress = getSingleMinterAddress(EVM_CHAINS.Avalanche, isMainNet);
+
       const res = result?.filter((data) => data?.Id !== filterAddress);
       if (res?.length) {
         // dispatch(setPolygonCollections(res));

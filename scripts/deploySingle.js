@@ -4,7 +4,7 @@ async function main() {
   console.log("Deploying proxy ...");
   const NftSingle = await upgrades.deployProxy(
     NftSingleFactory,
-    ["Genadrop 1 of 1", "GND", "0x504D51f62846fbeee1c3d5ae518398b5d22bB905"],
+    ["NFTreasure 1 of 1", "TREASURE", "0x0949183501aA67a77fb009b46e8D7F07a3520352"],
     {
       kind: "uups",
       initializer: "initialize",
