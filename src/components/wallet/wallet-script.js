@@ -39,7 +39,7 @@ import {
   setSwitchWalletNotification,
   setToggleWalletPopup,
 } from "../../gen-state/gen.actions";
-import { chainIdToParams } from "../../utils/chain";
+import { chainIdToParams, isMainNet } from "../../utils/chain";
 import supportedChains from "../../utils/supportedChains";
 import getConfig from "../wallet-popup/nearConfig";
 import * as WS from "./wallet-script";
@@ -122,10 +122,10 @@ export const initializeConnection = async (walletProps) => {
     search.get("account_id") ||
     window.localStorage.getItem("near_wallet") === "connected_to_near"
   ) {
-    const network = process.env.REACT_APP_ENV_STAGING === "true" ? "testnet" : "mainnet";
+    const network = isMainNet === "true" ? "testnet" : "mainnet";
     const nearConfig = getConfig(network);
     const connectedToNearMainnet = {};
-    if (process.env.REACT_APP_ENV_STAGING === "true") {
+    if (isMainNet) {
       connectedToNearMainnet.modules = [
         setupMyNearWallet({ walletUrl: "https://testnet.mynearwallet.com", iconUrl: MyNearIconUrl }),
         setupNearWallet({ iconUrl: NearIconUrl }),
@@ -150,7 +150,7 @@ export const initializeConnection = async (walletProps) => {
 
     const isSignedIn = walletSelector.isSignedIn();
     window.selector = walletSelector;
-    const connectedChain = process.env.REACT_APP_ENV_STAGING === "true" ? 1111 : 1112;
+    const connectedChain = isMainNet === "true" ? 1111 : 1112;
     console.log("signed..");
     if (isSignedIn) {
       window.localStorage.setItem("near_wallet", "connected_to_near");
@@ -191,8 +191,8 @@ export const initializeConnection = async (walletProps) => {
 };
 
 export const setNetworkType = ({ dispatch, handleSetState }) => {
-  dispatch(setMainnet(process.env.REACT_APP_ENV_STAGING === "false"));
-  handleSetState({ network: process.env.REACT_APP_ENV_STAGING === "false" ? "mainnet" : "testnet" });
+  dispatch(setMainnet(isMainNet === "false"));
+  handleSetState({ network: isMainNet === "false" ? "mainnet" : "testnet" });
 };
 
 export const connectWithQRCode = async ({ walletConnectProvider, dispatch, supportedChains }) => {

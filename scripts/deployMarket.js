@@ -5,7 +5,7 @@ async function main() {
 
   // console.log("version no. : ", await Nft.sayversion(), await Nft.symbol());
 
-  const NFTMarket = await upgrades.deployProxy(NFTMarketFactory, ["GenaDrop"], {
+  const NFTMarket = await upgrades.deployProxy(NFTMarketFactory, ["NFTreasure"], {
     kind: "uups",
     initializer: "initialize",
   });

@@ -60,54 +60,6 @@ const WalletPopup = ({ handleSetState }) => {
       setMetamask(true);
       window.localStorage.removeItem("near_wallet");
     }
-    if (supportedChains[chainId]?.chain === "Near") {
-      // NEAR Connect
-      const network = process.env.REACT_APP_ENV_STAGING === "true" ? "testnet" : "mainnet";
-      const nearConfig = getConfig(`${network}`);
-      const connectedToNearMainnet = {};
-      if (process.env.REACT_APP_ENV_STAGING === "true") {
-        connectedToNearMainnet.modules = [
-          setupMyNearWallet({ walletUrl: "https://testnet.mynearwallet.com", iconUrl: MyNearIconUrl }),
-          setupNearWallet({ iconUrl: NearIconUrl }),
-          setupMeteorWallet({ iconUrl: MeteorIconUrl }),
-          setupHereWallet({ iconUrl: HereWalletIconUrl }),
-        ];
-      } else {
-        connectedToNearMainnet.modules = [
-          setupMyNearWallet({ walletUrl: "https://app.mynearwallet.com", iconUrl: MyNearIconUrl }),
-          setupNearWallet({ iconUrl: NearIconUrl }),
-          setupSender({ iconUrl: SenderIconUrl }),
-          setupMeteorWallet({ iconUrl: MeteorIconUrl }),
-          setupHereWallet({ iconUrl: HereWalletIconUrl }),
-          setupNightly({ iconUrl: NightlyIcon }),
-        ];
-      }
-      const walletSelector = await setupWalletSelector({
-        network: nearConfig,
-        ...connectedToNearMainnet,
-      });
-      const description = "Please select a wallet to sign in..";
-      const contract =
-        process.env.REACT_APP_ENV_STAGING === "true" ? "genadrop-test.mpadev.testnet" : "genadrop-contract.nftgen.near";
-
-      const modal = setupModal(walletSelector, { contractId: contract, description });
-      modal.show();
-
-      const isSignedIn = walletSelector.isSignedIn();
-      window.selector = walletSelector;
-      if (isSignedIn) {
-        window.localStorage.setItem("near_wallet", "connected_to_near");
-        dispatch(setChainId(chainId));
-        dispatch(setAccount(walletSelector.store.getState().accounts[0].accountId));
-        dispatch(setProposedChain(chainId));
-        dispatch(setConnector(walletSelector.wallet()));
-      }
-
-      dispatch(setToggleWalletPopup(false));
-      handleProposedChain();
-
-      return;
-    }
     if (window.selector) {
       const nearLogout = await window.selector.wallet();
       nearLogout.signOut();

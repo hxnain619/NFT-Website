@@ -5,7 +5,7 @@ import mintIcon from "../../../assets/icon-mint.svg";
 import searchIcon from "../../../assets/icon-search.svg";
 import timerIcon from "../../../assets/icon-timer.svg";
 import transferIcon from "../../../assets/icon-transfer.svg";
-import { chainIdToParams } from "../../../utils/chain";
+import { chainIdToParams, isMainNet } from "../../../utils/chain";
 import classes from "./exploreTransactionHistory.module.css";
 
 import { breakAddress, getDate } from "../../../components/wallet/wallet-script";
@@ -17,8 +17,7 @@ const ExploreTransactionHistory = ({ collectionId, data, chain, fromCollection }
     selected: "all",
     transactionData: [],
     isAlgoChain: false,
-    explorer:
-      process.env.REACT_APP_ENV_STAGING === "false" ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/",
+    explorer: isMainNet ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/",
   });
 
   const { selected, explorer, transactionData, isAlgoChain } = state;

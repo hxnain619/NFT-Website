@@ -1,5 +1,7 @@
 import { CHAIN_DECIMAL_TO_HEX, EVM_CHAINS } from "../constant/chain";
 
+const isMainNet = process.env.REACT_APP_ENV_STAGING === "true";
+
 const chainIdToParams = {
   137: {
     chainId: "0x89",
@@ -76,7 +78,7 @@ const getChainFromName = (chainName) => {
   if (chainName.toLowerCase().includes("polygon")) {
     return EVM_CHAINS.Polygon;
   }
-  if (chainName.toLowerCase().includes("avalance")) {
+  if (chainName.toLowerCase().includes("avalanche")) {
     return EVM_CHAINS.Avalanche;
   }
   if (chainName.toLowerCase().includes("eth")) {
@@ -86,7 +88,7 @@ const getChainFromName = (chainName) => {
   return EVM_CHAINS.Ethereum;
 };
 
-const getChainExplorerLink = (chainName, isMainNet) => {
+const getChainExplorerLink = (chainName) => {
   return chainNameToParams[isMainNet ? chainName.toLowerCase() : `${chainName.toLowerCase()}-testnet`]
     .blockExplorerUrls;
 };
@@ -122,4 +124,4 @@ const addChain = async (chainId) => {
   }
 };
 
-export { getChainFromName, getChainExplorerLink, chainIdToParams, chainNameToParams, switchChain, addChain };
+export { getChainFromName, getChainExplorerLink, chainIdToParams, chainNameToParams, switchChain, addChain, isMainNet };

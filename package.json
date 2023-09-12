@@ -148,7 +148,7 @@
   "private": true,
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "build": "react-app-rewired --openssl-legacy-provider build",
+    "build": "react-app-rewired build",
     "doc": "jsdoc -c jsdoc.json",
     "eject": "react-scripts eject",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
@@ -156,7 +156,7 @@
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",
     "prod": "yarn run build && serve build",
-    "start": "react-app-rewired --openssl-legacy-provider start",
+    "start": "react-app-rewired start",
     "test": "react-app-rewired test"
   },
   "version": "0.1.0"

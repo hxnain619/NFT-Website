@@ -7,6 +7,7 @@ import successIcon from "../../../assets/icon-success_2.svg";
 import linkIconAccent from "../../../assets/icon-link-accent.svg";
 import linkIconWhite from "../../../assets/icon-link-white.svg";
 import { GenContext } from "../../../gen-state/gen.context";
+import { isMainNet } from "../../../utils/chain";
 
 export const NearErrorPop = (props) => {
   const { handleSetState, popupProps } = props;
@@ -63,10 +64,9 @@ export const NearSuccessPopup = (props) => {
     }, 650);
   };
 
-  const nearExplorerUrl =
-    process.env.REACT_APP_ENV_STAGING === "true"
-      ? `https://explorer.testnet.near.org/?query=${url}`
-      : `https://explorer.near.org/transactions/${url}`;
+  const nearExplorerUrl = isMainNet
+    ? `https://explorer.testnet.near.org/?query=${url}`
+    : `https://explorer.near.org/transactions/${url}`;
 
   const handleResetPopup = () => {
     handleSetState({

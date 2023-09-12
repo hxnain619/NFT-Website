@@ -1,30 +1,24 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.8;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract NftSoulBound is ERC721, ERC721URIStorage, ERC721Burnable {
-    uint256 _tokenIdCounter;
+contract NftSoulBound is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
+    using Counters for Counters.Counter;
 
-    constructor() ERC721("GenadropSoulBound", "GSB") {
-        _tokenIdCounter = 0;
-    }
+    Counters.Counter private _tokenIdCounter;
 
-    function safeMint(address to, string memory uri) public {
-        uint256 tokenId = _tokenIdCounter;
-        _tokenIdCounter++;
+    constructor() ERC721("NFTreasure", "TREASURE") {}
+
+    function safeMint(address to, string memory uri) public onlyOwner {
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
-    }
-
-    function _beforeTokenTransfer(address _from, address _to, uint256 _tokenId) internal virtual override {
-        require(
-            _from == address(0) || _to == address(0),
-            "Soulbound tokens can not be transferred, they can only be burned."
-        );
-        super._beforeTokenTransfer(_from, _to, _tokenId);
     }
 
     // The following functions are overrides required by Solidity.
@@ -35,5 +29,18 @@ contract NftSoulBound is ERC721, ERC721URIStorage, ERC721Burnable {
 
     function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721URIStorage) returns (bool) {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 firstTokenId,
+        uint256 batchSize
+    ) internal virtual override(ERC721) {
+        super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
     }
 }

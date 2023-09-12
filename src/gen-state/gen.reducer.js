@@ -1,4 +1,5 @@
 /* eslint-disable default-param-last */
+import { isMainNet } from "../utils/chain";
 import genActionTypes from "./gen.types";
 import {
   addLayer,
@@ -48,7 +49,7 @@ export const INITIAL_STATE = {
   loaderMessage: "",
   didMount: false,
   graphCollections: [],
-  mainnet: process.env.REACT_APP_ENV_STAGING === "false",
+  mainnet: isMainNet,
   prompt: null,
   promptAsset: null,
   promptLayer: null,
