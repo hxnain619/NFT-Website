@@ -83,13 +83,6 @@ const NFTDetail = () => {
                   <ListingMarket nftDetails={nftDetails} />
                 )}
               </div>
-              <div className={classes.mobile}>
-                <NFT nftDetails={nftDetails} />
-                <Deals nftDetails={{ ...nftDetails, account, chainId, mainnet, connector, dispatch }} />
-                {supportedChains[params.chainId]?.label === "Near" && nftDetails?.marketListed && (
-                  <ListingMarket nftDetails={nftDetails} />
-                )}
-              </div>
             </div>
 
             <div className={classes.detailSection}>
@@ -98,11 +91,6 @@ const NFTDetail = () => {
                 <Description nftDetails={nftDetails} />
                 <Attributes nftDetails={nftDetails} />
                 <Details nftDetails={nftDetails} />
-              </div>
-              <div className={classes.mobile}>
-                <Description nftDetails={nftDetails} />
-                <Details nftDetails={nftDetails} />
-                <Attributes nftDetails={nftDetails} />
               </div>
             </div>
           </div>

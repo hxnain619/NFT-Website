@@ -3,9 +3,10 @@
 }
 
 .heading {
-  font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: 2em;
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--default);
+  margin-bottom: 1em;
 }
 
 .display {
@@ -29,18 +30,19 @@
 }
 
 .btn {
-  width: 100%;
-  max-width: 12em;
-  padding: 0.5em 1.5em;
+  background: transparent;
+  text-transform: capitalize;
+  padding: 0.5em 2.5em;
   border-radius: 0.7em;
   cursor: var(--cursor-pointer);
-  color: var(--default);
-  background: var(--main-color);
+  color: var(--primary-light-blue-2, #93a3f8);
   text-align: center;
-  border: 1px solid var(--main-color);
-  transition: background 300ms;
+  border-radius: 50px;
+  border: 1px solid var(--primary-light-blue-2, #93a3f8);
+  transition: background 300ms, color 300ms;
 }
 
 .btn:hover {
-  background: var(--main-hovered);
+  background: var(--primary-light-blue-2, #93a3f8);
+  color: var(--default);
 }

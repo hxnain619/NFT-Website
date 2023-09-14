@@ -1,13 +1,13 @@
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import classes from "./Deals.module.css";
 import supportedChains from "../../../utils/supportedChains";
 import { buyGraphNft, buyNft, getFormatedPrice } from "../../../utils";
 import openseaIcon from "../../../assets/icon-opensea.svg";
 import lockIcon from "../../../assets/lock-white.svg";
 
 import { GenContext } from "../../../gen-state/gen.context";
+import "./Deals.css";
 
 const Deals = ({ nftDetails }) => {
   const {
@@ -53,75 +53,70 @@ const Deals = ({ nftDetails }) => {
   useEffect(() => {
     getUsdValue();
   }, [priceFeed]);
-  return (
-    <div className={classes.container}>
-      <div className={classes.wrapper}>
-        <div className={classes.title}>Current Price</div>
-        <div className={classes.priceSection}>
-          <img className={classes.chainIcon} src={supportedChains[chain].icon} alt="" />
-          <div className={classes.price}>{`${price ? Number(price).toFixed(2) : "0.0"}`}</div>
-          <div className={classes.appx}>{`~ $${price ? usdValue.toFixed(2) : "0"}`}</div>
-        </div>
+
+  const chainButton = () => {
+    return isSoulBound ? (
+      <div className="lock">
+        <img src={lockIcon} alt="" />
+        <span>Non Transferable</span>
       </div>
-      {isSoulBound ? (
-        <div className={classes.lock}>
-          <img src={lockIcon} alt="" />
-          <span>Non Transferable</span>
-        </div>
-      ) : supportedChains[chain]?.chain === "Near" && isListed ? (
-        <>
-          <div className={`${classes.btn} ${classes.disable}`} disabled>
-            Listed
-          </div>
-        </>
-      ) : !isListed && !price ? (
-        owner === account && supportedChains[chain]?.networkId !== 1111 ? (
-          <Link to={chain ? `/marketplace/1of1/list/${chain}/${Id}` : `/marketplace/1of1/list/${Id}`}>
-            {isListed ? (
-              <button className={`${classes.btn} ${classes.disable}`} disabled>
-                Re-List
-              </button>
-            ) : (
-              <button className={classes.btn}>List</button>
-            )}
-          </Link>
-        ) : (
-          <div className={`${classes.btn} ${classes.disable}`} disabled>
-            Not Listed
-          </div>
-        )
-      ) : owner === account && isListed ? (
-        <div className={`${classes.btn} ${classes.disable}`} disabled>
-          Listed
-        </div>
-      ) : !sold && isListed ? (
-        supportedChains[chain]?.chain === "Algorand" ? (
-          <div onClick={() => buyNft(buyProps)} className={classes.btn}>
-            Buy
-          </div>
-        ) : (
-          <div onClick={() => buyGraphNft(buyProps)} className={classes.btn}>
-            Buy
-          </div>
-        )
-      ) : account === owner ? (
+    ) : supportedChains[chain]?.chain === "Near" && isListed ? (
+      <div className="btn" disabled>
+        Listed
+      </div>
+    ) : !isListed && !price ? (
+      owner === account && supportedChains[chain]?.networkId !== 1111 ? (
         <Link to={chain ? `/marketplace/1of1/list/${chain}/${Id}` : `/marketplace/1of1/list/${Id}`}>
-          <div className={`${classes.btn}`}>List</div>
+          {isListed ? (
+            <button className="btn" disabled>
+              Re-List
+            </button>
+          ) : (
+            <button className="btn">List</button>
+          )}
         </Link>
-      ) : price && !isListed ? (
-        <div className={`${classes.btn} ${classes.disable}`} disabled>
-          Sold
+      ) : (
+        <div className="btn" disabled>
+          Not Listed
         </div>
-      ) : isListed ? (
-        <div onClick={() => buyGraphNft(buyProps)} className={`${classes.btn} `}>
+      )
+    ) : owner === account && isListed ? (
+      <div className="btn" disabled>
+        Listed
+      </div>
+    ) : !sold && isListed ? (
+      supportedChains[chain]?.chain === "Algorand" ? (
+        <div onClick={() => buyNft(buyProps)} className="btn">
           Buy
         </div>
       ) : (
-        <div className={`${classes.btn} ${classes.disable}`} disabled>
-          Not Listed
+        <div onClick={() => buyGraphNft(buyProps)} className="btn">
+          Buy
         </div>
-      )}
-      <div className={classes.sea}>
+      )
+    ) : account === owner ? (
+      <Link to={chain ? `/marketplace/1of1/list/${chain}/${Id}` : `/marketplace/1of1/list/${Id}`}>
+        <div className="btn">List</div>
+      </Link>
+    ) : price && !isListed ? (
+      <div className="btn" disabled>
+        Sold
+      </div>
+    ) : isListed ? (
+      <div onClick={() => buyGraphNft(buyProps)} className="btn">
+        Buy
+      </div>
+    ) : (
+      <div className="btn" disabled>
+        Not Listed
+      </div>
+    );
+  };
+
+  return (
+    <div className="detail-section">
+      <div className="sea">
+        <div className="title">Current Price</div>
         {supportedChains[chain]?.label === "Polygon" ? (
           <a
             href={`https://opensea.io/assets/matic/${
@@ -132,7 +127,7 @@ const Deals = ({ nftDetails }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <div className={classes.opensea}>
+            <div className="opensea">
               <img src={openseaIcon} alt="" /> View Listing on Opensea
             </div>
           </a>
@@ -146,13 +141,21 @@ const Deals = ({ nftDetails }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <div className={classes.opensea}>
+            <div className="opensea">
               <img src={openseaIcon} alt="" /> View Listing on Opensea
             </div>
           </a>
         ) : (
           ""
         )}
+      </div>
+      <div className="price-section">
+        <div className="price">
+          <img className="chainIcon" src={supportedChains[chain].icon} alt="" />
+          <div className="price-text">{`${price ? Number(price).toFixed(2) : "0.0"}`}</div>
+          <div className="appx">{`~ $${price ? usdValue.toFixed(2) : "0"}`}</div>
+        </div>
+        {chainButton()}
       </div>
     </div>
   );

@@ -1,21 +1,16 @@
 .container {
-  width: 100%;
-  margin-bottom: 4em;
-  padding: 4em 2em;
+  width: 80%;
+  margin: 1em auto;
   position: relative;
 }
 
-.desktop,
-.mobile {
+.desktop {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2em;
-}
-.mobile {
-  display: none;
+  gap: 1em;
 }
 
 .backBtnContainer {
@@ -54,11 +49,11 @@
 }
 
 .nftSection {
-  width: 50%;
+  width: 40%;
 }
 
 .detailSection {
-  width: 50%;
+  width: 60%;
 }
 
 .priceHistory {
@@ -78,28 +73,30 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .detailSection {
+    padding-top: 2.2em;
+  }
   .wrapper {
     max-width: 56em;
   }
 }
 
 @media screen and (max-width: 900px) {
+  .nftSection,
+  .detailSection {
+    width: 50%;
+  }
   .wrapper {
     max-width: 64em;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
   .wrapper {
     max-width: 64em;
-  }
-
-  .desktop {
-    display: none;
-  }
-
-  .mobile {
-    display: flex;
   }
 
   .sectionWrapper {
@@ -111,10 +108,7 @@
   .nftSection {
     width: 100%;
   }
-}
-
-@media screen and (max-width: 540px) {
-  .container {
-    padding: 2em 1em;
+  .nftSection {
+    min-width: 100%;
   }
 }

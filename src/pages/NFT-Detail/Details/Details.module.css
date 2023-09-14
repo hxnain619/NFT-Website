@@ -1,35 +1,56 @@
 .container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1em;
-  border-radius: 1em;
-  padding: 1em;
-  background: #ffffff;
-  border: 2px solid #eeeff2;
-  box-shadow: 2px 7px 22px rgba(28, 27, 28, 0.1);
-  border-radius: 1em;
 }
 
 .heading {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5em;
+  color: var(--primary-white, #ecf1f9);
+  /* subheading-small-jost */
+  /* font-family: Jost; */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
-
-.list {
+.listContainer {
+  padding: 8px;
   width: 100%;
+  border: 1px solid var(--primary-dark-blue, #262b92);
+  margin-top: 1em;
+}
+.list {
   display: flex;
-  align-items: center;
+  padding: 8px;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 16px;
+  align-self: stretch;
+  border-radius: 4px;
 }
 
-.list * {
-  color: #525c76;
+.list div {
+  font-family: "Poppins";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
 }
-
+.list div:first-child {
+  color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
+}
+.list div:last-child {
+  color: var(--default);
+}
+.textPurple {
+  cursor: pointer;
+  color: var(--primary-light-blue-2, #93a3f8);
+}
+.textPurple:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--primary-light-blue-2, #93a3f8);
+}
+.list svg > path {
+  fill: var(--primary-light-blue-2, #93a3f8);
+}
 .value {
   font-size: 1rem;
   font-weight: 600;
