@@ -424,13 +424,16 @@
   .container {
     gap: 0;
   }
-}
-@media screen and (max-width: 380px) {
   .dropdownContainer {
     left: 0;
   }
+}
+@media screen and (max-width: 380px) {
+  .dropdownContainer {
+    left: -3em;
+  }
   .pushNotification {
-    right: -1.7em;
+    right: -14em;
   }
 
   .container {
