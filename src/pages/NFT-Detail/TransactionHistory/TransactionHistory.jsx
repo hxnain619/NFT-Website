@@ -8,7 +8,6 @@ import { ReactComponent as TxIcon } from "../../../assets/icon-tx.svg";
 import { ReactComponent as MintIcon } from "../../../assets/icon-mint.svg";
 import { ReactComponent as SalesIcon } from "../../../assets/icon-sales.svg";
 import { ReactComponent as TransferIcon, ReactComponent as ListIcon } from "../../../assets/icon-transfer.svg";
-import { ReactComponent as TransactionIcon } from "../../../assets/icon-transaction.svg";
 import { ReactComponent as SearchIcon } from "../../../assets/icon-search.svg";
 
 import TransactionCard from "./TransactionCard";
@@ -81,10 +80,7 @@ const TransactionHistory = ({ transactionHistory, nftDetails }) => {
   return (
     <div className={classes.container}>
       <TransactionCard txn={transaction} nftDetails={nftDetails} setState={handleSetState} />
-      <div className={classes.heading}>
-        <TransactionIcon />
-        <div>Transaction History</div>
-      </div>
+      <div className={classes.heading}>Transaction History</div>
       <div className={classes.wrapper}>
         <div className={classes.tabs}>
           {transactionTypes.map((tab, idx) => (
@@ -106,10 +102,7 @@ const TransactionHistory = ({ transactionHistory, nftDetails }) => {
           {filterdHistory &&
             filterdHistory.map((txn, idx) => (
               <div key={idx} onClick={() => handleShowTxn(txn)} className={classes.list}>
-                <div className={classes.tag}>
-                  {txIcons[txn.type]}
-                  <div>{txn.type}</div>
-                </div>
+                <span className={classes.tag}>{txn.type}</span>
                 <div className={classes.item}>
                   <div>From</div>
                   <div className={classes.accent}>{txn.seller ? breakAddress(txn.seller) : "--"}</div>

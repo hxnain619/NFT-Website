@@ -3,16 +3,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { breakAddress } from "../NFTDetail-script";
-import classes from "./NFT.module.css";
 import { ReactComponent as ShareIcon } from "../../../assets/icon-share.svg";
 import { ReactComponent as RefreshIcon } from "../../../assets/icon-refresh.svg";
-import Share from "./Share";
 import avatar from "../../../assets/avatar.png";
+import "./NFT.css";
 
 // import { ReactComponent as MoreIcon } from "../../../assets/icon-more.svg";
 
 const NFT = ({ nftDetails }) => {
-  const { name, image_url, owner, collection_name } = nftDetails;
+  const { name, image_url, owner } = nftDetails;
   const [share, setShare] = useState(false);
   const wrapperRef = useRef(null);
   const hanldeClickOutside = (e) => {
@@ -36,53 +35,33 @@ const NFT = ({ nftDetails }) => {
   }, [share]);
 
   return (
-    <div className={classes.container}>
-      <div className={classes.heading}>
-        <div className={classes.nftName}>{truncateText(name, 15)}</div>
-        <div className={classes.shareSection}>
-          <div className={classes.dropdown} ref={wrapperRef}>
-            <RefreshIcon
-              //  onClick={() => setShare(true)}
-              className={classes.shareIcon}
-            />
-            <ShareIcon onClick={() => setShare(true)} className={classes.shareIcon} />
-
-            <Share share={share} setShare={setShare} />
-          </div>
-
-          {/* <div className={classes.moreIconContainer}>
-            <MoreIcon className={classes.moreIcon} />
-          </div> */}
+    <div className="image-section">
+      <div className="heading">
+        <div className="card-heading">{truncateText(name, 15)}</div>
+        <div ref={wrapperRef}>
+          <RefreshIcon /> &nbsp;
+          <ShareIcon onClick={() => setShare(true)} />
         </div>
       </div>
-      {nftDetails?.ipfs_data?.image_mimetype?.includes("video") || image_url.slice(-3) === "mp4" ? (
-        <video className={classes.image} src={image_url} alt="" controls />
-      ) : nftDetails?.ipfs_data?.image_mimetype?.includes("audio") ? (
-        <audio className={classes.image} src={image_url} alt="" controls />
-      ) : (
-        <img className={classes.image} src={image_url} alt="" />
-      )}
-      <div className={classes.details}>
-        <div className={classes.detail}>
-          {owner && (
-            <>
-              <div className={classes.title}>Created by</div>
-              <div className={classes.subSection}>
-                <img src={avatar} alt="" className={classes.placeholder} />
-
-                <Link to={`/profile/${nftDetails?.chain}/${owner}`} className={`${classes.name} ${classes.active}`}>
-                  {breakAddress(owner)}
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-        {collection_name && collection_name !== "Genadrop 1 of 1" ? (
-          <div className={classes.detail}>
-            <div className={classes.title}>Collection</div>
-            <div className={classes.name}>{collection_name}</div>
-          </div>
-        ) : null}
+      <div className="image-container">
+        {nftDetails?.ipfs_data?.image_mimetype?.includes("video") || image_url.slice(-3) === "mp4" ? (
+          <video className="image" src={image_url} alt="" controls />
+        ) : nftDetails?.ipfs_data?.image_mimetype?.includes("audio") ? (
+          <audio className="image" src={image_url} alt="" controls />
+        ) : (
+          <img className="image" src={image_url} alt="" />
+        )}
+      </div>
+      <div className="image-section-description">
+        {owner && (
+          <>
+            <div className="title">Created by:</div>
+            <div>
+              <img className="placeholder" src={avatar} alt="" />
+              <Link to={`/profile/${nftDetails?.chain}/${owner}`}>{breakAddress(owner)}</Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

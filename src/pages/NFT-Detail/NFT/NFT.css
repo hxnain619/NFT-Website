@@ -1,0 +1,87 @@
+.image-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.image-section > img,
+.image-section > video,
+.image-section > audio {
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-heading {
+  font-weight: 800;
+  font-family: "Jost", sans-serif;
+  color: white;
+  text-transform: capitalize;
+  font-size: 28px;
+  font-style: normal;
+}
+
+.image-container .image {
+  width: 100%;
+  height: 545px;
+  margin: 6px 0;
+}
+
+.nft-detail-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.image-section-description div:last-child {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.title {
+  margin-bottom: 0.5em;
+  font-size: 0.85rem;
+  color: var(--default);
+}
+
+.image-section-description div:last-child a {
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--primary-light-blue);
+}
+.image-section-description div:last-child a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--primary-light-blue);
+}
+.placeholder {
+  width: 2em !important;
+  height: 2em !important;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .nft-detail-container {
+    flex-direction: column;
+  }
+  .image-container .image {
+    height: 358px;
+  }
+  .heading div {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .image {
+    height: auto;
+    width: 100%;
+  }
+}

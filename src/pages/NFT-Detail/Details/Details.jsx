@@ -24,33 +24,27 @@ const Details = ({ nftDetails }) => {
   return (
     <div className={classes.container}>
       <div className={classes.heading}>Details</div>
-      <div className={classes.list}>
-        <div>Mint address</div>
-        <div onClick={handleExplorer} className={classes.value}>
-          <div>{breakAddress(owner, 4)}</div>
-          <LinkIcon />
+      <div className={classes.listContainer}>
+        <div className={classes.list}>
+          <div>Mint address</div>
+          <div onClick={handleExplorer} className={`${classes.value} ${classes.textPurple}`}>
+            {breakAddress(owner, 8)}
+            <LinkIcon />
+          </div>
         </div>
-      </div>
-      {/* <div className={classes.list}>
-        <div>Minted</div>
-        <div>date</div>
-      </div> */}
-      {/* <div className={classes.list}>
-        <div>Creator Royalty</div>
-        <div>0%</div>
-      </div> */}
-      {isListed && (
-        <>
+        {isListed && (
           <div className={classes.list}>
             <div>Marketplace Fee</div>
             <div>10%</div>
           </div>
+        )}
+        {isListed && (
           <div className={`${classes.list} ${classes.total}`}>
             <div>Total</div>
             <div>10%</div>
           </div>
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };

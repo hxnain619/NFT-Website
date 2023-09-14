@@ -1,49 +1,36 @@
-.container {
+.detail-section {
+  width: 100%;
+  margin-top: 2em;
+}
+.detail-section .title {
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--default);
+}
+.price-section {
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  flex-direction: row;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1em;
-  padding: 2em 1em;
-  border-radius: 1em;
-  position: sticky;
-  top: 3.5em;
-  /* background: var(--default); */
+  align-items: center;
 }
-.container * {
-  color: var(--primary-white);
-}
-
-.chainIcon {
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
-}
-
-.lock {
+.price-section .price {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
-  cursor: not-allowed;
-  justify-content: space-around;
-  background-color: #b2b7c2;
-  border-radius: 6.5px;
-  padding: 15px;
 }
-.lock > img {
-  margin-right: 6px;
-  width: 31px;
-}
-.lock > span {
-  font-size: 22px;
-  color: white;
+.chainIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
 }
 
 .title {
   margin-bottom: 0.5em;
   color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
-
   /* Button 2 */
   /* font-family: DM Sans; */
   font-size: 14px;
@@ -53,27 +40,20 @@
   /* color: var(--text-placeholder); */
 }
 
-.priceSection {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5em;
-}
-
-.price {
+.price-text {
   color: var(--primary-white, #ecf1f9);
-
   /* Headline 4 */
-  /* font-family: DM Sans; */
+  font-family: "Poppins";
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
   line-height: 40px; /* 125% */
-  letter-spacing: -0.32px;
 }
 
 .appx {
+  font-size: 18px;
   color: var(--text-placeholder);
+  margin-left: 4px;
 }
 
 .btn {
@@ -85,8 +65,8 @@
   cursor: pointer;
   transition: all 300ms;
   text-align: center;
-  width: 8em;
-  font-size: 1.2em;
+  width: 200px;
+  font-size: 14px;
   border-radius: 40px;
   background: var(--primary-primary-blue, #3856ff);
   border: 1px solid var(--primary-primary-blue, #3856ff);
@@ -98,29 +78,32 @@
   /* color: var(--main-color); */
 }
 
-.btn.disable {
+.btn[disabled] {
   background: var(--outline-dark);
   cursor: not-allowed;
   border: 1px solid var(--outline-dark);
 }
 
-.btn.disable:hover {
+.btn[disabled]:hover {
   color: var(--outline);
 }
-
 .sea {
+  cursor: pointer;
   display: flex;
-  justify-content: center;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 .opensea {
   display: flex;
   align-items: center;
   gap: 1em;
+  font-size: 14px;
+  color: var(--primary-light-blue);
 }
 .opensea:hover {
   cursor: pointer;
 }
+
 @media screen and (max-width: 1200px) {
   .btn {
     padding: 0.5em 1.5em;
@@ -128,21 +111,11 @@
 }
 
 @media screen and (max-width: 540px) {
-  .container {
-    top: 3em;
+  .detail-section {
+    margin-top: 0;
   }
   .btn {
     padding: 0.5em !important;
     width: 6em;
-  }
-  .lock {
-    padding: 10px;
-  }
-
-  .lock span {
-    font-size: 16px;
-  }
-  .lock img {
-    width: 25px;
   }
 }
