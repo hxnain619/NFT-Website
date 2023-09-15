@@ -9,7 +9,7 @@ Chart.register(...registerables);
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const Graph = ({ details }) => {
-  const [graphData, setData] = useState({
+  const [graphData, getGraphData] = useState({
     dates: [],
     prices: [],
   });
@@ -32,7 +32,7 @@ const Graph = ({ details }) => {
         }
       });
 
-      setData({ dates, prices });
+      getGraphData({ dates, prices });
     }
   }, [details]);
 
@@ -42,14 +42,24 @@ const Graph = ({ details }) => {
       {
         data: graphData.prices,
         fill: false,
-        backgroundColor: "#03071099",
-        borderColor: "rgb(147 163 248)",
+        backgroundColor: "#FFFFFF",
+        borderColor: "rgba(147, 163, 248, 0.08)",
         tension: 1,
       },
     ],
   };
-
   const options = {
+    scales: {
+      yAxes: {
+        grid: {
+          color: "rgba(147, 163, 248, 0.08)",
+        },
+        ticks: {
+          color: "white",
+          fontSize: 12,
+        },
+      },
+    },
     animations: {
       tension: {
         duration: 1000,
@@ -69,9 +79,9 @@ const Graph = ({ details }) => {
 
   return (
     <>
-      {graphData.prices ? (
+      {graphData.prices?.length > 0 ? (
         <div className={classes.chart}>
-          <Line data={data} width={null} height={90} options={options} />
+          <Line data={data} width={null} height={300} options={options} />
         </div>
       ) : (
         <div className={classes.nodata}>No Price History Available</div>

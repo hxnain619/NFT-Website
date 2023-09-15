@@ -101,7 +101,7 @@ export const getAllNftsbyChain = async (chainName, limit = 0) => {
   const { data: sbData, error: sbError } = await client.query(GET_SIGNLE_NFTS(chainName, limit, true)).toPromise();
 
   if (error || sbError) return [];
-  const data = getSingleGraphNfts([...graphData.nfts, ...sbData.nfts]);
+  const data = await getSingleGraphNfts([...graphData.nfts, ...sbData.nfts]);
   return data;
 };
 

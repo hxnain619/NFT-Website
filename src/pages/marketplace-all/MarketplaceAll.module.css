@@ -28,17 +28,8 @@
   justify-content: center;
   flex-direction: column;
   gap: 3em;
-  padding: 6em 2em;
-  /* background: linear-gradient(
-    259.21deg,
-    #b0e2fe -27.76%,
-    #d8e6fc 1.15%,
-    #fdeafa 26.21%,
-    #e3f2f9 47.43%,
-    #edf5f8 67.57%,
-    #fbeffc 87.77%,
-    #b0e2fe 107.4%
-  ); */
+  padding: 160px;
+  position: relative;
 }
 
 .title {
@@ -115,13 +106,6 @@
 }
 
 .dateFilter {
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-  padding: 0.2em;
-  border-radius: 0.7em;
-  border: 1px solid #cacdd5; */
   display: flex;
   padding: 4px;
   align-items: flex-start;
@@ -129,6 +113,9 @@
   border-radius: 2px;
   border: 1px solid var(--primary-dark-blue, #262b92);
   background: var(--transparent-black-black-60, rgba(3, 7, 16, 0.6));
+  justify-content: space-around;
+  width: 100%;
+  max-width: 456px;
 }
 
 .date {
@@ -224,7 +211,11 @@
   }
 
   .date {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
+  }
+
+  .heading {
+    padding: 120px;
   }
 }
 

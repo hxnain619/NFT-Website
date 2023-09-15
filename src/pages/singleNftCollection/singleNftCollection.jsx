@@ -75,7 +75,7 @@ const SingleNftCollection = () => {
   };
 
   useEffect(() => {
-    Promise.all([getAllNftsbyChain(0, "Avalanche"), getAllNftsbyChain(0, "Polygon")]).then((data) =>
+    Promise.all([getAllNftsbyChain("Avalanche"), getAllNftsbyChain("Polygon")]).then((data) =>
       handleSetState({
         collections: sortBy({ collections: data.flat(), value: "Newest" }),
         filteredCollection: sortBy({ collections: data.flat(), value: "Newest" }),

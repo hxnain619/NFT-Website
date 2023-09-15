@@ -252,7 +252,7 @@ const avalancheSoulBoundAddress = getSoulBoundAddress(EVM_CHAINS.Avalanche, isMa
 
 const addressByNetworkandSoulBound = (chainName, isSoulBound) => {
   return isSoulBound
-    ? chainName == "Polygon"
+    ? chainName === "Polygon"
       ? polygonSoulBoundAddress
       : chainName === "Avalanche"
       ? avalancheSoulBoundAddress

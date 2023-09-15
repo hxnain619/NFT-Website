@@ -10,6 +10,7 @@
 import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
 import { ethers } from "ethers";
 import JSZip from "jszip";
+import { async } from "regenerator-runtime";
 import { getRandomFromMetadata } from ".";
 import { mintAbi, mintCollectionAbi, mintSingleAbi, mintSoulAbi } from "../constant/abi";
 import { EVM_CHAINS } from "../constant/chain";
@@ -100,6 +101,23 @@ const uploadToIpfs = async (nftFile, nftFileName, asset, isIpfsLink, isAi) => {
     integrity: jsonIntegrity.base64,
     media: resultFile.IpfsHash,
   };
+};
+
+const uploadFileViaServer = async (singleMintProps, chain) => {
+  const { file, metadata, isIpfsLink, isAi, fileName } = singleMintProps;
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("fileName", isAi || isIpfsLink ? fileName : file.name);
+  formData.append("asset", JSON.stringify(metadata));
+  const response = await axios.post(process.env.REACT_APP_BACKEND, formData, {
+    auth: {
+      username: process.env.REACT_APP_USERNAME,
+      password: process.env.REACT_APP_PASSWORD,
+    },
+  });
+
+  return response;
 };
 
 export const connectAndMint = async (file, metadata, imgName, retryTimes, isIpfsLink, isAi) => {
@@ -232,92 +250,48 @@ export async function mintSingleToChain(singleMintProps, chain) {
     isSoulBound,
   } = singleMintProps;
   if (isSoulBound) {
-    return mintSoulBound(singleMintProps, chain);
+    return mintSoulBound(singleMintProps, chain); // Assuming mintSoulBound accepts the same parameters
   }
 
   const singleMinterAddress = getSingleMinterAddress(chain, mainnet);
 
-  if (connector.isWalletConnect) {
-    const provider = new ethers.providers.Web3Provider(connector);
-    const signer = provider.getSigner();
+  try {
     dispatch(setLoader("uploading 1 of 1"));
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("fileName", isAi || isIpfsLink ? fileName : file.name);
-    formData.append("asset", JSON.stringify(metadata));
-    const rd = await axios.post(process.env.REACT_APP_BACKEND, formData, {
-      auth: {
-        username: process.env.REACT_APP_USERNAME,
-        password: process.env.REACT_APP_PASSWORD,
-      },
-    });
-    const asset = rd.data.content.upload;
+
+    const response = await uploadFileViaServer(singleMintProps, chain);
+
+    const asset = response.data.content.upload;
     const uintArray = asset.metadata.toLocaleString();
     const id = parseInt(uintArray.slice(0, 7).replace(/,/g, ""));
+
     dispatch(setLoader("minting 1 of 1"));
+
+    const signer = connector.isWalletConnect
+      ? new ethers.providers.Web3Provider(connector).getSigner()
+      : await connector.getSigner();
+
     const contract = new ethers.Contract(singleMinterAddress, mintSingleAbi, signer);
     const ethNonce = await signer.getTransactionCount();
+
     const tx = {
       from: account,
       to: singleMinterAddress,
-      // gasLimit: ethers.utils.hexlify(250000), change tx from legacy later
-      // gasPrice: ethers.utils.parseUnits('5', "gwei"),
       data: contract.interface.encodeFunctionData("mint", [receiverAddress, id, 1, asset.url, "0x"]),
       nonce: ethNonce,
     };
-    try {
-      const result = await signer.sendTransaction(tx);
-      await result.wait();
-      dispatch(setLoader(""));
 
-      const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${result.hash}`;
-      return txUrl;
-    } catch (error) {
-      dispatch(setLoader(""));
-      return {
-        error,
-        message: error.message ? error.message : "something went wrong! check your connected network and try again.",
-      };
-    }
-  }
-  const signer = await connector.getSigner();
-  dispatch(setLoader("uploading 1 of 1"));
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("fileName", isAi || isIpfsLink ? fileName : file.name);
-  formData.append("asset", JSON.stringify(metadata));
-  const rd = await axios.post(process.env.REACT_APP_BACKEND, formData, {
-    auth: {
-      username: process.env.REACT_APP_USERNAME,
-      password: process.env.REACT_APP_PASSWORD,
-    },
-  });
-  console.log("rd", rd);
-  const asset = rd.data.content.upload;
-  console.log("url", asset.url, receiverAddress);
-  const id = getRandomFromMetadata(asset.metadata, 100000);
-
-  console.log(id);
-  console.log("contract address", singleMinterAddress);
-  dispatch(setLoader("minting 1 of 1"));
-  const contract = new ethers.Contract(singleMinterAddress, mintSingleAbi, signer);
-  console.log("contract", singleMinterAddress, contract);
-  let txn;
-  try {
-    txn = await contract.mint(receiverAddress, id, 1, asset.url, "0x");
-    await txn.wait();
-    console.log(txn.hash);
-    // await marketContract.createMarketplaceItem(contract.address, id, String(price * 10 ** 18), "General", account);
+    const result = await signer.sendTransaction(tx);
+    await result.wait();
     dispatch(setLoader(""));
 
-    const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${txn.hash}`;
+    const txUrl = `${getChainExplorerLink(chain, mainnet)}tx/${result.hash}`;
     return txUrl;
   } catch (error) {
     dispatch(setLoader(""));
-    console.log(error);
+    console.error(error);
     return {
       error,
-      message: "something went wrong! please check your connected network and try again.",
+      message: error.message || "Something went wrong! Please check your connected network and try again.",
     };
   }
 }

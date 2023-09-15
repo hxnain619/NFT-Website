@@ -135,6 +135,9 @@
   color: var(--filtersText);
   font-size: 14px;
   padding: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .connected {
@@ -394,6 +397,10 @@
   .connect {
     padding: 10px 20px;
     margin-bottom: 32px;
+  }
+
+  .dropdownContainer {
+    left: -48px;
   }
 }
 @media screen and (max-width: 480px) {

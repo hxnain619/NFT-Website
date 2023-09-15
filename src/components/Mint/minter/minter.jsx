@@ -599,46 +599,6 @@ const Minter = () => {
       dispatch(setOverlay(true));
       handleSingleMint(singleMintProps).then((url) => {
         dispatch(setOverlay(false));
-        if (singleMintProps.chain.toLowerCase() === "near") {
-          if (url.error) {
-            return handleSetState({
-              popupProps: {
-                url: "Something went wrong while minting or the process was cancelled, Please try again",
-                isError: true,
-                popup: true,
-              },
-            });
-          }
-          if (url.message) {
-            return handleSetState({
-              popupProps: {
-                imageSrc: file[0],
-                url: url.message,
-                isError: true,
-                popup: true,
-              },
-            });
-          }
-          if (url.transaction.hash) {
-            return handleSetState({
-              popupProps: {
-                imageSrc: file[0],
-                url: `https://explorer.near.org/?query=${url.transaction.hash}`,
-                isError: false,
-                popup: true,
-              },
-            });
-          }
-          if (url?.response[0]?.transaction?.hash) {
-            return handleSetState({
-              popupProps: {
-                url: `https://explorer.near.org/?query=${url.response[0].transaction.hash}`,
-                isError: false,
-                popup: true,
-              },
-            });
-          }
-        }
         if (typeof url === "object" && singleMintProps.chain.toLowerCase() !== "near") {
           handleSetState({
             popupProps: {
