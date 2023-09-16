@@ -44,3 +44,4 @@ remnant/
 
 yarn.lock
 package-lock.json
+.vercel
