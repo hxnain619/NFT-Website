@@ -97,7 +97,7 @@ const WalletPopup = ({ handleSetState }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.desktopView}>
+      <div >
         <DesktopPopup
           showConnectionMethods={showConnectionMethods}
           mainnet={mainnet}
@@ -113,7 +113,7 @@ const WalletPopup = ({ handleSetState }) => {
           setToggleWalletPopup={setToggleWalletPopup}
         />
       </div>
-      <div className={classes.mobileView}>
+      {/* <div className={classes.mobileView}>
         <MobilePopup
           showConnectionMethods={showConnectionMethods}
           mainnet={mainnet}
@@ -128,7 +128,7 @@ const WalletPopup = ({ handleSetState }) => {
           showMetamask={showMetamask}
           setToggleWalletPopup={setToggleWalletPopup}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
