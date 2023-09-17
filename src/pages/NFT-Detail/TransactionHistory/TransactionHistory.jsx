@@ -23,7 +23,7 @@ const TransactionHistory = ({ transactionHistory, nftDetails }) => {
   const [state, setState] = useState({
     activeType: "All",
     filterdHistory: [],
-    transactionTypes: ["All"],
+    transactionTypes: ["All", "Minting"],
     transaction: null,
     searchValue: "",
   });

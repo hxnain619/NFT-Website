@@ -12,7 +12,11 @@ export const handleMint = async (args) => {
   }
   let url = null;
   try {
-    if (chain.toLowerCase() === "polygon" || chain.toLowerCase() === "avalanche") {
+    if (
+      chain.toLowerCase() === "polygon" ||
+      chain.toLowerCase() === "avalanche" ||
+      chain.toLowerCase() === "ethereum"
+    ) {
       url = await mintToChain({ ...args }, chain);
     } else {
       dispatch(
@@ -47,7 +51,11 @@ export const handleSingleMint = async (args) => {
   }
   let url = null;
   try {
-    if (chain.toLowerCase() === "polygon" || chain.toLowerCase() === "avalanche") {
+    if (
+      chain.toLowerCase() === "polygon" ||
+      chain.toLowerCase() === "avalanche" ||
+      chain.toLowerCase() === "ethereum"
+    ) {
       url = await mintSingleToChain({ ...args }, chain);
     } else {
       dispatch(

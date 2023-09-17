@@ -1,11 +1,15 @@
 /* eslint-disable no-shadow */
-import React, { useContext, useState, useEffect, useCallback } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import { ReactComponent as BackIcon } from "../../assets/icon-arrow-left.svg";
 import { GenContext } from "../../gen-state/gen.context";
+import supportedChains from "../../utils/supportedChains";
 import Attributes from "./Attributes/Attributes";
 import Deals from "./Deals/Deals";
 import Description from "./Description/Description";
 import Details from "./Details/Details";
+import ListingMarket from "./ListingMarket/ListingMarket";
+import LoadingScreen from "./Loading-Screen/LoadingScreen";
 import Metadata from "./Metadata/Metadata";
 import More from "./More/More";
 import NFT from "./NFT/NFT";
@@ -13,10 +17,6 @@ import { getGraphData } from "./NFTDetail-script";
 import classes from "./NFTDetail.module.css";
 import PriceHistory from "./PriceHistory/PriceHistory";
 import TransactionHistory from "./TransactionHistory/TransactionHistory";
-import { ReactComponent as BackIcon } from "../../assets/icon-arrow-left.svg";
-import supportedChains from "../../utils/supportedChains";
-import LoadingScreen from "./Loading-Screen/LoadingScreen";
-import ListingMarket from "./ListingMarket/ListingMarket";
 
 const NFTDetail = () => {
   const { params } = useRouteMatch();

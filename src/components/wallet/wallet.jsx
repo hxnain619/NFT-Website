@@ -146,7 +146,6 @@ function ConnectWallet() {
       };
 
       const formatBalance = (balance) => {
-        console.log(Web3.utils.fromWei(balance, "ether"));
         return parseFloat(Web3.utils.fromWei(balance, "ether")).toFixed(3);
       };
       const ethBalance = formatBalance(
@@ -258,7 +257,9 @@ function ConnectWallet() {
     <div className={classes.connectedContainer}>
       <div className={classes.balance}>
         {" "}
-        {`${americanFormatNumber(balance, 3)} ${supportedChains[chainId]?.symbol}`}{" "}
+        {`${americanFormatNumber(balances[supportedChains[chainId]?.symbol], 3)} ${
+          supportedChains[chainId]?.symbol
+        }`}{" "}
       </div>
       <div className={classes.connected}>
         <div className={classes.address}>

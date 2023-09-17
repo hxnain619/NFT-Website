@@ -20,6 +20,8 @@ import Search from "../../components/Search/Search";
 import { getAllChainCollections, getAllNftsbyChain } from "../../renderless/fetch-data/fetchUserGraphData";
 import SkeletonCards from "../../components/skeleton-card";
 
+import GlowCircle from "../../components/glow-circle/GlowCircle";
+
 const MarketplaceAll = () => {
   const { mainnet, dispatch } = useContext(GenContext);
   const mountRef = useRef(0);
@@ -192,6 +194,8 @@ const MarketplaceAll = () => {
             All
           </div>
         </div>
+
+        <GlowCircle />
       </div>
       <div className={classes.wrapper}>
         {Object.keys(paginate).length ? (

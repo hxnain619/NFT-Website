@@ -26,11 +26,11 @@ const FeaturedNFTCards = () => {
 
   useEffect(() => {
     if (mainnet) {
-      Promise.all([getFeaturedChainNft(featuredNFTs[1], "Avalanche")]).then((data) => {
+      Promise.all([getFeaturedChainNft(featuredNFTs[0], "Avalanche")]).then((data) => {
         handleSetState({ NFTs: [...data.flat()] });
       });
     } else {
-      Promise.all([getAllNftsbyChain("Avalanche", 10)]).then((data) => {
+      Promise.all([getAllNftsbyChain("Avalanche", 10), getAllNftsbyChain("Polygon", 10)]).then((data) => {
         handleSetState({ NFTs: [...data.flat()] });
       });
     }

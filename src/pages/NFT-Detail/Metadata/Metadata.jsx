@@ -1,8 +1,8 @@
-import React, { CopyBlock, dracula } from "react-code-blocks";
 import { useContext } from "react";
-import classes from "./Metadata.module.css";
-import { GenContext } from "../../../gen-state/gen.context";
+import React, { CopyBlock, dracula } from "react-code-blocks";
 import { setNotification } from "../../../gen-state/gen.actions";
+import { GenContext } from "../../../gen-state/gen.context";
+import classes from "./Metadata.module.css";
 
 const Metadata = ({ nftDetails: properties }) => {
   const { dispatch } = useContext(GenContext);

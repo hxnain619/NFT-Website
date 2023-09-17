@@ -114,7 +114,7 @@
   pointer-events: none;
 }
 
-.mobileMenu a {
+.mobileMenu > a {
   color: var(--primary-white, #ecf1f9);
   /* font-family: 'Jost'; */
   font-size: 24px;
@@ -124,11 +124,11 @@
   position: relative;
 }
 
-.mobileMenu a.active {
+.mobileMenu > a.active {
   color: var(--secondary-yellow, #fec90c);
 }
 
-.mobileMenu a .decorator {
+.mobileMenu > a .decorator {
   position: absolute;
   width: 3px;
   left: -32px;

@@ -85,7 +85,6 @@ const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionN
   };
   const [isLoading, setIsLoading] = useState(false);
   const handleImageLoad = () => {
-    console.log("loaded");
     setIsLoading(false);
   };
 
