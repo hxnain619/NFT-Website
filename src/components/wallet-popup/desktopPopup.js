@@ -26,16 +26,26 @@ const DesktopPopup = ({
   showMetamask,
 }) => {
   return (
-    <div className={classes.card}>
-      <div className={classes.leftGrid}>
+    <div className={classes.modalCard}>
+     
+      <div className={classes.iconContainer}>
+          <CloseIcon
+            onClick={() => {
+              dispatch(setToggleWalletPopup(false));
+              setShowMoreOptions(false);
+              setConnectionMethods(false);
+            }}
+            className={classes.closeIcon}
+          />
+        </div>
         <div className={classes.heading}>
           <h3>{showConnectionMethods ? "Connect Wallets" : "Connect Your Wallet"}</h3>
           <p className={classes.description}>
             {showConnectionMethods
-              ? "Connect with one of our available wallet providers. You need to connect your wallet to access most of Genadrop features."
+              ? "Connect with one of our available providers."
               : "Select any of our supported blockchains"}{" "}
           </p>
-          {!showConnectionMethods && (
+          {/* {!showConnectionMethods && (
             <div className={classes.networkSwitch}>
               You&apos;re viewing data from the {mainnet ? "main" : "test"} network.
               <br /> Go to{" "}
@@ -48,7 +58,7 @@ const DesktopPopup = ({
               </a>{" "}
               to switch to {!mainnet ? "main" : "test"} network
             </div>
-          )}
+          )} */}
         </div>
 
         <div className={classes.wrapper}>
@@ -99,8 +109,7 @@ const DesktopPopup = ({
         </div> */}
           </div>
         </div>
-      </div>
-      <div className={classes.rightGrid}>
+      {/* <div className={classes.rightGrid}>
         <div className={classes.iconContainer}>
           <CloseIcon
             onClick={() => {
@@ -125,7 +134,7 @@ const DesktopPopup = ({
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
