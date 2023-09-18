@@ -6,6 +6,7 @@ import SingleNftCard from "../SingleNftCard/SingleNftCard";
 import NotFound from "../../not-found/notFound";
 import classes from "./FeaturedNfts.module.css";
 import SkeletonCards from "../../skeleton-card";
+import { EVM_CHAINS } from "../../../constant/chain";
 
 const FeaturedNFTCards = () => {
   const { mainnet } = useContext(GenContext);
@@ -30,7 +31,11 @@ const FeaturedNFTCards = () => {
         handleSetState({ NFTs: [...data.flat()] });
       });
     } else {
-      Promise.all([getAllNftsbyChain("Avalanche", 10), getAllNftsbyChain("Polygon", 10)]).then((data) => {
+      Promise.all([
+        getAllNftsbyChain(EVM_CHAINS.Avalanche, 10),
+        getAllNftsbyChain(EVM_CHAINS.Polygon, 10),
+        getAllNftsbyChain(EVM_CHAINS.Ethereum, 10),
+      ]).then((data) => {
         handleSetState({ NFTs: [...data.flat()] });
       });
     }

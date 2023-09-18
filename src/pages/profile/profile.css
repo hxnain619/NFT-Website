@@ -162,24 +162,30 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--card-outline);
-  border-radius: 5px;
-  background: transparent;
   margin: 10px 0;
   transition: border 10ms;
+
+  border-radius: 4px;
+  border: 1px solid rgba(147, 163, 248, 0.24);
+  background: var(--transparent-black-black-30, rgba(3, 7, 16, 0.3));
 }
 
 .text input {
   border: none;
   min-width: 80%;
   text-align: left;
-  font-size: 13px;
   min-height: 40px;
   border-radius: 5px;
   background-color: transparent;
-  color: #fbfbfb80;
   outline: none;
   border: none;
+
+  color: var(--transparent-white-white-50, rgba(251, 251, 251, 0.5));
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 .text:has(input:hover),
 .text:has(input:focus) {

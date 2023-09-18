@@ -16,17 +16,13 @@
   width: 100%;
   min-width: 480px;
   padding: 32px;
-  /* overflow: auto; */
   background: var(--tile-bg);
   min-height: 265px;
   border: 1px solid var(--primary-light-blue);
   border-radius: 8px;
   animation: show 300ms alternate;
-  /* margin: 6em auto 4em auto; */
   gap: 32px;
-  /* display: grid; */
-  /* grid-template-columns: 100% 0%; */
-  /* gap: 2%; */
+  position: relative;
 }
 
 .leftGrid {
@@ -71,13 +67,10 @@
 }
 
 .iconContainer {
-  width: 100%;
-  /* display: flex; */
   position: relative;
-  top: -2.5em;
-  left: 26em;
-  /* align-items: center; */
-  /* justify-content: flex-end; */
+  position: absolute;
+  right: 64px;
+  top: 0px;
 }
 
 .closeIcon {
@@ -301,7 +294,7 @@
 }
 .connectionMethod:hover {
   box-shadow: var(--shadow-dark);
-  transform:scale(1.2);
+  transform: scale(1.2);
 }
 
 .connectionMethod.metamask {
@@ -338,7 +331,6 @@
   text-decoration: underline;
 }
 @media screen and (max-width: 768px) {
-  
   .heading h4 {
     font-size: 0.85rem;
   }
@@ -378,8 +370,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  
-  .modalCard{
+  .modalCard {
     min-width: 280px;
   }
   .heading h4 {
@@ -421,7 +412,7 @@
     width: 48px;
     height: 48px;
   }
-  
+
   .connectionMethod h3 {
     font-size: 1rem;
   }
@@ -430,7 +421,6 @@
     font-size: 0.85rem;
   }
   .iconContainer {
-    top: -2.5em;
-    left: 17em;
+    right: 58px;
   }
 }

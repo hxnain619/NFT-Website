@@ -23,7 +23,7 @@ import {
 } from "../../utils";
 import { getSingleMinterAddress, getSoulBoundAddress } from "../../utils/address";
 import { isMainNet } from "../../utils/chain";
-import { getClientByChainName } from "../../utils/graph";
+import { getChainNameByChain, getClientByChain, getClientByChainName } from "../../utils/graph";
 import { avalancheClient, polygonClient } from "../../utils/graphqlClient";
 
 const soulboundSingleFilterAddress = getSoulBoundAddress(EVM_CHAINS.Polygon);
@@ -95,8 +95,9 @@ export const getChainUserCollections = async (account, chainName) => {
   return result;
 };
 
-export const getAllNftsbyChain = async (chainName, limit = 0) => {
-  const client = getClientByChainName(chainName);
+export const getAllNftsbyChain = async (chain, limit = 0) => {
+  const client = getClientByChain(chain);
+  const chainName = getChainNameByChain(chain);
   const { data: graphData, error } = await client.query(GET_SIGNLE_NFTS(chainName, limit, false)).toPromise();
   const { data: sbData, error: sbError } = await client.query(GET_SIGNLE_NFTS(chainName, limit, true)).toPromise();
 
@@ -105,7 +106,8 @@ export const getAllNftsbyChain = async (chainName, limit = 0) => {
   return data;
 };
 
-export const getAllChainCollections = async (chainName) => {
+export const getAllChainCollections = async (chain) => {
+  const chainName = getChainNameByChain(chain);
   const singleMinterAddress = getSingleMinterAddress(chainName, isMainNet);
 
   const { data, error } = await getClientByChainName(chainName).query(GET_GRAPH_COLLECTIONS).toPromise();

@@ -15,9 +15,22 @@ const getClientByChain = (chain) => {
   }
 };
 
+const getChainNameByChain = (chain) => {
+  switch (chain) {
+    case EVM_CHAINS.Polygon:
+      return "Polygon";
+    case EVM_CHAINS.Avalanche:
+      return "Avalanche";
+    case EVM_CHAINS.Ethereum:
+      return "Ethereum";
+    default:
+      return "Avalanche";
+  }
+};
+
 const getClientByChainName = (chainName) => {
   const chain = getChainFromName(chainName);
   return getClientByChain(chain);
 };
 
-export { getClientByChainName, getClientByChain };
+export { getClientByChainName, getClientByChain, getChainNameByChain };

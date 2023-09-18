@@ -7,6 +7,7 @@ import allChainsIcon from "../../../assets/all-chains.svg";
 import avalancheIcon from "../../../assets/icon-avalanche.svg";
 import { ReactComponent as DropdownIcon } from "../../../assets/icon-chevron-down.svg";
 import polygonIcon from "../../../assets/icon-polygon.svg";
+import ethereumIcon from "../../../assets/icon-ethereum.svg";
 import { GenContext } from "../../../gen-state/gen.context";
 import { orderedChainsList } from "../../../utils/supportedChains";
 import classes from "./chainDropdown.module.css";
@@ -14,6 +15,7 @@ import classes from "./chainDropdown.module.css";
 const chainIcon = {
   polygon: polygonIcon,
   avalanche: avalancheIcon,
+  ethereum: ethereumIcon,
 };
 
 const ChainDropdown = ({ onChainFilter, data }) => {
