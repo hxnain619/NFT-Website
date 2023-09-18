@@ -6,14 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* gap: 0.5em; */
-  /* border-radius: 0.7em; */
-  /* margin-top:8px; */
-  /* border-radius: 2px; */
-  /* cursor: pointer; */
-  /* background: #ffffff; */
-  /* border: 1.41429px solid #a9a9a9; */
-  /* box-shadow: 5.65714px 5.65714px 11.3143px rgba(28, 27, 28, 0.04); */
+  cursor: pointer;
   padding: 4px;
 }
 
@@ -80,11 +73,9 @@
 }
 
 .chain {
-  width: 26px;
-  height: 26px;
-  padding: 3px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background-color: rgba(238, 69, 68, 1);
 }
 
 .description {

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import supportedChains from "../../../utils/supportedChains";
 import classes from "./CollectionNftCard.module.css";
-// import { getFormatedPrice } from "../../../utils";
+import { v4 as uuidv4, v4 } from "uuid";
 
 const formattedNumber = (number, decimals = 2) => {
   const input = number?.toFixed(decimals);
@@ -40,11 +40,17 @@ const CollectionNftCard = ({ use_width, collection }) => {
               <video className={classes.image} controls src={image_urls[0]} alt="" />
             ) : (
               image_urls.map((image_url, id) => (
-                <img style={{ left: id * 8, bottom: id * 8 }} className={classes.image} src={image_url} alt="" />
+                <img
+                  style={{ left: id * 8, bottom: id * 8 }}
+                  className={classes.image}
+                  src={image_url}
+                  key={uuidv4()}
+                  alt=""
+                />
               ))
             )
           ) : (
-            <img alt="" />
+            <img alt="" key={uuidv4()} />
           )}
         </div>
       </div>

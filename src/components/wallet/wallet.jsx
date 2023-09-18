@@ -25,11 +25,11 @@ import {
   setNetworkType,
 } from "./wallet-script";
 
+import Web3 from "web3";
 import { setNotification } from "../../gen-state/gen.actions";
+import { chainIdToParams } from "../../utils/chain";
 import { readUserProfile } from "../../utils/firebase";
 import PushNotification from "../notifications/PushNotification";
-import Web3 from "web3";
-import { chainIdToParams, chainNameToParams } from "../../utils/chain";
 
 function ConnectWallet() {
   const history = useHistory();

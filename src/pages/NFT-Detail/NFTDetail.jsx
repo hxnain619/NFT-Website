@@ -3,12 +3,10 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../../assets/icon-arrow-left.svg";
 import { GenContext } from "../../gen-state/gen.context";
-import supportedChains from "../../utils/supportedChains";
 import Attributes from "./Attributes/Attributes";
 import Deals from "./Deals/Deals";
 import Description from "./Description/Description";
 import Details from "./Details/Details";
-import ListingMarket from "./ListingMarket/ListingMarket";
 import LoadingScreen from "./Loading-Screen/LoadingScreen";
 import Metadata from "./Metadata/Metadata";
 import More from "./More/More";
@@ -79,9 +77,6 @@ const NFTDetail = () => {
             <div className={classes.nftSection}>
               <div className={classes.desktop}>
                 <NFT nftDetails={nftDetails} />
-                {supportedChains[params.chainId]?.label === "Near" && nftDetails?.marketListed && (
-                  <ListingMarket nftDetails={nftDetails} />
-                )}
               </div>
             </div>
 

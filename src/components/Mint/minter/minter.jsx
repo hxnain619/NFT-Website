@@ -1276,30 +1276,6 @@ const Minter = () => {
                       </button>
                     </div>
                   </div>
-                  {chainId !== null &&
-                    supportedChains[chainId]?.chain !== "Algorand" &&
-                    supportedChains[chainId]?.chain !== "Near" &&
-                    supportedChains[chainId]?.chain !== "Arbitrum" &&
-                    supportedChains[chainId]?.chain !== "Optimism" && (
-                      <div className={`${classes.inputWrapper} `}>
-                        <div className={`${classes.toggleTitle}`}>
-                          <div className={classes.category}>
-                            Soul Bound{" "}
-                            <div className={classes.toggler}>
-                              <label className={classes.switch}>
-                                <input
-                                  type="checkbox"
-                                  // value={isSoulBound}
-                                  onClick={() => handleCheckSoulBound()}
-                                  defaultChecked={category === "Sesh"}
-                                />
-                                <span className={classes.slider} />
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
 
                   <div className={classes.inputWrapper}>
                     <div className={classes.confirm}>
@@ -1309,46 +1285,6 @@ const Minter = () => {
                     </div>
                   </div>
                 </section>
-
-                {/* <section className={classes.mintOptions}>
-                  <div className={classes.category}>Set Mint Options</div>
-                  <div className={classes.inputWrapper}>
-                    <label>Blockchain</label>
-                    <div
-                      onClick={() => handleSetState({ toggleDropdown: !toggleDropdown })}
-                      className={`${classes.chain} ${classes.active}`}
-                    >
-                      {chainId ? (
-                        <div className={classes.chainLabel}>
-                          <img src={supportedChains[chainId].icon} alt="" />
-                          {chain?.label}
-                        </div>
-                      ) : (
-                        <span>Select Chain</span>
-                      )}
-                      <DropdownIcon className={classes.dropdownIcon} />
-                    </div>
-                    <div className={`${classes.chainDropdown} ${toggleDropdown && classes.active}`}>
-                      {Object.values(supportedChains)
-                        .filter((chainE) => mainnet === chainE.isMainnet)
-                        .map((chainE) => (
-                          <div
-                            onClick={() =>
-                              !chainE.comingSoon && chainE.networkId !== chainId
-                                ? handleConnectFromMint(chainE)
-                                : handleSetState({ toggleDropdown: !toggleDropdown })
-                            }
-                            className={`${classes.chain} ${chainE.comingSoon && classes.disable}`}
-                            key={chainE.id}
-                            value={chainE.label}
-                          >
-                            <img src={chainE.icon} alt="" />
-                            {chainE.label}
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                </section> */}
               </div>
               <section className={classes.mintButtonWrapper}>
                 <button type="button" onClick={onMint} className={classes.mintBtn}>

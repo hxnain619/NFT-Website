@@ -9,6 +9,7 @@ import { getCollectionsByChain, sortBy } from "../../../pages/Marketplace/Market
 import { setActiveCollection } from "../../../gen-state/gen.actions";
 import { getAllChainCollections } from "../../../renderless/fetch-data/fetchUserGraphData";
 import SkeletonCards from "../../skeleton-card";
+import { EVM_CHAINS } from "../../../constant/chain";
 
 const AllNfts = () => {
   const [state, setState] = useState({
@@ -45,7 +46,11 @@ const AllNfts = () => {
   };
 
   useEffect(() => {
-    Promise.all([getAllChainCollections("Avalanche"), getAllChainCollections("Polygon")]).then((data) => {
+    Promise.all([
+      getAllChainCollections(EVM_CHAINS.Avalanche),
+      getAllChainCollections(EVM_CHAINS.Polygon),
+      getAllChainCollections(EVM_CHAINS.Ethereum),
+    ]).then((data) => {
       const filteredData = sortBy({ collections: data.flat(), value: "Newest" });
       console.log("collections", filteredData);
       handleSetState({ collections: filteredData });

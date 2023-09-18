@@ -1,26 +1,27 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
-import React, { useContext, useEffect, useState, useRef } from "react";
-import classes from "./MarketplaceAll.module.css";
-import CollectionNftCard from "../../components/Marketplace/CollectionNftCard/CollectionNftCard";
-import { GenContext } from "../../gen-state/gen.context";
-import PageControl from "../../components/Marketplace/Page-Control/PageControl";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ChainDropdown from "../../components/Marketplace/Chain-dropdown/chainDropdown";
+import CollectionNftCard from "../../components/Marketplace/CollectionNftCard/CollectionNftCard";
+import FilterDropdown from "../../components/Marketplace/Filter-dropdown/FilterDropdown";
+import PageControl from "../../components/Marketplace/Page-Control/PageControl";
+import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
+import NotFound from "../../components/not-found/notFound";
+import Search from "../../components/Search/Search";
+import SkeletonCards from "../../components/skeleton-card";
+import { GenContext } from "../../gen-state/gen.context";
+import { getAllChainCollections, getAllNftsbyChain } from "../../renderless/fetch-data/fetchUserGraphData";
 import {
+  filterBy,
+  getCollectionsByChain,
+  getCollectionsByDate,
   rangeBy,
   sortBy,
-  getCollectionsByDate,
-  getCollectionsByChain,
-  filterBy,
 } from "../Marketplace/Marketplace-script";
-import NotFound from "../../components/not-found/notFound";
-import FilterDropdown from "../../components/Marketplace/Filter-dropdown/FilterDropdown";
-import SingleNftCard from "../../components/Marketplace/SingleNftCard/SingleNftCard";
-import Search from "../../components/Search/Search";
-import { getAllChainCollections, getAllNftsbyChain } from "../../renderless/fetch-data/fetchUserGraphData";
-import SkeletonCards from "../../components/skeleton-card";
+import classes from "./MarketplaceAll.module.css";
 
 import GlowCircle from "../../components/glow-circle/GlowCircle";
+import { EVM_CHAINS } from "../../constant/chain";
 
 const MarketplaceAll = () => {
   const { mainnet, dispatch } = useContext(GenContext);
@@ -58,10 +59,12 @@ const MarketplaceAll = () => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      getAllNftsbyChain("Avalanche"),
-      getAllNftsbyChain("Polygon"),
-      getAllChainCollections("Avalanche"),
-      getAllChainCollections("Polygon"),
+      getAllNftsbyChain(EVM_CHAINS.Avalanche, 10),
+      getAllNftsbyChain(EVM_CHAINS.Polygon, 10),
+      getAllNftsbyChain(EVM_CHAINS.Ethereum, 10),
+      getAllChainCollections(EVM_CHAINS.Avalanche, 10),
+      getAllChainCollections(EVM_CHAINS.Polygon, 10),
+      getAllChainCollections(EVM_CHAINS.Ethereum, 10),
     ]).then((data) => {
       const filteredData = sortBy({ collections: data.flat(), value: "Newest" });
       handleSetState({ collections: filteredData, filteredCollection: filteredData });

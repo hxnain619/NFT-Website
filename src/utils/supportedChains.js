@@ -112,7 +112,7 @@ const supportedChains = {
 export const orderedChainsList = [
   {
     id: "matic-network",
-    label: "Polygon ",
+    label: "Polygon",
     chain: "Polygon",
     icon: polygonChainIcon,
     symbol: "MATIC",
@@ -154,7 +154,7 @@ export const orderedChainsList = [
   },
   {
     id: "avalanche",
-    label: "Avalanche ",
+    label: "Avalanche",
     chain: "Avalanche",
     icon: avaxChainIcon,
     livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=avalanche-2&vs_currencies=usd",
@@ -165,6 +165,35 @@ export const orderedChainsList = [
     isMainnet: false,
     switch: switchChain,
     coinGeckoLabel: "avalanche-2",
+  },
+  {
+    id: "ethereum",
+    label: "Ethereum",
+    chain: "Ethereum",
+    icon: etherChainIcon,
+    symbol: "ETH",
+    networkId: 1,
+    explorer: "https://etherscan.io/",
+    livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
+    add: addChain,
+    isMainnet: true,
+    switch: switchChain,
+    coinGeckoLabel: "ethereum",
+  },
+
+  {
+    id: "ethereum-testnet",
+    label: "Ethereum",
+    chain: "Ethereum",
+    icon: etherChainIcon,
+    symbol: "ETH",
+    networkId: 5,
+    explorer: "https://goerli.etherscan.io/",
+    livePrice: "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd",
+    add: addChain,
+    isMainnet: false,
+    switch: switchChain,
+    coinGeckoLabel: "ethereum",
   },
 ];
 
