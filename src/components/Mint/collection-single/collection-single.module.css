@@ -112,6 +112,7 @@
   flex-direction: column;
   padding: 3em 0;
   gap: 32px;
+  cursor: var(--cursor-pointer);
   border-radius: 4px;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
   transition: background-image 10ms ease-in-out;
@@ -119,7 +120,7 @@
 
 .card:hover {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2393A3F8FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-  cursor: var(--cursor-hover);
+  /* cursor: var(--cursor-hover); */
 }
 
 .card.collection {
