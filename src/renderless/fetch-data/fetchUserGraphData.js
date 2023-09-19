@@ -6,7 +6,7 @@ import { EVM_CHAINS } from "../../constant/chain";
 import {
   GET_GRAPH_COLLECTIONS,
   GET_GRAPH_NFT,
-  GET_SIGNLE_NFTS,
+  GET_SINGLE_NFTS,
   GET_SINGLE_GRAPH_COLLECTION,
   GET_USER_COLLECTIONS,
   GET_USER_NFT,
@@ -98,8 +98,8 @@ export const getChainUserCollections = async (account, chainName) => {
 export const getAllNftsbyChain = async (chain, limit = 0) => {
   const client = getClientByChain(chain);
   const chainName = getChainNameByChain(chain);
-  const { data: graphData, error } = await client.query(GET_SIGNLE_NFTS(chainName, limit, false)).toPromise();
-  const { data: sbData, error: sbError } = await client.query(GET_SIGNLE_NFTS(chainName, limit, true)).toPromise();
+  const { data: graphData, error } = await client.query(GET_SINGLE_NFTS(chainName, limit, false)).toPromise();
+  const { data: sbData, error: sbError } = await client.query(GET_SINGLE_NFTS(chainName, limit, true)).toPromise();
 
   if (error || sbError) return [];
   const data = await getSingleGraphNfts([...graphData.nfts, ...sbData.nfts]);

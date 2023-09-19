@@ -250,25 +250,24 @@ const polygonSoulBoundAddress = getSoulBoundAddress(EVM_CHAINS.Polygon, isMainNe
 const avalancheAddress = getSingleMinterAddress(EVM_CHAINS.Avalanche, isMainNet);
 const avalancheSoulBoundAddress = getSoulBoundAddress(EVM_CHAINS.Avalanche, isMainNet);
 
+const ethereumAddress = getSingleMinterAddress(EVM_CHAINS.Avalanche, isMainNet);
+const ethereumSoulBoundAddress = getSoulBoundAddress(EVM_CHAINS.Avalanche, isMainNet);
+
 const addressByNetworkandSoulBound = (chainName, isSoulBound) => {
-  return isSoulBound
-    ? chainName === "Polygon"
-      ? polygonSoulBoundAddress
-      : chainName === "Avalanche"
-      ? avalancheSoulBoundAddress
-      : ""
-    : chainName === "Polygon"
-    ? polygonAddress
-    : chainName === "Avalanche"
-    ? avalancheAddress
-    : "";
+  if (chainName.toLowerCase() === "polygon") {
+    return isSoulBound ? polygonSoulBoundAddress : polygonAddress;
+  }
+  if (chainName.toLowerCase() === "avalanche") {
+    return isSoulBound ? avalancheSoulBoundAddress : avalancheAddress;
+  }
+  return isSoulBound ? ethereumSoulBoundAddress : ethereumAddress;
 };
 
 const limitString = (limit) => {
   return limit ? `first: ${limit}` : "";
 };
 
-export const GET_SIGNLE_NFTS = (chainName, limit, isSoulBound) => {
+export const GET_SINGLE_NFTS = (chainName, limit, isSoulBound) => {
   return `
   query MyQuery {
     nfts(orderBy: createdAtTimestamp, orderDirection: desc, ${limitString(

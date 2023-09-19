@@ -3,28 +3,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* gap: 0.5em; */
   margin-top: 8px;
   border-radius: 2px;
   cursor: pointer;
-  border: 1.41429px solid var(--primary-dark-blue);
+  border: 1px solid var(--primary-dark-blue);
   background: rgba(187, 197, 255, 0.04);
   padding: 3px;
   min-width: 286px;
   width: 286px;
   height: 432px;
+  transition: 300ms;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
 }
 
 .container * {
   color: var(--transparent-white-white-90);
 }
 
-.container:hover .image {
-  transform: scale(1.05);
+.container:hover {
+  border: 1px solid #20c1ff;
 }
 
 .imageContainer {
