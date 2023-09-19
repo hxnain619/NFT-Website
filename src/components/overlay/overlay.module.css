@@ -26,7 +26,8 @@
   flex-direction: column;
   padding: 1.5em 2em;
   border-radius: 1em;
-  background: var(--default);
+  background: var(--primary-black-bg);
+
 }
 
 .wrapper img {
