@@ -1,25 +1,22 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 import { useContext, useEffect } from "react";
-import { ethers } from "ethers";
-import {
-  setCollections,
-  setSingleNfts,
-  setPolygonCollections,
-  setAvalancheCollections,
-  setNotification,
-  setSearchContainer,
-  setPolygonSingleNfts,
-  setAvalancheSingleNfts,
-} from "../../gen-state/gen.actions";
-import { getGraphCollections, getNftCollections, getSingleNfts, getSingleGraphNfts } from "../../utils";
-import { GET_GRAPH_COLLECTIONS, GET_SIGNLE_NFTS } from "../../graphql/querries/getCollections";
-import { avalancheClient, polygonClient } from "../../utils/graphqlClient";
-import { GenContext } from "../../gen-state/gen.context";
-import { parseAvaxSingle, parsePolygonCollection, parsePolygonSingle } from "./fetchData-script";
-import { getSingleMinterAddress } from "../../utils/address";
 import { EVM_CHAINS } from "../../constant/chain";
+import {
+  setAvalancheCollections,
+  setAvalancheSingleNfts,
+  setNotification,
+  setPolygonCollections,
+  setPolygonSingleNfts,
+  setSearchContainer,
+} from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
+import { GET_GRAPH_COLLECTIONS, GET_SINGLE_NFTS } from "../../graphql/querries/getCollections";
+import { getGraphCollections, getSingleGraphNfts } from "../../utils";
+import { getSingleMinterAddress } from "../../utils/address";
 import { isMainNet } from "../../utils/chain";
+import { avalancheClient, polygonClient } from "../../utils/graphqlClient";
+import { parseAvaxSingle, parsePolygonCollection, parsePolygonSingle } from "./fetchData-script";
 
 const FetchData = () => {
   const { dispatch, mainnet } = useContext(GenContext);
@@ -59,9 +56,9 @@ const FetchData = () => {
     (async function getPolygonSingleNfts() {
       dispatch(setPolygonSingleNfts(null));
 
-      const { data, error } = await polygonClient.query(GET_SIGNLE_NFTS("Polygon", 0, false)).toPromise();
+      const { data, error } = await polygonClient.query(GET_SINGLE_NFTS("Polygon", 0, false)).toPromise();
       const { data: sbData, error: sbError } = await polygonClient
-        .query(GET_SIGNLE_NFTS("Polygon", 0, true))
+        .query(GET_SINGLE_NFTS("Polygon", 0, true))
         .toPromise();
       if (error || sbError) {
         return dispatch(
@@ -119,7 +116,7 @@ const FetchData = () => {
     (async function getAvalancheSingleNfts() {
       dispatch(setAvalancheSingleNfts(null));
 
-      const { data, error } = await avalancheClient.query(GET_SIGNLE_NFTS("Avalanche", 0, false)).toPromise();
+      const { data, error } = await avalancheClient.query(GET_SINGLE_NFTS("Avalanche", 0, false)).toPromise();
       if (error) {
         return dispatch(
           setNotification({

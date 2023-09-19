@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import supportedChains from "../../../utils/supportedChains";
 import classes from "./CollectionNftCard.module.css";
-import { v4 as uuidv4, v4 } from "uuid";
 
 const formattedNumber = (number, decimals = 2) => {
   const input = number?.toFixed(decimals);
@@ -27,6 +27,18 @@ const CollectionNftCard = ({ use_width, collection }) => {
     getUsdValue();
   }, [getUsdValue]);
 
+  // Calculate the total width of images
+  const totalWidth = image_urls ? image_urls.length * 8 : 0;
+
+  // Calculate the negative margin to center the image stack
+  const imageStackStyle = {
+    marginLeft: `-${totalWidth / 2}px`, // Center the stack    width: 100%;
+    marginTop: `${totalWidth / 2}px`, // Center the stack    width: 100%;
+    width: `100%`,
+    height: `100%`,
+    position: `relative`,
+  };
+
   return (
     <div
       style={use_width ? { width: use_width } : {}}
@@ -39,15 +51,17 @@ const CollectionNftCard = ({ use_width, collection }) => {
             image_urls[0] && image_urls[0].slice(-3) === "mp4" ? (
               <video className={classes.image} controls src={image_urls[0]} alt="" />
             ) : (
-              image_urls.map((image_url, id) => (
-                <img
-                  style={{ left: id * 8, bottom: id * 8 }}
-                  className={classes.image}
-                  src={image_url}
-                  key={uuidv4()}
-                  alt=""
-                />
-              ))
+              <div style={imageStackStyle}>
+                {image_urls.map((image_url, id) => (
+                  <img
+                    style={{ left: id * 8, bottom: id * 8 }}
+                    className={classes.image}
+                    src={image_url}
+                    key={uuidv4()}
+                    alt=""
+                  />
+                ))}
+              </div>
             )
           ) : (
             <img alt="" key={uuidv4()} />

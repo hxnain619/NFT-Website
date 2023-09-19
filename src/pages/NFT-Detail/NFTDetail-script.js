@@ -3,6 +3,7 @@
 /* eslint-disable consistent-return */
 import { getAllNftsbyChain, getNftById, getSingleCollection } from "../../renderless/fetch-data/fetchUserGraphData";
 import { getCeloGraphNft, getGraphCollection, getTransactions } from "../../utils";
+import { getChainFromName } from "../../utils/chain";
 import { readUserProfile } from "../../utils/firebase";
 import supportedChains from "../../utils/supportedChains";
 
@@ -60,7 +61,7 @@ export const getGraphData = async ({ graphProps }) => {
     try {
       // Fetching for nft by Id comparing it to the chain it belongs to before displaying the Id
       const [nftData, trHistory] = await getNftById(nftId, supportedChains[Number(chainId)]?.chain);
-      const nfts = await getAllNftsbyChain(supportedChains[Number(chainId)]?.chain, 10);
+      const nfts = await getAllNftsbyChain(getChainFromName(supportedChains[Number(chainId)]?.chain), 10);
       return {
         nftDetails: nftData,
         collection: [],

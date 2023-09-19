@@ -1,10 +1,10 @@
 /* eslint-disable import/no-import-module-exports */
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import GenContextProvider from "./gen-state/gen.context";
+import "./index.css";
 import Loading from "./pages/loading/loading";
 
 if (module.hot) {

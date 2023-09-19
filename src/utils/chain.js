@@ -117,7 +117,7 @@ const getChainFromName = (chainName) => {
   if (chainName.toLowerCase().includes("avalanche")) {
     return EVM_CHAINS.Avalanche;
   }
-  if (chainName.toLowerCase().includes("eth")) {
+  if (chainName.toLowerCase().includes("ethereum")) {
     return EVM_CHAINS.Ethereum;
   }
 
