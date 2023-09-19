@@ -14,6 +14,7 @@ import ProfileImg from "../../assets/ai-art-style/cartoonist.png";
 
 import "./profile.css";
 import { breakAddress } from "../NFT-Detail/NFTDetail-script";
+import BackButton from "../../components/back-button/BackButton";
 
 const Profile = () => {
   const history = useHistory();
@@ -61,10 +62,11 @@ const Profile = () => {
 
   return (
     <>
+        <BackButton/>
       <div className="container">
-        <Link to="#" className="back-btn" onClick={() => history.goBack()}>
+        {/* <Link to="#" className="back-btn" onClick={() => history.goBack()}>
           <ArrowBack /> Back
-        </Link>{" "}
+        </Link>{" "} */}
         <div className="heading-section">Profile Settings</div>
       </div>
       <div className="bg-cover">

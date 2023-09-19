@@ -42,6 +42,7 @@ import { GenContext } from "../../../gen-state/gen.context";
 import QrReaderContainer from "../../../pages/NFT-Detail/ImageModal/ImageModal";
 import IpfsImage from "../IpfsImage/IpfsImage";
 import Tweeter from "../Tweeter/tweeter";
+import BackButton from "../../back-button/BackButton";
 
 const Minter = () => {
   const params = useParams();
@@ -766,6 +767,8 @@ const Minter = () => {
           zip={zip}
         />
       ) : (
+        <>
+          <BackButton/>
         <div className={classes.wrapper}>
           <div className={classes.header}>
             <div className={classes.headerTitle}>Create Your NFT</div>
@@ -1305,6 +1308,8 @@ const Minter = () => {
             />
           )}
         </div>
+        </>
+
       )}
       <ProfileImgOverlay
         metadata={metadata}

@@ -6,6 +6,7 @@ import cards from "./Creating-script";
 import { ReactComponent as DownArrow } from "../../assets/down-arrow.svg";
 import { GenContext } from "../../gen-state/gen.context";
 import { setNotification } from "../../gen-state/gen.actions";
+import BackButton from "../../components/back-button/BackButton";
 
 const Creating = () => {
   const history = useHistory();
@@ -49,6 +50,8 @@ const Creating = () => {
   };
 
   return (
+    <>
+    <BackButton/>
     <div className={classes.container}>
       <div className={classes.heading}>
         <div className={classes.title}>Create Your NFT</div>
@@ -84,6 +87,7 @@ const Creating = () => {
         {active ? "See less" : "See more"} <DownArrow />
       </div> */}
     </div>
+    </>
   );
 };
 

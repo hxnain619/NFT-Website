@@ -11,6 +11,7 @@ import { setMinter, setZip } from "../../../gen-state/gen.actions";
 import { NearErrorPop, NearSuccessPopup } from "../popup/nearMintPopup";
 import MintTweet from "../mintTweet/mintTweet";
 import MintIpfs from "../mintIPFS/mintIPFS";
+import BackButton from "../../back-button/BackButton";
 
 const CollectionToSingleMinter = () => {
   const params = useParams();
@@ -217,9 +218,11 @@ const CollectionToSingleMinter = () => {
             <NearSuccessPopup handleSetState={handleSetState} popupProps={popupProps} />
           )}
           <>
-            <Link to="/create" className={classes.goBack}>
+            {/* <Link to="/create" className={classes.goBack}>
               <BackIcon className={classes.backIcon} />
-            </Link>
+            </Link> */}
+            
+              <BackButton/>
             <header className={classes.headingWrapper}>
               <h1 className={classes.heading}>Create your NFT</h1>
               <p className={classes.description}>
