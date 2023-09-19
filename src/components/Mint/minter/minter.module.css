@@ -818,6 +818,7 @@ div.showPreview > span {
   -webkit-appearance: none;
   -moz-appearance: none; */
   margin-right: 1em;
+  cursor: var(--cursor-pointer) !important;
   max-width: 20px !important;
   height: 20px !important;
   border: 1px solid var(--primary-blue) !important;
