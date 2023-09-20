@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { ethers } from "ethers";
 import { EVM_CHAINS } from "../../constant/chain";
 import { getSingleMinterAddress, getSoulBoundAddress } from "../../utils/address";
 import { isMainNet } from "../../utils/chain";

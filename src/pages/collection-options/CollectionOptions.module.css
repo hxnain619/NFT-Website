@@ -1,26 +1,38 @@
 .container {
-  padding: 2em 2em 6em;
-  max-width: 908px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
+  gap: 48px;
+  padding: 16px 188px;
 }
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .title {
-  font-weight: 700;
-  font-size: 4rem;
-  color: var(--text-heading);
-  margin-bottom: 0.25em;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+  font-family: "Jost";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 48px;
 }
 .description {
-  font-size: 1.25rem;
-  color: #000000;
-  margin-bottom: 3.2em;
+  color: var(--primary-white, #ecf1f9);
   text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
 }
 .cardDeck {
-  display: grid;
+  display: flex;
   gap: 27px 29px;
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
@@ -29,39 +41,68 @@
 }
 .typeCard {
   display: flex;
+  height: 240px;
   flex-direction: column;
-  padding: 1rem;
+  flex: 1 0 0;
+  justify-content: center;
   align-items: center;
-  border: 1px solid;
-  box-shadow: 26px 18px 18px rgba(93, 134, 194, 0.05);
-  border-radius: 20px;
-  background: var(--default);
-  border: 1px solid #e5ecfb;
-  min-height: 243px;
+  gap: 16px;
+  align-self: stretch;
+  border-radius: 4px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  transition: background-image 10ms ease-in-out;
   cursor: pointer;
-}
-.typeCard:hover {
-  border-color: var(--main-color);
-}
-.typeCard:hover .content {
-  background: var(--main-color);
-}
-.typeCard:hover .cardTitle,
-.typeCard:hover .cardDesc {
-  color: var(--default);
+
+  animation: slide-right 850ms forwards;
+  transform: translateX(-2%);
+  padding: 8px;
 }
 
-.typeCard:hover .icon svg path {
-  stroke: var(--main-color);
+.typeCard:hover {
+  background: var(--marketplaceBg);
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2393A3F8FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
-.typeCard:nth-child(3):hover .icon svg path {
-  fill: var(--main-color);
+
+.cardTitle {
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
-.typeCard:nth-child(2):hover .icon svg path:last-child {
-  fill: var(--main-color);
+.cardDescription {
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(2%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(-2%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 .icon {
-  height: 100%;
   display: flex;
   align-items: center;
 }
@@ -102,10 +143,6 @@
   flex-direction: column;
   width: calc(100% - 52px);
 }
-.cardTitle {
-  font-size: 14px;
-  color: var(--text-heading);
-}
 .cardDesc {
   font-size: 10px;
   color: #959ca3;
@@ -129,32 +166,27 @@
 .moreBTN svg path {
   fill: var(--main-color);
 }
-@media screen and (max-width: 650px) {
+
+@media (max-width: 1024px) {
+  .typeCard {
+    padding: 24px;
+  }
+
+  .container {
+    padding: 24px 16px;
+  }
+
   .cardDeck {
-    grid-template-columns: repeat(2, 1fr);
+    flex-direction: column;
   }
 }
+
 @media screen and (max-width: 480px) {
-  .cardDeck {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .typeCard {
-    min-height: auto;
-  }
   .title {
     font-size: 2rem;
   }
   .description {
     font-size: 15px;
-  }
-  .card {
-    padding: 1.25rem 1rem;
-  }
-  .cardTitle {
-    font-size: 0.75rem;
-  }
-  .cardDescription {
-    font-size: 0.5rem;
   }
   .icon {
     width: 80px;

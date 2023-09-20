@@ -51,42 +51,42 @@ const Creating = () => {
 
   return (
     <>
-    <BackButton/>
-    <div className={classes.container}>
-      <div className={classes.heading}>
-        <div className={classes.title}>Create Your NFT</div>
-        <div className={classes.description}>Create all types of NFTs, automatically indexed in our marketplace.</div>
-      </div>
-      <div className={classes.cardDeck}>
-        {cards.slice(0, 6).map((card) => (
-          <div onClick={() => handleRedirect(card)} to={card.url} className={classes.card} key={card.title}>
-            <div className={`${classes.icon} ${card.title === "Tweets" ? classes.tweetIcon : ""}`}>{card.icon}</div>
-            <div className={classes.cardTitle}>{card.title}</div>
-            <div className={classes.cardDescription}>{card.description}</div>
-          </div>
-        ))}
-      </div>
-      <div className={`${classes.extra} ${active ? classes.active : ""}`}>
-        {cards.slice(6).map((card) => (
-          <Link
-            to={!card.comingSoon && card.url}
-            className={`${classes.card} ${card.comingSoon ? classes.noDrop : ""}`}
-            key={card.title}
-          >
-            <div className={classes.icon}>{card.icon}</div>
-            <div className={classes.cardTitle}>{card.title}</div>
-            <div className={classes.cardDescription}>{card.description}</div>
-            {card.comingSoon ? <div className={classes.comingSoon}>Coming Soon!</div> : ""}
-          </Link>
-        ))}
-      </div>
-      {/* <div
+      <div className={classes.container}>
+        <BackButton />
+        <div className={classes.heading}>
+          <div className={classes.title}>Create Your NFT</div>
+          <div className={classes.description}>Create all types of NFTs, automatically indexed in our marketplace.</div>
+        </div>
+        <div className={classes.cardDeck}>
+          {cards.slice(0, 6).map((card) => (
+            <div onClick={() => handleRedirect(card)} to={card.url} className={classes.card} key={card.title}>
+              <div className={`${classes.icon} ${card.title === "Tweets" ? classes.tweetIcon : ""}`}>{card.icon}</div>
+              <div className={classes.cardTitle}>{card.title}</div>
+              <div className={classes.cardDescription}>{card.description}</div>
+            </div>
+          ))}
+        </div>
+        <div className={`${classes.extra} ${active ? classes.active : ""}`}>
+          {cards.slice(6).map((card) => (
+            <Link
+              to={!card.comingSoon && card.url}
+              className={`${classes.card} ${card.comingSoon ? classes.noDrop : ""}`}
+              key={card.title}
+            >
+              <div className={classes.icon}>{card.icon}</div>
+              <div className={classes.cardTitle}>{card.title}</div>
+              <div className={classes.cardDescription}>{card.description}</div>
+              {card.comingSoon ? <div className={classes.comingSoon}>Coming Soon!</div> : ""}
+            </Link>
+          ))}
+        </div>
+        {/* <div
         className={`${classes.moreBTN} ${active ? classes.active : ""}`}
         onClick={() => handleSetState({ active: !active })}
       >
         {active ? "See less" : "See more"} <DownArrow />
       </div> */}
-    </div>
+      </div>
     </>
   );
 };

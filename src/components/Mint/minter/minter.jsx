@@ -1,12 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/media-has-caption */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable eqeqeq */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable consistent-return */
-/* eslint-disable no-unsafe-optional-chaining */
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
@@ -768,476 +759,481 @@ const Minter = () => {
         />
       ) : (
         <>
-          <BackButton/>
-        <div className={classes.wrapper}>
-          <div className={classes.header}>
-            <div className={classes.headerTitle}>Create Your NFT</div>
-            {file?.length > 1 ? (
-              <div className={classes.headerDescription}>
-                Upload a{" "}
-                <span>
-                  collection
-                  <BorderIcon />
-                </span>{" "}
-                to create NFTs on any of our <br />
-                supported blockchains super fast!
-              </div>
-            ) : (
-              <div className={classes.headerDescription}>Upload an image to create NFT</div>
-            )}
-          </div>
-          <div className={classes.grid}>
-            {/* <Category handleSetState={handleSetState} category={category} file={file} params={params} /> */}
-            <div className={classes.mintSection}>
-              <section className={classes.assetContainer}>
-                {tweet ? (
-                  <div ref={tweetRef}>
-                    <Tweeter tweet={tweet} />
-                  </div>
-                ) : ipfsLink ? (
-                  <div className={classes.ipfs}>
-                    <IpfsImage ipfsLink={ipfsLink} type={ipfsType} />
-                  </div>
-                ) : (
-                  <div className={`${classes.imageContainers} ${file?.length > 1 && classes._}`}>
-                    {mintId === "ai" ? (
-                      <img src={aiData.imageUrl} alt="" className={classes.singleImage} />
-                    ) : (
-                      file &&
-                      (file?.length > 1 ? (
-                        file
-                          .filter((_, idx) => idx < 3)
-                          .map((f, idx) => (
-                            <div
-                              key={idx}
-                              style={{ backgroundImage: `url(${URL.createObjectURL(f)})` }}
-                              className={classes.imageContainer}
-                            />
-                          ))
-                      ) : videoExtensions.includes(fileExtension) ? (
-                        <video src={URL.createObjectURL(file[0])} alt="" className={classes.singleImage} controls />
-                      ) : audioExtensions.includes(fileExtension) ? (
-                        <audio src={URL.createObjectURL(file[0])} className={classes.singleImage} controls muted />
-                      ) : (
-                        <img
-                          src={mintId !== "ai" ? URL.createObjectURL(file[0]) : aiData.imageUrl}
-                          alt=""
-                          className={classes.singleImage}
-                        />
-                      ))
-                    )}
-                    {category === "Vibe" && <VibesLogo className={classes.overlayImage} />}
-                  </div>
-                )}
-
-                <div className={classes.assetInfo}>
-                  <div className={classes.innerAssetInfo}>
-                    <div className={classes.assetInfoTitle}>
-                      <span>
-                        {tweet
-                          ? `${tweet.author_id.username + moment(tweet.created_at).format(" hh:mm a · MM Do, YYYY")}`
-                          : mintId === "ai"
-                          ? fileName
-                          : fName}
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        {"Number of assets: "}
-                        {file?.length ? file.length : 1}
-                      </span>
-                    </div>
-                    {chainId === 4160 && (
-                      <div className={classes.priceTooltip}>
-                        <span>Mint Price:</span> <p className={classes.assetInfoMintPrice}>{file?.length * 0.1} ALGO</p>
-                        <GenadropToolTip content="Mint price is 0.01 per NFT" fill="#0d99ff" />
-                      </div>
-                    )}
-                    {file?.length > 1 ? (
-                      <div onClick={() => handleSetState({ preview: true })} className={classes.showPreview}>
-                        <span>view all assets</span>
-                        <img src={rightArrow} alt="" />
-                      </div>
-                    ) : null}
-                  </div>
-                  <button
-                    onClick={() => {
-                      tweet ? history.push("/mint/tweet") : changeFile();
-                    }}
-                    type="button"
-                  >
-                    Change Asset
-                  </button>
+          <BackButton />
+          <div className={classes.wrapper}>
+            <div className={classes.header}>
+              <div className={classes.headerTitle}>Create Your NFT</div>
+              {file?.length > 1 ? (
+                <div className={classes.headerDescription}>
+                  Upload a{" "}
+                  <span>
+                    collection
+                    <BorderIcon />
+                  </span>{" "}
+                  to create NFTs on any of our <br />
+                  supported blockchains super fast!
                 </div>
-              </section>
-              <div className={classes.mintForm}>
-                <div className={classes.heading}> {getActivetitle()}</div>
-
-                <section className={classes.details}>
-                  {/* <div className={classes.category}>Asset Details</div> */}
-                  <div className={classes.inputWrapper}>
-                    <label>
-                      {"Add NFT Name "}
-                      <span className={classes.required}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={fileName}
-                      onChange={(event) => {
-                        handleSetState({ fileName: event.target.value });
-                      }}
-                    />
-                  </div>
-
-                  {category === "Vibe" && (
-                    <div className={classes.inputWrapper}>
-                      <label>Friendliness</label>
-                      <SliderInput
-                        MAX={10}
-                        value={vibeProps.friendliness}
-                        handleChange={(e) => {
-                          const friendliness = e.target.value;
-                          const newProps = vibeProps;
-                          newProps.friendliness = friendliness;
-                          handleSetState({
-                            vibeProps: newProps,
-                          });
-                        }}
-                      />
-                      <label>Energy</label>
-                      <SliderInput
-                        MAX={10}
-                        value={vibeProps.energy}
-                        handleChange={(e) => {
-                          const energy = e.target.value;
-                          const newProps = vibeProps;
-                          newProps.energy = energy;
-                          handleSetState({
-                            vibeProps: newProps,
-                          });
-                        }}
-                      />
-                      <label>Density</label>
-                      <SliderInput
-                        MAX={10}
-                        value={vibeProps.density}
-                        handleChange={(e) => {
-                          const density = e.target.value;
-                          const newProps = vibeProps;
-                          newProps.density = density;
-                          handleSetState({
-                            vibeProps: newProps,
-                          });
-                        }}
-                      />
-                      <label>Diversity</label>
-                      <SliderInput
-                        MAX={10}
-                        value={vibeProps.diversity}
-                        handleChange={(e) => {
-                          const diversity = e.target.value;
-                          const newProps = vibeProps;
-                          newProps.diversity = diversity;
-                          handleSetState({
-                            vibeProps: newProps,
-                          });
-                        }}
-                      />
+              ) : (
+                <div className={classes.headerDescription}>Upload an image to create NFT</div>
+              )}
+            </div>
+            <div className={classes.grid}>
+              {/* <Category handleSetState={handleSetState} category={category} file={file} params={params} /> */}
+              <div className={classes.mintSection}>
+                <section className={classes.assetContainer}>
+                  {tweet ? (
+                    <div ref={tweetRef}>
+                      <Tweeter tweet={tweet} />
+                    </div>
+                  ) : ipfsLink ? (
+                    <div className={classes.ipfs}>
+                      <IpfsImage ipfsLink={ipfsLink} type={ipfsType} />
+                    </div>
+                  ) : (
+                    <div className={`${classes.imageContainers} ${file?.length > 1 && classes._}`}>
+                      {mintId === "ai" ? (
+                        <img src={aiData.imageUrl} alt="" className={classes.singleImage} />
+                      ) : (
+                        file &&
+                        (file?.length > 1 ? (
+                          file
+                            .filter((_, idx) => idx < 3)
+                            .map((f, idx) => (
+                              <div
+                                key={idx}
+                                style={{ backgroundImage: `url(${URL.createObjectURL(f)})` }}
+                                className={classes.imageContainer}
+                              />
+                            ))
+                        ) : videoExtensions.includes(fileExtension) ? (
+                          <video src={URL.createObjectURL(file[0])} alt="" className={classes.singleImage} controls />
+                        ) : audioExtensions.includes(fileExtension) ? (
+                          <audio src={URL.createObjectURL(file[0])} className={classes.singleImage} controls muted />
+                        ) : (
+                          <img
+                            src={mintId !== "ai" ? URL.createObjectURL(file[0]) : aiData.imageUrl}
+                            alt=""
+                            className={classes.singleImage}
+                          />
+                        ))
+                      )}
+                      {category === "Vibe" && <VibesLogo className={classes.overlayImage} />}
                     </div>
                   )}
 
-                  <div className={classes.inputWrapper}>
-                    <label>
-                      Description <span className={classes.required}>{" *"}</span>{" "}
-                      {/* <GenadropToolTip
+                  <div className={classes.assetInfo}>
+                    <div className={classes.innerAssetInfo}>
+                      <div className={classes.assetInfoTitle}>
+                        <span>
+                          {tweet
+                            ? `${tweet.author_id.username + moment(tweet.created_at).format(" hh:mm a · MM Do, YYYY")}`
+                            : mintId === "ai"
+                            ? fileName
+                            : fName}
+                        </span>
+                      </div>
+                      <div>
+                        <span>
+                          {"Number of assets: "}
+                          {file?.length ? file.length : 1}
+                        </span>
+                      </div>
+                      {chainId === 4160 && (
+                        <div className={classes.priceTooltip}>
+                          <span>Mint Price:</span>{" "}
+                          <p className={classes.assetInfoMintPrice}>{file?.length * 0.1} ALGO</p>
+                          <GenadropToolTip content="Mint price is 0.01 per NFT" fill="#0d99ff" />
+                        </div>
+                      )}
+                      {file?.length > 1 ? (
+                        <div onClick={() => handleSetState({ preview: true })} className={classes.showPreview}>
+                          <span>view all assets</span>
+                          <img src={rightArrow} alt="" />
+                        </div>
+                      ) : null}
+                    </div>
+                    <button
+                      onClick={() => {
+                        tweet ? history.push("/mint/tweet") : changeFile();
+                      }}
+                      type="button"
+                    >
+                      Change Asset
+                    </button>
+                  </div>
+                </section>
+                <div className={classes.mintForm}>
+                  <div className={classes.heading}> {getActivetitle()}</div>
+
+                  <section className={classes.details}>
+                    {/* <div className={classes.category}>Asset Details</div> */}
+                    <div className={classes.inputWrapper}>
+                      <label>
+                        {"Add NFT Name "}
+                        <span className={classes.required}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={fileName}
+                        onChange={(event) => {
+                          handleSetState({ fileName: event.target.value });
+                        }}
+                      />
+                    </div>
+
+                    {category === "Vibe" && (
+                      <div className={classes.inputWrapper}>
+                        <label>Friendliness</label>
+                        <SliderInput
+                          MAX={10}
+                          value={vibeProps.friendliness}
+                          handleChange={(e) => {
+                            const friendliness = e.target.value;
+                            const newProps = vibeProps;
+                            newProps.friendliness = friendliness;
+                            handleSetState({
+                              vibeProps: newProps,
+                            });
+                          }}
+                        />
+                        <label>Energy</label>
+                        <SliderInput
+                          MAX={10}
+                          value={vibeProps.energy}
+                          handleChange={(e) => {
+                            const energy = e.target.value;
+                            const newProps = vibeProps;
+                            newProps.energy = energy;
+                            handleSetState({
+                              vibeProps: newProps,
+                            });
+                          }}
+                        />
+                        <label>Density</label>
+                        <SliderInput
+                          MAX={10}
+                          value={vibeProps.density}
+                          handleChange={(e) => {
+                            const density = e.target.value;
+                            const newProps = vibeProps;
+                            newProps.density = density;
+                            handleSetState({
+                              vibeProps: newProps,
+                            });
+                          }}
+                        />
+                        <label>Diversity</label>
+                        <SliderInput
+                          MAX={10}
+                          value={vibeProps.diversity}
+                          handleChange={(e) => {
+                            const diversity = e.target.value;
+                            const newProps = vibeProps;
+                            newProps.diversity = diversity;
+                            handleSetState({
+                              vibeProps: newProps,
+                            });
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    <div className={classes.inputWrapper}>
+                      <label>
+                        Description <span className={classes.required}>{" *"}</span>{" "}
+                        {/* <GenadropToolTip
                         content="This description will be visible on your collection page"
                         fill="#0d99ff"
                       /> */}
-                    </label>
-                    <textarea
-                      style={metadata?.length === 1 ? { pointerEvents: "none" } : {}}
-                      rows="5"
-                      value={description}
-                      onChange={(event) => handleSetState({ description: event.target.value })}
-                    />
-                  </div>
-
-                  {(file?.length === 1 || ipfsLink) && (
-                    <div className={`${classes.inputWrapper} ${classes.categoryWrapper}`}>
-                      <label>
-                        Category<span className={classes.required}>{" *"}</span>{" "}
                       </label>
-                      <div
-                        onClick={() => {
-                          if (!metadata?.category) {
-                            handleSetState({
-                              toggleCategory: !toggleCategory,
-                            });
-                          }
-                        }}
-                        className={`${classes.chain} ${classes.active}`}
-                      >
-                        {category ? (
-                          <div className={classes.chainLabel}>{category}</div>
-                        ) : mintId === "Audio File" || ipfsType === "Audio" ? (
-                          <div className={classes.chainLabel}>Audio</div>
-                        ) : mintId === "Video File" || ipfsType === "Video" ? (
-                          <div className={classes.chainLabel}>Video</div>
-                        ) : mintId === "ai" ? (
-                          <div className={classes.chainLabel}>Mint Art</div>
-                        ) : (
-                          <span>Select Category</span>
-                        )}
-                        {!metadata?.category && mintId !== "Audio File" && mintId !== "Video File" && (
-                          <DropdownIcon className={classes.dropdownIcon} />
-                        )}
-                      </div>
-                      <div className={`${classes.chainDropdown} ${toggleCategory && classes.active}`}>
-                        {categories.map((nftCategory) => (
-                          <div
-                            className={`${classes.chain} `}
-                            key={nftCategory}
-                            onClick={() => handleSetState({ category: nftCategory, toggleCategory: false })}
-                          >
-                            {nftCategory}
-                          </div>
-                        ))}
-                      </div>
+                      <textarea
+                        style={metadata?.length === 1 ? { pointerEvents: "none" } : {}}
+                        rows="5"
+                        value={description}
+                        onChange={(event) => handleSetState({ description: event.target.value })}
+                      />
                     </div>
-                  )}
-                  {category === "Sesh" && (
-                    <div className={classes.inputWrapper}>
-                      <label>Stick Type</label>
-                      <div
-                        onClick={() => {
-                          handleSetState({
-                            toggleType: !toggleType,
-                          });
-                        }}
-                        className={`${classes.chain} ${classes.active}`}
-                      >
-                        {stick_type ? <div className={classes.chainLabel}>{stick_type}</div> : <span>Select</span>}
-                        <DropdownIcon className={classes.dropdownIcon} />
-                      </div>
-                      <div className={`${classes.chainDropdown} ${toggleType && classes.active}`}>
-                        {stick_types.map((type) => (
-                          <div
-                            className={`${classes.chain} `}
-                            key={type}
-                            onClick={() => handleSetState({ stick_type: type, toggleType: false })}
-                          >
-                            {type}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
-                  <div className={classes.inputWrapper}>
-                    <label>Attributes</label>
-                    {!zip ? (
-                      <>
-                        <div className={classes.attributes}>
-                          {Object.keys(attributes).map((key) =>
-                            attributes[key].trait_type !== "location" ? (
-                              <Attribute
-                                key={key}
-                                attribute={attributes[key]}
-                                id={key}
-                                index={key}
-                                removeAttribute={handleRemoveAttribute}
-                                changeAttribute={handleChangeAttribute}
-                                iscat={
-                                  attributes[key].trait_type === "Category" ||
-                                  attributes[key].trait_type === "Mentions" ||
-                                  attributes[key].trait_type === "Hashtag"
-                                }
-                              />
-                            ) : (
-                              () => handleSetState({ location: key })
-                            )
+                    {(file?.length === 1 || ipfsLink) && (
+                      <div className={`${classes.inputWrapper} ${classes.categoryWrapper}`}>
+                        <label>
+                          Category<span className={classes.required}>{" *"}</span>{" "}
+                        </label>
+                        <div
+                          onClick={() => {
+                            if (!metadata?.category) {
+                              handleSetState({
+                                toggleCategory: !toggleCategory,
+                              });
+                            }
+                          }}
+                          className={`${classes.chain} ${classes.active}`}
+                        >
+                          {category ? (
+                            <div className={classes.chainLabel}>{category}</div>
+                          ) : mintId === "Audio File" || ipfsType === "Audio" ? (
+                            <div className={classes.chainLabel}>Audio</div>
+                          ) : mintId === "Video File" || ipfsType === "Video" ? (
+                            <div className={classes.chainLabel}>Video</div>
+                          ) : mintId === "ai" ? (
+                            <div className={classes.chainLabel}>Mint Art</div>
+                          ) : (
+                            <span>Select Category</span>
+                          )}
+                          {!metadata?.category && mintId !== "Audio File" && mintId !== "Video File" && (
+                            <DropdownIcon className={classes.dropdownIcon} />
                           )}
                         </div>
-                        <button type="button" onClick={handleAddAttribute}>
-                          + Add Attribute
-                        </button>
-                      </>
-                    ) : metadata.length === 1 ? (
-                      <>
-                        {metadata[0].attributes.map((attr, idx) => (
-                          <div className={classes.attribute} key={idx}>
-                            <div>{attr.trait_type}</div>
-                            <div>{attr.value}</div>
-                          </div>
-                        ))}
-                      </>
-                    ) : (
-                      <div className={classes.metadata}>
-                        <div>Number of Assets: {metadata.length}</div>
-                        <div className={classes.trait_type}>
-                          Trait_types:
-                          {metadata[0]?.attributes.map(({ trait_type }, idx) => (
-                            <span key={idx}>{trait_type} </span>
+                        <div className={`${classes.chainDropdown} ${toggleCategory && classes.active}`}>
+                          {categories.map((nftCategory) => (
+                            <div
+                              className={`${classes.chain} `}
+                              key={nftCategory}
+                              onClick={() => handleSetState({ category: nftCategory, toggleCategory: false })}
+                            >
+                              {nftCategory}
+                            </div>
                           ))}
                         </div>
                       </div>
                     )}
-                  </div>
-                  {file?.length > 1 && (
-                    <>
-                      <div className={`${classes.inputWrapper} ${classes.dropInputWrapper}`}>
-                        <label>
-                          Collection photo
-                          <GenadropToolTip content="This image will be used as collection logo" fill="#0d99ff" />
-                        </label>
-                      </div>
-                      <div className={`${classes.dropWrapper} ${collectionProfile && classes.dropWrapperSeleted}`}>
-                        <div onClick={() => handleSetState({ toggleGuide: true })}>
-                          {profileSelected ? (
-                            <img src={URL.createObjectURL(file[0])} alt="" />
-                          ) : (
-                            <div className={classes.selectImg}>
-                              <PlusIcon />
-                              <p>Add photo</p>
+                    {category === "Sesh" && (
+                      <div className={classes.inputWrapper}>
+                        <label>Stick Type</label>
+                        <div
+                          onClick={() => {
+                            handleSetState({
+                              toggleType: !toggleType,
+                            });
+                          }}
+                          className={`${classes.chain} ${classes.active}`}
+                        >
+                          {stick_type ? <div className={classes.chainLabel}>{stick_type}</div> : <span>Select</span>}
+                          <DropdownIcon className={classes.dropdownIcon} />
+                        </div>
+                        <div className={`${classes.chainDropdown} ${toggleType && classes.active}`}>
+                          {stick_types.map((type) => (
+                            <div
+                              className={`${classes.chain} `}
+                              key={type}
+                              onClick={() => handleSetState({ stick_type: type, toggleType: false })}
+                            >
+                              {type}
                             </div>
-                          )}
+                          ))}
                         </div>
                       </div>
-                    </>
-                  )}
+                    )}
 
-                  {/* *************** TOGGLE LOCATION: START *************** */}
-
-                  {(category === "Vibe" || category === "Sesh") && file?.length === 1 && (
                     <div className={classes.inputWrapper}>
-                      <div className={classes.toggleTitle}>
-                        <div className={classes.receiverAddress}>
-                          <div className={classes.toggleTitle}>
-                            <label>Location</label>
-                            <div className={classes.toggler}>
-                              <label
-                                className={`${classes.switch} ${isMobileDevice && classes.noClick}`}
-                                onClick={() => (isMobileDevice ? accessDenied() : "")}
-                              >
-                                <input
-                                  id="location"
-                                  type="checkbox"
-                                  onClick={() => {
-                                    enableAccess();
-                                    handleSetState({ showLocation: !showLocation });
-                                  }}
-                                  defaultChecked={location !== ""}
+                      <label>Attributes</label>
+                      {!zip ? (
+                        <>
+                          <div className={classes.attributes}>
+                            {Object.keys(attributes).map((key) =>
+                              attributes[key].trait_type !== "location" ? (
+                                <Attribute
+                                  key={key}
+                                  attribute={attributes[key]}
+                                  id={key}
+                                  index={key}
+                                  removeAttribute={handleRemoveAttribute}
+                                  changeAttribute={handleChangeAttribute}
+                                  iscat={
+                                    attributes[key].trait_type === "Category" ||
+                                    attributes[key].trait_type === "Mentions" ||
+                                    attributes[key].trait_type === "Hashtag"
+                                  }
                                 />
-                                <span className={classes.slider} />
-                              </label>
-                            </div>
+                              ) : (
+                                () => handleSetState({ location: key })
+                              )
+                            )}
                           </div>
-
-                          {showLocation ? (
-                            <div className={classes.inputContainer}>
-                              <input
-                                type="text"
-                                value={location?.value ? location.value : "Getting location ..."}
-                                disabled
-                              />
+                          <button type="button" onClick={handleAddAttribute}>
+                            + Add Attribute
+                          </button>
+                        </>
+                      ) : metadata.length === 1 ? (
+                        <>
+                          {metadata[0].attributes.map((attr, idx) => (
+                            <div className={classes.attribute} key={idx}>
+                              <div>{attr.trait_type}</div>
+                              <div>{attr.value}</div>
                             </div>
-                          ) : (
-                            ""
-                          )}
+                          ))}
+                        </>
+                      ) : (
+                        <div className={classes.metadata}>
+                          <div>Number of Assets: {metadata.length}</div>
+                          <div className={classes.trait_type}>
+                            Trait_types:
+                            {metadata[0]?.attributes.map(({ trait_type }, idx) => (
+                              <span key={idx}>{trait_type} </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
-                  )}
-
-                  {/* *************** TOGGLE LOCATION: END *************** */}
-
-                  {/*  *************** TOGGLE TWEET: START ***************   */}
-                  {tweet ? (
-                    <>
-                      <div className={classes.inputWrapper}>
-                        <div className={classes.toggleTitle}>
-                          <div className={classes.receiverAddress}>
-                            <div className={classes.toggleTitle}>
-                              <label>Hashtags</label>
-                              <div className={classes.toggler}>
-                                <label className={`${classes.switch}`}>
-                                  <input
-                                    id="location"
-                                    type="checkbox"
-                                    defaultChecked={hashtags}
-                                    onClick={() => (hashtags ? removeHashtag() : addHashtag())}
-                                  />
-                                  <span className={classes.slider} />
-                                </label>
-                              </div>
-                            </div>
-
-                            <div className={classes.hashtags}>
-                              {tweet?.hashtags[0]?.map((e) => {
-                                if (e !== null) {
-                                  return (
-                                    <div className={`${classes.hashtag}  ${!hashtags && classes.noTag}`}>{`#${e}`}</div>
-                                  );
-                                }
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className={classes.inputWrapper}>
-                        <div className={classes.toggleTitle}>
-                          <div className={classes.receiverAddress}>
-                            <div className={classes.toggleTitle}>
-                              <label>Mentions</label>
-                              <div className={classes.toggler}>
-                                <label className={`${classes.switch}`}>
-                                  <input
-                                    id="location"
-                                    type="checkbox"
-                                    defaultChecked={mentions}
-                                    onClick={() => (mentions ? removeMentions() : addMentions())}
-                                  />
-                                  <span className={classes.slider} />
-                                </label>
-                              </div>
-                            </div>
-
-                            <div className={classes.hashtags}>
-                              {tweet?.mentions[0]?.map((e) => {
-                                if (e !== null) {
-                                  return (
-                                    <div className={`${classes.hashtag}  ${!mentions && classes.noTag}`}>{`@${e}`}</div>
-                                  );
-                                }
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    ""
-                  )}
-
-                  {/*  *************** TOGGLE TWEET: END ***************   */}
-
-                  <div className={`${classes.inputWrapper} `}>
-                    <div className={`${classes.toggleTitle}`}>
-                      <div className={classes.category}>
-                        Mint to {mintToMyAddress && category !== "Sesh" ? "my" : "Another"} Address{" "}
-                        <div className={classes.toggler}>
-                          <label className={classes.switch}>
-                            <input
-                              type="checkbox"
-                              onClick={() => handleCheck()}
-                              defaultChecked={account !== ""}
-                              disabled={category === "Sesh"}
-                            />
-                            <span className={classes.slider} />
+                    {file?.length > 1 && (
+                      <>
+                        <div className={`${classes.inputWrapper} ${classes.dropInputWrapper}`}>
+                          <label>
+                            Collection photo
+                            <GenadropToolTip content="This image will be used as collection logo" fill="#0d99ff" />
                           </label>
                         </div>
-                        {/* <GenadropToolTip
+                        <div className={`${classes.dropWrapper} ${collectionProfile && classes.dropWrapperSeleted}`}>
+                          <div onClick={() => handleSetState({ toggleGuide: true })}>
+                            {profileSelected ? (
+                              <img src={URL.createObjectURL(file[0])} alt="" />
+                            ) : (
+                              <div className={classes.selectImg}>
+                                <PlusIcon />
+                                <p>Add photo</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {/* *************** TOGGLE LOCATION: START *************** */}
+
+                    {(category === "Vibe" || category === "Sesh") && file?.length === 1 && (
+                      <div className={classes.inputWrapper}>
+                        <div className={classes.toggleTitle}>
+                          <div className={classes.receiverAddress}>
+                            <div className={classes.toggleTitle}>
+                              <label>Location</label>
+                              <div className={classes.toggler}>
+                                <label
+                                  className={`${classes.switch} ${isMobileDevice && classes.noClick}`}
+                                  onClick={() => (isMobileDevice ? accessDenied() : "")}
+                                >
+                                  <input
+                                    id="location"
+                                    type="checkbox"
+                                    onClick={() => {
+                                      enableAccess();
+                                      handleSetState({ showLocation: !showLocation });
+                                    }}
+                                    defaultChecked={location !== ""}
+                                  />
+                                  <span className={classes.slider} />
+                                </label>
+                              </div>
+                            </div>
+
+                            {showLocation ? (
+                              <div className={classes.inputContainer}>
+                                <input
+                                  type="text"
+                                  value={location?.value ? location.value : "Getting location ..."}
+                                  disabled
+                                />
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* *************** TOGGLE LOCATION: END *************** */}
+
+                    {/*  *************** TOGGLE TWEET: START ***************   */}
+                    {tweet ? (
+                      <>
+                        <div className={classes.inputWrapper}>
+                          <div className={classes.toggleTitle}>
+                            <div className={classes.receiverAddress}>
+                              <div className={classes.toggleTitle}>
+                                <label>Hashtags</label>
+                                <div className={classes.toggler}>
+                                  <label className={`${classes.switch}`}>
+                                    <input
+                                      id="location"
+                                      type="checkbox"
+                                      defaultChecked={hashtags}
+                                      onClick={() => (hashtags ? removeHashtag() : addHashtag())}
+                                    />
+                                    <span className={classes.slider} />
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div className={classes.hashtags}>
+                                {tweet?.hashtags[0]?.map((e) => {
+                                  if (e !== null) {
+                                    return (
+                                      <div
+                                        className={`${classes.hashtag}  ${!hashtags && classes.noTag}`}
+                                      >{`#${e}`}</div>
+                                    );
+                                  }
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className={classes.inputWrapper}>
+                          <div className={classes.toggleTitle}>
+                            <div className={classes.receiverAddress}>
+                              <div className={classes.toggleTitle}>
+                                <label>Mentions</label>
+                                <div className={classes.toggler}>
+                                  <label className={`${classes.switch}`}>
+                                    <input
+                                      id="location"
+                                      type="checkbox"
+                                      defaultChecked={mentions}
+                                      onClick={() => (mentions ? removeMentions() : addMentions())}
+                                    />
+                                    <span className={classes.slider} />
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div className={classes.hashtags}>
+                                {tweet?.mentions[0]?.map((e) => {
+                                  if (e !== null) {
+                                    return (
+                                      <div
+                                        className={`${classes.hashtag}  ${!mentions && classes.noTag}`}
+                                      >{`@${e}`}</div>
+                                    );
+                                  }
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      ""
+                    )}
+
+                    {/*  *************** TOGGLE TWEET: END ***************   */}
+
+                    <div className={`${classes.inputWrapper} `}>
+                      <div className={`${classes.toggleTitle}`}>
+                        <div className={classes.category}>
+                          Mint to {mintToMyAddress && category !== "Sesh" ? "my" : "Another"} Address{" "}
+                          <div className={classes.toggler}>
+                            <label className={classes.switch}>
+                              <input
+                                type="checkbox"
+                                onClick={() => handleCheck()}
+                                defaultChecked={account !== ""}
+                                disabled={category === "Sesh"}
+                              />
+                              <span className={classes.slider} />
+                            </label>
+                          </div>
+                          {/* <GenadropToolTip
                           content={`${
                             category === "Sesh"
                               ? "Input the Reciever address to mint"
@@ -1245,71 +1241,70 @@ const Minter = () => {
                           }`}
                           fill="#0d99ff"
                         /> */}
-                      </div>
-                    </div>
-                    <div className={classes.otherAddress}>
-                      <div className={classes.receiverAddress}>
-                        <label>Receiver Address</label>
-
-                        <div className={classes.inputContainer}>
-                          <input
-                            style={zip ? { pointerEvents: "none" } : {}}
-                            type="text"
-                            value={mintToMyAddress && category !== "Sesh" ? account : receiverAddress}
-                            placeholder={
-                              account === "" ? "Please connect your wallet" : `Input a valid Receiver Address`
-                            }
-                            onChange={(event) => handleReceiverAddress(event)}
-                            disabled={!!mintToMyAddress && category !== "Sesh"}
-                          />
-                          {goodReceiverAddress && account !== "" ? (
-                            <GreenTickIcon />
-                          ) : (
-                            <GreenTickIcon className={classes.tick} />
-                          )}
                         </div>
                       </div>
-                      <button
-                        disabled={!!mintToMyAddress && category !== "Sesh"}
-                        type="button"
-                        onClick={() => handleSetState({ openQrModal: true })}
-                        className={classes.qrScanner}
-                      >
-                        {/* <QrCodeIcon /> */}
-                      </button>
-                    </div>
-                  </div>
+                      <div className={classes.otherAddress}>
+                        <div className={classes.receiverAddress}>
+                          <label>Receiver Address</label>
 
-                  <div className={classes.inputWrapper}>
-                    <div className={classes.confirm}>
-                      <input className={classes.confirmCheckbox} type="checkbox" />
-                      Please confirm you own the rights to use this image commercially.
-                      <span className={classes.required}>*</span>
+                          <div className={classes.inputContainer}>
+                            <input
+                              style={zip ? { pointerEvents: "none" } : {}}
+                              type="text"
+                              value={mintToMyAddress && category !== "Sesh" ? account : receiverAddress}
+                              placeholder={
+                                account === "" ? "Please connect your wallet" : `Input a valid Receiver Address`
+                              }
+                              onChange={(event) => handleReceiverAddress(event)}
+                              disabled={!!mintToMyAddress && category !== "Sesh"}
+                            />
+                            {goodReceiverAddress && account !== "" ? (
+                              <GreenTickIcon />
+                            ) : (
+                              <GreenTickIcon className={classes.tick} />
+                            )}
+                          </div>
+                        </div>
+                        <button
+                          disabled={!!mintToMyAddress && category !== "Sesh"}
+                          type="button"
+                          onClick={() => handleSetState({ openQrModal: true })}
+                          className={classes.qrScanner}
+                        >
+                          {/* <QrCodeIcon /> */}
+                        </button>
+                      </div>
                     </div>
-                  </div>
+
+                    <div className={classes.inputWrapper}>
+                      <div className={classes.confirm}>
+                        <input className={classes.confirmCheckbox} type="checkbox" />
+                        Please confirm you own the rights to use this image commercially.
+                        <span className={classes.required}>*</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <section className={classes.mintButtonWrapper}>
+                  <button type="button" onClick={onMint} className={classes.mintBtn}>
+                    Mint
+                  </button>
+                  <button type="button" onClick={handleCancel} className={classes.cancelBtn}>
+                    Cancel
+                  </button>
                 </section>
               </div>
-              <section className={classes.mintButtonWrapper}>
-                <button type="button" onClick={onMint} className={classes.mintBtn}>
-                  Mint
-                </button>
-                <button type="button" onClick={handleCancel} className={classes.cancelBtn}>
-                  Cancel
-                </button>
-              </section>
             </div>
+            {openQrModal && (
+              <QrReaderContainer
+                dispatch={dispatch}
+                handleCloseModal={handleCloseQrModal}
+                handleAddress={handleSetState}
+                mainnet={mainnet}
+              />
+            )}
           </div>
-          {openQrModal && (
-            <QrReaderContainer
-              dispatch={dispatch}
-              handleCloseModal={handleCloseQrModal}
-              handleAddress={handleSetState}
-              mainnet={mainnet}
-            />
-          )}
-        </div>
         </>
-
       )}
       <ProfileImgOverlay
         metadata={metadata}

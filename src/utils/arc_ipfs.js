@@ -362,79 +362,25 @@ export async function createNFT(createProps, doAccountCheck) {
   return assets;
 }
 
-export async function listNetworkNft(nftProps, chainName) {
-  const { account, connector, id, nftContract, dispatch, price, mainnet } = nftProps;
-
-  const marketAddress = getMarketAddress(chainName, mainnet);
-
-  if (connector.isWalletConnect) {
-    const provider = new ethers.providers.Web3Provider(connector);
-    const signer = provider.getSigner();
-    const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
-    const contract = new ethers.Contract(nftContract, mintSingleAbi, signer);
-    // const contract = new ethers.Contract(
-    //   mainnet ? process.env.REACT_APP_CELO_MAINNET_SINGLE_ADDRESS : process.env.REACT_APP_CELO_TESTNET_SINGLE_ADDRESS,
-    //   mintSingleAbi,
-    //   signer
-    // );
-    const approvalCheck = await contract.isApprovedForAll(account, marketContract.address);
-
-    try {
-      // only pop approval equest if unapproved
-      if (!approvalCheck) {
-        dispatch(setLoader("Approve marketplace to list nft"));
-        const ethNonce = await signer.getTransactionCount();
-        const approvalTx = {
-          from: account,
-          to: contract.address,
-          // gasLimit: ethers.utils.hexlify(250000), change tx from legacy later
-          // gasPrice: ethers.utils.parseUnits('5', "gwei"),
-          data: contract.interface.encodeFunctionData("setApprovalForAll", [marketContract.address, true]),
-          nonce: ethNonce,
-        };
-        const result = await signer.sendTransaction(approvalTx);
-        await result.wait();
-      }
-      const ethNonce = await signer.getTransactionCount();
-      const listingTx = {
-        from: account,
-        to: marketContract.address,
-        // gasLimit: ethers.utils.hexlify(250000), change tx from legacy later
-        // gasPrice: ethers.utils.parseUnits('5', "gwei"),
-        data: marketContract.interface.encodeFunctionData("createMarketplaceItem", [
-          nftContract,
-          id,
-          String(price * 10 ** 18),
-          "General",
-          account,
-        ]),
-        nonce: ethNonce,
-      };
-      const result = await signer.sendTransaction(listingTx);
-      await result.wait();
-      dispatch(setLoader(""));
-
-      const txUrl = `${getChainExplorerLink(chainName, mainnet)}tx/${result.hash}`;
-      return txUrl;
-    } catch (error) {
-      dispatch(setLoader(""));
-      return {
-        error,
-        message: error.message ? error.message : "something went wrong! check your connected network and try again.",
-      };
-    }
-  }
-  const signer = await connector.getSigner();
-  const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
+async function approveNftMarketplace(account, contract, marketContract, dispatch) {
   try {
-    const contract = new ethers.Contract(nftContract, mintSingleAbi, signer);
-    const approvalCheck = await contract.isApprovedForAll(account, marketContract.address);
-    if (!approvalCheck) {
-      dispatch(setLoader("Approve marketplace to list nft"));
-      const approvalTxn = await contract.setApprovalForAll(marketContract.address, true);
-      await approvalTxn.wait();
+    dispatch(setLoader("Approve marketplace to list NFT"));
+    const isApproved = await contract.isApprovedForAll(account, marketContract.address);
+    if (!isApproved) {
+      const approvalTx = await contract.setApprovalForAll(marketContract.address, true);
+      await approvalTx.wait();
     }
-    dispatch(setLoader("Listing Nft to marketplace"));
+    dispatch(setLoader(""));
+  } catch (error) {
+    dispatch(setLoader(""));
+    console.error(error);
+    throw new Error("Error approving NFT for marketplace");
+  }
+}
+
+async function createMarketplaceItem(account, marketContract, nftContract, id, price, dispatch) {
+  try {
+    dispatch(setLoader("Listing NFT to marketplace"));
     const txn = await marketContract.createMarketplaceItem(
       nftContract,
       id,
@@ -444,14 +390,43 @@ export async function listNetworkNft(nftProps, chainName) {
     );
     await txn.wait();
     dispatch(setLoader(""));
-    const txUrl = `${getChainExplorerLink(chainName, mainnet)}tx/${txn.hash}`;
-    return txUrl;
+    return txn.hash;
   } catch (error) {
     dispatch(setLoader(""));
-    console.log(error);
+    console.error(error);
+    throw new Error("Error listing NFT in the marketplace");
+  }
+}
+
+export async function listNetworkNft(nftProps, chainName) {
+  const { account, connector, id, nftContract, dispatch, price, mainnet } = nftProps;
+
+  const marketAddress = getMarketAddress(chainName, mainnet);
+
+  try {
+    if (connector.isWalletConnect) {
+      const provider = new ethers.providers.Web3Provider(connector);
+      const signer = provider.getSigner();
+      const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
+      const contract = new ethers.Contract(nftContract, mintSingleAbi, signer);
+
+      await approveNftMarketplace(account, contract, marketContract, dispatch);
+
+      return await createMarketplaceItem(account, marketContract, nftContract, id, price, dispatch);
+    }
+
+    const signer = await connector.getSigner();
+    const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
+    const contract = new ethers.Contract(nftContract, mintSingleAbi, signer);
+
+    await approveNftMarketplace(account, contract, marketContract, dispatch);
+
+    return await createMarketplaceItem(account, marketContract, nftContract, id, price, dispatch);
+  } catch (error) {
+    console.error(error);
     return {
       error,
-      message: "Error listing nft, please try again or reavhout to support.",
+      message: "Something went wrong! Please check your connected network and try again.",
     };
   }
 }

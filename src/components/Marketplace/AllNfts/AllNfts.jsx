@@ -103,7 +103,7 @@ const AllNfts = () => {
     Promise.all([
       getAllNftsbyChain(EVM_CHAINS.Avalanche, 10),
       getAllNftsbyChain(EVM_CHAINS.Polygon, 10),
-      getAllNftsbyChain(EVM_CHAINS.Polygon, 10),
+      getAllNftsbyChain(EVM_CHAINS.Ethereum, 10),
     ]).then((data) => {
       handleSetState({ singles: sortBy({ collections: data.flat(), value: "Newest" }) });
     });
