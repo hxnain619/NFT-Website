@@ -20,7 +20,7 @@ const Explore = () => {
   const [state, setState] = useState({
     toggleFilter: true,
     NFTCollection: null,
-    FilteredCollection: null,
+    FilteredCollection: null, 
     loadedChain: null,
     allGraphCollection: [],
     collection: null,
@@ -186,14 +186,14 @@ const Explore = () => {
               onClick={() => handleTabActive("T1")}
               className={`${classes.type}  ${activeType === "T1" && classes.active}`}
             >
-              <img src={listIcon} alt="" />
-              Items
+              {/* <img src={listIcon} alt="" /> */}
+              NFTs
             </div>
             <div
               onClick={() => handleTabActive("T2")}
               className={`${classes.type}  ${activeType === "T2" && classes.active}`}
             >
-              <img src={activityIcon} alt="" />
+              {/* <img src={activityIcon} alt="" /> */}
               Activity
             </div>
           </div>

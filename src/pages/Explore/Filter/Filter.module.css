@@ -1,5 +1,5 @@
 .sidebar {
-  border: 1px solid var(--card-outline);
+  /* border: 1px solid var(--card-outline); */
   width: 100%;
   max-width: 20em;
   position: sticky;
@@ -45,7 +45,11 @@
   width: 1em;
   height: 1em;
 }
-
+.priceSpan{
+  color: var(--primary-white);
+  font-weight: 500;
+  /* font-size: 14px; */
+}
 .sort,
 .status {
   display: flex;
@@ -243,7 +247,28 @@
 .sidebar2 img:hover {
   background: var(--main-lightest);
 }
-
+.customSort{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 8px 16px 8px;
+border-bottom: 1px solid #93A3F814;
+}
+.customSort > button{
+  padding: 0.3em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    width:auto;
+    height: 36px;
+    /* border: 1px solid var(--primary-dark-blue); */
+    background: #03071099;
+    color: var(--default);
+    font-size: 14px;
+}
+button.active{
+  background: var(--primary-dark-blue);
+}
 @media screen and (max-width: 768px) {
   .sidebar,
   .sidebar2 {
