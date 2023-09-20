@@ -1,7 +1,7 @@
 .container {
-  width: 80%;
   margin: 1em auto;
   position: relative;
+  padding: 16px 188px;
 }
 
 .desktop {
@@ -36,7 +36,6 @@
 
 .wrapper {
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -73,6 +72,10 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .container {
+    padding: 24px 16px;
+  }
+
   .detailSection {
     padding-top: 2.2em;
   }
@@ -93,7 +96,7 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 90%;
+    padding: 24px 16px;
   }
   .wrapper {
     max-width: 64em;

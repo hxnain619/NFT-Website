@@ -49,14 +49,13 @@ const cards = [
   //   url: "/mint/tweet",
   //   comingSoon: false,
   // },
-
-  // {
-  //   title: "Collection",
-  //   description: "Import arts into layers",
-  //   icon: <Collection />,
-  //   url: "/collection",
-  //   comingSoon: "",
-  // },
+  {
+    title: "Collection",
+    description: "Import arts into layers",
+    icon: <Collection />,
+    url: "/collection",
+    comingSoon: "",
+  },
   // {
   //   title: "Import",
   //   description: "Import collection from the contract",

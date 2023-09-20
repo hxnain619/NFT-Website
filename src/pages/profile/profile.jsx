@@ -62,7 +62,7 @@ const Profile = () => {
 
   return (
     <>
-        <BackButton/>
+      <BackButton />
       <div className="container">
         {/* <Link to="#" className="back-btn" onClick={() => history.goBack()}>
           <ArrowBack /> Back

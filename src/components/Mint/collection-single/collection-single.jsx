@@ -1,17 +1,15 @@
 /* eslint-disable no-shadow */
-import React, { useEffect, useRef, useState, useContext } from "react";
-import { useParams, useHistory, useRouteMatch, useLocation, Link } from "react-router-dom";
-import classes from "./collection-single.module.css";
-import collectionIcon from "../../../assets/icon-collection-light.svg";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import { ReactComponent as Art } from "../../../assets/create/art-icon.svg";
-import { ReactComponent as BackIcon } from "../../../assets/icon-arrow-left.svg";
-import { handleZipFile } from "./collection-single-script";
-import { GenContext } from "../../../gen-state/gen.context";
+import collectionIcon from "../../../assets/icon-collection-light.svg";
 import { setMinter, setZip } from "../../../gen-state/gen.actions";
-import { NearErrorPop, NearSuccessPopup } from "../popup/nearMintPopup";
-import MintTweet from "../mintTweet/mintTweet";
-import MintIpfs from "../mintIPFS/mintIPFS";
+import { GenContext } from "../../../gen-state/gen.context";
 import BackButton from "../../back-button/BackButton";
+import MintIpfs from "../mintIPFS/mintIPFS";
+import MintTweet from "../mintTweet/mintTweet";
+import { NearErrorPop, NearSuccessPopup } from "../popup/nearMintPopup";
+import classes from "./collection-single.module.css";
 
 const CollectionToSingleMinter = () => {
   const params = useParams();
@@ -218,11 +216,8 @@ const CollectionToSingleMinter = () => {
             <NearSuccessPopup handleSetState={handleSetState} popupProps={popupProps} />
           )}
           <>
-            {/* <Link to="/create" className={classes.goBack}>
-              <BackIcon className={classes.backIcon} />
-            </Link> */}
-            
-              <BackButton/>
+            <BackButton />
+
             <header className={classes.headingWrapper}>
               <h1 className={classes.heading}>Create your NFT</h1>
               <p className={classes.description}>
@@ -238,19 +233,6 @@ const CollectionToSingleMinter = () => {
                 to create NFT
               </p>
             </header>
-
-            {/* <div className={classes.mintSwitch}>
-          <button
-            type="button"
-            className={`${params.mintId === "collection" && classes.active}`}
-            onClick={handleCollectionClick}
-          >
-            collection
-          </button>
-          <button type="button" className={`${params.mintId === "1of1" && classes.active}`} onClick={handle1of1Click}>
-            1 of 1
-          </button>
-        </div> */}
 
             {mintType === "collection" ? (
               <div className={`${classes.card} ${classes[params.mintId]} drop-area`}>

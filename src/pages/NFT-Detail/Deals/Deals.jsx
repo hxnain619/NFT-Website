@@ -81,15 +81,9 @@ const Deals = ({ nftDetails }) => {
         Listed
       </div>
     ) : !sold && isListed ? (
-      supportedChains[chain]?.chain === "Algorand" ? (
-        <div onClick={() => buyNft(buyProps)} className="btn">
-          Buy
-        </div>
-      ) : (
-        <div onClick={() => buyGraphNft(buyProps)} className="btn">
-          Buy
-        </div>
-      )
+      <div onClick={() => buyGraphNft(buyProps)} className="btn">
+        Buy
+      </div>
     ) : account === owner ? (
       <Link to={chain ? `/marketplace/1of1/list/${chain}/${Id}` : `/marketplace/1of1/list/${Id}`}>
         <div className="btn">List</div>

@@ -4,26 +4,33 @@
   width: 100%;
   max-width: 1440px;
   padding: 0 1em;
-  padding-top: 2em;
+  padding-top: 80px;
   margin: 0 auto;
   margin-bottom: 8em;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 
 .nft {
-  width: 15rem;
+  width: 430px;
   align-self: center;
-  border: 5px solid #e5e8eb;
-  border-radius: 5px;
-  margin-bottom: 1rem;
+  height: 430px;
+  object-fit: cover;
 }
 
 .container span {
   align-self: center;
-  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 48px; /* 120% */
 }
 .section {
   display: flex;
@@ -52,9 +59,19 @@
   font-size: 1.5rem;
   font-weight: bold;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 450px;
+
+  color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
+  text-align: center;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  gap: 16px;
 }
 .buy {
   flex-direction: row;
@@ -67,112 +84,78 @@
   font-weight: bold;
   background-color: var(--main-color);
 }
-.view {
-  margin: 1rem auto;
-  border-radius: 2.5rem;
-}
 
 .viewtext {
-  color: var(--main-color);
-  padding: 0 0.5rem;
-  height: 4rem;
-  width: 14rem;
-  border-radius: 2.5rem;
-  font-size: 1.3rem;
-  font-weight: bold;
-  border: 3px solid var(--main-color);
+  display: flex;
+  height: 40px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex: 1 0 0;
+  border-radius: 40px;
+  background: var(--primary-primary-blue, #20c1ff);
+  width: 196px;
+  color: var(--primary-black-bg, #080f20);
+  text-align: center;
+  margin: auto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
 }
+
+.viewtext:hover {
+  color: white;
+  background: var(#56cfff);
+}
+.detailContent {
+  display: flex;
+  gap: 12px;
+}
+
 .buy:hover,
 .detailContent img:hover {
   transform: scale(1.05);
   transition: all 0.2s ease-in-out;
 }
 
-.view:hover {
-  background-color: var(--main-color);
-  transition: all 0.4s ease-in-out;
+.detailContent img {
+  width: 50px;
   cursor: var(--cursor-pointer);
-}
 
-.viewtext:hover {
-  border-radius: 2.5rem;
-  color: white;
-}
-
-@media screen and (max-width: 1440px) {
-  .container {
-    max-width: 1200px;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .container {
-    max-width: 1000px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .container {
-    max-width: 768px;
-  }
+  padding: 10px;
+  border-radius: 24px;
+  border: 1px solid var(--transparent-white-white-50, rgba(251, 251, 251, 0.5));
+  background: var(--transparent-black-black-60, rgba(3, 7, 16, 0.6));
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    max-width: 540px;
-    padding: 0 2em;
-    margin-top: 2em;
+    padding-top: 56px;
+    gap: 56px;
   }
 
-  .section1 {
-    flex-direction: column;
-  }
-
-  .v_subsection1 {
+  .view {
     width: 100%;
-    margin-bottom: 1rem;
-    max-width: 222rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .container {
-    padding: 0 0.5em;
-  }
-  .container span {
-    font-size: 1.2rem;
-  }
-  .section1 {
-    flex-direction: column;
   }
 
-  .buy {
-    width: 95%;
-  }
-  .nftId {
-    font-size: 1rem;
-  }
-
-  .detailContent img {
-    width: 35px !important;
-    margin-right: 10px !important;
-  }
   .viewtext {
-    font-size: 1rem;
-    height: 3rem;
-    width: 12rem;
+    width: 100%;
   }
 
-  .nftName {
-    flex-direction: column;
+  .nft {
+    aspect-ratio: 1;
+    width: 100%;
+    height: initial;
   }
-}
 
-.detailContent {
-  padding: 1rem;
-}
-.detailContent img {
-  width: 50px;
-  margin-right: 24px;
-  cursor: var(--cursor-pointer);
+  .nftId {
+    width: 90%;
+  }
 }

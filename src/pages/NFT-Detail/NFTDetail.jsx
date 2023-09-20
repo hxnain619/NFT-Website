@@ -72,7 +72,7 @@ const NFTDetail = () => {
             <BackIcon className={classes.backIcon} />
             <div>Back</div>
           </div>
-        
+
           <div className={classes.sectionWrapper}>
             <div className={classes.nftSection}>
               <div className={classes.desktop}>
