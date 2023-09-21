@@ -142,10 +142,20 @@
     top: 2.9em;
     border-radius: 0.5em;
     align-items: flex-start;
+    gap: 16px;
+
+    flex-direction: column;
   }
 
   .detailsWrapper {
     gap: 0.5em;
+    margin: 0;
+    width: 100%;
+  }
+
+  .detail {
+    justify-content: space-between;
+    width: 100%;
   }
 }
 

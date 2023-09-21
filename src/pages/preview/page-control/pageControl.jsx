@@ -6,13 +6,13 @@ const PageControl = ({ controProps }) => {
   return (
     <div className={classes.paginate}>
       <div onClick={handlePrev} className={classes.pageControl}>
-        prev
+        Prev
       </div>
       <div className={classes.pageCount}>
         {currentPage} of {Object.keys(paginate).length}
       </div>
       <div onClick={handleNext} className={classes.pageControl}>
-        next
+        Next
       </div>
       <div className={classes.pageChoose}>
         <input
@@ -22,7 +22,7 @@ const PageControl = ({ controProps }) => {
           onChange={(e) => handleSetState({ currentPageValue: e.target.value >= 1 ? e.target.value : "" })}
         />
         <div onClick={handleGoto} className={classes.pageControl}>
-          goto
+          Go to
         </div>
       </div>
     </div>

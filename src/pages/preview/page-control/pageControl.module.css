@@ -65,3 +65,13 @@
   border-radius: 4px;
   border: 1px solid rgba(147, 163, 248, 0.24);
 }
+
+@media screen and (max-width: 768px) {
+  .pageControl {
+    padding: 0.5em 0.5em;
+  }
+
+  .pageChoose {
+    padding: 4px 4px 4px 8px;
+  }
+}
