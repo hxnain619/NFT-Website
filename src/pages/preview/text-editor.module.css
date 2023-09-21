@@ -12,10 +12,18 @@
 
 .container form textarea,
 .container form input {
-  flex: 1;
-  padding: 0.25em;
+  flex: 1 1;
+  padding: 4px 8px;
   border: none;
-  outline: 1px solid var(--outline);
+  color: var(--primary-white, #ecf1f9);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  background: transparent;
+  outline: none;
+  height: 26px;
+  width: 240px;
 }
 
 .container button {
@@ -41,12 +49,14 @@
 
 .container div p {
   flex: 1;
-  padding: 0.15em;
-  color: white;
-}
+  padding: 4px 8px;
+  color: var(--primary-white, #ecf1f9);
 
-.container.invert div p {
-  color: var(--card-bg);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
+  text-align: left;
 }
 
 .editIcon {

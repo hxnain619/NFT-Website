@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-constant-condition */
 import React, { useContext, useEffect, useRef } from "react";
+import { ReactComponent as DeleteIcon } from "../../assets/icon-delete.svg";
 import { clearRule, deleteRule, promptDeleteRules, setPrompt } from "../../gen-state/gen.actions";
 import { GenContext } from "../../gen-state/gen.context";
-import classes from "./rulesCard.module.css";
-import leftArrow from "../../assets/icon-arrow-left-long.svg";
 import { handleImage } from "../preview/collection-preview-script";
+import classes from "./rulesCard.module.css";
 
 const RulesCard = ({ showRule }) => {
   const { dispatch, layers, rule, promptRules } = useContext(GenContext);
@@ -34,11 +34,9 @@ const RulesCard = ({ showRule }) => {
 
   return (
     <div className={classes.container}>
-      <canvas className={classes.canvas} ref={canvasRef} />
-      <p>Click on a rule to show preview</p>
       <div className={classes.wrapper}>
         {rule.map((rl, index) => (
-          <div key={index} className={classes.conflictCard} onClick={() => imageHandler(index)}>
+          <div key={index} className={classes.conflictCard}>
             <div className={classes.content}>
               {rl.map((r, idx) => (
                 <div key={idx} className={classes.innerContent}>
@@ -52,6 +50,7 @@ const RulesCard = ({ showRule }) => {
             </div>
             <div onClick={() => handleDelete(rl)} className={classes.deleteRule}>
               Delete Rule
+              <DeleteIcon className={classes.closeIcon} />
             </div>
           </div>
         ))}
@@ -59,7 +58,6 @@ const RulesCard = ({ showRule }) => {
       {true ? (
         <div className={classes.btnContainer}>
           <button type="button" onClick={() => showRule(false)} className={classes.closeBtn}>
-            <img src={leftArrow} alt="" />
             Go back
           </button>
           <button type="button" onClick={handleClearRule} className={classes.deleteBtn}>

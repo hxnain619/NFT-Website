@@ -1,15 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from "react";
-import classes from "./preview.module.css";
-import { GenContext } from "../../gen-state/gen.context";
-import { deleteAsset, setMintAmount, setMintInfo, promptDeleteAsset } from "../../gen-state/gen.actions";
-import Sidebar from "./sidebar/sidebar";
-import ArtCard from "./art-card/artCard";
-import Navbar from "./navbar/navbar";
-import SelectedGifArt from "./selected-gif-art/selectedGifArt";
-import PageControl from "./page-control/pageControl";
-import GifModal from "./gif-modal/gifModal";
 import SubscriptionNotification from "../../components/Subscription-Notification/SubscriptionNotification";
+import { deleteAsset, promptDeleteAsset, setMintAmount, setMintInfo } from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
+import ArtCard from "./art-card/artCard";
+import GifModal from "./gif-modal/gifModal";
+import Navbar from "./navbar/navbar";
+import PageControl from "./page-control/pageControl";
+import classes from "./preview.module.css";
+import SelectedGifArt from "./selected-gif-art/selectedGifArt";
+import Sidebar from "./sidebar/sidebar";
 
 const Preview = () => {
   const {

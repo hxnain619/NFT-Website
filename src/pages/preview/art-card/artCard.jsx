@@ -3,9 +3,9 @@ import { handleDownload } from "../../../utils/index2";
 import { addGif, handleDelete, handleDeleteAndReplace, handleDescription, handleRename } from "../preview-script";
 import TextEditor from "../text-editor";
 import classes from "../preview.module.css";
-import { ReactComponent as CheckIcon } from "../../../assets/check-solid.svg";
-import { ReactComponent as CloseIcon } from "../../../assets/icon-close.svg";
 import { setNotification, setLoader, setZip } from "../../../gen-state/gen.actions";
+import { ReactComponent as CloseIcon } from "../../../assets/icon-image-delete.svg";
+import { ReactComponent as CheckIcon } from "../../../assets/check-solid.svg";
 
 const ArtCard = ({ previewProps, asset }) => {
   const { image, id, name, description, index } = asset;
@@ -26,7 +26,7 @@ const ArtCard = ({ previewProps, asset }) => {
           value={description}
           cols="30"
           rows="3"
-          placeholder="description"
+          placeholder="Add description"
           onChange={(e) =>
             handleDescription({
               description: e.target.value,
@@ -36,39 +36,39 @@ const ArtCard = ({ previewProps, asset }) => {
             })
           }
         />
-        <div className={classes.buttonContainer}>
+      </div>
+      <div className={classes.buttonContainer}>
+        <button
+          type="button"
+          className={classes.nftDownload}
+          onClick={() =>
+            handleDownload({
+              window,
+              dispatch,
+              currentPlan,
+              setLoader,
+              setZip,
+              setNotification,
+              value: [asset],
+              name: asset.name,
+              outputFormat,
+              single: true,
+            })
+          }
+        >
+          Download
+        </button>
+        {image.split(",")[0] !== "data:image/gif;base64" && (
           <button
             type="button"
-            className={classes.nftDonwload}
-            onClick={() =>
-              handleDownload({
-                window,
-                dispatch,
-                currentPlan,
-                setLoader,
-                setZip,
-                setNotification,
-                value: [asset],
-                name: asset.name,
-                outputFormat,
-                single: true,
-              })
-            }
+            className={classes.generateNew}
+            onClick={() => handleDeleteAndReplace({ ...previewProps, id, index })}
           >
-            Download
+            Generate New
           </button>
-          {image.split(",")[0] !== "data:image/gif;base64" && (
-            <button type="button" onClick={() => handleDeleteAndReplace({ ...previewProps, id, index })}>
-              Generate New
-            </button>
-          )}
-        </div>
+        )}
       </div>
-      {!gifShow && (
-        <div onClick={() => handleDelete({ dispatch, id })} className={classes.iconClose}>
-          <CloseIcon className={classes.closeIcon} />
-        </div>
-      )}
+      {!gifShow && <CloseIcon className={classes.closeIcon} onClick={() => handleDelete({ dispatch, id })} />}
       {gifShow && (
         <div
           onClick={() => addGif({ ...previewProps, asset })}

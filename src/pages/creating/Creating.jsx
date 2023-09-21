@@ -1,12 +1,11 @@
 /* eslint-disable no-shadow */
-import React, { useState, useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
-import classes from "./Creating.module.css";
-import cards from "./Creating-script";
-import { ReactComponent as DownArrow } from "../../assets/down-arrow.svg";
-import { GenContext } from "../../gen-state/gen.context";
-import { setNotification } from "../../gen-state/gen.actions";
+import React, { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import BackButton from "../../components/back-button/BackButton";
+import { setNotification } from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
+import cards from "./Creating-script";
+import classes from "./Creating.module.css";
 
 const Creating = () => {
   const history = useHistory();

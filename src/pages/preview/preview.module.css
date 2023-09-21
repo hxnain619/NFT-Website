@@ -1,12 +1,10 @@
 .wrapper {
   width: 100%;
-  padding: 0 1em;
-  padding-top: 2em;
+  padding: 0 32px;
 }
 
 .container {
   width: 100%;
-  max-width: 1440px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -17,11 +15,17 @@
 }
 
 .sidebar {
+  top: 6em;
+  padding: 16px;
   min-width: 20em;
   position: sticky;
-  top: 9em;
-  border: 1px solid #c4c4c4;
-  border-radius: 0.5em;
+  border-radius: 4px;
+  border: 1px solid var(--primary-dark-blue, #262b92);
+  background: rgba(187, 197, 255, 0.02);
+
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .display {
@@ -30,15 +34,19 @@
 
 .collectionDetail {
   width: 100%;
-  padding: 1em 1.6em;
+
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
 }
 
 .collectionDetail .wrapper {
   width: 100%;
   padding: 0.5em;
   border-radius: 0.25em;
-  margin-bottom: 2em;
-  border: 1px solid var(--card-outline);
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
 }
 
 .collectionDetail img {
@@ -48,13 +56,15 @@
 .collectionDetail textarea {
   resize: none;
   width: 100%;
+  padding: 16px;
   border-radius: 0.25em;
-  border: 1px solid var(--card-outline);
-  padding: 0.6rem 0rem 0.3rem 0.8rem;
+  border-radius: 2px;
+  border: 1px solid var(--primary-dark-blue, #262b92);
+  background: transparent;
 }
 
 .collectionDetail textarea:focus {
-  outline: 1px solid var(--outline);
+  outline: 1px solid var(--primary-primary-blue, #20c1ff);
 }
 
 .collectionDetail .tab {
@@ -65,20 +75,27 @@
   margin-bottom: 0.5em;
 }
 
+.collectionDetail .tab h3 {
+  color: var(--primary-white, #ecf1f9);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
+}
+
 .collectionDetail .toggleContainer {
-  width: 36px;
+  width: 40px;
   border-radius: 0.75em;
   padding: 0px 0;
   background: var(--default);
   cursor: var(--cursor-pointer);
-  padding: 2px 2px;
+  padding: 4px 4px;
   transition: all 300ms;
-  border: 1px solid var(--card-outline);
 }
 
 .collectionDetail .toggleContainer.active {
   background: var(--main-color);
-  border: 1px solid var(--outline);
 }
 
 .collectionDetail .toggle {
@@ -95,7 +112,6 @@
 }
 
 .actionContainer {
-  padding: 1em 0.8em;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -108,12 +124,14 @@
 }
 
 .actionContainer h3 {
-  margin-top: -20px;
-  background: var(--default);
+  padding: 0 8px;
   width: fit-content;
-  padding-right: 6px;
-  margin-left: -5px;
-  padding-left: 5px;
+  color: var(--primary-white, #ecf1f9);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
 
 .actionContainer label {
@@ -122,11 +140,17 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 1em;
+  gap: 10px;
   padding: 0.75em;
-  border-radius: 0.25em;
-  background: var(--card-layer);
-  color: var(--default);
+
+  border-radius: 2px;
+  background: rgba(187, 197, 255, 0.16);
+
+  color: var(--primary-white, #ecf1f9);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
 
 .actionContainer .btnWrapper > button {
@@ -135,16 +159,22 @@
   border: none;
   height: 3em;
   font-size: 1rem;
-  border-radius: 0.25em;
-  background: var(--main-color);
-  color: var(--default);
+  color: var(--primary-black-bg, #080f20);
+  text-align: center;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 114.286% */
   cursor: var(--cursor-pointer);
   transition: all 300ms;
+
+  border-radius: 40px;
+  background: var(--primary-primary-blue, #20c1ff);
 }
 
 .actionContainer .btnWrapper > button:hover {
   background: var(--main-hovered);
-  outline: 2px solid var(--main-color);
 }
 
 .preview {
@@ -152,13 +182,22 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
+  grid-gap: 24px;
 }
 
 .card {
   min-width: 12em;
   max-width: 20em;
-  padding: 0.5rem;
+  padding: 4px;
   position: relative;
+
+  border-radius: 2px;
+  border: 1px solid var(--primary-dark-blue, #262b92);
+  background: rgba(187, 197, 255, 0.04);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .cardActive {
@@ -187,22 +226,15 @@
 .asset {
   display: inline-block;
   width: 100%;
-  border-top-right-radius: 0.5em;
-  border-top-left-radius: 0.5em;
-  border: 1px solid var(--outline);
 }
 
 .cardBody {
-  background: var(--card-layer);
   color: var(--default);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1em;
-  padding: 1em;
-  border-bottom-right-radius: 0.5em;
-  border-bottom-left-radius: 0.5em;
+  gap: 10px;
 }
 
 .cardBody .textWrapper {
@@ -216,12 +248,19 @@
 
 .cardBody textarea {
   width: 100%;
-  background: var(--card-shade);
   color: var(--default);
-  padding: 0.25em;
+  padding: 8px;
   resize: none;
-  border-radius: 0.25em;
   outline: none;
+
+  border-radius: 4px;
+  border: 1px solid rgba(147, 163, 248, 0.24);
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: transparent;
 }
 
 .cardBody textarea::placeholder {
@@ -250,28 +289,50 @@
   font-size: 0.6em;
 }
 
-.buttonContainer button:last-child {
-  border-color: var(--default);
+.buttonContainer .generateNew {
+  transition: 0.3s ease-in;
+  border-radius: 40px;
+  border: 2px solid var(--primary-primary-blue, #20c1ff);
+  background: var(--primary-black-bg, #080f20);
+  color: var(--primary-primary-blue, #20c1ff);
+  outline: none;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
 }
 
-.buttonContainer button:first-child,
-.nftDonwload {
-  background: var(--default);
-  border-color: var(--default);
-  color: var(--main-color);
-}
-
-.buttonContainer button:last-child:hover {
-  background: var(--card-layer);
-  outline: 2px solid var(--card-layer);
-  border-color: transparent;
-}
-
-.buttonContainer button:first-child:hover,
-.nftDonwload {
-  background: var(--main-hovered);
-  border-color: var(--main-hovered);
+.buttonContainer .generateNew:hover {
+  background: var(--main-color);
   color: var(--default);
+  outline: none;
+}
+
+.buttonContainer .nftDownload {
+  transition: 0.3s ease-in;
+  background: var(--default);
+  color: var(--main-color);
+  border-radius: 40px;
+  background: var(--primary-primary-blue, #20c1ff);
+  color: var(--primary-black-bg, #080f20);
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+}
+
+.buttonContainer .nftDownload:hover {
+  background: var(--main-hovered);
 }
 
 .foramtWrapper {
@@ -282,9 +343,6 @@
   grid-gap: 1em;
   gap: 1em;
   width: 100%;
-  border: 1px solid #c4c4c4;
-  padding: 0.6rem 0.8rem;
-  padding-bottom: 1.3rem;
 }
 
 .foramtWrapper p {
@@ -297,21 +355,22 @@
   align-items: center;
   justify-content: center;
   cursor: var(--cursor-pointer);
+  background: #1a2235; /* Use the background color without outline */
 }
 
 .radioBtn::before {
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  background: var(--card-layer);
   position: absolute;
   content: "";
-  outline: 2px solid var(--default);
   outline-offset: 2px;
+  background: #1a2235; /* Use the background color without outline */
+  outline: 2px solid var(--primary-primary-blue, #20c1ff);
 }
 
 .radioBtn.clicked::before {
-  background: var(--default);
+  background: var(--primary-primary-blue, #20c1ff);
 }
 
 .paginate {
@@ -356,19 +415,20 @@
 
 /* -------------------------------- GIF Genrator -------------------------------- */
 .btnWrapper {
-  padding: 0 0.8rem;
   width: 100%;
   display: grid;
   grid-template-columns: auto;
-  gap: 0.5rem;
+  gap: 16px;
 }
 
 .btnWrapper > button.gifButton {
   margin-top: 2em;
-  background: var(--default);
-  border: 1px solid var(--main-color);
-  color: var(--main-color);
   transition: 0.3s ease-in;
+
+  border-radius: 40px;
+  border: 2px solid var(--primary-primary-blue, #20c1ff);
+  background: var(--primary-black-bg, #080f20);
+  color: var(--primary-primary-blue, #20c1ff);
 }
 
 .btnWrapper > button.gifButton:hover {
@@ -636,8 +696,25 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-.closeIcon path {
-  fill: #f1423b;
+.closeIcon {
+  transition: all 300ms;
+  padding: 4px;
+  fill: var(--icon-color);
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+
+  flex: none;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  border-radius: 2px;
+  border: 1px solid var(--transparent-white-white-85, rgba(251, 251, 251, 0.85));
+  background: rgba(3, 7, 16, 0.3);
+}
+
+.closeIcon:hover {
+  box-shadow: var(--shadow-dark);
 }
 
 .gifAllBtn {

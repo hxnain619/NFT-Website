@@ -3,15 +3,15 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-const */
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useState, useRef, useContext } from "react";
-import classes from "./create-guide.module.css";
-import rightCtrl from "../../assets/icon-angle-right.svg";
-import leftCtrl from "../../assets/icon-angle-left.svg";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import blankImage from "../../assets/blank.png";
-import { GenContext } from "../../gen-state/gen.context";
-import { setDidMout } from "../../gen-state/gen.actions";
-import { guide } from "./create-guide-script";
+import leftCtrl from "../../assets/icon-angle-left.svg";
+import rightCtrl from "../../assets/icon-angle-right.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
+import { setDidMout } from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
+import { guide } from "./create-guide-script";
+import classes from "./create-guide.module.css";
 
 const maxCount = Object.keys(guide).length;
 

@@ -1,8 +1,5 @@
 .container {
-  width: max-content;
-  border-radius: 0.5em;
   overflow: hidden;
-  margin: auto;
   position: relative;
 }
 
@@ -30,11 +27,16 @@
 }
 
 .placeholder {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: rgba(187, 197, 255, 0.08);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--outline);
-  border-radius: 0.5em;
+}
+
+.canvas {
+  width: 100%;
 }

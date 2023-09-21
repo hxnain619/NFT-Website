@@ -3,12 +3,12 @@
 /* eslint-disable consistent-return */
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import classes from "./Session.module.css";
+import { ReactComponent as ArrowBackIcon } from "../../assets/icon-arrow-left.svg";
 import { ReactComponent as ChevronIcon } from "../../assets/icon-chevron-down.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
 import { ReactComponent as MarkIcon } from "../../assets/icon-mark.svg";
-import { ReactComponent as ArrowBackIcon } from "../../assets/icon-arrow-left.svg";
-import { GenContext } from "../../gen-state/gen.context";
+import { getCurrentUser } from "../../components/google-auth/googleAuth.script";
+import SkeletonCards from "../../components/skeleton-card";
 import {
   addRule,
   setCollectionName,
@@ -21,12 +21,12 @@ import {
   setSession,
   setUpgradePlan,
 } from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
 import { deleteAllLayers, fetchSession, fetchUserSession } from "../../renderless/store-data/StoreData.script";
-import { plans } from "../Pricing/Pricing.script";
-import { getCurrentUser } from "../../components/google-auth/googleAuth.script";
-import NotResult from "./No-Result/NoResult";
 import { handleResetCreate } from "../../utils";
-import SkeletonCards from "../../components/skeleton-card";
+import { plans } from "../Pricing/Pricing.script";
+import NotResult from "./No-Result/NoResult";
+import classes from "./Session.module.css";
 
 const Session = () => {
   const history = useHistory();
@@ -90,7 +90,7 @@ const Session = () => {
         dispatch(setOverlay(true));
         const sessions = await fetchSession({ currentUser });
         dispatch(setOverlay(false));
-        if (sessions.length) {
+        if (sessions) {
           toggleNoResult("false");
           dispatch(setSession(sessions));
         } else {

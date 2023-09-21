@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../preview.module.css";
+import classes from "./pageControl.module.css";
 
 const PageControl = ({ controProps }) => {
   const { handleGoto, handleNext, handlePrev, currentPage, currentPageValue, paginate, handleSetState } = controProps;
@@ -14,15 +14,17 @@ const PageControl = ({ controProps }) => {
       <div onClick={handleNext} className={classes.pageControl}>
         next
       </div>
-      <div onClick={handleGoto} className={classes.pageControl}>
-        goto
+      <div className={classes.pageChoose}>
+        <input
+          min={1}
+          type="number"
+          value={currentPageValue}
+          onChange={(e) => handleSetState({ currentPageValue: e.target.value >= 1 ? e.target.value : "" })}
+        />
+        <div onClick={handleGoto} className={classes.pageControl}>
+          goto
+        </div>
       </div>
-      <input
-        min={1}
-        type="number"
-        value={currentPageValue}
-        onChange={(e) => handleSetState({ currentPageValue: e.target.value >= 1 ? e.target.value : "" })}
-      />
     </div>
   );
 };

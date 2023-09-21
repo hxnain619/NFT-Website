@@ -37,7 +37,7 @@
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   margin: auto;
-  width: 100%;
+  width: 900px;
 }
 .typeCard {
   display: flex;
@@ -50,12 +50,11 @@
   align-self: stretch;
   border-radius: 4px;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-  transition: background-image 10ms ease-in-out;
   cursor: pointer;
-
-  animation: slide-right 850ms forwards;
   transform: translateX(-2%);
   padding: 8px;
+  transition: background-image 10ms ease-in-out;
+  animation: slide-right 850ms forwards;
 }
 
 .typeCard:hover {
@@ -78,7 +77,8 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
+  height: 48px;
 }
 
 @keyframes slide-right {
@@ -178,6 +178,7 @@
 
   .cardDeck {
     flex-direction: column;
+    width: 100%;
   }
 }
 

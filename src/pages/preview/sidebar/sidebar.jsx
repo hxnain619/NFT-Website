@@ -39,9 +39,6 @@ const Sidebar = ({ sidebarProps }) => {
   return (
     <aside className={`${classes.sidebar} ${gifShow && classes.sidebarActive}`}>
       <div className={classes.collectionDetail}>
-        <div className={classes.tab}>
-          <h3>Collection Name </h3>
-        </div>
         <div className={classes.wrapper}>
           <TextEditor
             placeholder={collectionName || ""}
@@ -65,9 +62,10 @@ const Sidebar = ({ sidebarProps }) => {
         </div>
         <textarea
           name="description"
+          className={classes.collectionDescription}
           value={collectionDescription}
           rows="4"
-          placeholder="description"
+          placeholder="Enter Description"
           onChange={(event) => handleCollectionDescription({ ...sidebarProps, event })}
         />
       </div>
@@ -109,7 +107,7 @@ const Sidebar = ({ sidebarProps }) => {
         <div className={classes.btnWrapper}>
           {!gifShow && (
             <button onClick={handleGif} className={classes.gifButton} type="button">
-              Genrate GIF
+              Generate GIF
             </button>
           )}
         </div>

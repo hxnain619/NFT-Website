@@ -1,15 +1,19 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable no-shadow */
 
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import LayerOrders from "../../components/layerorders/layerorders";
+import { ReactComponent as DropdownIcon } from "../../assets/icon-chevron-down.svg";
+import { ReactComponent as Diskicon } from "../../assets/icon-disk.svg";
+import { ReactComponent as LoadingIcon } from "../../assets/icon-loading.svg";
 import CollectionDescription from "../../components/description/collection-description";
-import CollectionOverview from "../../components/overview/collection-overview";
-import classes from "./create.module.css";
-import SubscriptionNotification from "../../components/Subscription-Notification/SubscriptionNotification";
+import GoogleAuth from "../../components/google-auth/googleAuth";
+import LayerOrders from "../../components/layerorders/layerorders";
+import { handleSampleLayers } from "../../components/menu/collection-menu-script";
 import CollectionNameModal from "../../components/Modals/Collection-Name-Modal/CollectionNameModal";
-import { GenContext } from "../../gen-state/gen.context";
+import CollectionOverview from "../../components/overview/collection-overview";
+import ProfileDropdown from "../../components/profile-dropdown/profileDropdown";
+import SubscriptionNotification from "../../components/Subscription-Notification/SubscriptionNotification";
 import {
   setOverlay,
   setSession,
@@ -17,15 +21,10 @@ import {
   setToggleSessionModal,
   setUpgradePlan,
 } from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
 import { fetchSession } from "../../renderless/store-data/StoreData.script";
-import CreateGuide from "../../components/create-guide/create-guide";
-import GoogleAuth from "../../components/google-auth/googleAuth";
-import ProfileDropdown from "../../components/profile-dropdown/profileDropdown";
-import { ReactComponent as Diskicon } from "../../assets/icon-disk.svg";
-import { ReactComponent as DropdownIcon } from "../../assets/icon-chevron-down.svg";
-import { ReactComponent as LoadingIcon } from "../../assets/icon-loading.svg";
+import classes from "./create.module.css";
 import ProgressBar from "./Progress-Bar/ProgressBar";
-import { handleSampleLayers } from "../../components/menu/collection-menu-script";
 // import LoginModal from "../../components/Modals/Login-Modal/LoginModal";
 import { signInWithGoogle } from "../../components/google-auth/googleAuth.script";
 
@@ -98,9 +97,7 @@ const CreateCollection = () => {
   return (
     <div className={classes.container}>
       <SubscriptionNotification />
-      {/* <LoginModal /> */}
       <CollectionNameModal />
-      <CreateGuide toggleGuide={toggleGuide} setGuide={(e) => handleSetState({ toggleGuide: e })} />
       <div className={classes.details}>
         <div
           onClick={!isSignIn ? handleSignIn : () => {}}
@@ -147,16 +144,17 @@ const CreateCollection = () => {
           )}
         </div>
         <div className={classes.guide}>
-          <div>Need help?</div>
-          {currentPlan === "free" ? <div onClick={handleSample}>Try our samples</div> : null}
-          <div onClick={handleTutorial}>Watch tutorial</div>
+          <div className={classes.guideHelpText}>Need help?</div>
+          {currentPlan === "free" ? (
+            <div onClick={handleSample} className={classes.guideSampleButton}>
+              Try our samples
+            </div>
+          ) : null}
         </div>
       </div>
       <div className={classes.wrapper}>
-        <div className={classes.layer_overview}>
-          <LayerOrders />
-          <CollectionOverview />
-        </div>
+        <LayerOrders />
+        <CollectionOverview />
         <CollectionDescription />
       </div>
     </div>

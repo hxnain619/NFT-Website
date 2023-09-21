@@ -148,20 +148,20 @@ a {
 ::-webkit-scrollbar {
   width: inherit;
   height: 6px;
-  width: 10px;
+  width: 4px;
   border-radius: 1em;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 0px;
-  background: #f1f1f1;
+  background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 0px;
+  background: #93a3f833;
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-corner {
@@ -170,7 +170,7 @@ a {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b1b1b1;
+  background: #93a3f866;
 }
 
 button {

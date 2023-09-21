@@ -1,9 +1,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-restricted-syntax */
 import React, { useContext, useEffect, useState } from "react";
-import CollectionMenu from "../menu/collection-menu";
-import classes from "./collection-overview.module.css";
-import { GenContext } from "../../gen-state/gen.context";
+import cardPacks from "../../assets/cards-pack.png";
+import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
 import {
   addRule,
   clearPreview,
@@ -12,12 +11,12 @@ import {
   setLayerAction,
   setNotification,
 } from "../../gen-state/gen.actions";
-import isUnique from "./collection-overview-script";
-import RulesCard from "../rulesCard/rulesCard.component";
+import { GenContext } from "../../gen-state/gen.context";
 import { reOrderPreview } from "../../utils";
-import infoIcon from "../../assets/icon-info-regular.svg";
-import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
-import createIcon from "../../assets/create-icon2.svg";
+import CollectionMenu from "../menu/collection-menu";
+import RulesCard from "../rulesCard/rulesCard.component";
+import isUnique from "./collection-overview-script";
+import classes from "./collection-overview.module.css";
 
 const CollectionOverview = () => {
   const { dispatch, isRule, preview, rule, layers, combinations } = useContext(GenContext);
@@ -138,7 +137,6 @@ const CollectionOverview = () => {
           </>
         )}
         <div className={`${classes.conflictInfo} ${toggleInfo && classes.hidden}`}>
-          <img src={infoIcon} alt="info" />
           <p>Setting conflict rules for images means that the selected set of images cannot form a generative art</p>
           <CloseIcon className={classes.closeIcon} onClick={() => handleSetState({ toggleInfo: true })} />
         </div>
@@ -148,7 +146,7 @@ const CollectionOverview = () => {
         layers.map((layer) => <CollectionMenu key={layer.id} layer={layer} />)
       ) : (
         <div className={classes.fallback}>
-          <img src={createIcon} alt="" />
+          <img src={cardPacks} alt="" />
           <h4>Add Layers to Generate Art</h4>
           <p>Click on “Add Layer” button to add layers for your arts</p>
         </div>
