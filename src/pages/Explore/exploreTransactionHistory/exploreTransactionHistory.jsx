@@ -3,7 +3,7 @@
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from "react";
 import classes from "./exploreTransactionHistory.module.css";
-
+import exportIC from '../../../assets/export.png'
 import exportIcon from "../../../assets/icon-export.svg";
 import searchIcon from "../../../assets/icon-search.svg";
 
@@ -36,8 +36,29 @@ const ExploreTransactionHistory = ({ collectionId, chain }) => {
     Listing: <ListIcon />,
   };
 
+
   const { selected, explorer, transactionData, isAlgoChain, searchValue, filterdHistory } = state;
 
+  const dummyData = [
+    {
+    icon: exportIcon,
+    dataType:"minting",
+    dataName:"dummy",
+    address1: "0xC47e...2470",
+    address2: "0xC47e...2470",
+    month: "8 months",
+    link:"acd"
+  },
+  {
+    icon: exportIcon,
+    dataType:"minting",
+    dataName:"dummy",
+    address1: "0xC47e...2470",
+    address2: "0xC47e...2470",
+    month: "8 months",
+    link:"acd"
+  }
+]
   const handleSetState = (payload) => {
     setState((states) => ({ ...states, ...payload }));
   };
@@ -124,10 +145,9 @@ const ExploreTransactionHistory = ({ collectionId, chain }) => {
   };
   return (
     <div className={classes.container}>
-      <div className={classes.header}>
+      {/* <div className={classes.header}>
         <TransactionIcon />
-        <div>Transaction History</div>
-      </div>
+      </div> */}
       <div className={classes.wrapper}>
         <div className={classes.filters}>
           <div
@@ -154,7 +174,7 @@ const ExploreTransactionHistory = ({ collectionId, chain }) => {
           >
             Sales
           </div>
-          <div
+          {/* <div
             className={`${classes.option && classes.disabled}`}
             disabled
             onClick={() => handleSetState({ selected: "listings" })}
@@ -167,39 +187,55 @@ const ExploreTransactionHistory = ({ collectionId, chain }) => {
             onClick={() => handleSetState({ selected: "canceled" })}
           >
             Canceled Listings
-          </div>
+          </div> */}
         </div>
 
         <div className={classes.searchInput}>
-          <img src={searchIcon} alt="" srcSet="" />
           <input type="text" placeholder="Search" value={searchValue} onChange={handleSearch} />
+          <img src={searchIcon} alt="" srcSet="" />
         </div>
         {isAlgoChain ? (
           <div className={classes.commingSoon}>coming soon</div>
-        ) : filterdHistory.length > 0 ? (
+        ) : 
+        filterdHistory.length > 0 ? 
+        (
+
           <div className={classes.transactionContainer}>
             {filterdHistory?.map((data) => {
               return (
                 <div className={classes.transaction}>
                   <div className={classes.status}>
-                    {txIcons[data?.type]}
+                    
+                    {/* {txIcons[data?.type]} */}
                     {data?.type}
                   </div>
                   <div className={classes.transactionDetails}>
                     <div className={classes.detail}>
                       <span className={classes.label}>From:</span>
-                      <span className={classes.value}>{data?.from ? breakAddress(data?.from, 4) : "--"}</span>
+                      <span className={classes.value}>
+                        {data?.from ? breakAddress(data?.from, 4) : "--"}
+                        </span>
                     </div>
                     <div className={classes.detail}>
                       <span className={classes.label}>To:</span>
-                      <span className={classes.value}>{data?.to ? breakAddress(data?.to, 4) : "--"}</span>
+                      <span className={classes.value}>
+                        {data?.to ? breakAddress(data?.to, 4) : "--"}
+                      </span>
                     </div>
-                    <div className={classes.detail}>
-                      <span className={classes.date}>{data.date}</span>
-                    </div>
+                    {/* <div className={classes.detail}>
+                      <span className={classes.date}>
+                        {data.date}
+                        {data.month}
+                        </span>
+                    </div> */}
                     <div className={classes.export}>
-                      <a href={`${explorer}tx/${data?.id}`} target="_blank" rel="noreferrer">
-                        <img src={exportIcon} alt="" />
+                    <span className={classes.date}>
+                        {data.date}
+                        </span>
+                      <a 
+                      href={`${explorer}tx/${data?.id}`} 
+                      target="_blank" rel="noreferrer">
+                        <img src={exportIC} alt="" />
                       </a>
                     </div>
                   </div>

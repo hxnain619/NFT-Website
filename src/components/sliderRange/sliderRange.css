@@ -1,0 +1,13 @@
+.rc-slider-rail{
+    height: 6px;
+    background: var(--primary-light-blue);
+    opacity: 20%;
+    border-radius: 0;
+}
+.rc-slider-track{
+    background-color: var(--primary-light-blue);
+    height: 6px;
+}
+.rc-slider-handle{
+    background-color: var(--primary-light-blue);
+}

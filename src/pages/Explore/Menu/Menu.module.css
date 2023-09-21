@@ -27,15 +27,15 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1em;
-  border-top: 1px solid var(--outline);
-  border-bottom: 1px solid var(--outline);
+  /* border-top: 1px solid var(--outline);
+  border-bottom: 1px solid var(--outline); */
   padding: 0.25em;
 }
 
 .pageControl {
   padding: 0.5em 1em;
   border-radius: 0.25em;
-  background: var(--main-color);
+  background: var(--primary-dark-blue);
   color: var(--default);
   cursor: var(--cursor-pointer);
   transition: all 300ms;

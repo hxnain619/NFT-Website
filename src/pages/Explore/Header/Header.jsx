@@ -7,7 +7,13 @@ import discordIcon from "../../../assets/icon-discord-blue.svg";
 import listIcon from "../../../assets/icon-list.svg";
 import stackIcon from "../../../assets/icon-stack.svg";
 import tradeIcon from "../../../assets/icon-trade.svg";
+import globe from "../../../assets/globe.png";
+import plane from "../../../assets/plane.png";
+import instagram from "../../../assets/instagram.png";
+import share from "../../../assets/share.png";
+import twitter from "../../../assets/twitter.png";
 import twitterIcon from "../../../assets/icon-twitter-blue.svg";
+import avalanche from '../../../assets/icon-avalanche-red.png'
 import Copy from "../../../components/copy/copy";
 import { breakAddress } from "../../../components/wallet/wallet-script";
 import { getFormatedPrice } from "../../../utils";
@@ -29,7 +35,22 @@ const Header = ({ collection, getHeight }) => {
     usdValue: 0,
     UsdVolumeValue: 0,
     user: null,
-    links: [],
+    links: [{
+     icon:twitter,
+    },
+    {
+      icon:globe
+    },
+    {
+      icon:plane
+    },
+    {
+      icon:instagram
+    } ,
+    {
+      icon:share
+    },
+  ],
   });
 
   const { usdValue, UsdVolumeValue, user, links } = state;
@@ -80,71 +101,91 @@ const Header = ({ collection, getHeight }) => {
 
   return (
     <div ref={headerRef} className={classes.container}>
-      <div style={{ backgroundImage: `url(${bannerImg})` }} className={classes.innerContainer}>
+      <div 
+      // style={{ backgroundImage: `url(${bannerImg})` }}
+      className={classes.innerContainer}>
         <div className={classes.wrapper}>
           <img className={classes.thumbnail} src={image_url} alt="" />
           <div className={classes.linksAndCollectionDetailWrapper}>
             <div className={classes.collectionDetail}>
               <div className={classes.nameAndChainWrapper}>
                 <div className={classes.name}>{name}</div>
-                <img className={classes.chain} src={supportedChains[chain]?.icon} alt="" />
+                {/* <img className={classes.chain} src={supportedChains[chain]?.icon} alt="" /> */}
               </div>
               <div className={classes.creator}>
-                <p>Created by</p>
+                <p>by</p>
                 <div className={classes.accent}>
                   <Link to={`/profile/${chain}/${owner}`}> {(user && user.username) || breakAddress(owner)}</Link>{" "}
-                  <Copy message={owner} />
+                  {/* <Copy message={owner} /> */}
                 </div>
               </div>
             </div>
-
-            <div className={classes.socialLinks}>
+            
+            {/* <div className={classes.socialLinks}>
               {links.map((link, idx) => (
                 <a key={idx} className={classes.link} href={link.url}>
                   <img src={link.icon} alt="" />
                 </a>
               ))}
-            </div>
+            </div>   */}
+            
           </div>
         </div>
+        
       </div>
+      
       <div className={classes.innerContainer_2}>
         <div className={classes.wrapper_2}>
+      <div className={classes.collectionDescription}>
+        <p>Collection 1234 created for creative people to own the NFT they desire. Creative people and geometry. <br/> Collection 1234 created for creative people to own the NFT they desire...</p>
+        </div>
+        <div className={classes.socialLinks}>
+              {links.map((link, idx) => (
+                <a key={idx} className={classes.link} href={link.url}>
+                  <img src={link.icon} alt="" />
+                </a>
+              ))}
+            </div>  
           <div className={classes.description}>{description}</div>
           <div className={classes.statsContainer}>
-            <div className={classes.statWrapper}>
-              <img src={stackIcon} alt="" />
+          <div className={classes.statWrapper}>
+              {/* <img src={listIcon} alt="" /> */}
               <div className={classes.details}>
-                <div className={classes._1}>FLOOR PRICE</div>
                 <div className={classes._2}>
-                  <span className={classes.accent}>{Number(price).toFixed(4)}</span>{" "}
-                  <span className={classes.accent}>{supportedChains[chain].symbol}</span>{" "}
-                  <span>{`$${usdValue.toFixed(4)}`}</span>
+                  <span className={classes.statsAccent}>{nfts.length}</span>
                 </div>
+                <div className={classes._1}>Total NFT</div>
+
+              </div>
+            </div>
+            <div className={classes.statWrapper}>
+              {/* <img src={stackIcon} alt="" /> */}
+              <div className={classes.details}>
+                <div className={classes._2}>
+                  {/* <span className={classes.accent}>{Number(price).toFixed(4)}</span>{" "} */}
+                  {/* <span className={classes.accent}>{supportedChains[chain].symbol}</span>{" "} */}
+                  <img src={avalanche} alt="avalanche" />
+                  <span>{`${usdValue.toFixed(1)}`}</span>
+                </div>
+                <div className={classes._1}>Floor Price</div>
+
               </div>
             </div>
 
             <div className={classes.statWrapper}>
-              <img src={tradeIcon} alt="" />
+              {/* <img src={tradeIcon} alt="" /> */}
               <div className={classes.details}>
-                <div className={classes._1}>TOTAL VOLUME TRADED</div>
                 <div className={classes._2}>
-                  <span className={classes.accent}>{volumeTraded}</span>{" "}
-                  <span className={classes.accent}>{supportedChains[chain].symbol}</span>{" "}
-                  <span>{`$${UsdVolumeValue}`}</span>
+                  {/* <span className={classes.accent}>{volumeTraded}</span>{" "}
+                  <span className={classes.accent}>{supportedChains[chain].symbol}</span>{" "} */}
+                  <img src={avalanche} alt="avalanche" />
+                  <span>{`${UsdVolumeValue}`}</span>
                 </div>
+                <div className={classes._1}>Total Volume Traded</div>
               </div>
             </div>
 
-            <div className={classes.statWrapper}>
-              <img src={listIcon} alt="" />
-              <div className={classes.details}>
-                <div className={classes._1}>TOTAL NFT COUNT</div>
-                <div className={classes._2}>
-                  <span className={classes.accent}>{nfts.length}</span>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

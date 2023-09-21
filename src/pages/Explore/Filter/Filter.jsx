@@ -8,6 +8,7 @@ import arrowIconRight from "../../../assets/icon-arrow-right.svg";
 import filterIcon from "../../../assets/icon-filter.svg";
 import dropdownIcon from "../../../assets/icon-dropdown.svg";
 import Dropdown from "../Dropdown/Dropdown";
+import RangeSlider from "../../../components/sliderRange/SliderRange";
 import RadioButton from "../Radio-Button/RadioButton";
 import { ReactComponent as MarkIcon } from "../../../assets/icon-mark.svg";
 
@@ -72,7 +73,7 @@ const Filter = ({ attributes, handleFilter, filterToDelete, toggleFilter, handle
     }
   };
 
-  const statusFilter = ["All", "Listed", "Not Listed", "on auction"];
+  const statusFilter = ["Listed", "Not Listed"];
   const sortFilter = ["Newest", "Oldest", "Highest price", "Lowest price", "a - z", "z - a"];
 
   useEffect(() => {
@@ -93,31 +94,41 @@ const Filter = ({ attributes, handleFilter, filterToDelete, toggleFilter, handle
     <>
       {toggleFilter ? (
         <aside className={classes.sidebar}>
-          <div onClick={() => handleExploreSetState({ toggleFilter: !toggleFilter })} className={classes.filterHeading}>
+          {/* <div onClick={() => handleExploreSetState({ toggleFilter: !toggleFilter })} className={classes.filterHeading}>
             <div>
               <img src={filterIcon} alt="" />
               <span>Filter</span>
             </div>
             <img className={classes.leftArrow} src={arrowIconLeft} alt="" />
-          </div>
+          </div> */}
           <div className={classes.sideOverflowWrapper}>
             <Dropdown title="Status">
+          <div className={classes.customSort}>
               {statusFilter.map((status, idx) => (
-                <div key={idx} className={classes.status}>
-                  <RadioButton onClick={() => handleStatus(status)} active={status === filter.status} />
-                  <div>{status}</div>
-                </div>
+                  <button onClick={() => handleStatus(status)} className={status === filter.status ? classes.active : ""} key={idx}>
+                  {status}
+                </button>
               ))}
+              </div>
             </Dropdown>
             <Dropdown title="Sort by">
+              <div className={classes.customSort}>
               {sortFilter.map((sort, idx) => (
-                <div key={idx} className={classes.sort}>
-                  <RadioButton onClick={() => handleSort(sort)} active={sort === filter.sortby} />
-                  <div>{sort}</div>
-                </div>
+                <button onClick={() => handleSort(sort)} className={sort === filter.sortby ? classes.active : ""} key={idx}>
+                  {sort}
+                </button>
               ))}
+              </div>
             </Dropdown>
-            <Dropdown title="Attribute" isAttribute>
+            <div>
+            <Dropdown title="Price">
+            <div className={classes.customSort}>
+            <RangeSlider/>
+            <span className={classes.priceSpan}>Price: $50-1,700</span>
+            </div>
+            </Dropdown>
+            </div>
+            {/* <Dropdown title="Attribute" isAttribute>
               <div className={classes.attributeFilter}>
                 <div className={`${classes.attribute} ${toggleAttribute && classes.active}`}>
                   {attributes &&
@@ -170,7 +181,7 @@ const Filter = ({ attributes, handleFilter, filterToDelete, toggleFilter, handle
                     ))}
                 </div>
               </div>
-            </Dropdown>
+            </Dropdown> */}
           </div>
         </aside>
       ) : (
