@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./navbar.module.css";
-import { ReactComponent as BackIcon } from "../../../assets/icon-arrow-left.svg";
+import { ReactComponent as BackIcon } from "../../../assets/icon-preview-back.svg";
 
 const Navbar = ({ navbarProps }) => {
   const history = useHistory();
@@ -11,6 +11,7 @@ const Navbar = ({ navbarProps }) => {
     <div className={classes.container}>
       <div onClick={() => history.goBack()} className={classes.btnContainer}>
         <BackIcon className={classes.btnIcon} />
+        Back
       </div>
       <div className={classes.detailsWrapper}>
         {(gifShow || gifs.length > 0) && (

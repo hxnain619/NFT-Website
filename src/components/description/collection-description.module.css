@@ -2,14 +2,19 @@
   width: 100%;
   height: calc(100vh - 10em);
   max-width: 20em;
-  padding: 1em;
+  padding: 16px;
   position: sticky;
   top: 5em;
-  border: 1px solid var(--outline);
-  border-radius: 0.5em;
   z-index: 10;
   overflow: auto;
-  box-shadow: -9px 13px 18px rgba(93, 134, 194, 0.1), 26px 18px 18px rgba(93, 134, 194, 0.1);
+
+  border-radius: 4px;
+  border: 1px solid var(--primary-dark-blue, #262b92);
+  background: rgba(187, 197, 255, 0.02);
+
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* .container.active {
@@ -33,13 +38,15 @@
   gap: 1em;
   width: 100%;
   margin-bottom: 1em;
+  height: 100%;
 }
 
 .previewWrapper {
-  width: auto;
+  width: 100%;
 }
 
 .detailsWrapper {
+  height: 100%;
   width: 100%;
   flex: 1;
 }
@@ -58,38 +65,78 @@
 .combinations,
 .amount {
   flex: 50%;
-  margin-bottom: 1em;
-  background: var(--card-light);
-  padding: 0.75em;
-  border-radius: 0.25em;
 }
 
-.combinations .title,
-.amount .title {
-  font-size: 0.75rem;
+.combinations .title span,
+.amount .title span {
+  color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .combinations .count {
   width: 100%;
-  background: var(--default);
-  text-align: center;
-  margin-top: 0.5em;
-  padding: 0.25em;
-  border-radius: 0.25em;
+  text-align: left;
+  margin-top: 6px;
+  border-radius: 4px;
   font-size: 0.85rem;
-  border: 2px solid transparent;
+  color: var(--transparent-white-white-90, rgba(251, 251, 251, 0.9));
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.32px;
+  background: transparent;
+  border: 1px solid rgba(8, 15, 32, 0.15);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
-.amount input {
+.amountWrapper {
   width: 100%;
-  background: var(--default);
-  text-align: center;
-  margin-top: 0.5em;
-  padding: 0.25em;
-  border-radius: 0.25em;
-  border: 2px solid var(--warning-500);
+  text-align: left;
+  margin-top: 6px;
+  border-radius: 4px;
+  display: flex;
+  background: transparent;
+  border: 1px solid rgba(147, 163, 248, 0.24);
+  padding: 4px 16px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.amountWrapper button {
+  color: var(--secondary-green, #2c9b8e);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.amountWrapper button:hover {
+  color: var(--secondary-green, #41dac8);
+}
+
+.amountWrapper input {
+  width: 100%;
+  height: 32px;
+  border: none;
   outline: none;
-  font-size: 0.85rem;
+  background: no-repeat;
+  color: var(--primary-white, #ecf1f9);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .amount input::placeholder {
@@ -113,12 +160,15 @@
 
 .generateSettings .wrapper {
   flex: 1;
-  background: var(--card-light);
   padding: 0.5em;
-  border-radius: 0.25em;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 4px;
+  border: 1px solid rgba(147, 163, 248, 0.24);
+  background: rgba(8, 15, 32, 0.15);
+  backdrop-filter: blur(25px);
 }
 
 .generateSettings select {
@@ -127,6 +177,27 @@
   border: none;
   outline: none;
   font-size: 0.85rem;
+
+  width: 100%;
+  height: 32px;
+  background: none;
+
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.generateSettings select option {
+  background-color: #080f20;
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
+}
+
+.generateSettings select option:checked {
+  background-color: #007bff;
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
 }
 
 .btnContainer {
@@ -138,17 +209,23 @@
 
 .generateBtn {
   flex: 1;
-  border-radius: 12px;
-  padding: 0.75em;
+  padding: 8px 16px;
   text-align: center;
-  background: var(--main-disable);
   color: var(--default);
   font-size: 1rem;
   cursor: var(--cursor-pointer);
   transition: all 300ms;
   display: flex;
+
   align-items: center;
   justify-content: center;
+  font-weight: 700;
+  border-radius: 40px;
+  background: var(--primary-primary-blue, #20c1ff);
+}
+
+.generateBtn:hover {
+  background: var(--main-hovered);
 }
 
 .generateBtn.active {
@@ -159,69 +236,35 @@
   background: var(--main-hovered);
 }
 
+.generateBtn:disabled {
+  opacity: 0.6;
+}
+
 .previewBtn {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--warning-500);
-  border-radius: 50%;
+  border-radius: 40px;
+  border: 2px solid var(--primary-primary-blue, #20c1ff);
+  background: var(--primary-black-bg, #080f20);
 }
 
-.previewBtn.active {
-  animation: ripple 850ms infinite;
-}
-
-@keyframes ripple {
-  0% {
-    box-shadow: 0 0 10px 0 var(--warning-500);
-  }
-  50% {
-    box-shadow: 0 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
-  100% {
-    box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.05);
-  }
-}
-
-.previewBtn:hover:before {
-  content: "Preview your collection";
-  position: absolute;
-  top: -1em;
-  left: 0;
-  white-space: nowrap;
-  font-size: 0.75rem;
-  transform: translateY(-100%);
-  padding: 0.5em;
-  border-radius: 0.25em;
-  background: #626277;
-  color: var(--default);
-  opacity: 1;
-}
-
-.previewBtn:hover:after {
-  content: "";
-  position: absolute;
-  top: -0.35em;
-  transform: translateY(-100%);
-  border-top: 0.5em solid #626277;
-  border-right: 0.5em solid transparent;
-  border-left: 0.5em solid transparent;
-  opacity: 1;
+.previewBtn:hover {
+  background: rgba(251, 251, 251, 0.1);
+  /* background: var(--primary-primary-blue, #20c1ff); */
 }
 
 .previewIcon {
-  width: 2.6em;
-  height: 2.6em;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: var(--default);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: var(--main-color);
   cursor: var(--cursor-pointer);
-  border: 1px solid var(--outline);
+  margin: 8px;
 }
 
 .mintInfo {
@@ -240,21 +283,16 @@
   border: 1px solid var(--main-color);
 }
 
-@media screen and (max-width: 1000px) {
-  .container {
-    height: auto;
-    max-width: 36em;
-    align-self: flex-end;
-    margin-top: 2em;
-  }
-
-  .preview_details {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
+@media screen and (max-width: 1024px) {
   .generateSettings .wrapper {
     padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    height: initial;
+    max-width: initial;
+    position: static;
   }
 }
 

@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useContext } from "react";
-import classes from "./collection-preview.module.css";
+import React, { useContext, useEffect, useRef } from "react";
 import { GenContext } from "../../gen-state/gen.context";
+import classes from "./collection-preview.module.css";
 // import { getImageSize } from "../../utils";
+import { ReactComponent as PreviewIcon } from "../../assets/icon-image-preview.svg";
 import { setPreview } from "../../gen-state/gen.actions";
 import { handleImage } from "./collection-preview-script";
-import assetPlaceholder from "../../assets/asset-placeholder.png";
 
 const CollectionPreview = () => {
   const { dispatch, layers, preview } = useContext(GenContext);
@@ -48,7 +48,7 @@ const CollectionPreview = () => {
       <canvas style={!preview.length ? { display: "none" } : {}} className={classes.canvas} ref={canvasRef} />
       {!preview.length ? (
         <div className={classes.placeholder}>
-          <img src={assetPlaceholder} alt="" />
+          <PreviewIcon />
         </div>
       ) : null}
     </div>

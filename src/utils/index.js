@@ -1034,7 +1034,7 @@ export const handleImage = async (props) => {
 
 export const handleBlankImage = async (props) => {
   const { img, canvas } = props;
-  const { height, width } = await getImageSize(img);
+  const { height, width } = img ? await getImageSize(img) : [200, 200];
   canvas.setAttribute("width", width);
   canvas.setAttribute("height", height);
   const ctx = canvas.getContext("2d");

@@ -1,7 +1,10 @@
 /* eslint-disable prefer-const */
 /* eslint-disable jsx-a11y/no-autofocus */
 /* eslint-disable no-restricted-syntax */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ReactComponent as CloseIcon } from "../../assets/icon-image-delete.svg";
+import { ReactComponent as EditIcon } from "../../assets/icon-layer-edit.svg";
+import { ReactComponent as MarkIcon } from "../../assets/icon-mark.svg";
 import {
   addPreview,
   removeImage,
@@ -12,9 +15,6 @@ import {
 } from "../../gen-state/gen.actions";
 import { GenContext } from "../../gen-state/gen.context";
 import classes from "./art-card.module.css";
-import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
-import { ReactComponent as EditIcon } from "../../assets/icon-edit.svg";
-import { ReactComponent as MarkIcon } from "../../assets/icon-mark.svg";
 import RadioButton from "./radio-Button/radioButton";
 
 const ArtCard = ({ layerTitle, trait, setActiveCard, activeCard, layerId, index }) => {
@@ -117,15 +117,15 @@ const ArtCard = ({ layerTitle, trait, setActiveCard, activeCard, layerId, index 
 
   return (
     <div className={`${classes.container} ${activeCard === index ? classes.active : classes.inActive}`}>
-      <div className={classes.action}>
+      <div onClick={() => handleAddPreview(traitTitle, image)} className={classes.imageContainer}>
+        <img className={classes.image} src={URL.createObjectURL(image)} alt="avatar" />
         {!isRule ? (
           <CloseIcon onClick={handleRemove} className={classes.closeIcon} />
         ) : (
-          <RadioButton active={activeCard === index} onClick={() => handleAddPreview(traitTitle, image)} />
+          <div className={classes.radioWrapper}>
+            <RadioButton active={activeCard === index} onClick={() => handleAddPreview(traitTitle, image)} />
+          </div>
         )}
-      </div>
-      <div onClick={() => handleAddPreview(traitTitle, image)} className={classes.imageContainer}>
-        <img className={classes.image} src={URL.createObjectURL(image)} alt="avatar" />
       </div>
       <div className={classes.details}>
         <div>

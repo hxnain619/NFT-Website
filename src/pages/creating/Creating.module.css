@@ -36,7 +36,7 @@
 }
 .cardDeck {
   display: flex;
-  width: 890px;
+  width: 900px;
   align-items: flex-start;
   gap: 30px;
 }
@@ -51,7 +51,6 @@
   align-self: stretch;
   border-radius: 4px;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-  transition: background-image 10ms ease-in-out;
   cursor: pointer;
 
   animation: slide-right 850ms forwards;
@@ -145,8 +144,6 @@
   color: var(--primary-white, #ecf1f9);
   text-align: center;
 
-  /* subheading-small-jost */
-  /* font-family: Jost; */
   font-size: 18px;
   font-style: normal;
   font-weight: 700;

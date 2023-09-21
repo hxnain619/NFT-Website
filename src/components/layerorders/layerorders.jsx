@@ -2,28 +2,28 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 /* eslint-disable no-unused-expressions */
 import React, { useContext, useEffect, useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from "uuid";
-import classes from "./layerorders.module.css";
-import { GenContext } from "../../gen-state/gen.context";
-import {
-  addLayer,
-  setLayers,
-  setCollectionName,
-  removeLayer,
-  setPrompt,
-  promptDeleteLayer,
-  setCombinations,
-  setLayerAction,
-} from "../../gen-state/gen.actions";
-import Layer from "../layer/layer";
-import { getCombinations, getItemStyle, getListStyle } from "./layeroders-script";
 import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
 import { ReactComponent as AddIcon } from "../../assets/icon-plus.svg";
+import {
+  addLayer,
+  promptDeleteLayer,
+  removeLayer,
+  setCollectionName,
+  setCombinations,
+  setLayerAction,
+  setLayers,
+  setPrompt,
+} from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
+import Layer from "../layer/layer";
 import LayerInput from "./Layer-Input/LayerInput";
+import { getCombinations, getItemStyle, getListStyle } from "./layeroders-script";
+import classes from "./layerorders.module.css";
 // import Tooltip from "./Tooltip/Tooltip";
-import { ReactComponent as EditIcon } from "../../assets/icon-edit.svg";
-import { ReactComponent as MarkIcon } from "../../assets/icon-mark.svg";
+import { ReactComponent as EditIcon } from "../../assets/icon-layer-edit.svg";
+import { ReactComponent as MarkIcon } from "../../assets/icon-layer-mark.svg";
 
 const LayerOrders = () => {
   const { layers, rule, dispatch, collectionName, isRule, promptLayer } = useContext(GenContext);
@@ -123,7 +123,7 @@ const LayerOrders = () => {
               />
             </form>
           ) : (
-            <label>{collectionName}</label>
+            <label>{collectionName || "Enter Collection Name"}</label>
           )}
 
           <div className={classes.editBtn}>
@@ -135,7 +135,7 @@ const LayerOrders = () => {
           </div>
         </div>
       </div>
-
+      <div className={classes.divider} />
       <div className={classes.layerorder}>
         <div className={classes.layerHeadWrapper}>
           {showInfo ? (

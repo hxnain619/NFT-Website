@@ -27,13 +27,17 @@ const CollectionDetails = () => {
       <h4>Attributes</h4>
 
       <div className={classes.content}>
-        {description.map(({ layerTitle, traitTitle, Rarity }, index) => (
-          <p key={index}>
-            <span>{`[${layerTitle}]`}</span>
-            <span>{traitTitle}</span>
-            <span>Rarity {Rarity}</span>
-          </p>
-        ))}
+        {description.length > 0 ? (
+          description.map(({ layerTitle, traitTitle, Rarity }, index) => (
+            <p key={index}>
+              <span>{`[${layerTitle}]`}</span>
+              <span>{traitTitle}</span>
+              <span>Rarity {Rarity}</span>
+            </p>
+          ))
+        ) : (
+          <div>No traits selected</div>
+        )}
       </div>
     </div>
   );
