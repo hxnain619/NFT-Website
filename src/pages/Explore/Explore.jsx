@@ -206,6 +206,7 @@ const Explore = () => {
             collectionName={collectionName.split("~")[1] ? collectionName.split("~")[1] : collectionName}
           />
         ) : (
+         
           <ExploreTransactionHistory collectionId={collectionId} chain={NFTCollection[0]?.chain} />
         )}
       </div>
