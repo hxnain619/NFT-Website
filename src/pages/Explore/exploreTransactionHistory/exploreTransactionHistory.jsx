@@ -197,7 +197,7 @@ const ExploreTransactionHistory = ({ collectionId, chain }) => {
         {isAlgoChain ? (
           <div className={classes.commingSoon}>coming soon</div>
         ) : 
-        filterdHistory.length > 0 ? 
+        filterdHistory?.length ? 
         (
 
           <div className={classes.transactionContainer}>
