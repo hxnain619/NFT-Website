@@ -13,7 +13,7 @@ import instagram from "../../../assets/instagram.png";
 import share from "../../../assets/share.png";
 import twitter from "../../../assets/twitter.png";
 import twitterIcon from "../../../assets/icon-twitter-blue.svg";
-import avalanche from '../../../assets/icon-avalanche-red.png'
+import avalanche from "../../../assets/icon-avalanche-red.png";
 import Copy from "../../../components/copy/copy";
 import { breakAddress } from "../../../components/wallet/wallet-script";
 import { getFormatedPrice } from "../../../utils";
@@ -35,22 +35,23 @@ const Header = ({ collection, getHeight }) => {
     usdValue: 0,
     UsdVolumeValue: 0,
     user: null,
-    links: [{
-     icon:twitter,
-    },
-    {
-      icon:globe
-    },
-    {
-      icon:plane
-    },
-    {
-      icon:instagram
-    } ,
-    {
-      icon:share
-    },
-  ],
+    links: [
+      {
+        icon: twitter,
+      },
+      {
+        icon: globe,
+      },
+      {
+        icon: plane,
+      },
+      {
+        icon: instagram,
+      },
+      {
+        icon: share,
+      },
+    ],
   });
 
   const { usdValue, UsdVolumeValue, user, links } = state;
@@ -101,9 +102,10 @@ const Header = ({ collection, getHeight }) => {
 
   return (
     <div ref={headerRef} className={classes.container}>
-      <div 
-      // style={{ backgroundImage: `url(${bannerImg})` }}
-      className={classes.innerContainer}>
+      <div
+        // style={{ backgroundImage: `url(${bannerImg})` }}
+        className={classes.innerContainer}
+      >
         <div className={classes.wrapper}>
           <img className={classes.thumbnail} src={image_url} alt="" />
           <div className={classes.linksAndCollectionDetailWrapper}>
@@ -120,7 +122,7 @@ const Header = ({ collection, getHeight }) => {
                 </div>
               </div>
             </div>
-            
+
             {/* <div className={classes.socialLinks}>
               {links.map((link, idx) => (
                 <a key={idx} className={classes.link} href={link.url}>
@@ -128,34 +130,34 @@ const Header = ({ collection, getHeight }) => {
                 </a>
               ))}
             </div>   */}
-            
           </div>
         </div>
-        
       </div>
-      
+
       <div className={classes.innerContainer_2}>
         <div className={classes.wrapper_2}>
-      <div className={classes.collectionDescription}>
-        <p>Collection 1234 created for creative people to own the NFT they desire. Creative people and geometry. <br/> Collection 1234 created for creative people to own the NFT they desire...</p>
-        </div>
-        <div className={classes.socialLinks}>
-              {links.map((link, idx) => (
-                <a key={idx} className={classes.link} href={link.url}>
-                  <img src={link.icon} alt="" />
-                </a>
-              ))}
-            </div>  
+          <div className={classes.collectionDescription}>
+            <p>
+              Collection 1234 created for creative people to own the NFT they desire. Creative people and geometry.{" "}
+              <br /> Collection 1234 created for creative people to own the NFT they desire...
+            </p>
+          </div>
+          <div className={classes.socialLinks}>
+            {links.map((link, idx) => (
+              <a key={idx} className={classes.link} href={link.url}>
+                <img src={link.icon} alt="" />
+              </a>
+            ))}
+          </div>
           <div className={classes.description}>{description}</div>
           <div className={classes.statsContainer}>
-          <div className={classes.statWrapper}>
+            <div className={classes.statWrapper}>
               {/* <img src={listIcon} alt="" /> */}
               <div className={classes.details}>
                 <div className={classes._2}>
                   <span className={classes.statsAccent}>{nfts.length}</span>
                 </div>
                 <div className={classes._1}>Total NFT</div>
-
               </div>
             </div>
             <div className={classes.statWrapper}>
@@ -168,7 +170,6 @@ const Header = ({ collection, getHeight }) => {
                   <span>{`${usdValue.toFixed(1)}`}</span>
                 </div>
                 <div className={classes._1}>Floor Price</div>
-
               </div>
             </div>
 
@@ -184,8 +185,6 @@ const Header = ({ collection, getHeight }) => {
                 <div className={classes._1}>Total Volume Traded</div>
               </div>
             </div>
-
-           
           </div>
         </div>
       </div>

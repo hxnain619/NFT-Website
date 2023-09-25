@@ -30,7 +30,7 @@ const Navbar = () => {
     <header className={classes.header}>
       <div className={classes.wrapper}>
         <div className={classes.logo}>
-          <img src={logoDarkIcon} alt="" onClick={() => history.push('/')} />
+          <img src={logoDarkIcon} alt="" onClick={() => history.push("/")} />
         </div>
         <div className={classes.topMenu}>
           <nav className={classes.topNav}>

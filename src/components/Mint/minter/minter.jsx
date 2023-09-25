@@ -19,6 +19,7 @@ import { ReactComponent as DropdownIcon } from "../../../assets/icon-dropdown2.s
 import { ReactComponent as GreenTickIcon } from "../../../assets/icon-green-tick.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/icon-plus.svg";
 import { ReactComponent as VibesLogo } from "../../../assets/proof-of-vibes.svg";
+import { ReactComponent as Art } from "../../../assets/create/art-icon.svg";
 
 // components
 import GenadropToolTip from "../../Genadrop-Tooltip/GenadropTooltip";
@@ -797,7 +798,7 @@ const Minter = () => {
                         file &&
                         (file?.length > 1 ? (
                           file
-                            .filter((_, idx) => idx < 3)
+                            .filter((_, idx) => idx < 12)
                             .map((f, idx) => (
                               <div
                                 key={idx}
@@ -838,13 +839,6 @@ const Minter = () => {
                           {file?.length ? file.length : 1}
                         </span>
                       </div>
-                      {chainId === 4160 && (
-                        <div className={classes.priceTooltip}>
-                          <span>Mint Price:</span>{" "}
-                          <p className={classes.assetInfoMintPrice}>{file?.length * 0.1} ALGO</p>
-                          <GenadropToolTip content="Mint price is 0.01 per NFT" fill="#0d99ff" />
-                        </div>
-                      )}
                       {file?.length > 1 ? (
                         <div onClick={() => handleSetState({ preview: true })} className={classes.showPreview}>
                           <span>view all assets</span>
@@ -1025,56 +1019,6 @@ const Minter = () => {
                       </div>
                     )}
 
-                    <div className={classes.inputWrapper}>
-                      <label>Attributes</label>
-                      {!zip ? (
-                        <>
-                          <div className={classes.attributes}>
-                            {Object.keys(attributes).map((key) =>
-                              attributes[key].trait_type !== "location" ? (
-                                <Attribute
-                                  key={key}
-                                  attribute={attributes[key]}
-                                  id={key}
-                                  index={key}
-                                  removeAttribute={handleRemoveAttribute}
-                                  changeAttribute={handleChangeAttribute}
-                                  iscat={
-                                    attributes[key].trait_type === "Category" ||
-                                    attributes[key].trait_type === "Mentions" ||
-                                    attributes[key].trait_type === "Hashtag"
-                                  }
-                                />
-                              ) : (
-                                () => handleSetState({ location: key })
-                              )
-                            )}
-                          </div>
-                          <button type="button" onClick={handleAddAttribute}>
-                            + Add Attribute
-                          </button>
-                        </>
-                      ) : metadata.length === 1 ? (
-                        <>
-                          {metadata[0].attributes.map((attr, idx) => (
-                            <div className={classes.attribute} key={idx}>
-                              <div>{attr.trait_type}</div>
-                              <div>{attr.value}</div>
-                            </div>
-                          ))}
-                        </>
-                      ) : (
-                        <div className={classes.metadata}>
-                          <div>Number of Assets: {metadata.length}</div>
-                          <div className={classes.trait_type}>
-                            Trait_types:
-                            {metadata[0]?.attributes.map(({ trait_type }, idx) => (
-                              <span key={idx}>{trait_type} </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
                     {file?.length > 1 && (
                       <>
                         <div className={`${classes.inputWrapper} ${classes.dropInputWrapper}`}>
@@ -1089,7 +1033,7 @@ const Minter = () => {
                               <img src={URL.createObjectURL(file[0])} alt="" />
                             ) : (
                               <div className={classes.selectImg}>
-                                <PlusIcon />
+                                <Art />
                                 <p>Add photo</p>
                               </div>
                             )}

@@ -2,7 +2,9 @@
   width: 100%;
   min-height: 100vh;
 }
-
+.container * {
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
+}
 .wrapper {
   width: 100%;
   padding: 4em 2em;
@@ -25,32 +27,27 @@
   justify-content: center;
   flex-direction: column;
   gap: 3em;
-  padding: 6em 2em;
-  background: linear-gradient(
-    259.21deg,
-    #b0e2fe -27.76%,
-    #d8e6fc 1.15%,
-    #fdeafa 26.21%,
-    #e3f2f9 47.43%,
-    #edf5f8 67.57%,
-    #fbeffc 87.77%,
-    #b0e2fe 107.4%
-  );
-}
-
-.title {
-  text-align: center;
+  padding: 160px;
+  position: relative;
 }
 
 .title h1 {
-  font-size: 4rem;
-  font-weight: 700;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 72px; /* 112.5% */
 }
 
 .title p {
-  font-size: 1.5rem;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
-
 .searchAndFilter {
   width: 100%;
   display: flex;

@@ -50,7 +50,7 @@ const RulesCard = ({ showRule }) => {
             </div>
             <div onClick={() => handleDelete(rl)} className={classes.deleteRule}>
               Delete Rule
-              <DeleteIcon className={classes.closeIcon} />
+              <DeleteIcon className={classes.deleteIcon} />
             </div>
           </div>
         ))}
