@@ -66,6 +66,8 @@ const Search = ({ searchPlaceholder, type }) => {
 
   function getHighlightedText(text, highlight) {
     // Split on highlight term and include term into parts, ignore case
+    if (text == null) return <span> </span>;
+
     const parts = text.split(new RegExp(`(${highlight})`, "gi"));
     return (
       <span>
@@ -129,9 +131,10 @@ const Search = ({ searchPlaceholder, type }) => {
                     ? `Showing ${suggestions.length} results `
                     : "No results"}
                 </div>
+                {"    "}
                 {value?.length ? (
                   <div className={classes.showAll} onClick={() => hanldeAllResults()}>
-                    <div /> Show All results{" "}
+                    Show All results{" "}
                   </div>
                 ) : (
                   ""
@@ -154,7 +157,7 @@ const Search = ({ searchPlaceholder, type }) => {
                   <div className={classes.content}>
                     <div className={classes.name}>{getHighlightedText(suggestion.name, value)}</div>
                     <div className={classes.description}>
-                      {getHighlightedText(suggestion.description.slice(0, 40), value)}...
+                      {getHighlightedText(suggestion?.description?.slice(0, 40), value)}...
                     </div>
                     <div className={classes.type_m}>{suggestion.type}</div>
                   </div>
