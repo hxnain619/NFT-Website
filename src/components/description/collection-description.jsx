@@ -67,6 +67,10 @@ const CollectionDescription = () => {
     handleGenerate({ ...generateProps, mintAmount: parseInt(amountInputValue) });
   };
 
+  const handleMaxClick = () => {
+    handleSetState({ amountInputValue: combinations });
+  };
+
   useEffect(() => {
     dispatch(setOverlay(false));
     handleSetState({ amountInputValue: mintAmount });
@@ -109,7 +113,9 @@ const CollectionDescription = () => {
               placeholder="Eg: 1000"
             />
 
-            <button type="button">Max</button>
+            <button type="button" onClick={handleMaxClick}>
+              Max
+            </button>
           </div>
         </div>
       </div>

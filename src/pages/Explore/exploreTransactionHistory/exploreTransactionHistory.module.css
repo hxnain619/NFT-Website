@@ -43,7 +43,7 @@
   /* background-color: var(--primary-dark-blue); */
   padding: 6px 16px 6px 16px;
   border-radius: 2px;
-  margin-right: 1em; 
+  margin-right: 1em;
 }
 
 .option:hover,
@@ -81,7 +81,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border: 1px solid rgba(147, 163, 248, 0.24);;
+  border: 1px solid rgba(147, 163, 248, 0.24);
   outline: 1px solid transparent;
 }
 
@@ -104,7 +104,6 @@
 .transaction {
   border-bottom: 1px solid var(--tab-bg-2);
   padding: 4px 8px 4px 8px;
-
 }
 
 .status {
@@ -137,27 +136,25 @@
   font-size: 14px;
   font-family: Poppins;
   font-weight: 400;
-
 }
 
 .detail {
   width: 10em;
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   align-items: center;
   gap: 220px;
 }
-.date{
+.date {
   color: var(--primary-white);
 }
 .value {
   font-size: 14px;
-  color: #20C1FF;
+  color: #20c1ff;
 }
-.export{
+.export {
   display: flex;
   gap: 24px;
-
 }
 .export img {
   border: 1px solid var(--tab-bg-2);
@@ -203,7 +200,6 @@
   .date,
   .value {
     font-size: 12px;
-    
   }
 
   .label {
@@ -214,7 +210,6 @@
     width: 1em;
     padding: 0.1em;
   }
-  
 }
 
 @media screen and (max-width: 480px) {
@@ -224,24 +219,24 @@
   .active {
     color: var(--default);
   }
-  .date{
+  .date {
     display: none;
   }
-  .export img{
+  .export img {
     display: none;
   }
-  .detail{
+  .detail {
     gap: 0;
     justify-content: space-between;
   }
   .value {
-    font-size: 12px; 
+    font-size: 12px;
   }
-  .transactionDetails{
+  .transactionDetails {
     font-size: 12px;
     margin: 0.5em 0;
   }
-  .status{
+  .status {
     margin-bottom: 12px;
   }
 }

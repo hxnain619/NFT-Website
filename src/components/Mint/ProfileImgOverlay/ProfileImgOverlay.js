@@ -30,7 +30,6 @@ const ProfileImgOverlay = ({ toggleGuide, file, handleSetState, collectionProfil
         >
           View all
         </div>
-        <div className={classes.line} />
         <div className={classes.buttonConatiner}>
           <p onClick={() => handleSetState({ toggleGuide: false })}>Cancel</p>
           <div onClick={saveHandler}>Save</div>

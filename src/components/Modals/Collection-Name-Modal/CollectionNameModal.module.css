@@ -19,11 +19,14 @@
 .wrapper {
   width: 100%;
   max-width: 48em;
-  border-radius: 0.5em;
-  background: var(--default);
   padding: 4em 1em;
   position: relative;
   animation: show 300ms alternate;
+  border-radius: 8px;
+  border: 1px solid var(--primary-light-blue-2, #93a3f8);
+  background: var(--primary-black-bg, #080f20);
+  backdrop-filter: blur(12px);
+  -webkit-animation: show 300ms alternate;
 }
 
 @keyframes show {
@@ -64,17 +67,26 @@
   gap: 1em;
   padding: 2em 4em;
   border-radius: 0.5em;
-  border: 1px solid var(--outline);
 }
 
 .content h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
 
 .content h6 {
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
 
 .content p {
@@ -92,11 +104,15 @@
 .inputContainer label {
   position: absolute;
   font-size: 0.75rem;
-  background: var(--default);
-  top: 0;
-  left: 1em;
-  transform: translateY(-50%);
+  top: -24px;
   font-weight: 600;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 100% */
 }
 
 .inputContainer input {
@@ -117,23 +133,34 @@
 }
 
 .content button {
-  align-self: center;
-  width: 100%;
-  padding: 0.75em 2em;
-  border-radius: 0.7em;
-  background: var(--main-disable);
-  color: var(--default);
-  font-size: 1rem;
+  cursor: var(--cursor-pointer);
   transition: all 300ms;
-  cursor: default;
+  border-radius: 40px;
+  background: var(--primary-primary-blue, #20c1ff);
+  color: var(--primary-black-bg, #080f20);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  width: 100%;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  -webkit-transition: all 300ms;
+  -moz-transition: all 300ms;
+  -ms-transition: all 300ms;
+  -o-transition: all 300ms;
+  padding: 12px 34px;
 }
 
-.content button.active {
+.content button {
   background: var(--main-color);
-  cursor: pointer;
+  color: white;
 }
 
-.content button.active:hover {
+.content button:hover {
   background: var(--main-hovered);
 }
 

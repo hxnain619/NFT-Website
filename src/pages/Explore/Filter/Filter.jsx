@@ -103,30 +103,38 @@ const Filter = ({ attributes, handleFilter, filterToDelete, toggleFilter, handle
           </div> */}
           <div className={classes.sideOverflowWrapper}>
             <Dropdown title="Status">
-          <div className={classes.customSort}>
-              {statusFilter.map((status, idx) => (
-                  <button onClick={() => handleStatus(status)} className={status === filter.status ? classes.active : ""} key={idx}>
-                  {status}
-                </button>
-              ))}
+              <div className={classes.customSort}>
+                {statusFilter.map((status, idx) => (
+                  <button
+                    onClick={() => handleStatus(status)}
+                    className={status === filter.status ? classes.active : ""}
+                    key={idx}
+                  >
+                    {status}
+                  </button>
+                ))}
               </div>
             </Dropdown>
             <Dropdown title="Sort by">
               <div className={classes.customSort}>
-              {sortFilter.map((sort, idx) => (
-                <button onClick={() => handleSort(sort)} className={sort === filter.sortby ? classes.active : ""} key={idx}>
-                  {sort}
-                </button>
-              ))}
+                {sortFilter.map((sort, idx) => (
+                  <button
+                    onClick={() => handleSort(sort)}
+                    className={sort === filter.sortby ? classes.active : ""}
+                    key={idx}
+                  >
+                    {sort}
+                  </button>
+                ))}
               </div>
             </Dropdown>
             <div>
-            <Dropdown title="Price">
-            <div className={classes.customSort}>
-            <RangeSlider/>
-            <span className={classes.priceSpan}>Price: $50-1,700</span>
-            </div>
-            </Dropdown>
+              <Dropdown title="Price">
+                <div className={classes.customSort}>
+                  <RangeSlider />
+                  <span className={classes.priceSpan}>Price: $50-1,700</span>
+                </div>
+              </Dropdown>
             </div>
             {/* <Dropdown title="Attribute" isAttribute>
               <div className={classes.attributeFilter}>

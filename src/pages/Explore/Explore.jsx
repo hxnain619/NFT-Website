@@ -20,7 +20,7 @@ const Explore = () => {
   const [state, setState] = useState({
     toggleFilter: true,
     NFTCollection: null,
-    FilteredCollection: null, 
+    FilteredCollection: null,
     loadedChain: null,
     allGraphCollection: [],
     collection: null,
@@ -206,7 +206,6 @@ const Explore = () => {
             collectionName={collectionName.split("~")[1] ? collectionName.split("~")[1] : collectionName}
           />
         ) : (
-         
           <ExploreTransactionHistory collectionId={collectionId} chain={NFTCollection[0]?.chain} />
         )}
       </div>

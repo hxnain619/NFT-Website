@@ -11,6 +11,8 @@ import MintTweet from "../mintTweet/mintTweet";
 import { NearErrorPop, NearSuccessPopup } from "../popup/nearMintPopup";
 import classes from "./collection-single.module.css";
 
+import { handleZipFile } from "./collection-single-script";
+
 const CollectionToSingleMinter = () => {
   const params = useParams();
   const history = useHistory();

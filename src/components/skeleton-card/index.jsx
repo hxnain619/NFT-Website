@@ -18,7 +18,7 @@ const SkeletonCards = ({
         .map((_, idx) => idx)
         .map((id) => (
           <div className={`${classes.skeleton} ${className}`} key={id}>
-            {customSize.map((size, index) => (
+            {customSize?.map((size, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <Skeleton key={size + index} animation={animation} count={1} height={size} />
             ))}

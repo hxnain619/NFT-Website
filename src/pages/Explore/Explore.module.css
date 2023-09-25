@@ -20,8 +20,7 @@
 }
 
 .section {
-  border-bottom: 1px solid #93A3F814;
-  ;
+  border-bottom: 1px solid #93a3f814;
   margin-bottom: 2em;
 }
 
@@ -62,7 +61,6 @@
   border-bottom: 1px solid var(--secondary-yellow);
   color: var(--secondary-yellow);
   padding: 0px 8px 8px 8px;
-
 }
 /* .filterDisplay {
   width: 100%;
@@ -211,7 +209,7 @@
   .main {
     padding: 0;
   }
-  
+
   .searchContainer {
     flex-direction: column;
     gap: 0.5em;

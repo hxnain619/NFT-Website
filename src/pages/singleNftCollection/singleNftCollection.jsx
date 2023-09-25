@@ -14,6 +14,7 @@ import Search from "../../components/Search/Search";
 import { getAllNftsbyChain } from "../../renderless/fetch-data/fetchUserGraphData";
 import SkeletonCards from "../../components/skeleton-card";
 import { EVM_CHAINS } from "../../constant/chain";
+import GlowCircle from "../../components/glow-circle/GlowCircle";
 
 const SingleNftCollection = () => {
   const { mainnet, account, dispatch } = useContext(GenContext);
@@ -133,6 +134,8 @@ const SingleNftCollection = () => {
         <div className={classes.chainMobile}>
           <ChainDropdown onChainFilter={handleChainChange} />
         </div>
+
+        <GlowCircle />
       </div>
       <div className={classes.wrapper}>
         {Object.keys(paginate).length && !load ? (
@@ -143,7 +146,7 @@ const SingleNftCollection = () => {
           </div>
         ) : !notFound || load ? (
           <div className={classes.nfts}>
-            <SkeletonCards cardsLength={8} customSize={(200, 40)} />
+            <SkeletonCards cardsLength={8} customSize={[200, 40]} />
           </div>
         ) : (
           <NotFound />
