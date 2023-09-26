@@ -23,7 +23,6 @@
 .heading {
   width: 100%;
   margin-top: 32px;
-  margin-bottom: 0.5em;
   font-size: 32px;
   font-style: normal;
   font-weight: 900;
@@ -39,7 +38,6 @@
   width: 100%;
   margin: 0 auto;
   color: var(--primary-white);
-  margin-bottom: 3em;
   font-family: Poppins;
   font-size: 16px;
   font-style: normal;
@@ -156,10 +154,11 @@
   grid-gap: 32px; /* Gap between columns */
 }
 
-.left {
-}
 .right {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 @media screen and (max-width: 1150px) {

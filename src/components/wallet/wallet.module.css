@@ -154,8 +154,7 @@
 }
 
 .connected:hover {
-  background: #2d46d6;
-  color: var(--main-hovered);
+  background: var(--primary-light-blue-2, #93a3f8);
 }
 
 .user {
@@ -307,8 +306,8 @@
 .pushNotification {
   position: absolute;
   width: max-content;
-  top: 2em;
-  right: 0;
+  top: 4em;
+  right: -8em;
   visibility: hidden;
 }
 

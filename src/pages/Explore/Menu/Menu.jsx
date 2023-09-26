@@ -57,13 +57,13 @@ const Menu = ({ NFTCollection, toggleFilter, headerHeight }) => {
       </div>
       <div className={classes.control}>
         <div onClick={handlePrev} className={classes.pageControl}>
-          prev
+          Prev
         </div>
         <div className={classes.pageCount}>
           {currentPage} of {Object.keys(paginate).length}
         </div>
         <div onClick={handleNext} className={classes.pageControl}>
-          next
+          Next
         </div>
       </div>
     </div>

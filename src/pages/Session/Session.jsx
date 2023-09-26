@@ -3,11 +3,13 @@
 /* eslint-disable consistent-return */
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { ReactComponent as ArrowBackIcon } from "../../assets/icon-arrow-left.svg";
 import { ReactComponent as ChevronIcon } from "../../assets/icon-chevron-down.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icon-close.svg";
 import { ReactComponent as MarkIcon } from "../../assets/icon-mark.svg";
+import BackButton from "../../components/back-button/BackButton";
 import { getCurrentUser } from "../../components/google-auth/googleAuth.script";
+import PrimaryButton from "../../components/primary-button/PrimaryButton";
+import SecondaryButton from "../../components/secondary-button/SecondaryButton";
 import SkeletonCards from "../../components/skeleton-card";
 import {
   addRule,
@@ -90,7 +92,7 @@ const Session = () => {
         dispatch(setOverlay(true));
         const sessions = await fetchSession({ currentUser });
         dispatch(setOverlay(false));
-        if (sessions) {
+        if (sessions.length > 0) {
           toggleNoResult("false");
           dispatch(setSession(sessions));
         } else {
@@ -111,19 +113,14 @@ const Session = () => {
   // return null
   return (
     <div className={classes.container}>
-      <div onClick={() => history.goBack()} className={classes.backBtnContainer}>
-        <ArrowBackIcon className={classes.backIcon} />
-        <div>Back</div>
-      </div>
+      <BackButton />
       {noResult !== "true" ? (
         <div className={classes.wrapper}>
           <div className={classes.content}>
             <h1>Session</h1>
             <div className={classes.subHeading}>
               <h3>Active Session</h3>
-              <button type="button" onClick={handleCreate}>
-                create new
-              </button>
+              <PrimaryButton text="Create New" onClick={handleCreate} />
             </div>
             {noResult === "false" ? (
               <div className={classes.sessionContainer}>
@@ -180,7 +177,7 @@ const Session = () => {
                   ))}
               </div>
             ) : (
-              <SkeletonCards customSize={[120, 120, 120]} />
+              <SkeletonCards fullWidth cardsLength={1} customSize={[100, 100, 100]} />
             )}
           </div>
         </div>

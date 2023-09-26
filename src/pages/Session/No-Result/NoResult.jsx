@@ -1,22 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
+import cardPacks from "../../../assets/cards-pack.png";
+import PrimaryButton from "../../../components/primary-button/PrimaryButton";
 import classes from "./NoResult.module.css";
-import { ReactComponent as CartIcon } from "../../../assets/icon-cart.svg";
-import { GenContext } from "../../../gen-state/gen.context";
-import { setUpgradePlan } from "../../../gen-state/gen.actions";
 
 const NotFound = () => {
-  const { dispatch } = useContext(GenContext);
   const history = useHistory();
 
   const handleCreate = () => {
-    dispatch(setUpgradePlan(false));
-    history.push("/create/session/pricing");
-  };
-
-  const handleUpgrade = () => {
-    dispatch(setUpgradePlan(true));
-    history.push("/create/session/pricing");
+    history.push("/create/collection");
   };
 
   return (
@@ -24,17 +16,13 @@ const NotFound = () => {
       <div className={classes.content}>
         <h1>Session</h1>
         <div className={classes.wrapper}>
-          <CartIcon className={classes.cartIcon} />
+          <img src={cardPacks} alt="card pack" />
           <div className={classes.description}>
-            <div>You have no saved session</div>
+            <h3>You have no saved session</h3>
             <div>Upgrade to any of our paid plans to save your session progress</div>
           </div>
-          <button type="button" onClick={handleUpgrade} className={classes.upgradeBtn}>
-            Upgrade
-          </button>
-          <button type="button" onClick={handleCreate} className={classes.createBtn}>
-            Create new session
-          </button>
+
+          <PrimaryButton onClick={handleCreate} text="Create New" />
         </div>
       </div>
     </div>

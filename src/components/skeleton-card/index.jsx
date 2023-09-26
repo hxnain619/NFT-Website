@@ -11,13 +11,14 @@ const SkeletonCards = ({
   cardsLength = 4, // number of cards
   customSize = [250, 20, 20], // define each card height
   className = "",
+  fullWidth = false,
 }) => (
   <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor} enableAnimation>
-    <div className={classes.skeletonWrapper}>
+    <div className={`${classes.skeletonWrapper} ${fullWidth && classes.fullWidth}`}>
       {[...new Array(cardsLength)]
         .map((_, idx) => idx)
         .map((id) => (
-          <div className={`${classes.skeleton} ${className}`} key={id}>
+          <div className={`${classes.skeleton}  ${fullWidth && classes.skeletonFull} ${className}`} key={id}>
             {customSize?.map((size, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <Skeleton key={size + index} animation={animation} count={1} height={size} />

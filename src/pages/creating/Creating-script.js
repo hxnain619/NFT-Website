@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactComponent as Art } from "../../assets/create/art-icon.svg";
-import { ReactComponent as Collection } from "../../assets/create/collection-icon.svg";
+import { ReactComponent as Collection } from "../../assets/create/icon-import-layers.svg";
 import { ReactComponent as Video } from "../../assets/create/video-icon.svg";
 // import { ReactComponent as Doubletake } from "../../assets/create/bereal-icon.svg";
 

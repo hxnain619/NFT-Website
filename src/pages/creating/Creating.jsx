@@ -79,12 +79,6 @@ const Creating = () => {
             </Link>
           ))}
         </div>
-        {/* <div
-        className={`${classes.moreBTN} ${active ? classes.active : ""}`}
-        onClick={() => handleSetState({ active: !active })}
-      >
-        {active ? "See less" : "See more"} <DownArrow />
-      </div> */}
       </div>
     </>
   );

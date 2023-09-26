@@ -7,14 +7,13 @@
 .heading {
   font-weight: 900;
   font-size: 32px;
-  margin-bottom: 1em;
 }
 
 .headingContainer,
 .wrapper {
   width: 100%;
-  /* max-width: 1440px; */
   margin: 20px auto;
+  gap: 16px;
 }
 .headingContainer {
   display: flex;
@@ -23,7 +22,7 @@
   /* justify-content: space-between; */
 }
 
-.headingContainer * {
+.headingContainer div {
   color: var(--primary-white);
 }
 

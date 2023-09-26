@@ -37,11 +37,11 @@
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   margin: auto;
-  width: 900px;
+  width: 1000px;
 }
 .typeCard {
   display: flex;
-  height: 240px;
+  height: 290px;
   flex-direction: column;
   flex: 1 0 0;
   justify-content: center;
@@ -49,17 +49,24 @@
   gap: 16px;
   align-self: stretch;
   border-radius: 4px;
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
   cursor: pointer;
   transform: translateX(-2%);
-  padding: 8px;
+  padding: 48px 16px 48px 16px;
   transition: background-image 10ms ease-in-out;
   animation: slide-right 850ms forwards;
+  border-radius: 4px;
+  border: 1px solid var(--primary-light-blue, #bbc5ff);
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
 }
 
 .typeCard:hover {
-  background: var(--marketplaceBg);
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2393A3F8FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 4px;
+  border: 1px solid var(--primary-primary-blue, #20c1ff);
+  background: var(--transparent-black-black-40, rgba(3, 7, 16, 0.4));
 }
 
 .cardTitle {
@@ -102,9 +109,43 @@
     opacity: 1;
   }
 }
+
+.iconWrapper {
+  padding: 16px;
+  border-radius: 40px;
+  background: rgba(187, 197, 255, 0.08);
+  position: relative;
+}
+
 .icon {
   display: flex;
   align-items: center;
+  width: 48px;
+  height: 48px;
+}
+
+.icon svg {
+  fill: #fbfbfb7f;
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
+}
+
+.typeCard:hover .icon svg {
+  fill: var(--primary-primary-blue, #20c1ff);
+  transition: 300ms;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  -ms-transition: 300ms;
+  -o-transition: 300ms;
+}
+
+.subIcon {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
 }
 .content {
   display: flex;
@@ -188,10 +229,5 @@
   }
   .description {
     font-size: 15px;
-  }
-  .icon {
-    width: 80px;
-    height: 80px;
-    padding: 1rem;
   }
 }

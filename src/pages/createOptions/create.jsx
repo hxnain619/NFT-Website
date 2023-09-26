@@ -1,12 +1,17 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import LayerOrders from "../../components/layerorders/layerorders";
+import { ReactComponent as DropdownIcon } from "../../assets/icon-chevron-down.svg";
+import { ReactComponent as Diskicon } from "../../assets/icon-disk.svg";
+import { ReactComponent as LoadingIcon } from "../../assets/icon-loading.svg";
+import CreateGuide from "../../components/create-guide/create-guide";
 import CollectionDescription from "../../components/description/collection-description";
-import CollectionOverview from "../../components/overview/collection-overview";
-import classes from "./create.module.css";
-import SubscriptionNotification from "../../components/Subscription-Notification/SubscriptionNotification";
+import GoogleAuth from "../../components/google-auth/googleAuth";
+import LayerOrders from "../../components/layerorders/layerorders";
+import { handleSampleLayers } from "../../components/menu/collection-menu-script";
 import CollectionNameModal from "../../components/Modals/Collection-Name-Modal/CollectionNameModal";
-import { GenContext } from "../../gen-state/gen.context";
+import CollectionOverview from "../../components/overview/collection-overview";
+import ProfileDropdown from "../../components/profile-dropdown/profileDropdown";
+import SubscriptionNotification from "../../components/Subscription-Notification/SubscriptionNotification";
 import {
   setOverlay,
   setSession,
@@ -14,15 +19,10 @@ import {
   setToggleSessionModal,
   setUpgradePlan,
 } from "../../gen-state/gen.actions";
+import { GenContext } from "../../gen-state/gen.context";
 import { fetchSession } from "../../renderless/store-data/StoreData.script";
-import CreateGuide from "../../components/create-guide/create-guide";
-import GoogleAuth from "../../components/google-auth/googleAuth";
-import ProfileDropdown from "../../components/profile-dropdown/profileDropdown";
-import { ReactComponent as Diskicon } from "../../assets/icon-disk.svg";
-import { ReactComponent as DropdownIcon } from "../../assets/icon-chevron-down.svg";
-import { ReactComponent as LoadingIcon } from "../../assets/icon-loading.svg";
+import classes from "./create.module.css";
 import ProgressBar from "./Progress-Bar/ProgressBar";
-import { handleSampleLayers } from "../../components/menu/collection-menu-script";
 // import LoginModal from "../../components/Modals/Login-Modal/LoginModal";
 import { signInWithGoogle } from "../../components/google-auth/googleAuth.script";
 

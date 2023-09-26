@@ -5,22 +5,37 @@
   overflow-y: hidden;
   overflow-x: hidden;
   text-align: center;
-  padding-top: 4em;
+  padding-top: 135px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 .container h1 {
-  font-weight: 700;
-  font-size: 3rem;
-  margin: 30px 0;
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 48px; /* 120% */
 }
 
-.text {
-  font-size: 28px;
-  font-weight: 400;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 40px;
+.text span {
+  color: var(--primary-white, #ecf1f9);
+  text-align: center;
+
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .button-container {
@@ -29,89 +44,29 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-.home:hover {
-  background-color: var(--main-color);
-  color: white;
-}
-
-.home {
-  width: 200px;
-  height: 60px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: var(--cursor-pointer);
-  background: none;
-  color: var(--main-color);
-  font-size: 20px;
-  border: 1px solid var(--main-color);
-  transition: 0.4s;
-  margin-right: 20px;
-  font-weight: 600;
-  border-radius: 0.7em;
-}
-
-.go-back:hover {
-  background: none;
-  color: var(--main-color);
-}
-
-.go-back {
-  width: 200px;
-  cursor: var(--cursor-pointer);
-  height: 60px;
-  background-color: var(--main-color);
-  color: white;
-  font-size: 20px;
-  transition: 0.4s;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--main-color);
-  font-weight: 600;
-  border-radius: 0.7em;
-}
-.go-back img {
-  width: 25px;
-  height: 20px;
-  margin-right: 10px;
-}
-.home img {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  transition: 0.4s;
-  margin-bottom: 3px;
-  background: none;
+  gap: 32px;
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    padding-top: 2em;
-    height: 700px;
+    padding: 72px 16px 32px 16px;
+    height: auto;
   }
-  .not-found img {
-    width: 90vw;
-    height: 300px;
+
+  .button-container {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
   }
-  .not-found h1 {
-    font-size: 27px;
-    margin: 10px 0;
+
+  .button-container button {
+    width: 100%;
   }
-  .text {
-    font-size: 20px;
-  }
-  .go-back {
-    margin-right: 10px;
-  }
-  .go-back,
-  .home {
-    width: 170px;
-    height: 50px;
-    font-size: 17px;
+
+  .text span {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 }
