@@ -13,7 +13,7 @@
 }
 .listContainer {
   padding: 8px;
-  width: 100%;
+  width: 60%;
   border: 1px solid var(--primary-dark-blue, #262b92);
   margin-top: 1em;
 }
@@ -69,4 +69,10 @@
 .total {
   font-weight: 600;
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .listContainer {
+    width: 100%;
+  }
 }
