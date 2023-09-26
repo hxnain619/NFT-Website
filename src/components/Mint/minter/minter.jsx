@@ -34,6 +34,7 @@ import BackButton from "../../back-button/BackButton";
 import IpfsImage from "../IpfsImage/IpfsImage";
 import Tweeter from "../Tweeter/tweeter";
 
+import PrimaryButton from "../../primary-button/PrimaryButton";
 import SecondaryButton from "../../secondary-button/SecondaryButton";
 
 const Minter = () => {
@@ -1229,12 +1230,8 @@ const Minter = () => {
                   </section>
                 </div>
                 <section className={classes.mintButtonWrapper}>
-                  <button type="button" onClick={onMint} className={classes.mintBtn}>
-                    Mint
-                  </button>
-                  <button type="button" onClick={handleCancel} className={classes.cancelBtn}>
-                    Cancel
-                  </button>
+                  <PrimaryButton text="Mint" onClick={onMint} />
+                  <SecondaryButton text="Cancel" onClick={handleCancel} />
                 </section>
               </div>
             </div>

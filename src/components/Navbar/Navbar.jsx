@@ -36,7 +36,7 @@ const Navbar = () => {
             {NAVIGATION_LIST?.map((link) => {
               return (
                 <NavLink
-                  className={`${classes.navItem} ${pathname === link.path ? classes.active : ""}`}
+                  className={`${classes.navItem} ${pathname.includes(link.path) ? classes.active : ""}`}
                   to={link.path}
                   key={link.label}
                 >

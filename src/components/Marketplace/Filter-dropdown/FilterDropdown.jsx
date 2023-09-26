@@ -2,10 +2,11 @@
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-const */
 import React, { useEffect, useRef, useState } from "react";
-import classes from "./FilterDropdown.module.css";
-import Dropdown from "../../../pages/Explore/Dropdown/Dropdown";
-import RadioButton from "../../../pages/Explore/Radio-Button/RadioButton";
 import { ReactComponent as FilterIcon } from "../../../assets/icon-filter2.svg";
+import Dropdown from "../../../pages/Explore/Dropdown/Dropdown";
+import classes from "./FilterDropdown.module.css";
+import PrimaryButton from "../../primary-button/PrimaryButton";
+import SecondaryButton from "../../secondary-button/SecondaryButton";
 
 const FilterDropdown = ({ handleFilter, collection }) => {
   const [state, setState] = useState({
@@ -133,12 +134,8 @@ const FilterDropdown = ({ handleFilter, collection }) => {
             </div>
           </div>
           <div className={classes.btnContainer}>
-            <div onClick={handleCancel} className={`${classes.btn} ${classes.cancel}`}>
-              Cancel
-            </div>
-            <div onClick={handleApply} className={`${classes.btn} ${classes.apply}`}>
-              Apply
-            </div>
+            <SecondaryButton text="Cancel" onClick={handleCancel} width="120px" />
+            <PrimaryButton text="Apply" onClick={handleApply} width="120px" />
           </div>
         </Dropdown>
       </div>
