@@ -133,15 +133,25 @@
   max-width: 200px;
   padding: 10px 0;
   color: var(--default);
+  cursor: pointer;
+}
+.input-active{
+  border: 1px solid var(--main-color) !important;
 }
 .image-title div {
   display: flex;
   flex-direction: column;
 }
-.image-title > .username-title {
+.image-title > .username-title {  margin: 0 auto;
+  max-width: 90%;
+  padding: 10px 6px;
+  color: var(--default);
   font-size: 28px;
   color: white;
   font-weight: 900;
+  background: transparent;
+  border: none;
+  width: 80%;
   margin-left: 0.5em;
 }
 .image-title > p {
