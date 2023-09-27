@@ -105,6 +105,6 @@ export const handleCancel = async ({ handleSetState, history, setEnableDisableBu
       handleSetState(res);
       setEnableDisableButtons(false)
       setIsEnableuserName(false)
-  // history.goBack();
+  history.goBack();
 
 };
