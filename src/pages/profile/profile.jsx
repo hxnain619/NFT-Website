@@ -127,7 +127,7 @@ const Profile = () => {
             <button type="button" className="btn secondary-btn" onClick={() => handleCancel(cancelProps)}>
               Cancel
             </button>
-            <button type="button" className="btn" onClick={() => handleSave(saveProps)}>
+            <button type="button" className="btn primary-button" onClick={() => handleSave(saveProps)}>
               Save
             </button>
           </div>

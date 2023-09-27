@@ -215,9 +215,21 @@
 
 .secondary-btn {
   background-color: transparent !important;
-  border: 1px solid var(--primary-light-blue);
-  color: var(--primary-light-blue);
+  border: 2px solid var(--main-color) !important;
+  color: var(--main-color) !important;
+  font-family: jost;
+  font-weight: 700;
   transition: all 10ms;
+}
+.primary-button{
+  background: var(--main-color) !important;
+  font-family: jost;
+  color: var(--primary-black-bg) !important;
+  font-weight: 700 !important;
+}
+.primary-button:hover{
+background: transparent !important;
+color: var(--main-color) !important;
 }
 
 @media only screen and (max-width: 480px) {
