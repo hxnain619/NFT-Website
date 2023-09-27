@@ -19,7 +19,8 @@ import BackButton from "../../components/back-button/BackButton";
 const Profile = () => {
   const history = useHistory();
   const { account, dispatch, chainId } = useContext(GenContext);
-
+  const [isEnableuserName,setIsEnableuserName] = useState(false)
+  const [enableDisableButtons,setEnableDisableButtons] = useState(false)
   const profileRef = useRef(null);
 
   const [state, setState] = useState({
@@ -48,15 +49,16 @@ const Profile = () => {
     setValidation((val) => ({ ...val, ...payload }));
   };
 
-  const inputProps = { handleSetState, handleSetValidation };
-  const saveProps = { account, state, dispatch, handleSetValidation, history };
-  const cancelProps = { handleSetState, history };
+  const inputProps = { handleSetState, handleSetValidation,setEnableDisableButtons };
+  const saveProps = { account, state, dispatch, handleSetValidation, history,setIsEnableuserName };
+  const cancelProps = { handleSetState, history,setEnableDisableButtons,account,setIsEnableuserName };
 
   useEffect(() => {
     (async function updateProfile() {
       if (!account) return;
       const res = await readUserProfile(account);
       handleSetState(res);
+      setEnableDisableButtonsState(false)
     })();
   }, [account]);
 
@@ -85,8 +87,8 @@ const Profile = () => {
           </div>
         </div>
         <div className="image-title">
-          <EditIcon />
-          <span className="username-title">{username}</span>
+          <EditIcon onClick={()=>setIsEnableuserName(true)}/>
+            <input className={`${isEnableuserName ? "input-active" : ""} username-title`} disabled={!isEnableuserName} name="username" onChange={(event) => handleInputChange({ event, ...inputProps })} type="text" value={username} />
           <br />
           <p>{breakAddress(account, 8)}</p>
         </div>
@@ -123,14 +125,14 @@ const Profile = () => {
               </div>
             ))}
           </div>
-          <div className="social-btns">
-            <button type="button" className="btn secondary-btn" onClick={() => handleCancel(cancelProps)}>
+        {enableDisableButtons && <div className="social-btns">
+            <button type="button" className="btn secondary-btn" onClick={() => handleCancel(cancelProps)} >
               Cancel
             </button>
-            <button type="button" className="btn primary-button" onClick={() => handleSave(saveProps)}>
+            <button type="button" className="btn" onClick={() => handleSave(saveProps)}>
               Save
             </button>
-          </div>
+          </div>}
         </div>
       </div>
     </>

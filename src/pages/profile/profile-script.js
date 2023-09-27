@@ -4,7 +4,7 @@
 /* eslint-disable prefer-const */
 import * as PS from "./profile-script";
 import { setLoader, setNotification } from "../../gen-state/gen.actions";
-import { writeUserProfile } from "../../utils/firebase";
+import { writeUserProfile,readUserProfile } from "../../utils/firebase";
 
 export const handleValidate = (state) => {
   const discordRegex = /^[0-9]{18}$/;
@@ -48,7 +48,7 @@ export const getValidName = (name) => {
   return `is${first + rest}`;
 };
 
-export const handleSave = async ({ account, state, dispatch, handleSetValidation, history }) => {
+export const handleSave = async ({ account, state, dispatch, handleSetValidation, history,setIsEnableuserName }) => {
   const validate = PS.handleValidate(state);
   const isValid = Object.values(validate).every((i) => i === true);
   if (isValid) {
@@ -80,9 +80,11 @@ export const handleSave = async ({ account, state, dispatch, handleSetValidation
     );
   }
   handleSetValidation(validate);
+  setIsEnableuserName(false);
 };
 
-export const handleInputChange = ({ event, handleSetState, handleSetValidation }) => {
+export const handleInputChange = ({ event, handleSetState, handleSetValidation, setEnableDisableButtons}) => {
+  
   let { name, value } = event.target;
   if (name === "twitter") {
     value = value.split("https://twitter.com/")[1];
@@ -94,16 +96,15 @@ export const handleInputChange = ({ event, handleSetState, handleSetValidation }
   if (!value) value = "";
   handleSetState({ [name]: value });
   handleSetValidation({ [PS.getValidName(name)]: true });
+  setEnableDisableButtons(true)
 };
 
-export const handleCancel = ({ handleSetState, history }) => {
-  handleSetState({
-    subscribe: false,
-    email: "",
-    twitter: "",
-    discord: "",
-    username: "",
-    instagram: "",
-  });
-  history.goBack();
+export const handleCancel = async ({ handleSetState, history, setEnableDisableButtons,account,setIsEnableuserName}) => {
+   if (!account) return;
+      const res = await readUserProfile(account);
+      handleSetState(res);
+      setEnableDisableButtons(false)
+      setIsEnableuserName(false)
+  // history.goBack();
+
 };
