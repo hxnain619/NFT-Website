@@ -14,6 +14,8 @@ import supportedChains from "../../utils/supportedChains";
 import WalletPopup from "../wallet-popup/walletPopup";
 import classes from "./wallet.module.css";
 
+import PrimaryButton from "../primary-button/PrimaryButton";
+
 import {
   breakAddress,
   connectWallet,
@@ -301,8 +303,8 @@ function ConnectWallet() {
           {changeNetwork}
         </div>
       ) : (
-        <div className={classes.connect} onClick={() => initConnectWallet(walletProps)}>
-          Connect Wallet
+        <div>
+          <PrimaryButton text="Connect Wallet" onClick={() => initConnectWallet(walletProps)} />
         </div>
       )}
     </>

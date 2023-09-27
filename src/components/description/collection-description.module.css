@@ -1,10 +1,10 @@
 .container {
   width: 100%;
-  height: calc(100vh - 10em);
+  height: calc(100vh - 7em);
   max-width: 20em;
   padding: 16px;
   position: sticky;
-  top: 5em;
+  top: 6em;
   z-index: 10;
   overflow: auto;
 
@@ -16,10 +16,6 @@
   display: flex;
   flex-direction: column;
 }
-
-/* .container.active {
-  z-index: 18;
-} */
 
 .container::-webkit-scrollbar {
   display: none;

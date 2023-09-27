@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory, NavLink } from "react-router-dom";
-import ConnectWallet from "../wallet/wallet";
-import classes from "./Navbar.module.css";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logoDarkIcon from "../../assets/images/logo-dark.svg";
 import { NAVIGATION_LIST } from "../../constant/navigation";
-import menuIcon from "../../assets/icon-burger.svg";
+import ConnectWallet from "../wallet/wallet";
 import MenuButton from "./MenuButton";
+import classes from "./Navbar.module.css";
 
 // import "./style.scss";
 
@@ -37,7 +36,7 @@ const Navbar = () => {
             {NAVIGATION_LIST?.map((link) => {
               return (
                 <NavLink
-                  className={`${classes.navItem} ${pathname === link.path ? classes.active : ""}`}
+                  className={`${classes.navItem} ${pathname.includes(link.path) ? classes.active : ""}`}
                   to={link.path}
                   key={link.label}
                 >

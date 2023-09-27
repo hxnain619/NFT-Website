@@ -62,7 +62,7 @@ const sortByPriceDescending = (col) => {
 
 const sortByNameAscending = (col) => {
   const collection = [...col].sort((a, b) => {
-    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+    if (a.name?.toLowerCase() > b.name?.toLowerCase()) return 1;
     return -1;
   });
   return collection;
@@ -70,7 +70,7 @@ const sortByNameAscending = (col) => {
 
 const sortByNameDescending = (col) => {
   const collection = [...col].sort((a, b) => {
-    if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+    if (a.name?.toLowerCase() > b.name?.toLowerCase()) return -1;
     return 1;
   });
   return collection;
@@ -102,6 +102,8 @@ export const sortBy = ({ value, collections }) => {
 
 export const filterBy = ({ value, collections, account }) => {
   switch (value) {
+    case "All":
+      return collections;
     case "Listed":
       return filterByListed(collections, account);
     case "Not Listed":

@@ -13,6 +13,8 @@ import { ReactComponent as PreviewIcon } from "../../assets/icon-nft-preview.svg
 import { handleGenerate } from "./collection-description-script";
 import { plans } from "../../pages/Pricing/Pricing.script";
 
+import PrimaryButton from "../primary-button/PrimaryButton";
+
 const CollectionDescription = () => {
   const {
     layers,
@@ -141,9 +143,13 @@ const CollectionDescription = () => {
               </Link>
             </div>
           ) : null}
-          <div onClick={handleGenerateClick} className={`${classes.generateBtn} ${combinations && classes.active}`}>
-            Generate Collection
-          </div>
+
+          <PrimaryButton
+            text="Generate Collection"
+            onClick={handleGenerateClick}
+            width="100%"
+            disabled={!combinations || combinations === 0}
+          />
         </div>
       </div>
       <canvas style={{ display: "none" }} ref={canvasRef} />

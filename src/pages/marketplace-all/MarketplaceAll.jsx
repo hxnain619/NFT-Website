@@ -140,7 +140,7 @@ const MarketplaceAll = () => {
 
   useEffect(() => {
     const countPerPage = 20;
-    const numberOfPages = Math.ceil(filteredCollection.length / countPerPage);
+    const numberOfPages = Math.ceil((filteredCollection ? filteredCollection.length : 0) / countPerPage);
     let startIndex = 0;
     let endIndex = startIndex + countPerPage;
     const paginate = {};
@@ -168,7 +168,7 @@ const MarketplaceAll = () => {
       <div className={classes.heading}>
         <div className={classes.title}>
           <h1>{searchChain}</h1>
-          <p>View all minted {filteredCollection.length ? `(${filteredCollection.length} minted)` : "(...)"}</p>
+          <p>View all minted {filteredCollection?.length ? `(${filteredCollection?.length} minted)` : "(...)"}</p>
         </div>
         <div className={classes.searchAndFilter}>
           <Search searchPlaceholder="Search By collections, 1of1s or Users" type="" />
@@ -219,7 +219,7 @@ const MarketplaceAll = () => {
           <NotFound />
         )}
       </div>
-      {Object.keys(paginate).length ? (
+      {Object.keys(paginate).length > 1 ? (
         <PageControl controProps={{ handleNext, handlePrev, handleGoto, ...state, handleSetState }} />
       ) : null}
     </div>

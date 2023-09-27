@@ -15,7 +15,16 @@ const CollectionOptions = () => {
       <div className={classes.cardDeck}>
         {cards.map((type) => (
           <Link to={type.url} className={classes.typeCard} key={type.title}>
-            <div className={classes.icon}>{type.icon}</div>
+            <div className={classes.iconWrapper}>
+              {type.subIcon ? (
+                <div>
+                  <div className={classes.icon}>{type.icon}</div>
+                  <div className={classes.subIcon}>{type.subIcon}</div>
+                </div>
+              ) : (
+                <div className={classes.icon}>{type.icon}</div>
+              )}
+            </div>
             <div className={classes.cardTitle}>{type.title}</div>
             <div className={classes.cardDescription}>{type.description}</div>
           </Link>

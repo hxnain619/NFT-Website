@@ -1,6 +1,6 @@
 .chainDropdown {
   display: flex;
-  padding: 0px 8px;
+  padding: 4px 8px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
@@ -14,27 +14,19 @@
 
 .selectedChain {
   display: flex;
-  padding: 4px;
   align-items: center;
   gap: 8px;
   flex: 1 0 0;
   border-radius: 4px;
-  /* display: flex;
-  padding: 0.25em 1em;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.25em;
-  border: 1px solid var(--card-outline);
-  border-radius: 0.7em;
-  cursor: var(--cursor-pointer);
-  height: 100%;
-  color: var(--main-color);
-  text-overflow: ellipsis;
-  white-space: nowrap; */
 }
 
-.selectedChain:hover {
-  /* background: var(--btn-close); */
+.selectedChain span {
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
+}
+
+.chain span,
+.chain div {
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
 }
 
 .selectedChain > div {
@@ -42,10 +34,11 @@
   align-items: center;
   justify-content: flex-start;
   gap: 1em;
+  height: 35px;
 }
 
 .chainDropdown .dropdown {
-  width: 10em;
+  width: 12em;
   top: 3em;
   position: absolute;
   background: transparent;
@@ -66,7 +59,10 @@
   visibility: visible;
   opacity: 1;
   transform: translateY(0em);
-  background: rgba(8, 15, 32);
+  border-radius: 8px;
+  border: 1px solid var(--primary-light-blue-2, #93a3f8);
+  background: var(--primary-black-bg, #080f20);
+  padding: 12px;
 }
 
 .chain:first-child {
@@ -75,13 +71,11 @@
 
 .chain {
   padding: 0.5em 1em;
-  border-bottom: 1px solid var(--outline);
+  border-bottom: 1px solid rgba(187, 197, 255, 0.16);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1em;
-  /* background: var(--default); */
-
   position: relative;
 }
 
@@ -102,9 +96,8 @@
 }
 
 .chain:hover {
-  /* background: var(--main-lightest); */
-  background: var(--card-light);
-  -webkit-text-fill-color: var(--text-heading);
+  border-radius: 2px;
+  background: rgba(187, 197, 255, 0.08);
 }
 
 .chainImg {
@@ -143,10 +136,6 @@
 
   .selectedChain > div {
     gap: 0.5em;
-  }
-
-  .selectedChain {
-    padding: 0.5em;
   }
 
   .chainImg {

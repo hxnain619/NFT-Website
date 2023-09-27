@@ -3,9 +3,6 @@
   min-height: 100vh;
 }
 
-.container * {
-  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
-}
 .wrapper {
   width: 100%;
   padding: 4em 2em;
@@ -125,6 +122,7 @@
   padding: 0.5em 0;
   font-weight: 600;
   cursor: pointer;
+  color: var(--transparent-white-white-70, rgba(251, 251, 251, 0.7));
 }
 
 .date.active {
@@ -234,8 +232,9 @@
 
   .chainMobile {
     display: block;
-    z-index: 0;
+    z-index: 1;
     margin-top: -1em;
+    width: 100%;
   }
 
   .chainDesktop {

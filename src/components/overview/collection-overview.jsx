@@ -18,6 +18,9 @@ import RulesCard from "../rulesCard/rulesCard.component";
 import isUnique from "./collection-overview-script";
 import classes from "./collection-overview.module.css";
 
+import PrimaryButton from "../primary-button/PrimaryButton";
+import SecondaryButton from "../secondary-button/SecondaryButton";
+
 const CollectionOverview = () => {
   const { dispatch, isRule, preview, rule, layers, combinations } = useContext(GenContext);
   const [state, setState] = useState({
@@ -114,18 +117,18 @@ const CollectionOverview = () => {
       <div className={classes.rules}>
         {isRule ? (
           <>
-            <button type="button" onClick={handleAddRule} className={classes.addRuleBtn}>
-              Add Rule
-            </button>
-            <button type="button" onClick={closeRule} className={classes.showRuleBtn}>
-              Cancel
-            </button>
+            <PrimaryButton text="Add Rule" width="128px" onClick={handleAddRule} />
+            <SecondaryButton text="Cancel" width="128px" onClick={closeRule} />
           </>
         ) : (
           <>
-            <button type="button" onClick={openRule} className={classes.addRuleBtn}>
-              Set Conflict
-            </button>
+            <PrimaryButton
+              text="Set Conflict"
+              width="128px"
+              onClick={openRule}
+              disabled={!combinations || combinations.length === 0}
+            />
+
             <button type="button" onClick={handleRules} className={classes.showRuleBtn}>
               Rules <div className={classes.ruleCount}>{rule.length}</div>
             </button>

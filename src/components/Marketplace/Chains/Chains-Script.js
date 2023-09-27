@@ -6,6 +6,7 @@ import allChains from "../../../assets/all-chains.svg";
 const chains = [
   {
     name: "All Chains",
+    label: "ALLCHAIN",
     icon: allChains,
     color: "#ECF1F9",
     border: "#2F88FF",

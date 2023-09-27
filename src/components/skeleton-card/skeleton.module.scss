@@ -8,3 +8,14 @@
 .skeleton {
   width: 20em;
 }
+
+.fullWidth {
+  width: 100%;
+}
+
+.skeletonFull {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}

@@ -104,9 +104,19 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1024px) {
   .btn {
     padding: 0.5em 1.5em;
+  }
+
+  .price-section {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .price-section button {
+    width: 100%;
   }
 }
 

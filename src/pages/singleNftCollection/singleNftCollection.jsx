@@ -152,7 +152,7 @@ const SingleNftCollection = () => {
           <NotFound />
         )}
       </div>
-      {Object.keys(paginate).length ? (
+      {Object.keys(paginate).length > 1 ? (
         <PageControl controProps={{ handleNext, handlePrev, handleGoto, ...state, handleSetState }} />
       ) : null}
     </div>

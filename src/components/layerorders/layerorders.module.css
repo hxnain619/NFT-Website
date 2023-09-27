@@ -5,11 +5,12 @@
   position: sticky;
   gap: 16px;
   z-index: 15;
+  top: 6em;
   max-width: 320px;
   width: 100%;
   padding: 16px;
   border-radius: 4px;
-  height: calc(100vh - 5em);
+  height: calc(100vh - 7em);
   border: 1px solid var(--primary-dark-blue, #262b92);
   background: rgba(187, 197, 255, 0.02);
 }

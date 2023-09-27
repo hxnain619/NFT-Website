@@ -51,7 +51,7 @@ const Creating = () => {
   return (
     <>
       <div className={classes.container}>
-        <BackButton />
+        {/* <BackButton /> */}
         <div className={classes.heading}>
           <div className={classes.title}>Create Your NFT</div>
           <div className={classes.description}>Create all types of NFTs, automatically indexed in our marketplace.</div>
@@ -79,12 +79,6 @@ const Creating = () => {
             </Link>
           ))}
         </div>
-        {/* <div
-        className={`${classes.moreBTN} ${active ? classes.active : ""}`}
-        onClick={() => handleSetState({ active: !active })}
-      >
-        {active ? "See less" : "See more"} <DownArrow />
-      </div> */}
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./pushNotification.module.css";
-import { ReactComponent as CloseIcon } from "../../assets/icon-close-solid.svg";
+import { ReactComponent as CloseIcon } from "../../assets/icon-close-white.svg";
 
 const PushNotification = ({ toggleNotification }) => {
   const handleClose = () => toggleNotification({ openNotification: false });
@@ -13,11 +13,6 @@ const PushNotification = ({ toggleNotification }) => {
       <div className={classes.content}>
         <h3>No Notifications</h3>
         <span>You don&apos;t have any notifications yet</span>
-      </div>
-      <div className={classes.footer}>
-        <button type="button" className={classes.subsButton}>
-          Subscribe
-        </button>
       </div>
     </div>
   );

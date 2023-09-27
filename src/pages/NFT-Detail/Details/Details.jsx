@@ -9,16 +9,9 @@ import classes from "./Details.module.css";
 const Details = ({ nftDetails }) => {
   const { owner, chain, isListed } = nftDetails;
   const { mainnet } = useContext(GenContext);
-  const algoexplorer = mainnet ? "https://algoexplorer.io/" : "https://testnet.algoexplorer.io/";
-
+  console.log(nftDetails);
   const handleExplorer = () => {
-    if (supportedChains[chain]?.chain === "Algorand") {
-      window.open(`${algoexplorer}address/${owner}`);
-    } else if (supportedChains[chain]?.chain === "Near") {
-      window.open(`${chainIdToParams[chain]?.blockExplorerUrls}${owner}`);
-    } else {
-      window.open(`${chainIdToParams[chain]?.blockExplorerUrls}address/${owner}`);
-    }
+    window.open(`${chainIdToParams[chain]?.blockExplorerUrls}address/${owner}`);
   };
 
   return (
@@ -44,6 +37,14 @@ const Details = ({ nftDetails }) => {
             <div>10%</div>
           </div>
         )}
+        <div className={classes.list}>
+          <div>Token ID</div>
+          <div>{nftDetails.tokenID}</div>
+        </div>
+        <div className={classes.list}>
+          <div>Blockchain</div>
+          <div>{supportedChains[chain]?.label}</div>
+        </div>
       </div>
     </div>
   );

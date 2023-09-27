@@ -6,6 +6,8 @@ import { buyGraphNft, buyNft, getFormatedPrice } from "../../../utils";
 import openseaIcon from "../../../assets/icon-opensea.svg";
 import lockIcon from "../../../assets/lock-white.svg";
 
+import PrimaryButton from "../../../components/primary-button/PrimaryButton";
+
 import { GenContext } from "../../../gen-state/gen.context";
 import "./Deals.css";
 
@@ -63,43 +65,25 @@ const Deals = ({ nftDetails }) => {
     ) : !isListed && !price ? (
       owner === account && supportedChains[chain]?.networkId !== 1111 ? (
         <Link to={chain ? `/marketplace/1of1/list/${chain}/${Id}` : `/marketplace/1of1/list/${Id}`}>
-          {isListed ? (
-            <button className="btn" disabled>
-              Re-List
-            </button>
-          ) : (
-            <button className="btn">List</button>
-          )}
+          {isListed ? <PrimaryButton text="Re-List" disabled /> : <PrimaryButton text="List" />}
         </Link>
       ) : (
-        <div className="btn" disabled>
-          Not Listed
-        </div>
+        <PrimaryButton text="Not Listed" disabled />
       )
     ) : owner === account && isListed ? (
-      <div className="btn" disabled>
-        Listed
-      </div>
+      <PrimaryButton text="Listed" disabled />
     ) : !sold && isListed ? (
-      <div onClick={() => buyGraphNft(buyProps)} className="btn">
-        Buy
-      </div>
+      <PrimaryButton onClick={() => buyGraphNft(buyProps)} text="Buy" />
     ) : account === owner ? (
       <Link to={chain ? `/marketplace/1of1/list/${chain}/${Id}` : `/marketplace/1of1/list/${Id}`}>
-        <div className="btn">List</div>
+        <PrimaryButton text="List" />
       </Link>
     ) : price && !isListed ? (
-      <div className="btn" disabled>
-        Sold
-      </div>
+      <PrimaryButton text="Sold" disabled />
     ) : isListed ? (
-      <div onClick={() => buyGraphNft(buyProps)} className="btn">
-        Buy
-      </div>
+      <PrimaryButton text="Buy" onClick={() => buyGraphNft(buyProps)} />
     ) : (
-      <div className="btn" disabled>
-        Not Listed
-      </div>
+      <PrimaryButton text="Not Listed" disabled />
     );
   };
 
@@ -107,37 +91,6 @@ const Deals = ({ nftDetails }) => {
     <div className="detail-section">
       <div className="sea">
         <div className="title">Current Price</div>
-        {supportedChains[chain]?.label === "Polygon" ? (
-          <a
-            href={`https://opensea.io/assets/matic/${
-              collection_name === "Genadrop 1 of 1"
-                ? "0x436AEceaEeC57b38a17Ebe71154832fB0fAFF878"
-                : "0x3243cd574e9d51ad012c7fa4957e8037beb8792f"
-            }/${nftDetails.tokenID}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div className="opensea">
-              <img src={openseaIcon} alt="" /> View Listing on Opensea
-            </div>
-          </a>
-        ) : supportedChains[chain]?.label === "Polygon Testnet" ? (
-          <a
-            href={`https://testnets.opensea.io/assets/mumbai/${
-              collection_name === "Genadrop 1 of 1"
-                ? "0x5d05fe74a923b0e2e50ef08e434ac8fa6c76fe71"
-                : "0x2b90d1ceb58d6848c07e7e1ef474bf3641efa539"
-            }/${nftDetails.tokenID}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div className="opensea">
-              <img src={openseaIcon} alt="" /> View Listing on Opensea
-            </div>
-          </a>
-        ) : (
-          ""
-        )}
       </div>
       <div className="price-section">
         <div className="price">

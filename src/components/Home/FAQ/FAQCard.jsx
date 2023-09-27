@@ -11,7 +11,7 @@ const FQACard = ({ dropdown, id, handleSetState, FAQ: { question, answer } }) =>
   };
 
   return (
-    <div onClick={handleDropdown} className={classes.container}>
+    <div onClick={handleDropdown} className={`${classes.container} ${dropdown === String(id) && classes.active}`}>
       <div className={`${classes.question} ${dropdown === String(id) && classes.active}`}>
         <p className={classes.title}>{question}</p>
         <span>

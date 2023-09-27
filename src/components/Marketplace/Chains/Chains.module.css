@@ -30,6 +30,8 @@
 
 .card:hover {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+
+  opacity: 0.8;
 }
 
 .card.inActive:hover .soon {

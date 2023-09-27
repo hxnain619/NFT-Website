@@ -158,7 +158,13 @@
   grid-gap: 10px;
 }
 
-.imageContainer {
+.imageContainers.single {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.imageWrapper {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -177,34 +183,6 @@
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
-}
-
-.assetContainer button {
-  display: flex;
-  height: 40px;
-  padding: 12px 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-
-  border-radius: 40px;
-  border: 2px solid var(--primary-light-blue, #bbc5ff);
-
-  color: var(--primary-light-blue, #bbc5ff);
-
-  /* Button 2 */
-  /* font-family: DM Sans; */
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px; /* 114.286% */
-}
-
-.assetContainer button:hover {
-  background: var(--primary-blue);
-  border: 1px solid var(--primary-blue);
-  cursor: var(--cursor-pointer);
-  color: white;
 }
 
 .assetInfo {
@@ -253,8 +231,7 @@
 .innerAssetInfo .assetInfoTitle > span {
   color: var(--transparent-white-white-80, rgba(251, 251, 251, 0.8));
 
-  /* subheading-small-jost */
-  /* font-family: Jost; */
+  text-align: left;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
@@ -910,7 +887,7 @@ div.showPreview > span {
     padding: 24px 16px;
   }
 
-  .imageContainer {
+  .imageWrapper {
     min-width: 74px;
     min-height: 95px;
   }

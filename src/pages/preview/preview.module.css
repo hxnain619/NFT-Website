@@ -62,7 +62,6 @@
   border: 1px solid var(--primary-dark-blue, #262b92);
   background: transparent;
   color: var(--transparent-white-white-70);
-
 }
 
 .collectionDetail textarea:focus {

@@ -386,7 +386,6 @@ const Dashboard = () => {
             <SearchBar onSearch={(value) => searchHandler(value)} />
             <DashboardFilterDropdown onFilter={handleFilterDropdown} />
           </div>
-
           {filteredCollection?.length > 0 ? (
             activeDetail === "sale" ? (
               <div className={classes.overview}>

@@ -13,17 +13,15 @@ import { initConnectWallet } from "../../wallet/wallet-script";
 import cards from "../Category/Category-script";
 import { getBase64, getFileFromBase64, handleMint, handleSingleMint } from "./minter-script";
 // assets
+import { ReactComponent as Art } from "../../../assets/create/art-icon.svg";
 import { ReactComponent as BorderIcon } from "../../../assets/create/border-icon.svg";
 import rightArrow from "../../../assets/icon-arrow-right.svg";
 import { ReactComponent as DropdownIcon } from "../../../assets/icon-dropdown2.svg";
 import { ReactComponent as GreenTickIcon } from "../../../assets/icon-green-tick.svg";
-import { ReactComponent as PlusIcon } from "../../../assets/icon-plus.svg";
 import { ReactComponent as VibesLogo } from "../../../assets/proof-of-vibes.svg";
-import { ReactComponent as Art } from "../../../assets/create/art-icon.svg";
 
 // components
 import GenadropToolTip from "../../Genadrop-Tooltip/GenadropTooltip";
-import Attribute from "../Attribute/Attribute";
 import CollectionPreview from "../collection-preview/collectionPreview";
 import Popup from "../popup/popup.component";
 import ProfileImgOverlay from "../ProfileImgOverlay/ProfileImgOverlay";
@@ -32,9 +30,12 @@ import SliderInput from "./SliderInput";
 import { setClipboard, setLoader, setMinter, setNotification, setOverlay } from "../../../gen-state/gen.actions";
 import { GenContext } from "../../../gen-state/gen.context";
 import QrReaderContainer from "../../../pages/NFT-Detail/ImageModal/ImageModal";
+import BackButton from "../../back-button/BackButton";
 import IpfsImage from "../IpfsImage/IpfsImage";
 import Tweeter from "../Tweeter/tweeter";
-import BackButton from "../../back-button/BackButton";
+
+import PrimaryButton from "../../primary-button/PrimaryButton";
+import SecondaryButton from "../../secondary-button/SecondaryButton";
 
 const Minter = () => {
   const params = useParams();
@@ -791,7 +792,7 @@ const Minter = () => {
                       <IpfsImage ipfsLink={ipfsLink} type={ipfsType} />
                     </div>
                   ) : (
-                    <div className={`${classes.imageContainers} ${file?.length > 1 && classes._}`}>
+                    <div className={`${classes.imageContainers} ${file?.length === 1 && classes.single}`}>
                       {mintId === "ai" ? (
                         <img src={aiData.imageUrl} alt="" className={classes.singleImage} />
                       ) : (
@@ -803,7 +804,7 @@ const Minter = () => {
                               <div
                                 key={idx}
                                 style={{ backgroundImage: `url(${URL.createObjectURL(f)})` }}
-                                className={classes.imageContainer}
+                                className={classes.imageWrapper}
                               />
                             ))
                         ) : videoExtensions.includes(fileExtension) ? (
@@ -846,14 +847,13 @@ const Minter = () => {
                         </div>
                       ) : null}
                     </div>
-                    <button
+                    <SecondaryButton
+                      text="Change Asset"
+                      width="150px"
                       onClick={() => {
                         tweet ? history.push("/mint/tweet") : changeFile();
                       }}
-                      type="button"
-                    >
-                      Change Asset
-                    </button>
+                    />
                   </div>
                 </section>
                 <div className={classes.mintForm}>
@@ -1230,12 +1230,8 @@ const Minter = () => {
                   </section>
                 </div>
                 <section className={classes.mintButtonWrapper}>
-                  <button type="button" onClick={onMint} className={classes.mintBtn}>
-                    Mint
-                  </button>
-                  <button type="button" onClick={handleCancel} className={classes.cancelBtn}>
-                    Cancel
-                  </button>
+                  <PrimaryButton text="Mint" onClick={onMint} />
+                  <SecondaryButton text="Cancel" onClick={handleCancel} />
                 </section>
               </div>
             </div>
