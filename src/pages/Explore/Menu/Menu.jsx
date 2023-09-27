@@ -46,15 +46,13 @@ const Menu = ({ NFTCollection, toggleFilter, headerHeight }) => {
 
   return (
     <div className={classes.container}>
-      <div className={`${classes.menu} ${toggleFilter && classes.resize}`}>
-        {Object.keys(paginate).length ? (
-          paginate[currentPage].map((nft, idx) => (
+      {!Object.keys(paginate).length ? <div className={`${classes.menu} ${toggleFilter && classes.resize}`}>
+        { (
+          paginate[currentPage]?.map((nft, idx) => (
             <SingleNftCard collectionNft={{ name: NFTCollection[0]?.collection_name }} key={idx} nft={nft} />
-          ))
-        ) : (
-          <SkeletonCards className={classes.loader} cardsLength={8} customSize={[200, 40]} />
+          ))  
         )}
-      </div>
+      </div> : <SkeletonCards className={classes.loader} cardsLength={3} customSize={[200, 40]} />} 
       <div className={classes.control}>
         <div onClick={handlePrev} className={classes.pageControl}>
           prev
