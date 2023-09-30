@@ -117,7 +117,7 @@ export const getGraphCollections = async (collections) => {
           collection.nfts.slice(0, collection.nfts.length > 4 ? 4 : collection.nfts.length).map(async (item) => {
             if (item?.tokenIPFSPath) {
               const { data } = await axios.get(
-                item?.tokenIPFSPath.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
+                item?.tokenIPFSPath?.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
               );
               collectionObj.image_urls.push(data?.image.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
             }
@@ -516,7 +516,9 @@ export const getUserGraphNft = async (collections, address) => {
 export const getCeloGraphNft = async (collection) => {
   const nftObj = [];
   try {
-    const { data } = await axios.get(collection?.tokenIPFSPath.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
+    const { data } = await axios.get(
+      collection?.tokenIPFSPath?.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
+    );
     const nftArr = {};
     nftArr.collection_name = collection?.collection?.name;
     nftArr.collection_contract = collection?.id?.split(collection?.tokenID)[0];
@@ -546,7 +548,9 @@ export const getCeloGraphNft = async (collection) => {
 export const getGraphNft = async (collection) => {
   const nftObj = [];
   try {
-    const { data } = await axios.get(collection?.tokenIPFSPath.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
+    const { data } = await axios.get(
+      collection?.tokenIPFSPath?.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
+    );
     const nftArr = {};
     nftArr.collection_name = collection?.collection?.name;
     // nftArr.collection_contract = collection?.id?.split(collection?.tokenID)[0];
@@ -576,7 +580,9 @@ export const getGraphNft = async (collection) => {
 export const getFeaturedGraphNft = async (collection) => {
   const nftObj = [];
   try {
-    const { data } = await axios.get(collection?.tokenIPFSPath.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
+    const { data } = await axios.get(
+      collection?.tokenIPFSPath?.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
+    );
     const nftArr = {};
     nftArr.collection_contract = collection?.id?.split(collection?.tokenID)[0];
     nftArr.name = data?.name;
@@ -604,7 +610,9 @@ export const getFeaturedGraphNft = async (collection) => {
 export const getNearNft = async (collection) => {
   const nftObj = [];
   try {
-    const { data } = await axios.get(collection?.tokenIPFSPath.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
+    const { data } = await axios.get(
+      collection?.tokenIPFSPath?.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/")
+    );
     const nftArr = {};
     nftArr.collection_name = collection?.collection?.name;
     nftArr.creator = collection?.collection?.creator?.id;
@@ -634,7 +642,7 @@ export const getNearNft = async (collection) => {
 export const getCollectionNearNft = async (nft) => {
   const nftObj = [];
   try {
-    const { data } = await axios.get(nft?.tokenIPFSPath.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
+    const { data } = await axios.get(nft?.tokenIPFSPath?.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/"));
     const nftArr = {};
     nftArr.collection_name = nft?.Collection?.name;
     nftArr.creator = nft?.Collection?.creator;
@@ -1114,7 +1122,7 @@ export const handleResetCreate = ({ dispatch }) => {
 
 export const setActiveNavLink = ({ isActive }) => (isActive ? "active" : "");
 
-export const isActiveNavLink = ({ isActive }) => (isActive ? true : false);
+export const isActiveNavLink = ({ isActive }) => !!isActive;
 
 function simpleHash(str) {
   let hash = 0;
