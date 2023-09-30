@@ -801,11 +801,7 @@ const Minter = () => {
                           file
                             .filter((_, idx) => idx < 12)
                             .map((f, idx) => (
-                              <div
-                                key={idx}
-                                style={{ backgroundImage: `url(${URL.createObjectURL(f)})` }}
-                                className={classes.imageWrapper}
-                              />
+                              <img src={URL.createObjectURL(f)} key={idx} className={classes.imageWrapper} />
                             ))
                         ) : videoExtensions.includes(fileExtension) ? (
                           <video src={URL.createObjectURL(file[0])} alt="" className={classes.singleImage} controls />

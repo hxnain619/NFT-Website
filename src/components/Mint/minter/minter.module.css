@@ -165,13 +165,11 @@
 }
 
 .imageWrapper {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  border: none;
   border-radius: 0.5em;
-
-  min-width: 178px;
-  min-height: 166px;
+  width: 178px;
+  height: 166px;
+  object-fit: cover;
 }
 
 .singleImage {
@@ -888,8 +886,8 @@ div.showPreview > span {
   }
 
   .imageWrapper {
-    min-width: 74px;
-    min-height: 95px;
+    width: 74px;
+    height: 95px;
   }
 }
 
