@@ -34,7 +34,7 @@ const CollectionDescription = () => {
     amountInputValue: "",
   });
   const { selectInputValue, amountInputValue } = state;
-  const [ifPreview,setIfPreview] = useState(false)
+  const [ifPreview, setIfPreview] = useState(false);
   const generateProps = {
     isRule,
     rule,
@@ -67,7 +67,7 @@ const CollectionDescription = () => {
     }
     dispatch(setMintAmount(parseInt(amountInputValue)));
     handleGenerate({ ...generateProps, mintAmount: parseInt(amountInputValue) });
-    setIfPreview(true)
+    setIfPreview(true);
   };
 
   const handleMaxClick = () => {
@@ -136,7 +136,7 @@ const CollectionDescription = () => {
         <div className={classes.btnContainer}>
           {nftLayers.length ? (
             <div
-              onClick={() => (window.sessionStorage.ripple = true )}
+              onClick={() => (window.sessionStorage.ripple = true)}
               className={`${classes.previewBtn} ${!ripple && classes.active}`}
             >
               <Link to={"/preview"}>
@@ -150,7 +150,6 @@ const CollectionDescription = () => {
             onClick={handleGenerateClick}
             width={ifPreview ? "80%" : "100%"}
             disabled={!combinations || combinations === 0}
-
           />
         </div>
       </div>

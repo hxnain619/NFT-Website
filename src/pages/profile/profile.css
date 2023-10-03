@@ -55,6 +55,7 @@
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
   transition: background-image 10ms ease-in-out;
   cursor: pointer;
+  position: relative;
 }
 .bg-cover svg {
   height: 42px;
@@ -80,6 +81,27 @@
   font-family: "Poppins";
   font-weight: 400;
   color: var(--default);
+}
+
+.bg-cover > img {
+  width: 100%;
+  height: 100%;
+}
+
+.bg-cover > div {
+  cursor: pointer;
+}
+
+.bg-cover .add-image-container {
+  width: auto;
+  height: 100%;
+  background-color: transparent;
+  background-image: none;
+}
+
+.bg-cover .add-image-container:hover {
+  background-image: none;
+  background-color: transparent;
 }
 
 .user-container {
@@ -125,7 +147,8 @@
   z-index: 2;
   transition: display 100ms, background-color 100ms;
 }
-.user-image:hover .add-image-container {
+.user-image:hover .add-image-container,
+.bg-cover:hover .add-image-container {
   display: flex;
 }
 .image-title {
@@ -135,14 +158,15 @@
   color: var(--default);
   cursor: pointer;
 }
-.input-active{
+.input-active {
   border: 1px solid var(--main-color) !important;
 }
 .image-title div {
   display: flex;
   flex-direction: column;
 }
-.image-title > .username-title {  margin: 0 auto;
+.image-title > .username-title {
+  margin: 0 auto;
   max-width: 90%;
   padding: 10px 6px;
   color: var(--default);
@@ -231,15 +255,15 @@
   font-weight: 700;
   transition: all 10ms;
 }
-.primary-button{
+.primary-button {
   background: var(--main-color) !important;
   font-family: jost;
   color: var(--primary-black-bg) !important;
   font-weight: 700 !important;
 }
-.primary-button:hover{
-background: transparent !important;
-color: var(--main-color) !important;
+.primary-button:hover {
+  background: transparent !important;
+  color: var(--main-color) !important;
 }
 
 @media only screen and (max-width: 480px) {

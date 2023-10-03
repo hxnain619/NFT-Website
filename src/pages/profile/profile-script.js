@@ -4,7 +4,21 @@
 /* eslint-disable prefer-const */
 import * as PS from "./profile-script";
 import { setLoader, setNotification } from "../../gen-state/gen.actions";
-import { writeUserProfile,readUserProfile } from "../../utils/firebase";
+import { writeUserProfile, readUserProfile, uploadProfileImage } from "../../utils/firebase";
+
+// Function to generate a random filename
+function generateRandomFilename() {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let randomFilename = "";
+  const filenameLength = 10; // You can adjust the length as needed
+
+  for (let i = 0; i < filenameLength; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomFilename += characters.charAt(randomIndex);
+  }
+
+  return randomFilename;
+}
 
 export const handleValidate = (state) => {
   const discordRegex = /^[0-9]{18}$/;
@@ -48,7 +62,7 @@ export const getValidName = (name) => {
   return `is${first + rest}`;
 };
 
-export const handleSave = async ({ account, state, dispatch, handleSetValidation, history,setIsEnableuserName }) => {
+export const handleSave = async ({ account, state, dispatch, handleSetValidation, history, setIsEnableuserName }) => {
   const validate = PS.handleValidate(state);
   const isValid = Object.values(validate).every((i) => i === true);
   if (isValid) {
@@ -83,8 +97,7 @@ export const handleSave = async ({ account, state, dispatch, handleSetValidation
   setIsEnableuserName(false);
 };
 
-export const handleInputChange = ({ event, handleSetState, handleSetValidation, setEnableDisableButtons}) => {
-  
+export const handleInputChange = ({ event, handleSetState, handleSetValidation, setEnableDisableButtons }) => {
   let { name, value } = event.target;
   if (name === "twitter") {
     value = value.split("https://twitter.com/")[1];
@@ -96,15 +109,44 @@ export const handleInputChange = ({ event, handleSetState, handleSetValidation, 
   if (!value) value = "";
   handleSetState({ [name]: value });
   handleSetValidation({ [PS.getValidName(name)]: true });
-  setEnableDisableButtons(true)
+  setEnableDisableButtons(true);
 };
 
-export const handleCancel = async ({ handleSetState, history, setEnableDisableButtons,account,setIsEnableuserName}) => {
-   if (!account) return;
-      const res = await readUserProfile(account);
-      handleSetState(res);
-      setEnableDisableButtons(false)
-      setIsEnableuserName(false)
+export const handleCancel = async ({
+  handleSetState,
+  history,
+  setEnableDisableButtons,
+  account,
+  setIsEnableuserName,
+}) => {
+  if (!account) return;
+  const res = await readUserProfile(account);
+  handleSetState(res);
+  setEnableDisableButtons(false);
+  setIsEnableuserName(false);
   history.goBack();
+};
 
+export const handleImageUpload = async (event, dispatch, handleSetState, setEnableDisableButtons, name) => {
+  const file = event.target.files[0]; // Get the selected file
+
+  // Call the uploadProfileImage function to upload the file and get the URL
+  const downloadURL = await uploadProfileImage(file);
+  if (downloadURL == "") {
+    dispatch(
+      setNotification({
+        message: "Unable to upload image",
+        type: "error",
+      })
+    );
+  } else {
+    dispatch(
+      setNotification({
+        message: "Image uploaded successfully",
+        type: "success",
+      })
+    );
+    handleSetState({ [name]: downloadURL });
+    setEnableDisableButtons(true);
+  }
 };
