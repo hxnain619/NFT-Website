@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { GenContext } from "../../gen-state/gen.context";
 import { readUserProfile } from "../../utils/firebase";
-import { handleCancel, handleInputChange, handleSave } from "./profile-script";
+import { handleCancel, handleImageUpload, handleInputChange, handleSave } from "./profile-script";
 import { ReactComponent as ArrowBack } from "../../assets/icon-arrow-left.svg";
 import { ReactComponent as BannerImg } from "../../assets/images/image-icon.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit-icon.svg";
@@ -19,8 +19,8 @@ import BackButton from "../../components/back-button/BackButton";
 const Profile = () => {
   const history = useHistory();
   const { account, dispatch, chainId } = useContext(GenContext);
-  const [isEnableuserName,setIsEnableuserName] = useState(false)
-  const [enableDisableButtons,setEnableDisableButtons] = useState(false)
+  const [isEnableuserName, setIsEnableuserName] = useState(false);
+  const [enableDisableButtons, setEnableDisableButtons] = useState(false);
   const profileRef = useRef(null);
 
   const [state, setState] = useState({
@@ -30,6 +30,8 @@ const Profile = () => {
     twitter: "",
     discord: "",
     instagram: "",
+    imgUrl: "",
+    bannerUrl: "",
   });
 
   const [validation, setValidation] = useState({
@@ -39,7 +41,9 @@ const Profile = () => {
     isInstagram: true,
   });
 
-  const { subscribe, email, twitter, discord, username, instagram } = state;
+  const [isBanner, setIsBanner] = useState(false);
+
+  const { subscribe, email, twitter, discord, username, instagram, imgUrl, bannerUrl } = state;
 
   const handleSetState = (payload) => {
     setState((states) => ({ ...states, ...payload }));
@@ -49,18 +53,22 @@ const Profile = () => {
     setValidation((val) => ({ ...val, ...payload }));
   };
 
-  const inputProps = { handleSetState, handleSetValidation,setEnableDisableButtons };
-  const saveProps = { account, state, dispatch, handleSetValidation, history,setIsEnableuserName };
-  const cancelProps = { handleSetState, history,setEnableDisableButtons,account,setIsEnableuserName };
+  const inputProps = { handleSetState, handleSetValidation, setEnableDisableButtons };
+  const saveProps = { account, state, dispatch, handleSetValidation, history, setIsEnableuserName };
+  const cancelProps = { handleSetState, history, setEnableDisableButtons, account, setIsEnableuserName };
 
   useEffect(() => {
     (async function updateProfile() {
       if (!account) return;
       const res = await readUserProfile(account);
       handleSetState(res);
-      setEnableDisableButtonsState(false)
+      setEnableDisableButtons(false);
     })();
   }, [account]);
+
+  const handleUserImageChange = (event) => {
+    handleImageUpload(event, dispatch, handleSetState, setEnableDisableButtons, isBanner ? "bannerUrl" : "imgUrl");
+  };
 
   return (
     <>
@@ -72,23 +80,51 @@ const Profile = () => {
         <div className="heading-section">Profile Settings</div>
       </div>
       <div className="bg-cover">
-        <BannerImg />
-        <p>Upload banner image</p>
-        <p>(recommended size 1728*160 px)</p>
+        {bannerUrl != "" ? <img src={bannerUrl} alt="" /> : <></>}
+        <div
+          className={bannerUrl == "" ? "" : "add-image-container"}
+          onClick={() => {
+            profileRef.current.click();
+            setIsBanner(true);
+          }}
+        >
+          <BannerImg />
+          <p>Upload banner image</p>
+          <p>(recommended size 1728*160 px)</p>
+        </div>
       </div>
       <div className="user-container">
         <div className="user-image">
-          <img src={ProfileImg} alt="" />
-          <div className="add-image-container">
+          <img src={imgUrl != "" ? ProfileImg : imgUrl} alt="" />
+          <div
+            className="add-image-container"
+            onClick={() => {
+              profileRef.current.click();
+              setIsBanner(false);
+            }}
+          >
             <BannerImg />
             <br />
             Add Photo
-            <input type="file" style={{ visibility: "hidden" }} id="inputTag" ref={profileRef} />
+            <input
+              type="file"
+              style={{ visibility: "hidden" }}
+              id="inputTag"
+              ref={profileRef}
+              onChange={handleUserImageChange}
+            />
           </div>
         </div>
         <div className="image-title">
-          <EditIcon onClick={()=>setIsEnableuserName(true)}/>
-            <input className={`${isEnableuserName ? "input-active" : ""} username-title`} disabled={!isEnableuserName} name="username" onChange={(event) => handleInputChange({ event, ...inputProps })} type="text" value={username} />
+          <EditIcon onClick={() => setIsEnableuserName(true)} />
+          <input
+            className={`${isEnableuserName ? "input-active" : ""} username-title`}
+            disabled={!isEnableuserName}
+            name="username"
+            onChange={(event) => handleInputChange({ event, ...inputProps })}
+            type="text"
+            value={username}
+          />
           <br />
           <p>{breakAddress(account, 8)}</p>
         </div>
@@ -125,14 +161,16 @@ const Profile = () => {
               </div>
             ))}
           </div>
-        {enableDisableButtons && <div className="social-btns">
-            <button type="button" className="btn secondary-btn" onClick={() => handleCancel(cancelProps)} >
-              Cancel
-            </button>
-            <button type="button" className="btn primary-button" onClick={() => handleSave(saveProps)}>
-              Save
-            </button>
-          </div>}
+          {enableDisableButtons && (
+            <div className="social-btns">
+              <button type="button" className="btn secondary-btn" onClick={() => handleCancel(cancelProps)}>
+                Cancel
+              </button>
+              <button type="button" className="btn primary-button" onClick={() => handleSave(saveProps)}>
+                Save
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

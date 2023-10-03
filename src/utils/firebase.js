@@ -5,6 +5,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { nanoid } from "nanoid";
 import { doc, getDoc } from "firebase/firestore";
+import "firebase/compat/storage";
 
 const firebaseConfig = {
   apiKey:
@@ -45,6 +46,7 @@ firebase.firestore().settings({ experimentalForceLongPolling: true });
 
 export const app = initApp;
 const db = firebase.firestore();
+const storage = firebase.storage();
 
 async function recordTransaction(assetId, type, buyer, seller, price, txId) {
   const updates = {};
@@ -400,6 +402,21 @@ async function listNft(assetId, price, owner, manager, txId) {
   }
 }
 
+async function uploadProfileImage(file, fileName) {
+  const storageRef = storage.ref("uploads/" + fileName);
+
+  try {
+    // Use the 'put' method to upload the file
+    await storageRef.put(file);
+    const downloadURL = await storageRef.getDownloadURL();
+    console.log("File uploaded successfully");
+    return downloadURL;
+  } catch (error) {
+    console.error("Error uploading file", error);
+    return "";
+  }
+}
+
 export {
   writeUserData,
   readSIngleUserNft,
@@ -418,4 +435,5 @@ export {
   writeNftSale,
   fetchUserCreatedNfts,
   readUsers,
+  uploadProfileImage,
 };
