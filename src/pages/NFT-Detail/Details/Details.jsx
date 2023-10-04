@@ -39,7 +39,7 @@ const Details = ({ nftDetails }) => {
         )}
         <div className={classes.list}>
           <div>Token ID</div>
-          <div>{nftDetails.tokenID}</div>
+          <div className={`${classes.textPurple}`}>{nftDetails.tokenID}</div>
         </div>
         <div className={classes.list}>
           <div>Blockchain</div>
