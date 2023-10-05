@@ -68,6 +68,10 @@
   border-radius: 50%;
 }
 
+.image-section svg {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .nft-detail-container {
     flex-direction: column;

@@ -7,6 +7,7 @@ import { ReactComponent as ShareIcon } from "../../../assets/icon-share.svg";
 import { ReactComponent as RefreshIcon } from "../../../assets/icon-refresh.svg";
 import avatar from "../../../assets/avatar.png";
 import "./NFT.css";
+import Share from "./Share";
 
 // import { ReactComponent as MoreIcon } from "../../../assets/icon-more.svg";
 
@@ -39,8 +40,9 @@ const NFT = ({ nftDetails }) => {
       <div className="heading">
         <div className="card-heading">{truncateText(name, 15)}</div>
         <div ref={wrapperRef}>
-          <RefreshIcon /> &nbsp;
+          <RefreshIcon onClick={() => window.location.reload()} /> &nbsp;
           <ShareIcon onClick={() => setShare(true)} />
+          <Share share={share} setShare={setShare} />
         </div>
       </div>
       <div className="image-container">
