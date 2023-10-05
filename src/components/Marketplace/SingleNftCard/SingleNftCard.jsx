@@ -96,7 +96,7 @@ const SingleNftCard = ({ use_width, nft, fromDashboard, fromDetails, collectionN
     <div style={use_width ? { width: use_width } : {}} onClick={handlePreview} className={classes.container}>
       <div className={classes.imageContainer}>
         <div className={classes.imageWrapper}>
-          {nft?.ipfs_data?.image_mimetype?.includes("video") || image_url.slice(-3) === "mp4" ? (
+          {nft?.ipfs_data?.image_mimetype?.includes("video") || image_url?.slice(-3) === "mp4" ? (
             <video className={classes.image} src={mediaURL} alt="" controls onLoad={() => setMediaURL(imgHolder)} />
           ) : nft?.ipfs_data?.image_mimetype?.includes("audio") ? (
             <div className={classes.thumbnail} style={{ backgroundImage: `url(${thumbnail})` }}>
