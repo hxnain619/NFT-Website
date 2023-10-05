@@ -241,12 +241,12 @@
   border-radius: 40px;
   border: 2px solid var(--primary-primary-blue, #20c1ff);
   background: var(--primary-black-bg, #080f20);
+  animation: animate 1.5s linear infinite;
 }
 
 .previewBtn:hover {
   background: rgba(251, 251, 251, 0.1);
   /* background: var(--primary-primary-blue, #20c1ff); */
-  animation: animate 2s linear infinite;
 }
 
 .previewIcon {
