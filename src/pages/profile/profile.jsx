@@ -9,7 +9,7 @@ import { ReactComponent as TwitterIcon } from "../../assets/icon-twitter-white.s
 import { ReactComponent as InstaIcon } from "../../assets/icon-instagram-white.svg";
 import { ReactComponent as DiscordIcon } from "../../assets/icon-discord-white.svg";
 import { ReactComponent as ClearIcon } from "../../assets/icon-close.svg";
-import ProfileImg from "../../assets/ai-art-style/cartoonist.png";
+import uploadImage from "../../assets/icon-image-preview.svg";
 
 import "./profile.css";
 import { breakAddress } from "../NFT-Detail/NFTDetail-script";
@@ -17,7 +17,7 @@ import BackButton from "../../components/back-button/BackButton";
 
 const Profile = () => {
   const history = useHistory();
-  const { account, dispatch, chainId } = useContext(GenContext);
+  const { account, dispatch } = useContext(GenContext);
   const [isEnableuserName, setIsEnableuserName] = useState(false);
   const [enableDisableButtons, setEnableDisableButtons] = useState(false);
   const profileRef = useRef(null);
@@ -34,14 +34,14 @@ const Profile = () => {
     bannerUrl: "",
   });
 
-  const [validation, setValidation] = useState({
+  const [_, setValidation] = useState({
     isEmail: true,
     isTwitter: true,
     isDiscord: true,
     isInstagram: true,
   });
 
-  const { subscribe, email, twitter, discord, username, instagram, imgUrl, bannerUrl } = state;
+  const { twitter, discord, username, instagram, imgUrl, bannerUrl } = state;
 
   const handleSetState = (payload) => {
     setState((states) => ({ ...states, ...payload }));
@@ -84,7 +84,7 @@ const Profile = () => {
       <div className="bg-cover">
         {bannerUrl !== "" ? <img src={bannerUrl} alt="" /> : <></>}
         <div
-          className="add-image-container"
+          className={bannerUrl === "" ? "" : "add-image-container"}
           onClick={() => {
             bannerRef.current.click();
           }}
@@ -103,9 +103,9 @@ const Profile = () => {
       </div>
       <div className="user-container">
         <div className="user-image">
-          {imgUrl !== "" ? <img src={imgUrl} alt="" /> : <></>}
+          {imgUrl !== "" ? <img src={imgUrl} alt="" /> : <img src={uploadImage} alt="" />}
           <div
-            className="add-image-container"
+            className={imgUrl === "" ? "" : "add-image-container"}
             onClick={() => {
               profileRef.current.click();
             }}

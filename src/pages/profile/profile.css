@@ -40,7 +40,9 @@
   margin: 0 auto !important;
   text-align: center;
 }
-
+.upload-img {
+  background: #0d1b3a !important;
+}
 .bg-cover {
   display: flex;
   flex-direction: column;
@@ -122,6 +124,8 @@
 }
 .user-image {
   margin: 0 auto;
+  background: #0d1b3a;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23747C90FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 .user-image img,
 .add-image-container {
