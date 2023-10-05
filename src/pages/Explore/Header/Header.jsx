@@ -69,11 +69,11 @@ const Header = ({ collection, getHeight }) => {
     const user = await readUserProfile(owner);
     const links = [];
     const link = {};
-    if (user.twitter) {
+    if (user?.twitter) {
       link.url = `https://twitter.com/${user.twitter}`;
       link.icon = linkIcons.twitter;
       links.push(link);
-    } else if (links.discord) {
+    } else if (links?.discord) {
       link.url = `https://discord.com/users/${user.discord}`;
       link.icon = linkIcons.discord;
       links.push(link);
@@ -155,7 +155,7 @@ const Header = ({ collection, getHeight }) => {
               {/* <img src={listIcon} alt="" /> */}
               <div className={classes.details}>
                 <div className={classes._2}>
-                  <span className={classes.statsAccent}>{nfts.length}</span>
+                  <span className={classes.statsAccent}>{nfts?.length ?? 0}</span>
                 </div>
                 <div className={classes._1}>Total NFT</div>
               </div>

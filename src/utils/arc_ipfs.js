@@ -260,7 +260,7 @@ export async function mintSingleToChain(singleMintProps, chain) {
 
     const response = await uploadFileViaServer(singleMintProps, chain);
 
-    const asset = response.data.content.upload;
+    const asset = response.data?.content?.upload;
     const uintArray = asset.metadata.toLocaleString();
     const id = parseInt(uintArray.slice(0, 7).replace(/,/g, ""));
 
@@ -276,7 +276,7 @@ export async function mintSingleToChain(singleMintProps, chain) {
     const tx = {
       from: account,
       to: singleMinterAddress,
-      data: contract.interface.encodeFunctionData("mint", [receiverAddress, id, 1, asset.url, "0x"]),
+      data: contract.interface.encodeFunctionData("mint", [receiverAddress, id, 1, asset?.url, "0x"]),
       nonce: ethNonce,
     };
 
