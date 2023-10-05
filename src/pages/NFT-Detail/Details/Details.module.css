@@ -42,7 +42,7 @@
 }
 .textPurple {
   cursor: pointer;
-  color: var(--primary-light-blue-2, #93a3f8);
+  color: var(--primary-light-blue-2, #93a3f8) !important;
 }
 .textPurple:hover {
   text-decoration: underline;

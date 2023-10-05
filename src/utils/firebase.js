@@ -403,7 +403,7 @@ async function listNft(assetId, price, owner, manager, txId) {
 }
 
 async function uploadProfileImage(file, fileName) {
-  const storageRef = storage.ref("uploads/" + fileName);
+  const storageRef = storage.ref(`uploads/${fileName}`);
 
   try {
     // Use the 'put' method to upload the file

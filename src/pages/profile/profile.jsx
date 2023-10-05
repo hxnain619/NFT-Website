@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { GenContext } from "../../gen-state/gen.context";
 import { readUserProfile } from "../../utils/firebase";
 import { handleCancel, handleImageUpload, handleInputChange, handleSave } from "./profile-script";
-import { ReactComponent as ArrowBack } from "../../assets/icon-arrow-left.svg";
 import { ReactComponent as BannerImg } from "../../assets/images/image-icon.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../assets/icon-twitter-white.svg";
@@ -22,6 +21,7 @@ const Profile = () => {
   const [isEnableuserName, setIsEnableuserName] = useState(false);
   const [enableDisableButtons, setEnableDisableButtons] = useState(false);
   const profileRef = useRef(null);
+  const bannerRef = useRef(null);
 
   const [state, setState] = useState({
     subscribe: false,
@@ -40,8 +40,6 @@ const Profile = () => {
     isDiscord: true,
     isInstagram: true,
   });
-
-  const [isBanner, setIsBanner] = useState(false);
 
   const { subscribe, email, twitter, discord, username, instagram, imgUrl, bannerUrl } = state;
 
@@ -66,41 +64,50 @@ const Profile = () => {
     })();
   }, [account]);
 
-  const handleUserImageChange = (event) => {
-    handleImageUpload(event, dispatch, handleSetState, setEnableDisableButtons, isBanner ? "bannerUrl" : "imgUrl");
+  const handleProfileUpload = (e) => {
+    const file = e.target.files[0];
+    handleSetState({ imgUrl: URL.createObjectURL(file) });
+    handleImageUpload(file, dispatch, handleSetState, setEnableDisableButtons, "imgUrl");
+  };
+  const handleBannerUpload = (e) => {
+    const file = e.target.files[0];
+    handleSetState({ bannerUrl: URL.createObjectURL(file) });
+    handleImageUpload(file, dispatch, handleSetState, setEnableDisableButtons, "bannerUrl");
   };
 
   return (
     <>
       <BackButton />
       <div className="container">
-        {/* <Link to="#" className="back-btn" onClick={() => history.goBack()}>
-          <ArrowBack /> Back
-        </Link>{" "} */}
         <div className="heading-section">Profile Settings</div>
       </div>
       <div className="bg-cover">
-        {bannerUrl != "" ? <img src={bannerUrl} alt="" /> : <></>}
+        {bannerUrl !== "" ? <img src={bannerUrl} alt="" /> : <></>}
         <div
-          className={bannerUrl == "" ? "" : "add-image-container"}
+          className="add-image-container"
           onClick={() => {
-            profileRef.current.click();
-            setIsBanner(true);
+            bannerRef.current.click();
           }}
         >
           <BannerImg />
           <p>Upload banner image</p>
           <p>(recommended size 1728*160 px)</p>
+          <input
+            ref={bannerRef}
+            type="file"
+            style={{ visibility: "hidden" }}
+            onChange={handleBannerUpload}
+            id="bannerTag"
+          />
         </div>
       </div>
       <div className="user-container">
         <div className="user-image">
-          <img src={imgUrl != "" ? ProfileImg : imgUrl} alt="" />
+          {imgUrl !== "" ? <img src={imgUrl} alt="" /> : <></>}
           <div
             className="add-image-container"
             onClick={() => {
               profileRef.current.click();
-              setIsBanner(false);
             }}
           >
             <BannerImg />
@@ -111,7 +118,7 @@ const Profile = () => {
               style={{ visibility: "hidden" }}
               id="inputTag"
               ref={profileRef}
-              onChange={handleUserImageChange}
+              onChange={handleProfileUpload}
             />
           </div>
         </div>
@@ -149,7 +156,7 @@ const Profile = () => {
                 value: `https://discord.com/${discord}`,
               },
             ].map((social) => (
-              <div className="text">
+              <div className="text" key={social.value}>
                 {social.icon}
                 <input
                   type="text"

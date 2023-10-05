@@ -65,7 +65,6 @@
 .bg-cover svg path {
   fill: var(--default);
 }
-
 .bg-cover:hover,
 .user-image:hover {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2393A3F8FF' stroke-width='4' stroke-dasharray='8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
@@ -86,6 +85,7 @@
 .bg-cover > img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .bg-cover > div {
@@ -93,15 +93,16 @@
 }
 
 .bg-cover .add-image-container {
-  width: auto;
+  width: 100%;
   height: 100%;
+  margin: 0 auto;
   background-color: transparent;
   background-image: none;
 }
 
 .bg-cover .add-image-container:hover {
   background-image: none;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.382);
 }
 
 .user-container {

@@ -127,12 +127,11 @@ export const handleCancel = async ({
   history.goBack();
 };
 
-export const handleImageUpload = async (event, dispatch, handleSetState, setEnableDisableButtons, name) => {
-  const file = event.target.files[0]; // Get the selected file
-
+export const handleImageUpload = async (file, dispatch, handleSetState, setEnableDisableButtons, name) => {
   // Call the uploadProfileImage function to upload the file and get the URL
-  const downloadURL = await uploadProfileImage(file);
-  if (downloadURL == "") {
+  dispatch(setLoader("uploading..."));
+  const downloadURL = await uploadProfileImage(file, file.name);
+  if (downloadURL === "") {
     dispatch(
       setNotification({
         message: "Unable to upload image",
@@ -149,4 +148,5 @@ export const handleImageUpload = async (event, dispatch, handleSetState, setEnab
     handleSetState({ [name]: downloadURL });
     setEnableDisableButtons(true);
   }
+  dispatch(setLoader(""));
 };
