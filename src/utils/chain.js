@@ -23,7 +23,7 @@ const chainIdToParams = {
     iconUrls: [""],
   },
   43113: {
-    chainId: "0Xa869",
+    chainId: "0xa869",
     chainName: "Avalanche",
     nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
     rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
@@ -83,7 +83,7 @@ const chainNameToParams = {
     iconUrls: [""],
   },
   "avalanche-testnet": {
-    chainId: "0Xa869",
+    chainId: "0xa869",
     chainName: "Avalanche",
     nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
     rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
