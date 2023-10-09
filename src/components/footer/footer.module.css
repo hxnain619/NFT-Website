@@ -181,6 +181,14 @@
     flex-wrap: wrap;
   }
 
+  .topRight {
+    flex-direction: row-reverse;
+  }
+
+  .topRight .gridlinks {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   .topLeft img {
     width: 4em;
   }
