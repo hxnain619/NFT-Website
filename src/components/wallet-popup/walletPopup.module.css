@@ -181,9 +181,20 @@
 .chain:hover p {
   color: var(--main-color);
 }
-.chain:hover img {
-  transform: scale(1.2);
+
+.chain .iconBack {
+  background-color: transparent;
+  display: inline-block;
+  width: 68px;
+  height: 68px;
+  padding: 6px;
+  border-radius: 12px;
 }
+
+.chain .iconBack:hover {
+  background-color: rgba(187, 197, 255, 0.08);
+}
+
 .chain img {
   width: 3.4em;
   height: 3.4em;

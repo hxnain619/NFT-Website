@@ -70,7 +70,9 @@ const DesktopPopup = ({
                 key={idx}
                 className={`${classes.chain} ${chain.comingSoon && classes.comingSoon}`}
               >
-                <img src={chain.icon} alt="" />
+                <div className={classes.iconBack}>
+                  <img src={chain.icon} alt="" />
+                </div>
                 <div className={classes.name}>
                   <h4>{chain.label}</h4>
                   {chain.comingSoon ? <span>Coming soon</span> : ""}
