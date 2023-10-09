@@ -105,7 +105,7 @@ const Profile = () => {
         <div className="user-image">
           {imgUrl !== "" ? <img src={imgUrl} alt="" /> : <img src={uploadImage} alt="" />}
           <div
-            className={imgUrl === "" ? "" : "add-image-container"}
+            className="add-image-container"
             onClick={() => {
               profileRef.current.click();
             }}
