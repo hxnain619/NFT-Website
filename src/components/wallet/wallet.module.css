@@ -20,10 +20,14 @@
 }
 .chainList span {
   color: var(--primary-white) !important;
+  font-family: "Montserrat", "SF Pro Display", sans-serif;
+  font-weight: 500;
 }
 .chainList a {
   font-size: 14px !important;
   color: var(--primary-light-blue) !important;
+  font-family: "Jost", "SF Pro Display", sans-serif;
+  font-weight: 700;
 }
 .avatar {
   position: relative;
@@ -132,12 +136,13 @@
 }
 
 .balance {
-  color: var(--filtersText);
+  color: var(--primary-white);
   font-size: 14px;
   padding: 0.5em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: "Montserrat", "SF Pro Display", sans-serif;
 }
 
 .connected {
@@ -192,10 +197,10 @@
 
 .address > span {
   color: var(--primary-black-bg, #080f20) !important;
-  font-family: Poppins;
+  font-family: "Montserrat", "SF Pro Display", sans-serif;
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 24px;
 }
 
