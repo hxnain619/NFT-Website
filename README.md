@@ -17,7 +17,7 @@
     <a href="https://www.docs.geandrop.io"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://youtu.be/wC0odzMW_9g">View Demo</a>
+    <a href="https://del-mp.vercel.app">View Website</a>
     ·
     <a href="https://github.com/codingshot/genadrop/issues">Report Bug</a>
     ·
